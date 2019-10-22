@@ -22,9 +22,7 @@ namespace CMSUI
     {
         public MainWindow()
         {
-            InitializeComponent();
-            //Window1 e = new Window1();
-            //e.Show();
+            InitializeComponent();   
         }
     }
 }
