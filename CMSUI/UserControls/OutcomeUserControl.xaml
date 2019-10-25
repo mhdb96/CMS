@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="CMSUI.UserControls.OutcomeUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:fsxaml="http://github.com/fsprojects/FsXaml"
+             xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:local="clr-namespace:CMSUI.UserControls"
+             mc:Ignorable="d" >
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
+                <TextBox x:Name="nameText"
+                 Margin="10 5 0 5" Width="50"                        
+                 TextWrapping="Wrap"/>
+                <TextBox x:Name="descriptionText"
+                 Margin="10 5 0 5" Width="200"
+                 Controls:TextBoxHelper.Watermark="Enter an Outcome"            
+                 Controls:TextBoxHelper.ClearTextButton="True"       
+                 TextWrapping="Wrap"/>
+                <Button x:Name="deleteOutcome" Click="DeleteOutcome_Click" 
+                        Margin="10 5 5 5"
+                Width="25"
+                        Height="25"
+                        Style="{DynamicResource MahApps.Metro.Styles.MetroCircleButtonStyle}">
+                    <iconPacks:PackIconOcticons 
+                    VerticalAlignment="Center"
+                    Width="10" Foreground="Red"                      
+                    Height="10"                                              
+                    Kind="x"/>
+                </Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

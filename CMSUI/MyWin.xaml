@@ -6,10 +6,24 @@
         xmlns:local="clr-namespace:CMSUI"
         xmlns:fsxaml="http://github.com/fsprojects/FsXaml"
         xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
-        Title="MyWin" Height="450" Width="800">
-        
+        Title="MyWin"
+        Height="450" Width="800"
+        BorderThickness="0"
+                      ResizeMode="CanResizeWithGrip"
+                      WindowStartupLocation="CenterScreen">
+
     <Grid>
-        
+        <Button Content="Button" HorizontalAlignment="Left" Margin="498,251,0,0" VerticalAlignment="Top" Width="75"
+                Style="{StaticResource AccentedSquareButtonStyle}" FontFamily="Segoe UI Light" FontWeight="Normal" FontSize="14"/>
+        <TextBox Controls:TextBoxHelper.Watermark="Enter your name"
+                 Controls:TextBoxHelper.ClearTextButton="True"
+                 HorizontalAlignment="Left" Height="23" Margin="450,106,0,0" 
+                 TextWrapping="Wrap" VerticalAlignment="Top" Width="300" 
+                 />
+
+
+
     </Grid>
 </Controls:MetroWindow>

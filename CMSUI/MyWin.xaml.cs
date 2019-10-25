@@ -17,11 +17,13 @@ namespace CMSUI
     /// <summary>
     /// Interaction logic for MyWin.xaml
     /// </summary>
-    public partial class MyWin : MahApps.Metro.Controls.MetroWindow
-    {
-        public MyWin()
+        public partial class MyWin
         {
-            InitializeComponent();
+            public MyWin()
+            {
+                InitializeComponent();
+                
+            }
         }
-    }
+        
 }
