@@ -41,9 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Answers.cs" />
     <Compile Include="DataAccess\SqlConnector.cs" />
+    <Compile Include="Evaluate.cs" />
     <Compile Include="GlobalConfig.cs" />
     <Compile Include="IDataConnection.cs" />
+    <Compile Include="info.cs" />
     <Compile Include="Models\ActiveTermModel.cs" />
     <Compile Include="Models\AdminModel.cs" />
     <Compile Include="Models\AssignmentModel.cs" />
