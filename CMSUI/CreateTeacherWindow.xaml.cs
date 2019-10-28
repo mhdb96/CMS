@@ -1,6 +1,7 @@
 ﻿using CMSLibrary;
 using CMSLibrary.DataAccess;
 using CMSLibrary.Models;
+using CMSUI.Requesters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,9 +23,11 @@ namespace CMSUI
     /// </summary>
     public partial class CreateTeacherWindow
     {
-        public CreateTeacherWindow()
+        ITeacherRequester CallingWindow;
+        public CreateTeacherWindow(ITeacherRequester caller)
         {
             InitializeComponent();
+            CallingWindow = caller;
         }
 
         private void CreateTeacherBtn_Click(object sender, RoutedEventArgs e)
@@ -38,6 +41,8 @@ namespace CMSUI
                 model.User.UserName = usernameText.Text;
                 model.User.Password = passwordText.Password;
                 GlobalConfig.Connection.CreateTeacher(model);
+                CallingWindow.TeacherComplete(model);
+                this.Close();
             }
                       
         }
@@ -49,6 +54,7 @@ namespace CMSUI
 
         private bool ValidForm()
         {
+            // TODO - validate this form!
             bool valid = true;
             return valid;
         }

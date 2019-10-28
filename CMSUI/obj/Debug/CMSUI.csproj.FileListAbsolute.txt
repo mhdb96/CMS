@@ -22,11 +22,9 @@ C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\bin\Debug\CMSUI.pdb
 C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\bin\Debug\CMSLibrary.dll
 C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\bin\Debug\CMSLibrary.pdb
 C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\CMSUI.csprojAssemblyReference.cache
-C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\MainWindow.g.cs
 C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\App.g.cs
 C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\CMSUI_MarkupCompile.cache
 C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\CMSUI_MarkupCompile.lref
-C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\MainWindow.baml
 C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\CMSUI.g.resources
 C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\CMSUI.Properties.Resources.resources
 C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\CMSUI.csproj.GenerateResource.cache
@@ -40,9 +38,7 @@ C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\bin\Debug\System.Windows.Int
 C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\bin\Debug\ControlzEx.pdb
 C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\bin\Debug\MahApps.Metro.pdb
 C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\bin\Debug\MahApps.Metro.xml
-C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\MyWin.g.cs
 C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\App.baml
-C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\MyWin.baml
 C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\bin\Debug\MahApps.Metro.IconPacks.dll
 C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\bin\Debug\MahApps.Metro.IconPacks.pdb
 C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\bin\Debug\MahApps.Metro.IconPacks.xml
@@ -60,3 +56,13 @@ C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\CreateCourseWindow
 C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\CreateCourseWindow.baml
 C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\CreateAssignmentWindow.g.cs
 C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\CreateAssignmentWindow.baml
+C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\AdminPanelWindow.g.cs
+C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\AdminPanelWindow.baml
+C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\CustomControls.baml
+C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\UserControls\CourseDashboardUserControl.g.cs
+C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\UserControls\DepartmentDashboardUserControl.g.cs
+C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\UserControls\CourseDashboardUserControl.baml
+C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\UserControls\DepartmentDashboardUserControl.baml
+C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\UserControls\TeacherDashboardUserControl.g.cs
+C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\UserControls\TeacherDashboardUserControl.baml

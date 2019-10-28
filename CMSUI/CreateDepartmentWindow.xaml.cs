@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using CMSLibrary;
 using CMSLibrary.Models;
+using CMSUI.Requesters;
 using CMSUI.UserControls;
 
 namespace CMSUI
@@ -22,10 +23,11 @@ namespace CMSUI
     /// </summary>
     public partial class CreateDepartmentWindow
     {
-        
-        public CreateDepartmentWindow()
+        IDepartmentRequester callingWindow;
+        public CreateDepartmentWindow(IDepartmentRequester caller)
         {
-            InitializeComponent();            
+            InitializeComponent();
+            callingWindow = caller;
         }
 
         private void CreateDepartmentBtn_Click(object sender, RoutedEventArgs e)
@@ -42,9 +44,32 @@ namespace CMSUI
                     model.Outcomes.Add(dO);
                 }
                 GlobalConfig.Connection.CreateDepartment(model);
+                callingWindow.DepartmentComplete(model);
+                this.Close();
             }
             
+
         }
+
+        //private async void ShowMessageDialog()
+        //{
+        //    var mySettings = new MetroDialogSettings()
+        //    {
+        //        AffirmativeButtonText = "OK",
+        //        ColorScheme = MetroDialogOptions.ColorScheme, DialogMessageFontSize = 10
+
+        //    };
+
+        //    MessageDialogResult result = await this.ShowMessageAsync("Success!", "Department has been successfuly added to the database",
+        //        MessageDialogStyle.Affirmative, mySettings);
+
+        //    if (result == MessageDialogResult.Affirmative)
+        //    {
+                
+        //    }
+        //}
+
+
         // TODO - empliment validation
         private bool ValidForm()
         {

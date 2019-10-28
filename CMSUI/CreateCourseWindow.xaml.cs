@@ -1,5 +1,6 @@
 ﻿using CMSLibrary;
 using CMSLibrary.Models;
+using CMSUI.Requesters;
 using CMSUI.UserControls;
 using System;
 using System.Collections.Generic;
@@ -22,10 +23,12 @@ namespace CMSUI
     /// </summary>
     public partial class CreateCourseWindow
     {
+        ICouresRequester CallingWindow;
         List<EducationalYearModel> EduYears;
-        public CreateCourseWindow()
+        public CreateCourseWindow(ICouresRequester caller)
         {
             InitializeComponent();
+            CallingWindow = caller;
             LoadListsData();
         }
 
@@ -59,6 +62,8 @@ namespace CMSUI
                     model.CourseOutcomes.Add(cO);
                 }
                 GlobalConfig.Connection.CreateCourse(model);
+                CallingWindow.CourseComplete(model);
+                this.Close();
             }
         }
 

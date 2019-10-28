@@ -121,6 +121,17 @@ namespace CMSLibrary.DataAccess
             }
         }
 
+        public void GetCourseOutcomes_ById(CourseModel model)
+        {
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@CourseId", model.Id);
+                model.CourseOutcomes = connection.Query<CourseOutcomeModel>("dbo.spCourseOutcomes_GetById", p, commandType: CommandType.StoredProcedure).ToList();
+
+            }
+        }
+
         public void CreateTeacher(TeacherModel model)
         {
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString(databaseName)))
@@ -215,6 +226,26 @@ namespace CMSLibrary.DataAccess
             throw new NotImplementedException();
         }
 
-        
+        public void GetDepartmentOutcomes_ById(DepartmentModel model)
+        {
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@DepartmentId", model.Id);
+                model.Outcomes = connection.Query<DepartmentOutcomeModel>("dbo.spDepartmentOutcomes_GetById",p , commandType: CommandType.StoredProcedure).ToList();
+                
+            }
+        }
+
+        public List<TeacherModel> GetFullTeacher_All()
+        {
+            List<TeacherModel> output;
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                output = connection.Query<TeacherModel, UserModel, TeacherModel>("dbo.spTeachers_Full_GetAll",
+                    (teacher, user) => { teacher.User = user; return teacher; }).ToList();
+            }
+            return output;
+        }
     }
 }

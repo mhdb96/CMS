@@ -13,5 +13,13 @@ namespace CMSLibrary.Models
         public string Code { get; set; }
         public EducationalYearModel EduYear { get; set; }
         public List<CourseOutcomeModel> CourseOutcomes { get; set; } = new List<CourseOutcomeModel>();
+        public string Full
+        {
+            get
+            {
+                return $"{Code} - {Name}";
+
+            }
+        }
     }
 }

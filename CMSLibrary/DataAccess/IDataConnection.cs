@@ -22,14 +22,19 @@ namespace CMSLibrary.DataAccess
         void CreateCourse(CourseModel model);
         void CreateCourseOutcome(CourseOutcomeModel model);
         List<EducationalYearModel> GetEducationalYear_ALL();
+        void GetCourseOutcomes_ById(CourseModel model);
 
         void CreateDepartment(DepartmentModel model);
         void CreateDepartmentOutcome(DepartmentOutcomeModel model);
+        void GetDepartmentOutcomes_ById(DepartmentModel model);
 
         void CreateExam(ExamModel model);
         void CreateQuestion(QuestionModel model);
         void CreateResult(ResultModel model);
 
         void CreateTeacher(TeacherModel model);
+
+        List<TeacherModel> GetFullTeacher_All();
+
     }
 }

@@ -67,15 +67,36 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AdminPanelWindow.xaml.cs">
+      <DependentUpon>AdminPanelWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CreateAssignmentWindow.xaml.cs">
       <DependentUpon>CreateAssignmentWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="CreateCourseWindow.xaml.cs">
       <DependentUpon>CreateCourseWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GridWidthToTabWidthConverter.cs" />
+    <Compile Include="HeaderToIconConverter.cs" />
+    <Compile Include="Requesters\ICouresRequester.cs" />
+    <Compile Include="Requesters\IDepartmentRequester.cs" />
+    <Compile Include="Requesters\ITeacherRequester.cs" />
+    <Compile Include="UserControls\CourseDashboardUserControl.xaml.cs">
+      <DependentUpon>CourseDashboardUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\DepartmentDashboardUserControl.xaml.cs">
+      <DependentUpon>DepartmentDashboardUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\OutcomeUserControl.xaml.cs">
       <DependentUpon>OutcomeUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\TeacherDashboardUserControl.xaml.cs">
+      <DependentUpon>TeacherDashboardUserControl.xaml</DependentUpon>
+    </Compile>
+    <Page Include="AdminPanelWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CreateActiveTermWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -96,10 +117,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -113,11 +130,15 @@
     <Compile Include="CreateTeacherWindow.xaml.cs">
       <DependentUpon>CreateTeacherWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Page Include="MyWin.xaml">
+    <Page Include="CustomControls.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\CourseDashboardUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\DepartmentDashboardUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -125,11 +146,12 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControls\TeacherDashboardUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MyWin.xaml.cs">
-      <DependentUpon>MyWin.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

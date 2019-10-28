@@ -1,11 +1,14 @@
 ﻿
 FC:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\App.xaml;;
+FC:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\AdminPanelWindow.xaml;;
 FC:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\CreateActiveTermWindow.xaml;;
 FC:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\CreateAssignmentWindow.xaml;;
 FC:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\CreateCourseWindow.xaml;;
 FC:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\CreateDepartmentWindow.xaml;;
 FC:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\CreateTeacherWindow.xaml;;
-FC:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\MainWindow.xaml;;
-FC:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\MyWin.xaml;;
+FC:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\CustomControls.xaml;;
+FC:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\UserControls\CourseDashboardUserControl.xaml;;
+FC:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\UserControls\DepartmentDashboardUserControl.xaml;;
 FC:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\UserControls\OutcomeUserControl.xaml;;
+FC:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\UserControls\TeacherDashboardUserControl.xaml;;
 
