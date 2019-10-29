@@ -69,8 +69,14 @@ namespace CMSUI
         private bool ValidForm()
         {
             // TODO - Validate this form
-            bool valid = true;
-            return valid;
+            if (departmentsCombobox.SelectedItem == null || activeTermsCombobox.SelectedItem == null || coursesCombobox.SelectedItem == null || teachersCombobox.SelectedItem == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 }

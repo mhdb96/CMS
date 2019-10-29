@@ -55,9 +55,15 @@ namespace CMSUI
 
         private bool ValidForm()
         {
-            //TODO - Validate this form
-            bool valid = true;
-            return valid;
+            // TODO - Validate this form
+            if(yearsCombobox.SelectedItem == null || termsCombobox.SelectedItem == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         private void CancelActiveTermBtn_Click(object sender, RoutedEventArgs e)

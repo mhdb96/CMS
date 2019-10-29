@@ -73,8 +73,23 @@ namespace CMSUI
         // TODO - empliment validation
         private bool ValidForm()
         {
-            bool valid = true;
-            return valid;
+            
+            if (nameText.Text != "")
+            {
+                foreach (OutcomeUserControl outcome in outcomesList.Children)
+                {
+                    if(outcome.nameText.Text == "" || outcome.descriptionText.Text =="")
+                    {
+                        return false;
+
+                    }
+                }
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private void CancelDepartmentBtn_Click(object sender, RoutedEventArgs e)

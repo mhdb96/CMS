@@ -55,8 +55,14 @@ namespace CMSUI
         private bool ValidForm()
         {
             // TODO - validate this form!
-            bool valid = true;
-            return valid;
+            if (regNoText.Text == "" || firstNameText.Text == "" || lastNameText.Text == "" || usernameText.Text == "" || usernameText.Text == "" )
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 }
