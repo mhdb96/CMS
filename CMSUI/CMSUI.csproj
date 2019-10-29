@@ -46,6 +46,8 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -78,9 +80,14 @@
     </Compile>
     <Compile Include="GridWidthToTabWidthConverter.cs" />
     <Compile Include="HeaderToIconConverter.cs" />
+    <Compile Include="Requesters\IActiveTermRequester.cs" />
+    <Compile Include="Requesters\IAssignmentRequester.cs" />
     <Compile Include="Requesters\ICouresRequester.cs" />
     <Compile Include="Requesters\IDepartmentRequester.cs" />
     <Compile Include="Requesters\ITeacherRequester.cs" />
+    <Compile Include="UserControls\AssignmentDashboardUserControl.xaml.cs">
+      <DependentUpon>AssignmentDashboardUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\CourseDashboardUserControl.xaml.cs">
       <DependentUpon>CourseDashboardUserControl.xaml</DependentUpon>
     </Compile>
@@ -92,6 +99,9 @@
     </Compile>
     <Compile Include="UserControls\TeacherDashboardUserControl.xaml.cs">
       <DependentUpon>TeacherDashboardUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\TermsDashboardUserControl.xaml.cs">
+      <DependentUpon>TermsDashboardUserControl.xaml</DependentUpon>
     </Compile>
     <Page Include="AdminPanelWindow.xaml">
       <SubType>Designer</SubType>
@@ -134,6 +144,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControls\AssignmentDashboardUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\CourseDashboardUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -147,6 +161,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\TeacherDashboardUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\TermsDashboardUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

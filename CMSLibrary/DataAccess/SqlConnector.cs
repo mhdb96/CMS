@@ -19,8 +19,8 @@ namespace CMSLibrary.DataAccess
             using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
             {
                 var p = new DynamicParameters();
-                p.Add("Yearid", model.Year.Id);
-                p.Add("TermId", model.Term.Id);
+                p.Add("@Yearid", model.Year.Id);
+                p.Add("@TermId", model.Term.Id);
                 p.Add("@id", 0, dbType: DbType.Int32, direction: ParameterDirection.Output);
                 connection.Execute("dbo.spActiveTerms_Insert", p, commandType: CommandType.StoredProcedure);
                 model.Id = p.Get<int>("@id");
@@ -244,6 +244,25 @@ namespace CMSLibrary.DataAccess
             {
                 output = connection.Query<TeacherModel, UserModel, TeacherModel>("dbo.spTeachers_Full_GetAll",
                     (teacher, user) => { teacher.User = user; return teacher; }).ToList();
+            }
+            return output;
+        }
+
+        public List<AssignmentModel> GetAssignment_All()
+        {
+            List<AssignmentModel> output;
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                output = connection.Query<AssignmentModel, DepartmentModel, ActiveTermModel, TermModel, YearModel, CourseModel, TeacherModel, AssignmentModel>("dbo.spAssignments_GetAll",
+                    (assignment, department, activeTerm, term, year, course, teacher)
+                    => {
+                        assignment.Department = department;
+                        activeTerm.Term = term;
+                        activeTerm.Year = year;
+                        assignment.ActiveTerm = activeTerm; 
+                        assignment.Course = course;
+                        assignment.Teacher = teacher;
+                        return assignment; }).ToList();
             }
             return output;
         }

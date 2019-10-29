@@ -43,13 +43,13 @@
                     <MyControls:TeacherDashboardUserControl/>
                 </Controls:MetroTabItem>
                 <Controls:MetroTabItem Header="Terms">
-                    <TextBlock>sdfklsdk;</TextBlock>
+                    <MyControls:TermsDashboardUserControl/>
                 </Controls:MetroTabItem>
                 <Controls:MetroTabItem Header="Courses">
                     <MyControls:CourseDashboardUserControl/>
                 </Controls:MetroTabItem>
                 <Controls:MetroTabItem Header="Assignment">
-                    <TextBlock>sdfklsdk;</TextBlock>
+                    <MyControls:AssignmentDashboardUserControl/>
                 </Controls:MetroTabItem>
             </TabControl>
         </DockPanel>

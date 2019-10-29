@@ -1,5 +1,6 @@
 ﻿using CMSLibrary;
 using CMSLibrary.Models;
+using CMSUI.Requesters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,11 +22,13 @@ namespace CMSUI
     /// </summary>
     public partial class CreateActiveTermWindow
     {
+        IActiveTermRequester CallingWindow;
         List<YearModel> Years;
         List<TermModel> Terms;
-        public CreateActiveTermWindow()
+        public CreateActiveTermWindow(IActiveTermRequester caller)
         {
             InitializeComponent();
+            CallingWindow = caller;
             LoadListsData();
         }
         private void LoadListsData()
@@ -44,11 +47,15 @@ namespace CMSUI
                 model.Year = (YearModel)yearsCombobox.SelectedItem;
                 model.Term = (TermModel)termsCombobox.SelectedItem;
                 GlobalConfig.Connection.CreateActiveTerm(model);
+                CallingWindow.ActiveTermComplete(model);
+                this.Close();
             }
+            
         }
 
         private bool ValidForm()
         {
+            //TODO - Validate this form
             bool valid = true;
             return valid;
         }

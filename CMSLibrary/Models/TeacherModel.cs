@@ -20,5 +20,12 @@ namespace CMSLibrary.Models
                 return $"{RegNo} - {FirstName} {LastName}";
             }
         }
+        public string Full
+        {
+            get
+            {
+                return $"{FirstName} {LastName}";
+            }
+        }
     }
 }

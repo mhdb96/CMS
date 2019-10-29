@@ -35,6 +35,7 @@ namespace CMSLibrary.DataAccess
         void CreateTeacher(TeacherModel model);
 
         List<TeacherModel> GetFullTeacher_All();
+        List<AssignmentModel> GetAssignment_All();
 
     }
 }

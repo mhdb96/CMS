@@ -1,5 +1,6 @@
 ﻿using CMSLibrary;
 using CMSLibrary.Models;
+using CMSUI.Requesters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,14 +22,16 @@ namespace CMSUI
     /// </summary>
     public partial class CreateAssignmentWindow
     {
+        IAssignmentRequester CallingWindow;
         List<DepartmentModel> Departments;
         List<ActiveTermModel> ActiveTerms;
         List<CourseModel> Courses;
         List<TeacherModel> Teachers;
 
-        public CreateAssignmentWindow()
+        public CreateAssignmentWindow(IAssignmentRequester caller)
         {
             InitializeComponent();
+            CallingWindow = caller;
             LoadListsData();
         }
 
@@ -59,10 +62,13 @@ namespace CMSUI
                 model.Course = (CourseModel)coursesCombobox.SelectedItem;
                 model.Teacher = (TeacherModel)teachersCombobox.SelectedItem;
                 GlobalConfig.Connection.CreateAssignment(model);
+                CallingWindow.AssignmentComplete(model);
+                this.Close();
             }
         }
         private bool ValidForm()
         {
+            // TODO - Validate this form
             bool valid = true;
             return valid;
         }
