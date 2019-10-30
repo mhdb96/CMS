@@ -15,16 +15,22 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+using MahApps.Metro.IconPacks;
+
 namespace CMSUI
 {
     /// <summary>
     /// Interaction logic for CreateActiveTermWindow.xaml
     /// </summary>
+    /// 
+
     public partial class CreateActiveTermWindow
     {
         IActiveTermRequester CallingWindow;
         List<YearModel> Years;
         List<TermModel> Terms;
+        List<StackPanel> spList = new List<StackPanel>();
+
         public CreateActiveTermWindow(IActiveTermRequester caller)
         {
             InitializeComponent();
@@ -41,6 +47,7 @@ namespace CMSUI
 
         private void CreateActiveTermBtn_Click(object sender, RoutedEventArgs e)
         {
+
             if(ValidForm())
             {
                 ActiveTermModel model = new ActiveTermModel();
@@ -55,15 +62,69 @@ namespace CMSUI
 
         private bool ValidForm()
         {
-            // TODO - Validate this form
-            if(yearsCombobox.SelectedItem == null || termsCombobox.SelectedItem == null)
+            int i = 0;
+            List<int> rows = new List<int>();
+            List<String> text = new List<String>();
+
+            StackPanel sp;
+
+            TextBlock tb;
+            PackIconMaterial icon;
+            foreach (UIElement Child in myGrid.Children)
             {
+                if(Child is ComboBox)
+                {
+                    if (((ComboBox)Child).SelectedItem == null)
+                    {
+                        rows.Add(Grid.GetRow(Child));
+                        text.Add(((ComboBox)Child).Name);
+                        i++;
+
+                    }
+                }
+            }
+            foreach (var item in spList)
+            {
+                item.Children.Clear();
+            }
+            
+            if (i > 0) { 
+                i = 0;
+            foreach (var row in rows)
+            {
+                sp = new StackPanel();
+                sp.Name = "errorSp";
+                sp.Orientation = Orientation.Horizontal;
+
+                spList.Add(sp);
+
+                tb = new TextBlock();
+                tb.Text = "You need to choose a " + text[i]  ;
+                tb.FontSize=20;
+                tb.VerticalAlignment = VerticalAlignment.Center;
+
+                icon = new PackIconMaterial();
+                icon.Kind = PackIconMaterialKind.AlertCircle;
+                icon.VerticalAlignment = VerticalAlignment.Center;
+                icon.Width = 20;
+                icon.Height = 20;
+                icon.Margin = new Thickness(5);
+                icon.Foreground = new SolidColorBrush(Colors.Red);
+
+                sp.Children.Add(icon);
+                sp.Children.Add(tb);
+                Grid.SetRow(sp, row);
+                Grid.SetColumn(sp,3);
+                myGrid.Children.Add(sp);
+                    i++;
+                }
                 return false;
             }
             else
             {
                 return true;
             }
+
         }
 
         private void CancelActiveTermBtn_Click(object sender, RoutedEventArgs e)

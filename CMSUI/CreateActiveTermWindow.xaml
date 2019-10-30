@@ -15,7 +15,7 @@
             <Setter Property="Margin" Value="0 0 10 0"/>
         </Style>
     </Window.Resources>
-    <Grid>
+    <Grid x:Name="myGrid">
         <Grid.ColumnDefinitions >
             <ColumnDefinition Width="20"/>
             <ColumnDefinition Width="auto"/>
@@ -57,6 +57,7 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
+        
         <ComboBox x:Name="termsCombobox"
             Width="150"                 
             Grid.Column="2" Grid.Row="3"            
@@ -69,6 +70,7 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
+        
         <Button
             x:Name="createActiveTermBtn" Click="CreateActiveTermBtn_Click"
             Content="Create" Grid.Column="3" Grid.Row="7"
