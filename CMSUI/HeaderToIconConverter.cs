@@ -35,6 +35,14 @@ namespace CMSUI
             {
                 return "Briefcase";
             }
+            if( type == "My Profile")
+            {
+                return "AccountCardDetails";
+            }
+            if(type == "My Courses")
+            {
+                return "BookMultiple";
+            }
             return "";
         }
 

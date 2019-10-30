@@ -26,7 +26,7 @@ namespace CMSUI.UserControls
         List<AssignmentModel> Assignments;
         List<DepartmentModel> Departments;
         List<ActiveTermModel> ActiveTerms;
-        List<AssignmentModel> FilteredAssignment;
+        List<AssignmentModel> FilteredAssignments;
         public AssignmentDashboardUserControl()
         {
             InitializeComponent();
@@ -88,44 +88,44 @@ namespace CMSUI.UserControls
             if(departmentsCombobox.SelectedItem == null)
             {
                 //filter by activeTerm
-                FilteredAssignment = new List<AssignmentModel>();
+                FilteredAssignments = new List<AssignmentModel>();
                 foreach(AssignmentModel model in Assignments)
                 {
                     ActiveTermModel a = (ActiveTermModel)activeTermsCombobox.SelectedItem;
                     if (model.ActiveTerm.Id == a.Id)
                     {
-                        FilteredAssignment.Add(model);
+                        FilteredAssignments.Add(model);
                     }
                 }
-                WireUpLists(FilteredAssignment);
+                WireUpLists(FilteredAssignments);
                 return;
             }
             if(activeTermsCombobox.SelectedItem == null)
             {
                 //filter by department
-                FilteredAssignment = new List<AssignmentModel>();                
+                FilteredAssignments = new List<AssignmentModel>();                
                 foreach (AssignmentModel model in Assignments)
                 {
                     DepartmentModel d = (DepartmentModel)departmentsCombobox.SelectedItem;
                     if (model.Department.Id == d.Id)
                     {
-                        FilteredAssignment.Add(model);
+                        FilteredAssignments.Add(model);
                     }
                 }
-                WireUpLists(FilteredAssignment);
+                WireUpLists(FilteredAssignments);
                 return;
             }
-            FilteredAssignment = new List<AssignmentModel>();
+            FilteredAssignments = new List<AssignmentModel>();
             foreach (AssignmentModel model in Assignments)
             {
                 DepartmentModel d = (DepartmentModel)departmentsCombobox.SelectedItem;
                 ActiveTermModel a = (ActiveTermModel)activeTermsCombobox.SelectedItem;
                 if (model.Department.Id == d.Id && model.ActiveTerm.Id == a.Id)
                 {
-                    FilteredAssignment.Add(model);
+                    FilteredAssignments.Add(model);
                 }
             }
-            WireUpLists(FilteredAssignment);
+            WireUpLists(FilteredAssignments);
             return;
         }
 

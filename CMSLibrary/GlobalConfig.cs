@@ -17,7 +17,7 @@ namespace CMSLibrary
         }
         public static string CnnString(string name)
         {
-            return ConfigurationManager.ConnectionStrings[name].ConnectionString;
+            return ConfigurationManager.ConnectionStrings[name].ConnectionString;            
         }
     }
 }

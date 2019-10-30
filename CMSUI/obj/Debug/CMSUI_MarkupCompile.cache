@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\App.xaml
-131485649981
+16-244993669
 
-23-1658244243
+291736306867
 20215207412
-AdminPanelWindow.xaml;CreateActiveTermWindow.xaml;CreateAssignmentWindow.xaml;CreateCourseWindow.xaml;CreateDepartmentWindow.xaml;CreateTeacherWindow.xaml;CustomControls.xaml;UserControls\AssignmentDashboardUserControl.xaml;UserControls\CourseDashboardUserControl.xaml;UserControls\DepartmentDashboardUserControl.xaml;UserControls\OutcomeUserControl.xaml;UserControls\TeacherDashboardUserControl.xaml;UserControls\TermsDashboardUserControl.xaml;
+AdminPanelWindow.xaml;CreateActiveTermWindow.xaml;CreateAssignmentWindow.xaml;CreateCourseWindow.xaml;CreateDepartmentWindow.xaml;CreateTeacherWindow.xaml;CustomControls.xaml;LoginWindow.xaml;TeacherPanelWindow.xaml;UserControls\AssignmentDashboardUserControl.xaml;UserControls\CourseDashboardUserControl.xaml;UserControls\DepartmentDashboardUserControl.xaml;UserControls\MyCoursesDashboardUserControl.xaml;UserControls\OutcomeUserControl.xaml;UserControls\TeacherDashboardUserControl.xaml;UserControls\TermsDashboardUserControl.xaml;
 
 False
 

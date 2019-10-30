@@ -266,5 +266,84 @@ namespace CMSLibrary.DataAccess
             }
             return output;
         }
+
+        public List<AssignmentModel> GetAssignment_ByTeacherId(int techerId)
+        {
+            List<AssignmentModel> output;
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@TeacherId", techerId);
+                output = connection.Query<AssignmentModel, DepartmentModel, ActiveTermModel, TermModel, YearModel, CourseModel, TeacherModel, AssignmentModel>("dbo.spAssignments_GetByTeacherId",
+                    (assignment, department, activeTerm, term, year, course, teacher)
+                    => {
+                        assignment.Department = department;
+                        activeTerm.Term = term;
+                        activeTerm.Year = year;
+                        assignment.ActiveTerm = activeTerm;
+                        assignment.Course = course;
+                        assignment.Teacher = teacher;
+                        return assignment;
+                    }, p, commandType: CommandType.StoredProcedure).ToList();
+            }
+            return output;
+        }
+
+        public UserModel GetUser_ByUserName(string userName)
+        {
+            UserModel output;
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@UserName", userName);                
+                output = connection.Query<UserModel, RoleModel, UserModel>("dbo.spUsers_GetByUsername",
+                    (user, role) => 
+                    { user.Role = role; return user; }, 
+                    p, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+            return output;
+        }
+
+        public AdminModel GetAdmin_ByUserId(int userId)
+        {
+            AdminModel output = new AdminModel();
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@UserId", userId);
+                output = connection.Query<AdminModel>("dbo.spAdmins_GetByUserId", p, commandType: CommandType.StoredProcedure).First();
+            }
+            return output;
+        }
+
+        public TeacherModel GetTeacher_ByUserId(int userId)
+        {
+            TeacherModel output = new TeacherModel();
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@UserId", userId);
+                output = connection.Query<TeacherModel>("dbo.spTeachers_GetByUserId", p, commandType: CommandType.StoredProcedure).First();
+            }
+            return output;
+        }
+
+        public string CheckConniction()
+        {
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                try
+                {
+                    connection.Open();
+                    return "";
+                }
+                catch (Exception ex)
+                {                    
+                    
+                    return ex.Message;
+                }
+                    
+            }
+        }
     }
 }

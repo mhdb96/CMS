@@ -13,6 +13,5 @@ namespace CMSLibrary.Models
         public string FilePath { get; set; }
         public AssignmentModel Assignment { get; set; }
         public ExamTypeModel ExamType { get; set; }
-        public List<QuestionModel> Questions { get; set; }
     }
 }

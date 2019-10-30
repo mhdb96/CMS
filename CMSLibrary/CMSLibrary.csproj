@@ -45,6 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuthenticationState.cs" />
+    <Compile Include="Login.cs" />
     <Compile Include="DataAccess\SqlConnector.cs" />
     <Compile Include="GlobalConfig.cs" />
     <Compile Include="DataAccess\IDataConnection.cs" />
@@ -56,8 +58,10 @@
     <Compile Include="Models\DepartmentModel.cs" />
     <Compile Include="Models\DepartmentOutcomeModel.cs" />
     <Compile Include="Models\EducationalYearModel.cs" />
+    <Compile Include="Models\ExamGroupModel.cs" />
     <Compile Include="Models\ExamModel.cs" />
     <Compile Include="Models\ExamTypeModel.cs" />
+    <Compile Include="Models\GroupModel.cs" />
     <Compile Include="Models\QuestionModel.cs" />
     <Compile Include="Models\ResultModel.cs" />
     <Compile Include="Models\RoleModel.cs" />

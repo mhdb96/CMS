@@ -9,6 +9,8 @@ namespace CMSLibrary.DataAccess
 {
     public interface IDataConnection
     {
+        string CheckConniction();
+
         void CreateActiveTerm(ActiveTermModel model);
         List<YearModel> GetYear_ALL();
         List<TermModel> GetTerm_ALL();
@@ -36,6 +38,12 @@ namespace CMSLibrary.DataAccess
 
         List<TeacherModel> GetFullTeacher_All();
         List<AssignmentModel> GetAssignment_All();
+
+        UserModel GetUser_ByUserName(string userName);
+
+        AdminModel GetAdmin_ByUserId(int userId);
+        TeacherModel GetTeacher_ByUserId(int userId);
+        List<AssignmentModel> GetAssignment_ByTeacherId(int techerId);
 
     }
 }

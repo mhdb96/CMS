@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CMSLibrary.Models;
+using CMSUI.Requesters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,10 +21,14 @@ namespace CMSUI
     /// </summary>
     public partial class AdminPanelWindow
     {
-        public string test = "10";
-        public AdminPanelWindow()
+        //public string test = "10";
+        IAdminPanelRequester CallingWindow;
+        AdminModel Admin;
+        public AdminPanelWindow(IAdminPanelRequester caller)
         {
             InitializeComponent();
+            CallingWindow = caller;
+            Admin = CallingWindow.GetAdminInfo();
             
         }
     }

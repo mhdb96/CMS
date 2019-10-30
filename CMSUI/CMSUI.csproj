@@ -79,12 +79,21 @@
       <DependentUpon>CreateCourseWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="GridWidthToTabWidthConverter.cs" />
+    <Compile Include="GridWidthToTabWidthConverterTeacher.cs" />
     <Compile Include="HeaderToIconConverter.cs" />
+    <Compile Include="LoginWindow.xaml.cs">
+      <DependentUpon>LoginWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Requesters\IActiveTermRequester.cs" />
+    <Compile Include="Requesters\IAdminPanelRequester.cs" />
     <Compile Include="Requesters\IAssignmentRequester.cs" />
     <Compile Include="Requesters\ICouresRequester.cs" />
     <Compile Include="Requesters\IDepartmentRequester.cs" />
+    <Compile Include="Requesters\ITeacherPanelRequester.cs" />
     <Compile Include="Requesters\ITeacherRequester.cs" />
+    <Compile Include="TeacherPanelWindow.xaml.cs">
+      <DependentUpon>TeacherPanelWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\AssignmentDashboardUserControl.xaml.cs">
       <DependentUpon>AssignmentDashboardUserControl.xaml</DependentUpon>
     </Compile>
@@ -93,6 +102,9 @@
     </Compile>
     <Compile Include="UserControls\DepartmentDashboardUserControl.xaml.cs">
       <DependentUpon>DepartmentDashboardUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\MyCoursesDashboardUserControl.xaml.cs">
+      <DependentUpon>MyCoursesDashboardUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\OutcomeUserControl.xaml.cs">
       <DependentUpon>OutcomeUserControl.xaml</DependentUpon>
@@ -144,6 +156,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="LoginWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TeacherPanelWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\AssignmentDashboardUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -153,6 +173,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\DepartmentDashboardUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\MyCoursesDashboardUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
