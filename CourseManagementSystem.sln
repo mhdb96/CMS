@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMSLibrary", "CMSLibrary\CM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMSUI", "CMSUI\CMSUI.csproj", "{0225797D-BCB9-42F8-B295-32B29C46FD04}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp1", "..\..\..\Desktop\WpfApp1\WpfApp1\WpfApp1.csproj", "{97D61E67-430D-4A60-9D1D-E8AFEB51672E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{0225797D-BCB9-42F8-B295-32B29C46FD04}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0225797D-BCB9-42F8-B295-32B29C46FD04}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0225797D-BCB9-42F8-B295-32B29C46FD04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97D61E67-430D-4A60-9D1D-E8AFEB51672E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97D61E67-430D-4A60-9D1D-E8AFEB51672E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97D61E67-430D-4A60-9D1D-E8AFEB51672E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97D61E67-430D-4A60-9D1D-E8AFEB51672E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
