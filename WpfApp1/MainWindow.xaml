@@ -1,0 +1,35 @@
+﻿<Window x:Class="WpfApp1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="1268.3">
+
+    <Grid Margin="0,0,3.6,0">
+        <DataGrid AutoGenerateColumns="False" x:Name="DataGridListe" CanUserAddRows="True" ItemsSource="{Binding ListeBinding}" Margin="10,10,572,50" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Ad" IsReadOnly="True" Binding="{Binding Path=ad}" Width="75"></DataGridTextColumn>
+                <DataGridTextColumn Header="Soyad" IsReadOnly="True"  Binding="{Binding Path=soyad}" Width="100"></DataGridTextColumn>
+                <DataGridTextColumn Header="No" IsReadOnly="True" Binding="{Binding Path=no}" Width="75"></DataGridTextColumn>
+                <DataGridTextColumn Header="Kitapçık" IsReadOnly="True"  Binding="{Binding Path=kitapcik}" Width="60"></DataGridTextColumn>
+                <DataGridTextColumn Header="Cevaplar" IsReadOnly="True" Binding="{Binding Path=cevaplar}" Width="150"></DataGridTextColumn>
+                <DataGridTextColumn Header="Doğru" IsReadOnly="True" Binding="{Binding Path=dogru}" Width="50"></DataGridTextColumn>
+
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid AutoGenerateColumns="False" Name="CevapAnahtari" CanUserAddRows="True" ItemsSource="{Binding AnahtarBinding}" Margin="705,10,243,50" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Kitapçık" IsReadOnly="True" Binding="{Binding Path=KitapcikTuru}" Width="75"></DataGridTextColumn>
+                <DataGridTextColumn Header="Cevaplar" IsReadOnly="True"  Binding="{Binding Path=DogruCevaplar}" Width="150"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="HESAPLA" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="1086,207,0,0" Click="Button_Click"/>
+        <Button Content="Gözat" HorizontalAlignment="Left" Margin="829,383,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_2"/>
+        <Button Content="Gözat" HorizontalAlignment="Left" Margin="276,383,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-1.787,0.76" Click="Button_Click_1"/>
+
+
+
+    </Grid>
+</Window>
