@@ -115,6 +115,7 @@ namespace CMSUI
                 sp.Children.Add(tb);
                 Grid.SetRow(sp, row);
                 Grid.SetColumn(sp,3);
+                    Grid.SetColumnSpan(sp, 3);
                 myGrid.Children.Add(sp);
                     i++;
                 }
@@ -130,6 +131,26 @@ namespace CMSUI
         private void CancelActiveTermBtn_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void YearsCombobox_DropDownClosed(object sender, EventArgs e)
+        {
+            ValidForm();
+        }
+
+        private void TermsCombobox_DropDownClosed(object sender, EventArgs e)
+        {
+            ValidForm();
+        }
+
+        private void YearsCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ValidForm();
+        }
+
+        private void TermsCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ValidForm();
         }
     }
 }
