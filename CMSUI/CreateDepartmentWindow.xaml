@@ -49,7 +49,13 @@
                  Margin="10 5 0 5" Width="200"
                  Controls:TextBoxHelper.Watermark="Enter Department Name"            
                  Controls:TextBoxHelper.ClearTextButton="True"       
-                 TextWrapping="Wrap"/>
+                 TextWrapping="Wrap" TextChanged="NameText_TextChanged"/>
+
+        <StackPanel x:Name="errorName" Grid.Column="3" Grid.Row="2" Orientation="Horizontal" Grid.ColumnSpan="3" Visibility="Hidden">
+            <iconPacks:PackIconMaterial Kind="AlertCircle" VerticalAlignment="Center" Width="20" Height="20" Margin="5 0 0 0" Foreground="Red"/>
+            <TextBlock Text="Name is required" FontSize="10pt" VerticalAlignment="Center" Margin="5 0 0 0"/>
+        </StackPanel>
+
         <StackPanel Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal">
             <TextBlock Text="Outcomes" Style="{StaticResource myTextBlockStyle}"/>
             <Button x:Name="addOutcome" Click="AddOutcome_Click" 
@@ -63,11 +69,15 @@
                     Kind="Add"/>
             </Button>
         </StackPanel>
-        <ScrollViewer Grid.Column="1" Grid.Row="4" Margin="10" Grid.ColumnSpan="3" Height="200">
-            <StackPanel Orientation="Vertical" x:Name="outcomesList">
+        <ScrollViewer  Grid.Column="1" Grid.Row="4" Margin="10" Grid.ColumnSpan="3" Height="200" ScrollChanged="ScrollViewer_ScrollChanged">
+            <StackPanel  Orientation="Vertical" x:Name="outcomesList">
                 
             </StackPanel>
         </ScrollViewer>
+        <StackPanel x:Name="errorOutcomes" Grid.Column="2" Grid.Row="3" Orientation="Horizontal" Grid.ColumnSpan="3" Visibility="Hidden" Margin="75 0 0 0">
+            <iconPacks:PackIconMaterial Kind="AlertCircle" VerticalAlignment="Center" Width="20" Height="20" Margin="5 0 0 0" Foreground="Red"/>
+            <TextBlock Text="Outcomes are required" FontSize="10pt" VerticalAlignment="Center" Margin="5 0 0 0"/>
+        </StackPanel>
         <Button
             x:Name="createDepartmentBtn" Click="CreateDepartmentBtn_Click"
             Content="Create" Grid.Column="3" Grid.Row="7"

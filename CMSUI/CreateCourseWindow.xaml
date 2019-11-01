@@ -8,7 +8,7 @@
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"                      
         xmlns:local="clr-namespace:CMSUI"
         mc:Ignorable="d"
-        Title="Create Course" Height="558.6" Width="508.4" FontSize="18pt">
+        Title="Create Course" Height="558.6" Width="522" FontSize="18pt">
     <Window.Resources>
         <Style x:Key = "myTextBlockStyle" TargetType = "TextBlock">
             <Setter Property = "VerticalAlignment" Value="Center" />
@@ -49,27 +49,40 @@
                  Margin="10 5 0 5" Width="200"
                  Controls:TextBoxHelper.Watermark="Enter Course Name"            
                  Controls:TextBoxHelper.ClearTextButton="True"       
-                 TextWrapping="Wrap"/>
+                 TextWrapping="Wrap" TextChanged="NameText_TextChanged"/>
+        <StackPanel x:Name="errorName" Grid.Column="3" Grid.Row="2" Orientation="Horizontal" Grid.ColumnSpan="3" Visibility="Hidden">
+            <iconPacks:PackIconMaterial Kind="AlertCircle" VerticalAlignment="Center" Width="20" Height="20" Margin="5 0 0 0" Foreground="Red"/>
+            <TextBlock Text="Name is required" FontSize="10pt" VerticalAlignment="Center" Margin="5 0 0 0"/>
+        </StackPanel>
         <TextBlock Grid.Column="1" Grid.Row="3" Text="Code:" Style="{StaticResource myTextBlockStyle}"/>
         <TextBox x:Name="codeText"
             Grid.Column="2" Grid.Row="3" 
                  Margin="10 5 0 5" Width="200"
                  Controls:TextBoxHelper.Watermark="Enter Course Code"            
                  Controls:TextBoxHelper.ClearTextButton="True"       
-                 TextWrapping="Wrap"/>
+                 TextWrapping="Wrap" TextChanged="CodeText_TextChanged"/>
+        <StackPanel x:Name="errorCode" Grid.Column="3" Grid.Row="3" Orientation="Horizontal" Grid.ColumnSpan="3" Visibility="Hidden">
+            <iconPacks:PackIconMaterial Kind="AlertCircle" VerticalAlignment="Center" Width="20" Height="20" Margin="5 0 0 0" Foreground="Red"/>
+            <TextBlock Text="Name is Code" FontSize="10pt" VerticalAlignment="Center" Margin="5 0 0 0"/>
+        </StackPanel>
         <TextBlock Grid.Column="1" Grid.Row="4" Text="Year:" Style="{StaticResource myTextBlockStyle}"/>
         <ComboBox x:Name="eduYearCombobox"
             Width="200"                 
             Grid.Column="2" Grid.Row="4"            
             Margin="10 5 0 5"           
             Controls:TextBoxHelper.ClearTextButton="True"            
-            Controls:TextBoxHelper.Watermark="Please select an item...">
+            Controls:TextBoxHelper.Watermark="Please select an item..." SelectionChanged="EduYearCombobox_SelectionChanged">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}" />
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
+
+        <StackPanel x:Name="errorYear" Grid.Column="3" Grid.Row="4" Orientation="Horizontal" Grid.ColumnSpan="3" Visibility="Hidden">
+            <iconPacks:PackIconMaterial Kind="AlertCircle" VerticalAlignment="Center" Width="20" Height="20" Margin="5 0 0 0" Foreground="Red"/>
+            <TextBlock Text="You need to choose a year" FontSize="10pt" VerticalAlignment="Center" Margin="5 0 0 0"/>
+        </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2" Orientation="Horizontal">
             <TextBlock Text="Outcomes" Style="{StaticResource myTextBlockStyle}"/>
             <Button x:Name="addOutcome" Click="AddOutcome_Click" 
@@ -83,11 +96,18 @@
                     Kind="Add"/>
             </Button>
         </StackPanel>
-        <ScrollViewer Grid.Column="1" Grid.Row="6" Margin="10" Grid.ColumnSpan="3" Height="200">
+        
+        <ScrollViewer Grid.Column="1" Grid.Row="6" Margin="10" Grid.ColumnSpan="3" Height="200" ScrollChanged="ScrollViewer_ScrollChanged">
             <StackPanel Orientation="Vertical" x:Name="outcomesList">
 
             </StackPanel>
         </ScrollViewer>
+
+        <StackPanel x:Name="errorOutcomes" Grid.Column="2" Grid.Row="5" Orientation="Horizontal" Grid.ColumnSpan="3" Visibility="Hidden" Margin="75 0 0 0">
+            <iconPacks:PackIconMaterial Kind="AlertCircle" VerticalAlignment="Center" Width="20" Height="20" Margin="5 0 0 0" Foreground="Red"/>
+            <TextBlock Text="Outcomes are required" FontSize="10pt" VerticalAlignment="Center" Margin="5 0 0 0"/>
+        </StackPanel>
+
         <Button
             x:Name="createCourseBtn" Click="CreateCourseBtn_Click"
             Content="Create" Grid.Column="3" Grid.Row="7"

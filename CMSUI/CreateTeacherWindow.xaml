@@ -8,7 +8,7 @@
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks" 
         xmlns:local="clr-namespace:CMSUI"
         mc:Ignorable="d"
-        Title="Create Teacher" Height="400" Width="450" FontSize="18pt">
+        Title="Create Teacher" Height="400" Width="511.2" FontSize="18pt">
     <Window.Resources>
         <Style x:Key = "myTextBlockStyle" TargetType = "TextBlock">
             <Setter Property = "VerticalAlignment" Value="Center" />
@@ -53,31 +53,51 @@
                  Margin="10 5 0 5" Width="150"
                  Controls:TextBoxHelper.Watermark="Enter Reg No"            
                  Controls:TextBoxHelper.ClearTextButton="True"       
-                 TextWrapping="Wrap"/>
+                 TextWrapping="Wrap" TextChanged="RegNoText_TextChanged"/>
+        <StackPanel x:Name="errorRegisterNo" Grid.Column="3" Grid.Row="2" Orientation="Horizontal" Grid.ColumnSpan="3" Visibility="Hidden">
+            <iconPacks:PackIconMaterial Kind="AlertCircle" VerticalAlignment="Center" Width="20" Height="20" Margin="5 0 0 0" Foreground="Red"/>
+            <TextBlock Text="Register No is required" FontSize="10pt" VerticalAlignment="Center" Margin="5 0 0 0"/>
+        </StackPanel>
         <TextBox x:Name="firstNameText"
             Grid.Column="2" Grid.Row="3" 
                  Margin="10 5 0 5" Width="150"
                  Controls:TextBoxHelper.Watermark="Enter First Name"            
                  Controls:TextBoxHelper.ClearTextButton="True"       
-                 TextWrapping="Wrap"/>
+                 TextWrapping="Wrap" TextChanged="FirstNameText_TextChanged"/>
+        <StackPanel x:Name="errorFirstName" Grid.Column="3" Grid.Row="3" Orientation="Horizontal" Grid.ColumnSpan="3" Visibility="Hidden">
+            <iconPacks:PackIconMaterial Kind="AlertCircle" VerticalAlignment="Center" Width="20" Height="20" Margin="5 0 0 0" Foreground="Red"/>
+            <TextBlock Text="First Name is required" FontSize="10pt" VerticalAlignment="Center" Margin="5 0 0 0"/>
+        </StackPanel>
         <TextBox x:Name="lastNameText"
             Grid.Column="2" Grid.Row="4" 
                  Margin="10 5 0 5" Width="150"
                  Controls:TextBoxHelper.Watermark="Enter Last Name"            
                  Controls:TextBoxHelper.ClearTextButton="True"       
-                 TextWrapping="Wrap"/>
+                 TextWrapping="Wrap" TextChanged="LastNameText_TextChanged"/>
+        <StackPanel x:Name="errorLastName" Grid.Column="3" Grid.Row="4" Orientation="Horizontal" Grid.ColumnSpan="3" Visibility="Hidden">
+            <iconPacks:PackIconMaterial Kind="AlertCircle" VerticalAlignment="Center" Width="20" Height="20" Margin="5 0 0 0" Foreground="Red"/>
+            <TextBlock Text="Last Name is required" FontSize="10pt" VerticalAlignment="Center" Margin="5 0 0 0"/>
+        </StackPanel>
         <TextBox x:Name="usernameText"
             Grid.Column="2" Grid.Row="5" 
                  Margin="10 5 0 5" Width="150"
                  Controls:TextBoxHelper.Watermark="Enter Username"            
                  Controls:TextBoxHelper.ClearTextButton="True"       
-                 TextWrapping="Wrap"/>
+                 TextWrapping="Wrap" TextChanged="UsernameText_TextChanged"/>
+        <StackPanel x:Name="errorUserName" Grid.Column="3" Grid.Row="5" Orientation="Horizontal" Grid.ColumnSpan="3" Visibility="Hidden">
+            <iconPacks:PackIconMaterial Kind="AlertCircle" VerticalAlignment="Center" Width="20" Height="20" Margin="5 0 0 0" Foreground="Red"/>
+            <TextBlock Text="Username is required" FontSize="10pt" VerticalAlignment="Center" Margin="5 0 0 0"/>
+        </StackPanel>
         <PasswordBox x:Name="passwordText"
             Grid.Column="2" Grid.Row="6" 
                  Margin="10 5 0 5" Width="150"
                      Style="{StaticResource MetroButtonRevealedPasswordBox}"
                  Controls:TextBoxHelper.Watermark="Enter Password"            
-                 Controls:TextBoxHelper.ClearTextButton="True"/>
+                 Controls:TextBoxHelper.ClearTextButton="True" PasswordChanged="PasswordText_PasswordChanged"/>
+        <StackPanel x:Name="errorPassword" Grid.Column="3" Grid.Row="6" Orientation="Horizontal" Grid.ColumnSpan="3" Visibility="Hidden">
+            <iconPacks:PackIconMaterial Kind="AlertCircle" VerticalAlignment="Center" Width="20" Height="20" Margin="5 0 0 0" Foreground="Red"/>
+            <TextBlock Text="Password is required" FontSize="10pt" VerticalAlignment="Center" Margin="5 0 0 0"/>
+        </StackPanel>
         <Button
             x:Name="createTeacherBtn" Click="CreateTeacherBtn_Click"
             Content="Create" Grid.Column="3" Grid.Row="7"

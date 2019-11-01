@@ -29,7 +29,8 @@ namespace CMSUI
         IActiveTermRequester CallingWindow;
         List<YearModel> Years;
         List<TermModel> Terms;
-        List<StackPanel> spList = new List<StackPanel>();
+        List<StackPanel> spList = new List<StackPanel>();  // valid 2 için
+        bool control = true;
 
         public CreateActiveTermWindow(IActiveTermRequester caller)
         {
@@ -61,6 +62,26 @@ namespace CMSUI
         }
 
         private bool ValidForm()
+        {
+            if (yearsCombobox.SelectedItem == null || termsCombobox.SelectedItem == null)
+            {
+                if (yearsCombobox.SelectedItem == null)
+                {
+                    errorYear.Visibility = Visibility.Visible;
+                }
+                if (termsCombobox.SelectedItem == null)
+                {
+                    errorTerm.Visibility = Visibility.Visible;
+                }
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        private bool ValidForm2()
         {
             int i = 0;
             List<int> rows = new List<int>();
@@ -115,7 +136,7 @@ namespace CMSUI
                 sp.Children.Add(tb);
                 Grid.SetRow(sp, row);
                 Grid.SetColumn(sp,3);
-                    Grid.SetColumnSpan(sp, 3);
+                Grid.SetColumnSpan(sp, 3);
                 myGrid.Children.Add(sp);
                     i++;
                 }
@@ -133,24 +154,28 @@ namespace CMSUI
             this.Close();
         }
 
-        private void YearsCombobox_DropDownClosed(object sender, EventArgs e)
-        {
-            ValidForm();
-        }
-
-        private void TermsCombobox_DropDownClosed(object sender, EventArgs e)
-        {
-            ValidForm();
-        }
-
         private void YearsCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ValidForm();
+            if (yearsCombobox.SelectedItem == null)
+            {
+                errorYear.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                errorYear.Visibility = Visibility.Hidden;
+            }
         }
 
         private void TermsCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ValidForm();
+            if (termsCombobox.SelectedItem == null)
+            {
+                errorTerm.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                errorTerm.Visibility = Visibility.Hidden;
+            }
         }
     }
 }

@@ -70,27 +70,94 @@ namespace CMSUI
         // TODO - empliment validation
         private bool ValidForm()
         {
-            if (nameText.Text != "" && codeText.Text != "" && eduYearCombobox.SelectedItem != null )
+            foreach (OutcomeUserControl outcome in outcomesList.Children)
             {
-                foreach (OutcomeUserControl outcome in outcomesList.Children)
+                if (outcome.nameText.Text == "" || outcome.descriptionText.Text == "")
                 {
-                    if (outcome.nameText.Text == "" || outcome.descriptionText.Text == "")
+                    if (outcome.descriptionText.Text == "")
                     {
-                        return false;
-
+                        outcome.descriptionText.BorderBrush = Brushes.Red;
                     }
+                    errorOutcomes.Visibility = Visibility.Visible;
                 }
-                return true;
             }
-            else
+
+            if (nameText.Text == "")
+            {
+                errorName.Visibility = Visibility.Visible;
+            }
+            if (codeText.Text == "")
+            {
+                errorCode.Visibility = Visibility.Visible;
+            }
+            if (eduYearCombobox.SelectedItem == null)
+            {
+                errorYear.Visibility = Visibility.Visible;
+            }
+            if (errorName.Visibility == Visibility.Visible || errorCode.Visibility == Visibility.Visible || errorYear.Visibility == Visibility.Visible || errorOutcomes.Visibility == Visibility.Visible)
             {
                 return false;
             }
+            else
+            {
+                return true;
+            }
+
+
         }
 
         private void CancelCourseBtn_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void NameText_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (nameText.Text == "")
+            {
+                errorName.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                errorName.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void ScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
+        {
+            errorOutcomes.Visibility = Visibility.Hidden;
+
+            foreach (OutcomeUserControl outcome in outcomesList.Children)
+            {
+                if (outcome.nameText.BorderBrush == Brushes.Red || outcome.descriptionText.BorderBrush == Brushes.Red)
+                {
+                    errorOutcomes.Visibility = Visibility.Visible;
+                }
+            }
+        }
+
+        private void CodeText_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (codeText.Text == "")
+            {
+                errorCode.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                errorCode.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void EduYearCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (eduYearCombobox.SelectedItem == null)
+            {
+                errorYear.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                errorYear.Visibility = Visibility.Hidden;
+            }
         }
     }
 }

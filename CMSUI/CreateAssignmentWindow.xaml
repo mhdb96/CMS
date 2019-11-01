@@ -52,49 +52,65 @@
             Grid.Column="2" Grid.Row="2"            
             Margin="10 5 0 5"           
             Controls:TextBoxHelper.ClearTextButton="True"            
-            Controls:TextBoxHelper.Watermark="Please select an item...">
+            Controls:TextBoxHelper.Watermark="Please select an item..." SelectionChanged="DepartmentsCombobox_SelectionChanged">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}" />
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
+        <StackPanel x:Name="errorDepartment" Grid.Column="3" Grid.Row="2" Orientation="Horizontal" Grid.ColumnSpan="3" Visibility="Hidden">
+            <iconPacks:PackIconMaterial Kind="AlertCircle" VerticalAlignment="Center" Width="20" Height="20" Margin="5 0 0 0" Foreground="Red"/>
+            <TextBlock Text="You need to choose a department" FontSize="10pt" VerticalAlignment="Center" Margin="5 0 0 0"/>
+        </StackPanel>
         <ComboBox x:Name="activeTermsCombobox"
             Width="200"                 
             Grid.Column="2" Grid.Row="3"            
             Margin="10 5 0 5"           
             Controls:TextBoxHelper.ClearTextButton="True"            
-            Controls:TextBoxHelper.Watermark="Please select an item...">
+            Controls:TextBoxHelper.Watermark="Please select an item..." SelectionChanged="ActiveTermsCombobox_SelectionChanged">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}" />
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
+        <StackPanel x:Name="errorActiveTerm" Grid.Column="3" Grid.Row="3" Orientation="Horizontal" Grid.ColumnSpan="3" Visibility="Hidden">
+            <iconPacks:PackIconMaterial Kind="AlertCircle" VerticalAlignment="Center" Width="20" Height="20" Margin="5 0 0 0" Foreground="Red"/>
+            <TextBlock Text="You need to choose a term" FontSize="10pt" VerticalAlignment="Center" Margin="5 0 0 0"/>
+        </StackPanel>
         <ComboBox x:Name="coursesCombobox"
             Width="200"                 
             Grid.Column="2" Grid.Row="4"            
             Margin="10 5 0 5"           
             Controls:TextBoxHelper.ClearTextButton="True"            
-            Controls:TextBoxHelper.Watermark="Please select an item...">
+            Controls:TextBoxHelper.Watermark="Please select an item..." SelectionChanged="CoursesCombobox_SelectionChanged">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}" />
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
+        <StackPanel x:Name="errorCourse" Grid.Column="3" Grid.Row="4" Orientation="Horizontal" Grid.ColumnSpan="3" Visibility="Hidden">
+            <iconPacks:PackIconMaterial Kind="AlertCircle" VerticalAlignment="Center" Width="20" Height="20" Margin="5 0 0 0" Foreground="Red"/>
+            <TextBlock Text="You need to choose a course" FontSize="10pt" VerticalAlignment="Center" Margin="5 0 0 0"/>
+        </StackPanel>
         <ComboBox x:Name="teachersCombobox"
             Width="200"                 
             Grid.Column="2" Grid.Row="5"            
             Margin="10 5 0 5"           
             Controls:TextBoxHelper.ClearTextButton="True"            
-            Controls:TextBoxHelper.Watermark="Please select an item...">
+            Controls:TextBoxHelper.Watermark="Please select an item..." SelectionChanged="TeachersCombobox_SelectionChanged">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding FullName}" />
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
+        <StackPanel x:Name="errorTeacher" Grid.Column="3" Grid.Row="5" Orientation="Horizontal" Grid.ColumnSpan="3" Visibility="Hidden">
+            <iconPacks:PackIconMaterial Kind="AlertCircle" VerticalAlignment="Center" Width="20" Height="20" Margin="5 0 0 0" Foreground="Red"/>
+            <TextBlock Text="You need to choose a teacher" FontSize="10pt" VerticalAlignment="Center" Margin="5 0 0 0"/>
+        </StackPanel>
         <Button
             x:Name="createAssignmentBtn" Click="CreateAssignmentBtn_Click"
             Content="Create" Grid.Column="3" Grid.Row="7"

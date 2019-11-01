@@ -10,15 +10,15 @@
              mc:Ignorable="d" >
     <Grid>
         <StackPanel Orientation="Vertical">
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" x:Name="OutComeSp">
                 <TextBox x:Name="nameText"
                  Margin="10 5 0 5" Width="50"                        
-                 TextWrapping="Wrap"/>
+                 TextWrapping="Wrap" TextChanged="NameText_TextChanged"/>
                 <TextBox x:Name="descriptionText"
                  Margin="10 5 0 5" Width="200"
                  Controls:TextBoxHelper.Watermark="Enter an Outcome"            
                  Controls:TextBoxHelper.ClearTextButton="True"       
-                 TextWrapping="Wrap"/>
+                 TextWrapping="Wrap" TextChanged="DescriptionText_TextChanged"/>
                 <Button x:Name="deleteOutcome" Click="DeleteOutcome_Click" 
                         Margin="10 5 5 5"
                 Width="25"

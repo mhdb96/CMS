@@ -71,11 +71,75 @@ namespace CMSUI
             // TODO - Validate this form
             if (departmentsCombobox.SelectedItem == null || activeTermsCombobox.SelectedItem == null || coursesCombobox.SelectedItem == null || teachersCombobox.SelectedItem == null)
             {
+                if (departmentsCombobox.SelectedItem == null)
+                {
+                    errorDepartment.Visibility = Visibility.Visible;
+                }
+                if (activeTermsCombobox.SelectedItem == null)
+                {
+                    errorActiveTerm.Visibility = Visibility.Visible;
+                }
+                if (coursesCombobox.SelectedItem == null)
+                {
+                    errorCourse.Visibility = Visibility.Visible;
+                }
+                if (teachersCombobox.SelectedItem == null)
+                {
+                    errorTeacher.Visibility = Visibility.Visible;
+                }
                 return false;
             }
             else
             {
                 return true;
+            }
+        }
+
+        private void DepartmentsCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (departmentsCombobox.SelectedItem == null)
+            {
+                errorDepartment.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                errorDepartment.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void ActiveTermsCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (activeTermsCombobox.SelectedItem == null)
+            {
+                errorActiveTerm.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                errorActiveTerm.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void CoursesCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (coursesCombobox.SelectedItem == null)
+            {
+                errorCourse.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                errorCourse.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void TeachersCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (teachersCombobox.SelectedItem == null)
+            {
+                errorTeacher.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                errorTeacher.Visibility = Visibility.Hidden;
             }
         }
     }

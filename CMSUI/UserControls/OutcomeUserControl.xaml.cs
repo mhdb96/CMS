@@ -46,5 +46,29 @@ namespace CMSUI.UserControls
             var parentT = parent as T;
             return parentT ?? FindParent<T>(parent);
         }
+
+        private void NameText_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (nameText.Text == "")
+            {
+                nameText.BorderBrush = Brushes.Red;
+            }
+            else
+            {
+                nameText.BorderBrush = Brushes.LightGray;
+            }
+        }
+
+        private void DescriptionText_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (descriptionText.Text == "")
+            {
+                descriptionText.BorderBrush = Brushes.Red;
+            }
+            else
+            {
+                descriptionText.BorderBrush = Brushes.LightGray;
+            }
+        }
     }
 }
