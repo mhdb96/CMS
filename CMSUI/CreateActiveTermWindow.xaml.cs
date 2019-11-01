@@ -29,8 +29,12 @@ namespace CMSUI
         IActiveTermRequester CallingWindow;
         List<YearModel> Years;
         List<TermModel> Terms;
+
+        List<TermModel> myTerms = new List<TermModel>();
+        List<ActiveTermModel> myActiveTerms = new List<ActiveTermModel>();
+
+        List<ActiveTermModel> activeTerms;
         List<StackPanel> spList = new List<StackPanel>();  // valid 2 için
-        bool control = true;
 
         public CreateActiveTermWindow(IActiveTermRequester caller)
         {
@@ -42,14 +46,18 @@ namespace CMSUI
         {
             Years = GlobalConfig.Connection.GetYear_ALL();
             yearsCombobox.ItemsSource = Years;
+            
             Terms = GlobalConfig.Connection.GetTerm_ALL();
-            termsCombobox.ItemsSource = Terms;
+            //termsCombobox.ItemsSource = Terms;
+
+            activeTerms = GlobalConfig.Connection.GetActiveTerm_All();
+
         }
 
         private void CreateActiveTermBtn_Click(object sender, RoutedEventArgs e)
         {
 
-            if(ValidForm())
+            if (ValidForm())
             {
                 ActiveTermModel model = new ActiveTermModel();
                 model.Year = (YearModel)yearsCombobox.SelectedItem;
@@ -63,6 +71,7 @@ namespace CMSUI
 
         private bool ValidForm()
         {
+
             if (yearsCombobox.SelectedItem == null || termsCombobox.SelectedItem == null)
             {
                 if (yearsCombobox.SelectedItem == null)
@@ -156,6 +165,38 @@ namespace CMSUI
 
         private void YearsCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            bool yaz = false;
+            YearModel model = (YearModel)yearsCombobox.SelectedItem;
+            myTerms.Clear();
+            myActiveTerms.Clear();
+
+
+            foreach (var item in activeTerms)
+            {
+                if (item.Year.Name == model.Name)
+                {
+                    myActiveTerms.Add(item);
+                }
+            }
+            foreach (var item2 in Terms)
+            {
+                yaz = true;
+                foreach (var item3 in myActiveTerms)
+                {
+                    if (item2.Name == item3.Term.Name)
+                    {
+                        yaz = false;
+                        break;
+                    }
+                }
+                if (yaz)
+                {
+                    myTerms.Add(item2);
+                }
+            }
+
+
+
             if (yearsCombobox.SelectedItem == null)
             {
                 errorYear.Visibility = Visibility.Visible;
@@ -176,6 +217,12 @@ namespace CMSUI
             {
                 errorTerm.Visibility = Visibility.Hidden;
             }
+        }
+
+        private void TermsCombobox_DropDownOpened(object sender, EventArgs e)
+        {
+            termsCombobox.Items.Refresh();
+            termsCombobox.ItemsSource = myTerms;
         }
     }
 }
