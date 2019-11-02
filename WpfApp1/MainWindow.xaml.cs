@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Win32;
 using CMSLibrary;
+using CMSLibrary.Models;
 
 namespace WpfApp1
 {
@@ -58,10 +59,10 @@ namespace WpfApp1
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             string answersPath = GetFilePath();
-            List<Answers> myAnswers = ev.AnswersList(answersPath);
-            foreach (Answers a in myAnswers)
+            List<AnswerKeyModel> myAnswers = ev.AnswersList(answersPath);
+            foreach (AnswerKeyModel a in myAnswers)
             {
-                CevapAnahtari.Items.Add(new { KitapcikTuru = a.Type, DogruCevaplar = a.True });
+                CevapAnahtari.Items.Add(new { KitapcikTuru = a.Group.Name, DogruCevaplar = a.AnswersList });
             }
         }
     }

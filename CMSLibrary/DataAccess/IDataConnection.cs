@@ -31,6 +31,8 @@ namespace CMSLibrary.DataAccess
         void GetDepartmentOutcomes_ById(DepartmentModel model);
 
         void CreateExam(ExamModel model);
+        List<ExamTypeModel> GetExamType_All();
+
         void CreateQuestion(QuestionModel model);
         void CreateResult(ResultModel model);
 
@@ -44,6 +46,8 @@ namespace CMSLibrary.DataAccess
         AdminModel GetAdmin_ByUserId(int userId);
         TeacherModel GetTeacher_ByUserId(int userId);
         List<AssignmentModel> GetAssignment_ByTeacherId(int techerId);
+
+        List<GroupModel> GetGroup_All();
 
     }
 }

@@ -47,7 +47,7 @@
   <ItemGroup>
     <Compile Include="AuthenticationState.cs" />
     <Compile Include="Login.cs" />
-    <Compile Include="Answers.cs" />
+    <Compile Include="Models\AnswerKeyModel.cs" />
     <Compile Include="DataAccess\SqlConnector.cs" />
     <Compile Include="Evaluate.cs" />
     <Compile Include="GlobalConfig.cs" />

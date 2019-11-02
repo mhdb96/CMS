@@ -10,6 +10,6 @@ namespace CMSLibrary.Models
     {
         public int Id { get; set; }
         public GroupModel Group { get; set; }
-        public List<QuestionModel> Questions { get; set; }
+        public List<QuestionModel> Questions { get; set; } = new List<QuestionModel>();
     }
 }

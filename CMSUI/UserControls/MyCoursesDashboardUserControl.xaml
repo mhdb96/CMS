@@ -81,13 +81,27 @@
             Margin="2">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Course.Name}"/>
+                    <UniformGrid Margin="10" Rows="1">
+                        <TextBlock Text="{Binding Course.Name}" />
+                        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                            <Button
+                                ToolTip="Add an exam"
+                                Margin="5"
+                            x:Name="addExamBtn" Click="AddExamBtn_Click" Tag="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBoxItem}},Path=Content}"
+                            VerticalAlignment="Center">
+                                <iconPacks:PackIconMaterial 
+                                    Margin="2"
+                                Foreground="Green"
+                            Kind="PlusBoxOutline" />
+                            </Button>
+                        </StackPanel>
+                    </UniformGrid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
         <StackPanel Orientation="Horizontal" Margin="5 0 5 0" Grid.Row="1" Grid.Column="3">
             <TextBlock  Text="Exams List" Style="{StaticResource myTextBlockStyle}"/>
-            <Button                                
+            <!--<Button                                
                 ToolTip="Add a new exam"                
                 Margin="5"                
                 x:Name="addExamBtn" Click="AddExamBtn_Click"
@@ -99,7 +113,7 @@
                         Foreground="Green"                        
                         Kind="PlusBoxOutline" />
                 </StackPanel>
-            </Button>
+            </Button>-->
         </StackPanel>
         
         <DataGrid 

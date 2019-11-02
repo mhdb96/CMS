@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CMSLibrary.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,21 +11,21 @@ namespace CMSLibrary
     public class Evaluate
     {
         List<info> myInfo = new List<info>();
-        List<Answers> myAnswers = new List<Answers>();
+        List<AnswerKeyModel> myAnswers = new List<AnswerKeyModel>();
         string listPath;
         string answersPath;
         string[] answerKeys;
         string[] results;
-        public List<Answers> AnswersList(string ansPa)
+        public List<AnswerKeyModel> AnswersList(string ansPa)
         {
             answersPath = ansPa;
             answerKeys = File.ReadAllLines(answersPath, Encoding.GetEncoding("iso-8859-9"));
             foreach (string answersString in answerKeys)
             {
-                Answers a = new Answers();
-                a.Type = answersString.Substring(0, 1);
-                a.Number = answersString.Length - 1;
-                a.True = answersString.Substring(1, a.Number);
+                AnswerKeyModel a = new AnswerKeyModel();
+                a.Group.Name = answersString.Substring(0, 1);
+                a.QuestionCount = answersString.Length - 1;
+                a.AnswersList = answersString.Substring(1, a.QuestionCount);
                 myAnswers.Add(a);
             }
             return myAnswers;
@@ -41,11 +42,11 @@ namespace CMSLibrary
                 i.Surname = listString.Substring(12, 12);
                 i.No = listString.Substring(24, 9);
                 i.Group = listString.Substring(33, 1);
-                foreach (Answers ans in myAnswers)
+                foreach (AnswerKeyModel ans in myAnswers)
                 {
-                    if (ans.Type == i.Group)
+                    if (ans.Group.Name == i.Group)
                     {
-                        i.Answers = listString.Substring(34, ans.Number);
+                        i.Answers = listString.Substring(34, ans.QuestionCount);
                         break;
                     }
                 }
@@ -61,13 +62,13 @@ namespace CMSLibrary
             {
                 correct = 0;
                 counter = 0;
-                foreach (Answers ans in myAnswers)
+                foreach (AnswerKeyModel ans in myAnswers)
                 {
-                    if (i.Group == ans.Type)
+                    if (i.Group == ans.Group.Name)
                     {
-                        while (counter != ans.Number)
+                        while (counter != ans.QuestionCount)
                         {
-                            if (i.Answers[counter].ToString() == ans.True.Substring(counter, 1))
+                            if (i.Answers[counter].ToString() == ans.AnswersList.Substring(counter, 1))
                             {
                                 correct++;
                             }

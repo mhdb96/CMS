@@ -78,6 +78,9 @@
     <Compile Include="CreateCourseWindow.xaml.cs">
       <DependentUpon>CreateCourseWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EvaluationWindows\CreateExamWindow.xaml.cs">
+      <DependentUpon>CreateExamWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GridWidthToTabWidthConverter.cs" />
     <Compile Include="GridWidthToTabWidthConverterTeacher.cs" />
     <Compile Include="HeaderToIconConverter.cs" />
@@ -89,10 +92,14 @@
     <Compile Include="Requesters\IAssignmentRequester.cs" />
     <Compile Include="Requesters\ICouresRequester.cs" />
     <Compile Include="Requesters\IDepartmentRequester.cs" />
+    <Compile Include="Requesters\IExamRequester.cs" />
     <Compile Include="Requesters\ITeacherPanelRequester.cs" />
     <Compile Include="Requesters\ITeacherRequester.cs" />
     <Compile Include="TeacherPanelWindow.xaml.cs">
       <DependentUpon>TeacherPanelWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\AnswersOutcomesUserControl.xaml.cs">
+      <DependentUpon>AnswersOutcomesUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\AssignmentDashboardUserControl.xaml.cs">
       <DependentUpon>AssignmentDashboardUserControl.xaml</DependentUpon>
@@ -152,7 +159,7 @@
     <Compile Include="CreateTeacherWindow.xaml.cs">
       <DependentUpon>CreateTeacherWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="CustomControls.xaml">
+    <Page Include="EvaluationWindows\CreateExamWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -161,6 +168,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TeacherPanelWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\AnswersOutcomesUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

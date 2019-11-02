@@ -1,5 +1,7 @@
 ﻿using CMSLibrary;
 using CMSLibrary.Models;
+using CMSUI.EvaluationWindows;
+using CMSUI.Requesters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,13 +22,24 @@ namespace CMSUI.UserControls
     /// <summary>
     /// Interaction logic for MyCoursesDashboardUserControl.xaml
     /// </summary>
-    public partial class MyCoursesDashboardUserControl : UserControl
+    public partial class MyCoursesDashboardUserControl : UserControl, IExamRequester
     {
         List<AssignmentModel> MyAssignments;
         List<AssignmentModel> FilteredAssignments;
+        AssignmentModel SelectedAssignment;
         List<ActiveTermModel> MyTerms = new List<ActiveTermModel>();
         List<DepartmentModel> MyDepartments = new List<DepartmentModel>();
         //List<CourseModel> MyCourses;
+
+        public static readonly DependencyProperty MyTeacherProperty =
+        DependencyProperty.Register("MyTeacher", typeof(TeacherModel), typeof(MyCoursesDashboardUserControl), new FrameworkPropertyMetadata(null));
+
+        public TeacherModel MyTeacher
+        {
+            get { return (TeacherModel)GetValue(MyTeacherProperty); }
+            set { SetValue(MyTeacherProperty, value); }
+        }
+
         public MyCoursesDashboardUserControl()
         {
             InitializeComponent();
@@ -122,18 +135,28 @@ namespace CMSUI.UserControls
 
         }
 
-        public static readonly DependencyProperty MyTeacherProperty =
-        DependencyProperty.Register("MyTeacher", typeof(TeacherModel), typeof(MyCoursesDashboardUserControl), new FrameworkPropertyMetadata(null));
-
-        public TeacherModel MyTeacher
-        {
-            get { return (TeacherModel)GetValue(MyTeacherProperty); }
-            set { SetValue(MyTeacherProperty, value); }
-        }
-
         private void AddExamBtn_Click(object sender, RoutedEventArgs e)
         {
+            Button btn = (Button)sender;
+            SelectedAssignment = (AssignmentModel)btn.Tag;
+            CreateExamWindow win = new CreateExamWindow(this);
+            win.ShowDialog();
+            
+        }
 
+        public void ExamComplete(ExamModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public UserModel GetUserInfo()
+        {
+            return MyTeacher.User;
+        }
+
+        public AssignmentModel GetAssignment()
+        {
+            return SelectedAssignment;
         }
     }
 }

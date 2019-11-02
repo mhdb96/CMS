@@ -345,5 +345,25 @@ namespace CMSLibrary.DataAccess
                     
             }
         }
+
+        public List<ExamTypeModel> GetExamType_All()
+        {
+            List<ExamTypeModel> output;
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                output = connection.Query<ExamTypeModel>("dbo.spExamTypes_GetAll").ToList();
+            }
+            return output;
+        }
+
+        public List<GroupModel> GetGroup_All()
+        {
+            List<GroupModel> output;
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                output = connection.Query<GroupModel>("dbo.spGroups_GetAll").ToList();
+            }
+            return output;
+        }
     }
 }
