@@ -28,9 +28,9 @@ namespace CMSUI
     {
         IActiveTermRequester CallingWindow;
         List<YearModel> Years;
-        List<TermModel> Terms;
+        //List<TermModel> Terms;
 
-        List<TermModel> myTerms = new List<TermModel>();
+        List<TermModel> myTerms;
         YearModel model;
 
         List<StackPanel> spList = new List<StackPanel>();  // valid 2 için
@@ -46,7 +46,7 @@ namespace CMSUI
             Years = GlobalConfig.Connection.GetYear_ALL();
             yearsCombobox.ItemsSource = Years;
             
-            Terms = GlobalConfig.Connection.GetTerm_ALL();
+            //Terms = GlobalConfig.Connection.GetTerm_ALL();
             //termsCombobox.ItemsSource = Terms;
         }
 
@@ -56,7 +56,7 @@ namespace CMSUI
             if (ValidForm())
             {
                 ActiveTermModel model = new ActiveTermModel();
-                model.Year = (YearModel)yearsCombobox.SelectedItem;//bunu fonk göndericez
+                model.Year = (YearModel)yearsCombobox.SelectedItem;
                 model.Term = (TermModel)termsCombobox.SelectedItem;
                 GlobalConfig.Connection.CreateActiveTerm(model);
                 CallingWindow.ActiveTermComplete(model);
@@ -161,17 +161,28 @@ namespace CMSUI
 
         private void YearsCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            model = (YearModel)yearsCombobox.SelectedItem;
-
-            myTerms=GlobalConfig.Connection.GetTerm_ValidByYearId(model.Id);
-            termsCombobox.ItemsSource = myTerms;
+            
 
             if (yearsCombobox.SelectedItem == null)
             {
+                termsCombobox.IsHitTestVisible = false;
                 errorYear.Visibility = Visibility.Visible;
             }
             else
             {
+                model = (YearModel)yearsCombobox.SelectedItem;
+                myTerms = GlobalConfig.Connection.GetTerm_ValidByYearId(model.Id);
+                termsCombobox.ItemsSource = myTerms;
+
+                if (!myTerms.Any())
+                {
+                    termsCombobox.IsHitTestVisible = false;
+                }
+                else
+                {
+                    termsCombobox.IsHitTestVisible = true;
+                }
+
                 errorYear.Visibility = Visibility.Hidden;
             }   
         }
@@ -186,10 +197,6 @@ namespace CMSUI
             {
                 errorTerm.Visibility = Visibility.Hidden;
             }
-        }
-
-        private void TermsCombobox_DropDownOpened(object sender, EventArgs e)
-        {
         }
     }
 }

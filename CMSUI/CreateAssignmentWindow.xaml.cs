@@ -28,6 +28,7 @@ namespace CMSUI
         List<CourseModel> Courses;
         List<TeacherModel> Teachers;
 
+
         public CreateAssignmentWindow(IAssignmentRequester caller)
         {
             InitializeComponent();
@@ -41,8 +42,17 @@ namespace CMSUI
             departmentsCombobox.ItemsSource = Departments;
             ActiveTerms = GlobalConfig.Connection.GetActiveTerm_All();
             activeTermsCombobox.ItemsSource = ActiveTerms;
-            Courses = GlobalConfig.Connection.GetCourse_All();
+
+            
+            Courses = GlobalConfig.Connection.GetCourses_Valid();
             coursesCombobox.ItemsSource = Courses;
+            if (!Courses.Any())
+            {
+                coursesCombobox.IsHitTestVisible = false;
+            }
+
+            //Courses = GlobalConfig.Connection.GetCourse_All();
+            //coursesCombobox.ItemsSource = Courses;
             Teachers = GlobalConfig.Connection.GetTeacher_All();
             teachersCombobox.ItemsSource = Teachers;
         }

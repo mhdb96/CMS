@@ -5,7 +5,6 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 using CMSLibrary.Models;
 using Dapper;
 
@@ -14,6 +13,17 @@ namespace CMSLibrary.DataAccess
     public class SqlConnector : IDataConnection
     {
         public static string databaseName = "CMS";
+
+
+        public List<CourseModel> GetCourses_Valid()
+        {
+            List<CourseModel> output;
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                output = connection.Query<CourseModel>("dbo.spCourses_Valid").ToList();
+            }
+            return output;
+        }
 
         public List<TermModel> GetTerm_ValidByYearId(int id)
         {

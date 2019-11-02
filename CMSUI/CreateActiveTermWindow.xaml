@@ -63,12 +63,13 @@
             <TextBlock Text="You need to choose a year" FontSize="10pt" VerticalAlignment="Center" Margin="5 0 0 0"/>
         </StackPanel>
 
-        <ComboBox x:Name="termsCombobox"             
+        <ComboBox x:Name="termsCombobox"      
+            IsHitTestVisible = "false"
             Width="150"                 
             Grid.Column="2" Grid.Row="3"            
             Margin="10 5 0 5"           
             Controls:TextBoxHelper.ClearTextButton="True"            
-            Controls:TextBoxHelper.Watermark="Please select an item..." SelectionChanged="TermsCombobox_SelectionChanged" DropDownOpened="TermsCombobox_DropDownOpened">
+            Controls:TextBoxHelper.Watermark="Please select an item..." SelectionChanged="TermsCombobox_SelectionChanged">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}" />

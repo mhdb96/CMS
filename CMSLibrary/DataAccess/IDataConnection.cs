@@ -9,6 +9,7 @@ namespace CMSLibrary.DataAccess
 {
     public interface IDataConnection
     {
+        List<CourseModel> GetCourses_Valid();
         List<TermModel> GetTerm_ValidByYearId(int id);
 
         void CreateActiveTerm(ActiveTermModel model);
