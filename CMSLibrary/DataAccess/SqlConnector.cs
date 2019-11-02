@@ -15,6 +15,16 @@ namespace CMSLibrary.DataAccess
         public static string databaseName = "CMS";
 
 
+        public void DeleteActiveTerms(int id)
+        {
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@ActiveTermsId", id);
+                connection.Execute("dbo.spActiveTerms_Delete", p, commandType: CommandType.StoredProcedure);
+            }
+        }
+
         public List<CourseModel> GetCourses_Valid()
         {
             List<CourseModel> output;
