@@ -32,8 +32,8 @@ namespace CMSUI
 
         List<TermModel> myTerms = new List<TermModel>();
         List<ActiveTermModel> myActiveTerms = new List<ActiveTermModel>();
-
         List<ActiveTermModel> activeTerms;
+
         List<StackPanel> spList = new List<StackPanel>();  // valid 2 için
 
         public CreateActiveTermWindow(IActiveTermRequester caller)
@@ -165,46 +165,47 @@ namespace CMSUI
 
         private void YearsCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            bool yaz = false;
-            YearModel model = (YearModel)yearsCombobox.SelectedItem;
             myTerms.Clear();
             myActiveTerms.Clear();
-
-
-            foreach (var item in activeTerms)
-            {
-                if (item.Year.Name == model.Name)
-                {
-                    myActiveTerms.Add(item);
-                }
-            }
-            foreach (var item2 in Terms)
-            {
-                yaz = true;
-                foreach (var item3 in myActiveTerms)
-                {
-                    if (item2.Name == item3.Term.Name)
-                    {
-                        yaz = false;
-                        break;
-                    }
-                }
-                if (yaz)
-                {
-                    myTerms.Add(item2);
-                }
-            }
-
-
-
             if (yearsCombobox.SelectedItem == null)
             {
+                termsCombobox.IsHitTestVisible = false;
                 errorYear.Visibility = Visibility.Visible;
             }
             else
             {
+                bool add = false;
+                YearModel model = (YearModel)yearsCombobox.SelectedItem;
+
+                foreach (var activeTerm in activeTerms)
+                {
+                    if (activeTerm.Year.Name == model.Name)
+                    {
+                        myActiveTerms.Add(activeTerm);
+                    }
+                }
+                foreach (var Term in Terms)
+                {
+                    add = true;
+                    foreach (var myActiveTerm in myActiveTerms)
+                    {
+                        if (Term.Name == myActiveTerm.Term.Name)
+                        {
+                            add = false;
+                            break;
+                        }
+                    }
+                    if (add)
+                    {
+                        myTerms.Add(Term);
+                    }
+                }
+                if (add)
+                {
+                    termsCombobox.IsHitTestVisible = true;
+                }
                 errorYear.Visibility = Visibility.Hidden;
-            }
+            }   
         }
 
         private void TermsCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
