@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using CMSLibrary.Models;
 using Dapper;
 
@@ -13,6 +14,18 @@ namespace CMSLibrary.DataAccess
     public class SqlConnector : IDataConnection
     {
         public static string databaseName = "CMS";
+
+        public List<TermModel> GetTerm_ValidByYearId(int id)
+        {
+            List<TermModel> myTerms;
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@Yearid", id);
+                myTerms = connection.Query<TermModel>("dbo.spTerms_ValidByYearId", p, commandType: CommandType.StoredProcedure).ToList();
+            }
+            return myTerms;
+        }
 
         public void CreateActiveTerm(ActiveTermModel model)
         {

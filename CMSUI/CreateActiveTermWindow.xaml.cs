@@ -31,8 +31,7 @@ namespace CMSUI
         List<TermModel> Terms;
 
         List<TermModel> myTerms = new List<TermModel>();
-        List<ActiveTermModel> myActiveTerms = new List<ActiveTermModel>();
-        List<ActiveTermModel> activeTerms;
+        YearModel model;
 
         List<StackPanel> spList = new List<StackPanel>();  // valid 2 için
 
@@ -49,9 +48,6 @@ namespace CMSUI
             
             Terms = GlobalConfig.Connection.GetTerm_ALL();
             //termsCombobox.ItemsSource = Terms;
-
-            activeTerms = GlobalConfig.Connection.GetActiveTerm_All();
-
         }
 
         private void CreateActiveTermBtn_Click(object sender, RoutedEventArgs e)
@@ -60,7 +56,7 @@ namespace CMSUI
             if (ValidForm())
             {
                 ActiveTermModel model = new ActiveTermModel();
-                model.Year = (YearModel)yearsCombobox.SelectedItem;
+                model.Year = (YearModel)yearsCombobox.SelectedItem;//bunu fonk göndericez
                 model.Term = (TermModel)termsCombobox.SelectedItem;
                 GlobalConfig.Connection.CreateActiveTerm(model);
                 CallingWindow.ActiveTermComplete(model);
@@ -165,45 +161,17 @@ namespace CMSUI
 
         private void YearsCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            myTerms.Clear();
-            myActiveTerms.Clear();
+            model = (YearModel)yearsCombobox.SelectedItem;
+
+            myTerms=GlobalConfig.Connection.GetTerm_ValidByYearId(model.Id);
+            termsCombobox.ItemsSource = myTerms;
+
             if (yearsCombobox.SelectedItem == null)
             {
-                termsCombobox.IsHitTestVisible = false;
                 errorYear.Visibility = Visibility.Visible;
             }
             else
             {
-                bool add = false;
-                YearModel model = (YearModel)yearsCombobox.SelectedItem;
-
-                foreach (var activeTerm in activeTerms)
-                {
-                    if (activeTerm.Year.Name == model.Name)
-                    {
-                        myActiveTerms.Add(activeTerm);
-                    }
-                }
-                foreach (var Term in Terms)
-                {
-                    add = true;
-                    foreach (var myActiveTerm in myActiveTerms)
-                    {
-                        if (Term.Name == myActiveTerm.Term.Name)
-                        {
-                            add = false;
-                            break;
-                        }
-                    }
-                    if (add)
-                    {
-                        myTerms.Add(Term);
-                    }
-                }
-                if (add)
-                {
-                    termsCombobox.IsHitTestVisible = true;
-                }
                 errorYear.Visibility = Visibility.Hidden;
             }   
         }
@@ -222,8 +190,6 @@ namespace CMSUI
 
         private void TermsCombobox_DropDownOpened(object sender, EventArgs e)
         {
-            termsCombobox.Items.Refresh();
-            termsCombobox.ItemsSource = myTerms;
         }
     }
 }

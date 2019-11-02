@@ -9,6 +9,8 @@ namespace CMSLibrary.DataAccess
 {
     public interface IDataConnection
     {
+        List<TermModel> GetTerm_ValidByYearId(int id);
+
         void CreateActiveTerm(ActiveTermModel model);
         List<YearModel> GetYear_ALL();
         List<TermModel> GetTerm_ALL();
