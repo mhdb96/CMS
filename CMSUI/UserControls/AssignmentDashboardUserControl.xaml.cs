@@ -66,6 +66,7 @@ namespace CMSUI.UserControls
         {
             //    // TODO - Delete the selected Assignment
             AssignmentModel model = (AssignmentModel)assignmentsGrid.SelectedItem;
+            GlobalConfig.Connection.DeleteAssignments(model.Id);
         }
 
         private void ActiveTermsCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)

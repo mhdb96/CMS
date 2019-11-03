@@ -14,6 +14,45 @@ namespace CMSLibrary.DataAccess
     {
         public static string databaseName = "CMS";
 
+        public void DeleteAssignments(int id)
+        {
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@AssignmentsId", id);
+                connection.Execute("dbo.spAssignments_Delete", p, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public void DeleteCourses(int id)
+        {
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@CoursesId", id);
+                connection.Execute("dbo.spCourses_Delete", p, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public void DeleteTeachers(int id)
+        {
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@UsersId", id);
+                connection.Execute("dbo.spTeachers_Delete", p, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public void DeleteDepartments(int id)
+        {
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@DepartmentsId", id);
+                connection.Execute("dbo.spDepartments_Delete", p, commandType: CommandType.StoredProcedure);
+            }
+        }
 
         public void DeleteActiveTerms(int id)
         {
