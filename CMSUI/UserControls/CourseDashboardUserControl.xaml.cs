@@ -66,8 +66,7 @@ namespace CMSUI.UserControls
                 courseOutcomesList.ItemsSource = model.CourseOutcomes;
             }
         }
-
-            private void UpdateCourseBtn_Click(object sender, RoutedEventArgs e)
+        private void UpdateCourseBtn_Click(object sender, RoutedEventArgs e)
         {
             Button btn = (Button)sender;
             CourseModel model = new CourseModel();
@@ -82,6 +81,9 @@ namespace CMSUI.UserControls
             model = (CourseModel)btn.Tag;
             // TODO - Delete the selected department
             GlobalConfig.Connection.DeleteCourses(model.Id);
+            Courses.Remove(model);
+            WireUpLists();
+
         }
     }
 }

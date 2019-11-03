@@ -65,7 +65,8 @@ namespace CMSUI.UserControls
             model = (ActiveTermModel)btn.Tag;
 
             GlobalConfig.Connection.DeleteActiveTerms(model.Id);
-
+            Terms.Remove(model);
+            WireUpLists();
             // TODO - Delete the selected term
         }
 

@@ -51,7 +51,8 @@ namespace CMSUI.UserControls
             model = (DepartmentModel)btn.Tag;
 
             GlobalConfig.Connection.DeleteDepartments(model.Id);
-
+            Departments.Remove(model);
+            WireUpLists();
             // TODO - Delete the selected department
         }
 
