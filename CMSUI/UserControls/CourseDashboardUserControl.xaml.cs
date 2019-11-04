@@ -80,7 +80,7 @@ namespace CMSUI.UserControls
             CourseModel model = new CourseModel();
             model = (CourseModel)btn.Tag;
             // TODO - Delete the selected department
-            GlobalConfig.Connection.DeleteCourses(model.Id);
+            GlobalConfig.Connection.DeleteCourse_ById(model.Id);
             Courses.Remove(model);
             WireUpLists();
 

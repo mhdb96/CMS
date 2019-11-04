@@ -14,7 +14,7 @@ namespace CMSLibrary.DataAccess
     {
         public static string databaseName = "CMS";
 
-        public void DeleteAssignments(int id)
+        public void DeleteAssignment_ById(int id)
         {
             using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
             {
@@ -24,7 +24,7 @@ namespace CMSLibrary.DataAccess
             }
         }
 
-        public void DeleteCourses(int id)
+        public void DeleteCourse_ById(int id)
         {
             using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
             {
@@ -34,42 +34,83 @@ namespace CMSLibrary.DataAccess
             }
         }
 
-        public void DeleteTeachers(int id)
+        public bool DeleteTeacher_ById(int id)
         {
             using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
             {
+                List<ExamModel> Exams = new List<ExamModel>();
                 var p = new DynamicParameters();
-                p.Add("@UsersId", id);
-                connection.Execute("dbo.spTeachers_Delete", p, commandType: CommandType.StoredProcedure);
+                p.Add("@TeacherId", id);
+                Exams = connection.Query<ExamModel>("dbo.spAssignments_HasExamByTeacherId", p, commandType: CommandType.StoredProcedure).ToList();
+
+                if (Exams.Any())
+                {
+                    return false;
+                }
+                else
+                {
+                    connection.Execute("dbo.spTeachers_Delete", p, commandType: CommandType.StoredProcedure);
+                    return true;
+                }
             }
         }
 
-        public void DeleteDepartments(int id)
+        public bool DeleteDepartment_ById(int id)
         {
             using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
             {
+
+                List<ExamModel> Exams = new List<ExamModel>();
+                List<ExamModel> Student = new List<ExamModel>();
+
                 var p = new DynamicParameters();
-                p.Add("@DepartmentsId", id);
-                connection.Execute("dbo.spDepartments_Delete", p, commandType: CommandType.StoredProcedure);
+                p.Add("@DepartmentId", id);
+                Exams = connection.Query<ExamModel>("dbo.spAssignments_HasExamByDepartmentId", p, commandType: CommandType.StoredProcedure).ToList();
+                Student = connection.Query<ExamModel>("dbo.spDepartments_HasStudentByDepartmentId", p, commandType: CommandType.StoredProcedure).ToList();
+
+                if (Exams.Any() || Student.Any())
+                {
+                    return false;
+                }
+                else
+                {
+                    connection.Execute("dbo.spDepartments_Delete", p, commandType: CommandType.StoredProcedure);
+                    return true;
+                }                
             }
         }
 
-        public void DeleteActiveTerms(int id)
+        public bool DeleteActiveTerm_ById(int id)
         {
             using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
             {
+                List<ExamModel> Exams = new List<ExamModel>();
                 var p = new DynamicParameters();
-                p.Add("@ActiveTermsId", id);
-                connection.Execute("dbo.spActiveTerms_Delete", p, commandType: CommandType.StoredProcedure);
+                p.Add("@ActiveTermId", id);
+                Exams = connection.Query<ExamModel>("dbo.spAssignments_HasExamByActiveTermId", p, commandType: CommandType.StoredProcedure).ToList();
+
+                if (Exams.Any())
+                {
+                    return false;
+                }
+                else
+                {
+                    connection.Execute("dbo.spActiveTerms_Delete", p, commandType: CommandType.StoredProcedure);
+                    return true;
+                }
             }
         }
 
-        public List<CourseModel> GetCourses_Valid()
+        public List<CourseModel> GetCourse_ValidByDepartmentIdAndActiveTermId(int DepartmentId , int ActiveTermId)
         {
             List<CourseModel> output;
             using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
             {
-                output = connection.Query<CourseModel>("dbo.spCourses_Valid").ToList();
+                var p = new DynamicParameters();
+                p.Add("@DepartmentId", DepartmentId);
+                p.Add("@ActiveTermId", ActiveTermId);
+
+                output = connection.Query<CourseModel>("dbo.spCourses_Valid",p,commandType:CommandType.StoredProcedure).ToList();
             }
             return output;
         }

@@ -64,10 +64,17 @@ namespace CMSUI.UserControls
             ActiveTermModel model = new ActiveTermModel();
             model = (ActiveTermModel)btn.Tag;
 
-            GlobalConfig.Connection.DeleteActiveTerms(model.Id);
-            Terms.Remove(model);
-            WireUpLists();
-            // TODO - Delete the selected term
+
+            if (GlobalConfig.Connection.DeleteActiveTerm_ById(model.Id))
+            {
+                Terms.Remove(model);
+                WireUpLists();
+                // TODO - Delete the selected term
+            }
+            else
+            {
+                // TODO - ADD a MessageBox
+            }
         }
 
         public void ActiveTermComplete(ActiveTermModel model)

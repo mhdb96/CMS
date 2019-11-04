@@ -63,7 +63,7 @@
                  TextWrapping="Wrap" TextChanged="CodeText_TextChanged"/>
         <StackPanel x:Name="errorCode" Grid.Column="3" Grid.Row="3" Orientation="Horizontal" Grid.ColumnSpan="3" Visibility="Hidden">
             <iconPacks:PackIconMaterial Kind="AlertCircle" VerticalAlignment="Center" Width="20" Height="20" Margin="5 0 0 0" Foreground="Red"/>
-            <TextBlock Text="Name is Code" FontSize="10pt" VerticalAlignment="Center" Margin="5 0 0 0"/>
+            <TextBlock Text="Code is required" FontSize="10pt" VerticalAlignment="Center" Margin="5 0 0 0"/>
         </StackPanel>
         <TextBlock Grid.Column="1" Grid.Row="4" Text="Year:" Style="{StaticResource myTextBlockStyle}"/>
         <ComboBox x:Name="eduYearCombobox"

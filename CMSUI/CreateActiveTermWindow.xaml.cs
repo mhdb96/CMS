@@ -28,12 +28,11 @@ namespace CMSUI
     {
         IActiveTermRequester CallingWindow;
         List<YearModel> Years;
-        //List<TermModel> Terms;
 
-        List<TermModel> myTerms;
+        List<TermModel> Terms;
         YearModel model;
 
-        List<StackPanel> spList = new List<StackPanel>();  // valid 2 için
+        //List<StackPanel> spList = new List<StackPanel>();  // DynamicValid  için
 
         public CreateActiveTermWindow(IActiveTermRequester caller)
         {
@@ -86,73 +85,73 @@ namespace CMSUI
             }
         }
 
-        private bool ValidForm2()
-        {
-            int i = 0;
-            List<int> rows = new List<int>();
-            List<String> text = new List<String>();
+        //private bool DynamicValidForm()//DİNAMİK BİR ŞEKİLDE HATA VEREN KOD (KULLANMIYORUZ)
+        //{
+        //    int i = 0;
+        //    List<int> rows = new List<int>();
+        //    List<String> text = new List<String>();
 
-            StackPanel sp;
+        //    StackPanel sp;
 
-            TextBlock tb;
-            PackIconMaterial icon;
-            foreach (UIElement Child in myGrid.Children)
-            {
-                if(Child is ComboBox)
-                {
-                    if (((ComboBox)Child).SelectedItem == null)
-                    {
-                        rows.Add(Grid.GetRow(Child));
-                        text.Add(((ComboBox)Child).Name);
-                        i++;
+        //    TextBlock tb;
+        //    PackIconMaterial icon;
+        //    foreach (UIElement Child in myGrid.Children)
+        //    {
+        //        if(Child is ComboBox)
+        //        {
+        //            if (((ComboBox)Child).SelectedItem == null)
+        //            {
+        //                rows.Add(Grid.GetRow(Child));
+        //                text.Add(((ComboBox)Child).Name);
+        //                i++;
 
-                    }
-                }
-            }
-            foreach (var item in spList)
-            {
-                item.Children.Clear();
-            }
+        //            }
+        //        }
+        //    }
+        //    foreach (var item in spList)
+        //    {
+        //        item.Children.Clear();
+        //    }
             
-            if (i > 0) { 
-                i = 0;
-            foreach (var row in rows)
-            {
-                sp = new StackPanel();
-                sp.Name = "errorSp";
-                sp.Orientation = Orientation.Horizontal;
+        //    if (i > 0) { 
+        //        i = 0;
+        //    foreach (var row in rows)
+        //    {
+        //        sp = new StackPanel();
+        //        sp.Name = "errorSp";
+        //        sp.Orientation = Orientation.Horizontal;
 
-                spList.Add(sp);
+        //        spList.Add(sp);
 
-                tb = new TextBlock();
-                tb.Text = "You need to choose a " + text[i]  ;
-                tb.FontSize=20;
-                tb.VerticalAlignment = VerticalAlignment.Center;
+        //        tb = new TextBlock();
+        //        tb.Text = "You need to choose a " + text[i]  ;
+        //        tb.FontSize=20;
+        //        tb.VerticalAlignment = VerticalAlignment.Center;
 
-                icon = new PackIconMaterial();
-                icon.Kind = PackIconMaterialKind.AlertCircle;
-                icon.VerticalAlignment = VerticalAlignment.Center;
-                icon.Width = 20;
-                icon.Height = 20;
-                icon.Margin = new Thickness(5);
-                icon.Foreground = new SolidColorBrush(Colors.Red);
+        //        icon = new PackIconMaterial();
+        //        icon.Kind = PackIconMaterialKind.AlertCircle;
+        //        icon.VerticalAlignment = VerticalAlignment.Center;
+        //        icon.Width = 20;
+        //        icon.Height = 20;
+        //        icon.Margin = new Thickness(5);
+        //        icon.Foreground = new SolidColorBrush(Colors.Red);
 
-                sp.Children.Add(icon);
-                sp.Children.Add(tb);
-                Grid.SetRow(sp, row);
-                Grid.SetColumn(sp,3);
-                Grid.SetColumnSpan(sp, 3);
-                myGrid.Children.Add(sp);
-                    i++;
-                }
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+        //        sp.Children.Add(icon);
+        //        sp.Children.Add(tb);
+        //        Grid.SetRow(sp, row);
+        //        Grid.SetColumn(sp,3);
+        //        Grid.SetColumnSpan(sp, 3);
+        //        myGrid.Children.Add(sp);
+        //            i++;
+        //        }
+        //        return false;
+        //    }
+        //    else
+        //    {
+        //        return true;
+        //    }
 
-        }
+        //}
 
         private void CancelActiveTermBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -171,10 +170,10 @@ namespace CMSUI
             else
             {
                 model = (YearModel)yearsCombobox.SelectedItem;
-                myTerms = GlobalConfig.Connection.GetTerm_ValidByYearId(model.Id);
-                termsCombobox.ItemsSource = myTerms;
+                Terms = GlobalConfig.Connection.GetTerm_ValidByYearId(model.Id);
+                termsCombobox.ItemsSource = Terms;
 
-                if (!myTerms.Any())
+                if (!Terms.Any())
                 {
                     termsCombobox.IsHitTestVisible = false;
                 }
