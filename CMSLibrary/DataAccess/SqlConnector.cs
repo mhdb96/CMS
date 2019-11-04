@@ -14,23 +14,48 @@ namespace CMSLibrary.DataAccess
     {
         public static string databaseName = "CMS";
 
-        public void DeleteAssignment_ById(int id)
+        public bool DeleteAssignment_ById(int id)
         {
             using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
             {
+                List<ExamModel> Exam = new List<ExamModel>();
                 var p = new DynamicParameters();
-                p.Add("@AssignmentsId", id);
-                connection.Execute("dbo.spAssignments_Delete", p, commandType: CommandType.StoredProcedure);
+                p.Add("@AssignmentId", id);
+                Exam = connection.Query<ExamModel>("dbo.spAssignemtns_HasExamByAssignmentId", p, commandType: CommandType.StoredProcedure).ToList();
+
+                if (Exam.Any())
+                {
+                    return false;
+                }
+                else
+                {
+                    connection.Execute("dbo.spAssignments_Delete", p, commandType: CommandType.StoredProcedure);
+                    return true;
+                }
+
             }
         }
 
-        public void DeleteCourse_ById(int id)
+        public bool DeleteCourse_ById(int id)
         {
             using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
             {
+                List<CourseModel> Courses = new List<CourseModel>();
                 var p = new DynamicParameters();
-                p.Add("@CoursesId", id);
-                connection.Execute("dbo.spCourses_Delete", p, commandType: CommandType.StoredProcedure);
+                p.Add("@CourseId", id);
+                Courses = connection.Query<CourseModel>("dbo.spCourses_HasAssignmentByCourseId", p, commandType: CommandType.StoredProcedure).ToList();
+
+                if (Courses.Any())
+                {
+                    return false;
+                }
+                else
+                {
+                    connection.Execute("dbo.spCourses_Delete", p, commandType: CommandType.StoredProcedure);
+                    return true;
+                }
+
+                
             }
         }
 

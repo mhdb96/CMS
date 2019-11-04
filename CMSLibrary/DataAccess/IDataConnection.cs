@@ -10,8 +10,8 @@ namespace CMSLibrary.DataAccess
     public interface IDataConnection
     {
 
-        void DeleteAssignment_ById(int id);
-        void DeleteCourse_ById(int id);
+        bool DeleteAssignment_ById(int id);
+        bool DeleteCourse_ById(int id);
         bool DeleteTeacher_ById(int id);
         bool DeleteDepartment_ById(int id);
         bool DeleteActiveTerm_ById(int id);
