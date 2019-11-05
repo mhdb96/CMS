@@ -34,6 +34,7 @@ namespace CMSUI.UserControls
         {
             Courses = GlobalConfig.Connection.GetCourse_All();
             coursesList.ItemsSource = Courses;
+            // TODO - look at the design of the course list
         }
 
         private void WireUpLists()

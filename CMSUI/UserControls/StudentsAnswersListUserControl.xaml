@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="CMSUI.UserControls.StudentsAnswersListUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:fsxaml="http://github.com/fsprojects/FsXaml"
+             xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks" 
+             xmlns:local="clr-namespace:CMSUI.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" Loaded="UserControl_Loaded">
+    <Grid>
+        <StackPanel>
+            <DataGrid x:Name="studentsAnswersGrid"             
+            SelectionMode="Single"                                                           
+            AutoGenerateColumns="False"
+            CanUserSortColumns="True"
+            CanUserReorderColumns="False"                  
+            >
+                <DataGrid.Columns>
+                    <DataGridTextColumn   
+                    SortMemberPath="Student.RegNo"
+                    Header="Registery No" Width="SizeToHeader"
+                    Binding="{Binding Student.RegNo, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}" IsReadOnly="False"
+                        >
+                    </DataGridTextColumn>
+                    <DataGridTextColumn 
+                    SortMemberPath="Student.FirstName"
+                    Header="First Name" Width="SizeToHeader"
+                    Binding="{Binding Student.FirstName , Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}">
+                    </DataGridTextColumn>
+                    <DataGridTextColumn 
+                    SortMemberPath="Student.LastName"
+                    Header="Last Name" Width="SizeToHeader"
+                    Binding="{Binding Student.LastName , Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}">
+                    </DataGridTextColumn>
+                    <DataGridTextColumn 
+                    SortMemberPath="Group.Name"
+                    Header="Group" Width="SizeToHeader"
+                    Binding="{Binding Group.Name , Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}">
+                    </DataGridTextColumn>
+                    <DataGridTextColumn 
+                    Header="Answers" Width="SizeToCells"
+                    Binding="{Binding AnswersList , Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}">
+                    </DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button Content="text" x:Name="test" Click="Test_Click"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

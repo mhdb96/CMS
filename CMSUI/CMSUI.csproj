@@ -116,6 +116,9 @@
     <Compile Include="UserControls\OutcomeUserControl.xaml.cs">
       <DependentUpon>OutcomeUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\StudentsAnswersListUserControl.xaml.cs">
+      <DependentUpon>StudentsAnswersListUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\TeacherDashboardUserControl.xaml.cs">
       <DependentUpon>TeacherDashboardUserControl.xaml</DependentUpon>
     </Compile>
@@ -192,6 +195,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\OutcomeUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\StudentsAnswersListUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

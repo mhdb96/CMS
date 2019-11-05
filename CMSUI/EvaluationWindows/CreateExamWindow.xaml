@@ -120,7 +120,7 @@
                   x:Name="answersOutcomesExpander"
                   IsExpanded="False" IsEnabled="False"
                   Header="_Answers Marks and outcomes">
-                    <ItemsControl x:Name="test">
+                    <ItemsControl x:Name="AnswersOutcomesMatrices">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <WrapPanel />
@@ -142,13 +142,18 @@
             Content="Choose" Grid.Column="2" Grid.Row="7"
             Margin="10 10 100 10"/>
                 <Button
-            x:Name="chooseAnswersListBtn" Click="ChooseAnswersListBtn_Click"
+            x:Name="chooseStudentsAnswersListBtn" Click="ChooseStudentsAnswersListBtn_Click"
             Content="Choose" Grid.Column="2" Grid.Row="9"
             Margin="10 10 100 10"/>
-                <Expander Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="5"
+                <Expander 
+                    x:Name="studentsAnswersExpander"
+                    Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="5"
                   IsExpanded="False" IsEnabled="False"
                   Header="_Students Answers">
-
+                    <MyControls:StudentsAnswersListUserControl 
+                        x:Name="studentAnswersListUserControl"
+                        MyEvaluator="{Binding Evaluator, ElementName=CreateExam}">
+                    </MyControls:StudentsAnswersListUserControl>
                 </Expander>
                 <Button
             x:Name="createExamBtn" Click="CreateExamBtn_Click"

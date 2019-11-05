@@ -79,3 +79,5 @@ C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\EvaluationWindows\
 C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\EvaluationWindows\CreateExamWindow.baml
 C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\UserControls\AnswersOutcomesUserControl.g.cs
 C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\UserControls\AnswersOutcomesUserControl.baml
+C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\UserControls\StudentsAnswersListUserControl.g.cs
+C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\UserControls\StudentsAnswersListUserControl.baml

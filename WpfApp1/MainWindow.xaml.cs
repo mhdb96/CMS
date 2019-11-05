@@ -33,10 +33,10 @@ namespace WpfApp1
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             DataGridListe.Items.Clear();
-            List<info> myInfo = ev.RightAnswers();
-            foreach (info i in myInfo)
+            List<StudentAnswersModel> myInfo = ev.GetRightAnswers();
+            foreach (StudentAnswersModel i in myInfo)
             {
-                DataGridListe.Items.Add(new { ad = i.Name, soyad = i.Surname, no = i.No, kitapcik = i.Group, cevaplar = i.CorrectNumber, dogru = i.No });
+                DataGridListe.Items.Add(new { ad = i.Student.FirstName, soyad = i.Student.LastName, no = i.Student.RegNo, kitapcik = i.Group.Name, cevaplar = i.AnswersList, dogru = i.CorrectAnswersCount });
             }
         }
         public string GetFilePath()
@@ -50,16 +50,16 @@ namespace WpfApp1
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             string listPath = GetFilePath();
-            List<info> myInfo = ev.StudentList(listPath);
-            foreach (info i in myInfo)
+            List<StudentAnswersModel> myInfo = ev.GetStudentsAnswers(listPath);
+            foreach (StudentAnswersModel i in myInfo)
             {
-                DataGridListe.Items.Add(new { ad = i.Name, soyad = i.Surname, no = i.No, kitapcik = i.Group, cevaplar = i.Answers });
+                DataGridListe.Items.Add(new { ad = i.Student.FirstName, soyad = i.Student.LastName, no = i.Student.RegNo, kitapcik = i.Group.Name, cevaplar = i.AnswersList });
             }
         }
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             string answersPath = GetFilePath();
-            List<AnswerKeyModel> myAnswers = ev.AnswersList(answersPath);
+            List<AnswerKeyModel> myAnswers = ev.GetAnswersKeys(answersPath);
             foreach (AnswerKeyModel a in myAnswers)
             {
                 CevapAnahtari.Items.Add(new { KitapcikTuru = a.Group.Name, DogruCevaplar = a.AnswersList });

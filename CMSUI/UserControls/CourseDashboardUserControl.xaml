@@ -65,9 +65,17 @@
             SelectionChanged="CoursesList_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <UniformGrid Margin="10" Rows="1">
-                        <TextBlock Text="{Binding Full}" />
-                        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                    <Grid Margin="10">
+                        <Grid.ColumnDefinitions >
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="{Binding Full}" Grid.Column="0" Grid.Row="0"/>
+                        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal"
+                                    Grid.Column="1" Grid.Row="0">
                             <Button
                                 ToolTip="Update"
                                 Margin="5"
@@ -89,7 +97,10 @@
                             Kind="Delete" />
                             </Button>
                         </StackPanel>
-                    </UniformGrid>
+                    </Grid>
+                    <!--<UniformGrid Margin="10" Rows="1">
+                        
+                    </UniformGrid>-->
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>

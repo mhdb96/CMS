@@ -10,65 +10,65 @@ namespace CMSLibrary
 {
     public class Evaluate
     {
-        List<info> myInfo = new List<info>();
-        List<AnswerKeyModel> myAnswers = new List<AnswerKeyModel>();
-        string listPath;
-        string answersPath;
+        public List<StudentAnswersModel> StudentsAnswers = new List<StudentAnswersModel>();
+        public List<AnswerKeyModel> AnswerKeys = new List<AnswerKeyModel>();
+        string StudentListPath;
+        string AnswersKeyPath;
         string[] answerKeys;
         string[] results;
-        public List<AnswerKeyModel> AnswersList(string ansPa)
+        public List<AnswerKeyModel> GetAnswersKeys(string answerPath)
         {
-            answersPath = ansPa;
-            answerKeys = File.ReadAllLines(answersPath, Encoding.GetEncoding("iso-8859-9"));
+            AnswersKeyPath = answerPath;
+            answerKeys = File.ReadAllLines(AnswersKeyPath, Encoding.GetEncoding("iso-8859-9"));
             foreach (string answersString in answerKeys)
             {
                 AnswerKeyModel a = new AnswerKeyModel();
                 a.Group.Name = answersString.Substring(0, 1);
                 a.QuestionCount = answersString.Length - 1;
                 a.AnswersList = answersString.Substring(1, a.QuestionCount);
-                myAnswers.Add(a);
+                AnswerKeys.Add(a);
             }
-            return myAnswers;
+            return AnswerKeys;
         }
 
-        public List<info> StudentList(string liPa)
+        public List<StudentAnswersModel> GetStudentsAnswers(string studentListPath)
         {
-            listPath = liPa;
-            results = File.ReadAllLines(listPath, Encoding.GetEncoding("iso-8859-9"));
+            StudentListPath = studentListPath;
+            results = File.ReadAllLines(StudentListPath, Encoding.GetEncoding("iso-8859-9"));
             foreach (string listString in results)
             {
-                info i = new info();
-                i.Name = listString.Substring(0, 12);
-                i.Surname = listString.Substring(12, 12);
-                i.No = listString.Substring(24, 9);
-                i.Group = listString.Substring(33, 1);
-                foreach (AnswerKeyModel ans in myAnswers)
+                StudentAnswersModel studentAnswers = new StudentAnswersModel();
+                studentAnswers.Student.FirstName = listString.Substring(0, 12);
+                studentAnswers.Student.LastName = listString.Substring(12, 12);
+                studentAnswers.Student.RegNo = Int32.Parse(listString.Substring(24, 9));
+                studentAnswers.Group.Name = listString.Substring(33, 1);
+                foreach (AnswerKeyModel answerKey in AnswerKeys)
                 {
-                    if (ans.Group.Name == i.Group)
+                    if (answerKey.Group.Name == studentAnswers.Group.Name)
                     {
-                        i.Answers = listString.Substring(34, ans.QuestionCount);
+                        studentAnswers.AnswersList = listString.Substring(34, answerKey.QuestionCount);
                         break;
                     }
                 }
-                myInfo.Add(i);
+                StudentsAnswers.Add(studentAnswers);
             }
-            return myInfo;
+            return StudentsAnswers;
         }
-        public List<info> RightAnswers()
+        public List<StudentAnswersModel> GetRightAnswers()
         {
             int correct;
             int counter;
-            foreach (info i in myInfo)
+            foreach (StudentAnswersModel studentAnswers in StudentsAnswers)
             {
                 correct = 0;
                 counter = 0;
-                foreach (AnswerKeyModel ans in myAnswers)
+                foreach (AnswerKeyModel answerKey in AnswerKeys)
                 {
-                    if (i.Group == ans.Group.Name)
+                    if (studentAnswers.Group.Name == answerKey.Group.Name)
                     {
-                        while (counter != ans.QuestionCount)
+                        while (counter != answerKey.QuestionCount)
                         {
-                            if (i.Answers[counter].ToString() == ans.AnswersList.Substring(counter, 1))
+                            if (studentAnswers.AnswersList[counter].ToString() == answerKey.AnswersList.Substring(counter, 1))
                             {
                                 correct++;
                             }
@@ -77,9 +77,9 @@ namespace CMSLibrary
                         break;
                     }
                 }
-                i.CorrectNumber = correct;
+                studentAnswers.CorrectAnswersCount = correct;
             }
-            return myInfo;
+            return StudentsAnswers;
         }
     }
 }

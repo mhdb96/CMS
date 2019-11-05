@@ -40,7 +40,7 @@ namespace CMSUI.UserControls
         public AnswersOutcomesUserControl()
         {
             InitializeComponent();
-        }
+        }        
         
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
@@ -173,6 +173,8 @@ namespace CMSUI.UserControls
                 }
                 
             }
+            saveMarksAmdOutcomesBtn.IsEnabled = false;
+            answersOutcomesMatrix.IsEnabled = false;
         }
     }
 }

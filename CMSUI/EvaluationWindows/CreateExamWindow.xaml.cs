@@ -24,7 +24,6 @@ namespace CMSUI.EvaluationWindows
     /// </summary>
     public partial class CreateExamWindow
     {
-
         public static readonly DependencyProperty ExamProperty =
         DependencyProperty.Register("Exam", typeof(ExamModel), typeof(CreateExamWindow), new FrameworkPropertyMetadata(null));        
 
@@ -34,16 +33,25 @@ namespace CMSUI.EvaluationWindows
             set { SetValue(ExamProperty, value); }
         }
 
+        public static readonly DependencyProperty EvaluateProperty =
+        DependencyProperty.Register("Evaluator", typeof(Evaluate), typeof(CreateExamWindow), new FrameworkPropertyMetadata(null));
+
+        private Evaluate Evaluator
+        {
+            get { return (Evaluate)GetValue(EvaluateProperty); }
+            set { SetValue(EvaluateProperty, value); }
+        }        
+
         IExamRequester CallingWindow;
         public CreateExamWindow(IExamRequester caller)
         {
+            Evaluator = new Evaluate();
             InitializeComponent();
             CallingWindow = caller;
             Exam = new ExamModel();
             Exam.Assignment = CallingWindow.GetAssignment();
             Exam.User = CallingWindow.GetUserInfo();
             examTypesCombobox.ItemsSource = GlobalConfig.Connection.GetExamType_All();
-
         }
 
         public string GetFilePath()
@@ -53,21 +61,21 @@ namespace CMSUI.EvaluationWindows
             file.ShowDialog();
             string path = file.FileName;
             return path;
-
         }
 
         private void ChooseAnswerKeyBtn_Click(object sender, RoutedEventArgs e)
         {
-            
             string answersKeyPath = GetFilePath();
             if(answersKeyPath == "")
             {
                 return;
             }
-            Evaluate ev = new Evaluate();
-            List<AnswerKeyModel> answerKeys = ev.AnswersList(answersKeyPath);
+            AnswersOutcomesMatrices.ItemsSource = null;
+            AnswersOutcomesMatrices.Items.Clear();
+            Exam.ExamGroups.Clear();
+            Evaluator.GetAnswersKeys(answersKeyPath);
             List<GroupModel> Groups = GlobalConfig.Connection.GetGroup_All();
-            foreach (AnswerKeyModel model in answerKeys)
+            foreach (AnswerKeyModel model in Evaluator.AnswerKeys)
             {
                 ExamGroupModel examGroup = new ExamGroupModel();
                 model.Group = Groups.Find(g => g.Name == model.Group.Name);
@@ -84,21 +92,35 @@ namespace CMSUI.EvaluationWindows
             }
             answersOutcomesExpander.IsEnabled = true;
             answersOutcomesExpander.IsExpanded = true;
-            //Exam.Assignment.Course.Id = 7;
-            GlobalConfig.Connection.GetCourseOutcomes_ById(Exam.Assignment.Course);
-            test.ItemsSource = Exam.ExamGroups;
+            Exam.Assignment.Course.Id = 7;
+            GlobalConfig.Connection.GetCourseOutcomes_ById(Exam.Assignment.Course);            
+            AnswersOutcomesMatrices.ItemsSource = Exam.ExamGroups;    
+            
+            
+            
         }
-        
-        private void ChooseAnswersListBtn_Click(object sender, RoutedEventArgs e)
+
+        private void ChooseStudentsAnswersListBtn_Click(object sender, RoutedEventArgs e)
         {
-            string answersListPath = GetFilePath();
+            string studentsAnswersListPath = GetFilePath();
+            if (studentsAnswersListPath == "")
+            {
+                return;
+            }
+            Evaluator.StudentsAnswers.Clear();
+            Evaluator.GetStudentsAnswers(studentsAnswersListPath);
+            studentAnswersListUserControl.refresh();
+            List<GroupModel> Groups = GlobalConfig.Connection.GetGroup_All();
+            foreach (StudentAnswersModel model in Evaluator.StudentsAnswers)
+            {
+                model.Group = Groups.Find(g => g.Name == model.Group.Name);
+            }            
+            studentsAnswersExpander.IsEnabled = true;
+            studentsAnswersExpander.IsExpanded = true;
         }
 
         private void CreateExamBtn_Click(object sender, RoutedEventArgs e)
         {
-            test.ItemsSource = null;
-            test.Items.Clear();
-            Exam.ExamGroups.Clear();
             //Exam.ExamType = (ExamTypeModel)examTypesCombobox.SelectedItem;
             //Exam.Date = (DateTime)examDate.SelectedDate;
         }
