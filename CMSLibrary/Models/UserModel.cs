@@ -14,6 +14,6 @@ namespace CMSLibrary.Models
 
         public string Password { get; set; }
 
-        public RoleModel Role { get; set; } = new RoleModel();
+        public RoleModel Role { get; set; }
     }
 }

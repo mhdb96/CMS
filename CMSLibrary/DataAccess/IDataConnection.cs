@@ -10,6 +10,17 @@ namespace CMSLibrary.DataAccess
     public interface IDataConnection
     {
 
+        ResultModel GetResults_GetByStudentIdAndQuestionId(int studentId, int questionId);
+        List<StudentModel> GetStudent_GetByExamGroupId(int id);
+        List<QuestionModel> GetQuestions_GetByExamGroupId(int id);
+        void GetExamGroup_ByExamId(ExamModel model);
+        ExamModel GetExam_ById(int id);
+        List<QuestionModel> GetQuestion_ALL();
+        List<StudentModel> GetStudent_ALL();
+        List<StudentMarksModel> GetStudentMark_ALL();
+
+
+
         bool DeleteAssignment_ById(int id);
         bool DeleteCourse_ById(int id);
         bool DeleteTeacher_ById(int id);

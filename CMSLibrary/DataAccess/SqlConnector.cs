@@ -14,6 +14,109 @@ namespace CMSLibrary.DataAccess
     {
         public static string databaseName = "CMS";
 
+        public ResultModel GetResults_GetByStudentIdAndQuestionId(int studentId, int questionId)
+        {
+            ResultModel output;
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@StudentId", studentId);
+                p.Add("@QuestionId", questionId);
+                output = connection.Query<ResultModel>("dbo.Results_GetByStudentIdAndQuestionId", p, commandType: CommandType.StoredProcedure).First();
+            }
+            return output;
+        }
+        public List<StudentModel> GetStudent_GetByExamGroupId(int id)
+        {
+            List<StudentModel> output;
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@ExamGroupId", id);
+                output = connection.Query<StudentModel>("dbo.spStudents_GetByExamGroupId", p, commandType: CommandType.StoredProcedure).ToList();
+            }
+            return output;
+        }
+        public List<QuestionModel> GetQuestions_GetByExamGroupId(int id)
+        {
+            List<QuestionModel> output;
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@ExamGroupId", id);
+                output = connection.Query<QuestionModel>("dbo.Questions_GetByExamGroupId", p, commandType: CommandType.StoredProcedure).ToList();
+            }
+            return output;
+        }
+
+        public void GetExamGroup_ByExamId(ExamModel model)
+        {
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@ExamId", model.Id);
+                model.ExamGroups = connection.Query<ExamGroupModel, GroupModel, ExamGroupModel>("dbo.ExamsGroups_GetByExamId", (examGroup, group)
+                    =>
+                {
+                    examGroup.Group = group;
+                    return examGroup;
+                }, p, commandType: CommandType.StoredProcedure).ToList();
+
+            }
+        }
+        public ExamModel GetExam_ById(int id)
+        {
+            ExamModel output;
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@ExamId", id);
+                output = connection.Query<ExamModel>("dbo.Exams_GetById", p, commandType: CommandType.StoredProcedure).First();
+
+            }
+            return output;
+        }
+
+        public List<QuestionModel> GetQuestion_ALL()
+        {
+            List<QuestionModel> output;
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                output = connection.Query<QuestionModel>("dbo.spQuestions_GetAll").ToList();
+            }
+            return output;
+        }
+
+        public List<StudentModel> GetStudent_ALL()
+        {
+            List<StudentModel> output;
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                output = connection.Query<StudentModel>("dbo.spStudents_GetAll").ToList();
+            }
+            return output;
+        }
+
+        public List<StudentMarksModel> GetStudentMark_ALL()
+        {
+            List<StudentMarksModel> output;
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+
+                output = connection.Query<StudentModel, ResultModel, QuestionModel, StudentMarksModel>("dbo.spStudentMarks_GetAll",
+                    (student, result, question)
+                    => {
+                        StudentMarksModel studentMarks = new StudentMarksModel();
+                        studentMarks.Student = student;
+                        studentMarks.Result = result;
+                        studentMarks.Question = question;
+                        return studentMarks;
+                    }).ToList();
+            }
+            return output;
+        }
+
+
         public bool DeleteAssignment_ById(int id)
         {
             using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))

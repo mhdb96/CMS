@@ -14,5 +14,12 @@ namespace CMSLibrary.Models
         public string LastName { get; set; }
         public DepartmentModel Department { get; set; }
         public EducationalYearModel EduYear { get; set; }
+        public string FullName
+        {
+            get
+            {
+                return $"{FirstName} {LastName}";
+            }
+        }
     }
 }

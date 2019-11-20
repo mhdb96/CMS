@@ -12,6 +12,20 @@ namespace CMSLibrary.Models
         public int RegNo { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public int UserId { get; set; }
+        public UserModel User { get; set; }
+        public string FullName
+        {
+            get
+            {
+                return $"{RegNo} - {FirstName} {LastName}";
+            }
+        }
+        public string Full
+        {
+            get
+            {
+                return $"{FirstName} {LastName}";
+            }
+        }
     }
 }

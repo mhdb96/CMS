@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace CMSLibrary.Models
 {
-    public class ResultModel
+    public class StudentMarksModel
     {
-        public int Id { get; set; }
-        public bool IsTrue { get; set; }
         public StudentModel Student { get; set; }
+        public QuestionModel Question { get; set; }
+        public ResultModel Result { get; set; }
     }
 }

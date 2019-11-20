@@ -9,6 +9,6 @@ namespace CMSLibrary.Models
     public class RoleModel
     {
         public int Id { get; set; }
-        public int Role { get; set; }
+        public string Name { get; set; }
     }
 }

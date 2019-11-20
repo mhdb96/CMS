@@ -22,3 +22,4 @@ C:\Users\onurk\Documents\GitHub\YGL-Projcet-1\CMSLibrary\obj\Debug\CMSLibrary.cs
 C:\Users\onurk\Documents\GitHub\YGL-Projcet-1\CMSLibrary\obj\Debug\CMSLibrary.csproj.CopyComplete
 C:\Users\onurk\Documents\GitHub\YGL-Projcet-1\CMSLibrary\obj\Debug\CMSLibrary.dll
 C:\Users\onurk\Documents\GitHub\YGL-Projcet-1\CMSLibrary\obj\Debug\CMSLibrary.pdb
+C:\Users\onurk\Documents\GitHub\YGL-Projcet-1\CMSLibrary\obj\Debug\CMSLibrary.csproj.ResolveComReference.cache
