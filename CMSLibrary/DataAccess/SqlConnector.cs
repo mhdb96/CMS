@@ -14,6 +14,44 @@ namespace CMSLibrary.DataAccess
     {
         public static string databaseName = "CMS";
 
+        public List<ResultModel> GetResults_GetByQuestionId(int questionId)
+        {
+            List<ResultModel> output;
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@QuestionId", questionId);
+                output = connection.Query<ResultModel>("dbo.spResults_GetByQuestionId", p, commandType: CommandType.StoredProcedure).ToList();
+            }
+            return output;
+        }
+
+        public List<QuestionModel> GetQuestion_GetByCourseOutcomesIdAndExamGroupsId(int ExamGroupId, int CourseOutcomeId)
+        {
+            List<QuestionModel> output;
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@ExamGroupId", ExamGroupId);
+                p.Add("@CourseOutcomeId", CourseOutcomeId);
+                output = connection.Query<QuestionModel>("dbo.spQuestion_GetByCourseOutcomesIdAndExamGroupsId", p, commandType: CommandType.StoredProcedure).ToList();
+            }
+            return output;
+        }
+
+        public List<CourseOutcomeModel> GetQuestionOutcomes_GetByCourseIdAndExamGroupsId(int ExamGroupId, int CourseId)
+        {
+            List<CourseOutcomeModel> output;
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@ExamGroupId", ExamGroupId);
+                p.Add("@CourseId", CourseId);
+                output = connection.Query<CourseOutcomeModel>("dbo.spQuestionOutcomes_GetByCourseOutcomesIdAndExamGroupsId", p, commandType: CommandType.StoredProcedure).ToList();
+            }
+            return output;
+        }
+
         public ResultModel GetResults_GetByStudentIdAndQuestionId(int studentId, int questionId)
         {
             ResultModel output;

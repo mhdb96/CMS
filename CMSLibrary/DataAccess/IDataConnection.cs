@@ -10,6 +10,9 @@ namespace CMSLibrary.DataAccess
     public interface IDataConnection
     {
 
+        List<ResultModel> GetResults_GetByQuestionId(int questionId);
+        List<QuestionModel> GetQuestion_GetByCourseOutcomesIdAndExamGroupsId(int examGroupId, int courseOutcomeId);
+        List<CourseOutcomeModel> GetQuestionOutcomes_GetByCourseIdAndExamGroupsId(int examGroupId, int courseId);
         ResultModel GetResults_GetByStudentIdAndQuestionId(int studentId, int questionId);
         List<StudentModel> GetStudent_GetByExamGroupId(int id);
         List<QuestionModel> GetQuestions_GetByExamGroupId(int id);

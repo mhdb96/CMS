@@ -64,6 +64,7 @@
     <Compile Include="Models\ExamTypeModel.cs" />
     <Compile Include="Models\GroupModel.cs" />
     <Compile Include="Models\QuestionModel.cs" />
+    <Compile Include="Models\QuestionOutcomesModel.cs" />
     <Compile Include="Models\ResultModel.cs" />
     <Compile Include="Models\RoleModel.cs" />
     <Compile Include="Models\StudentMarksModel.cs" />

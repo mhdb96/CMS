@@ -14,13 +14,28 @@ namespace WpfApp2
         _Application excel = new _Excel.Application();
         Workbook wb;
         Worksheet ws;
+        public Excel()
+        {
 
+        }
         public Excel (string path, int sheet)
         {
             this.path = path;
             wb = excel.Workbooks.Open(path);
             ws = excel.Worksheets[sheet];
         }
+
+        public void CreateNewFile()
+        {
+            wb=excel.Workbooks.Add(XlWBATemplate.xlWBATWorksheet);
+            ws = wb.Worksheets[1];
+        }
+        public void CreateNewSheet()
+        {
+            wb.Worksheets.Add(After:ws);
+            ws = wb.Worksheets[2];
+        }
+
         public decimal ReadCell(int i, int j)
         {
             i++;
@@ -41,6 +56,11 @@ namespace WpfApp2
             j++;
             ws.Cells[i, j].Value2 = s;
         
+        }
+        public void SelectWorkSheet(int sheetNumber)
+        {
+            ws = wb.Worksheets[sheetNumber];
+
         }
         public void Save()
         {
