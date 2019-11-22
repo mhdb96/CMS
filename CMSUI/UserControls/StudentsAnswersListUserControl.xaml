@@ -45,7 +45,7 @@
                     </DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
-            <Button Content="text" x:Name="test" Click="Test_Click"/>
+            <Button Content="Evaluate" x:Name="evaluate_Btn" Click="Evaluate_Btn_Click"/>
         </StackPanel>
     </Grid>
 </UserControl>

@@ -33,8 +33,14 @@ namespace CMSLibrary.DataAccess
         void CreateExam(ExamModel model);
         List<ExamTypeModel> GetExamType_All();
 
+        void CreteQuestionOutcome(QuestionOutcomeModel model);
+
+        void CreateExamGroup(ExamGroupModel model);
+
         void CreateQuestion(QuestionModel model);
         void CreateResult(ResultModel model);
+
+        StudentModel GetStudent_ByRegNo(int regNo);
 
         void CreateTeacher(TeacherModel model);
 

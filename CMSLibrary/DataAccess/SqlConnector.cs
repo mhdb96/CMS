@@ -211,19 +211,89 @@ namespace CMSLibrary.DataAccess
             return output;
         }
 
+
+
         public void CreateExam(ExamModel model)
         {
-            throw new NotImplementedException();
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@Date", model.Date);
+                p.Add("@FilePath", model.FilePath);
+                p.Add("@ExamTypeId", model.ExamType.Id);
+                p.Add("@AssignmentId", model.Assignment.Id);
+                p.Add("@UserId", model.User.Id);
+                p.Add("@id", 0, dbType: DbType.Int32, direction: ParameterDirection.Output);
+                connection.Execute("dbo.spExams_Insert", p, commandType: CommandType.StoredProcedure);
+                model.Id = p.Get<int>("@id");
+            }
+        }
+
+        public void CreateExamGroup(ExamGroupModel model)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@GroupId", model.Group.Id);
+                p.Add("@ExamId", model.ExamId);                
+                p.Add("@id", 0, dbType: DbType.Int32, direction: ParameterDirection.Output);
+                connection.Execute("dbo.spExamGroups_Insert", p, commandType: CommandType.StoredProcedure);
+                model.Id = p.Get<int>("@id");
+            }
         }
 
         public void CreateQuestion(QuestionModel model)
         {
-            throw new NotImplementedException();
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@Name", model.Name);
+                p.Add("@Mark", model.Mark);
+                p.Add("@ExamGroupId", model.ExamGroupId);
+                p.Add("@id", 0, dbType: DbType.Int32, direction: ParameterDirection.Output);
+                connection.Execute("dbo.spQuestions_Insert", p, commandType: CommandType.StoredProcedure);
+                model.Id = p.Get<int>("@id");
+            }
+        }
+
+        public void CreteQuestionOutcome(QuestionOutcomeModel model)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@QuestionId", model.QuestionId);
+                p.Add("@CourseOutcomeId", model.CourseOutcomeId);
+                p.Add("@id", 0, dbType: DbType.Int32, direction: ParameterDirection.Output);
+                connection.Execute("dbo.spQuestionOutcomes_Insert", p, commandType: CommandType.StoredProcedure);
+                model.Id = p.Get<int>("@id");
+            }
         }
 
         public void CreateResult(ResultModel model)
         {
-            throw new NotImplementedException();
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@IsTrue", model.IsTrue);
+                p.Add("@StudentId", model.Student.Id);
+                p.Add("@QuestionId", model.QuestionId);                
+                p.Add("@id", 0, dbType: DbType.Int32, direction: ParameterDirection.Output);
+                connection.Execute("dbo.spResults_Insert", p, commandType: CommandType.StoredProcedure);
+                model.Id = p.Get<int>("@id");
+            }
+        }
+
+        public StudentModel GetStudent_ByRegNo(int regNo)
+        {
+            StudentModel output;
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@RegNo", regNo);
+                output = connection.Query<StudentModel>("dbo.spStudents_GetByRegNo", p, commandType: CommandType.StoredProcedure).First();
+
+            }
+            return output;
         }
 
         public void GetDepartmentOutcomes_ById(DepartmentModel model)
@@ -365,5 +435,6 @@ namespace CMSLibrary.DataAccess
             }
             return output;
         }
+
     }
 }

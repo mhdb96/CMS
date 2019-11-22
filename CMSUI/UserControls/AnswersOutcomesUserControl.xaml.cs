@@ -68,8 +68,8 @@ namespace CMSUI.UserControls
             foreach (QuestionModel q in MyExam.ExamGroups[GroupIndex].Questions)
             {
                 TextBlock tb = new TextBlock();
-                tb.Text = q.Question;
-                tb.ToolTip = $"Question {q.Question}";
+                tb.Text = q.Name;
+                tb.ToolTip = $"Question {q.Name}";
                 tb.Margin = new Thickness(0, 10, 0, 10);
                 Grid.SetRow(tb, i);
                 Grid.SetColumn(tb, 0);
@@ -157,7 +157,7 @@ namespace CMSUI.UserControls
                 if (Child is TextBox)
                 {
                     QuestionModel question = (QuestionModel)answersOutcomesMatrix.RowDefinitions[Grid.GetRow(Child)].Tag;
-                    int questionIndex = MyExam.ExamGroups[GroupIndex].Questions.FindIndex(q => q.Question == question.Question);
+                    int questionIndex = MyExam.ExamGroups[GroupIndex].Questions.FindIndex(q => q.Name == question.Name);
                     decimal mark = decimal.Parse(((TextBox)Child).Text);
                     MyExam.ExamGroups[GroupIndex].Questions[questionIndex].Mark = mark;                                       
                 }
@@ -167,11 +167,10 @@ namespace CMSUI.UserControls
                     {
                         CourseOutcomeModel outcome = (CourseOutcomeModel)answersOutcomesMatrix.ColumnDefinitions[Grid.GetColumn(Child)].Tag;
                         QuestionModel question = (QuestionModel)answersOutcomesMatrix.RowDefinitions[Grid.GetRow(Child)].Tag;
-                        int questionIndex = MyExam.ExamGroups[GroupIndex].Questions.FindIndex(q => q.Question == question.Question);
+                        int questionIndex = MyExam.ExamGroups[GroupIndex].Questions.FindIndex(q => q.Name == question.Name);
                         MyExam.ExamGroups[GroupIndex].Questions[questionIndex].QuestionOutcomes.Add(outcome);
                     }                                        
                 }
-                
             }
             saveMarksAmdOutcomesBtn.IsEnabled = false;
             answersOutcomesMatrix.IsEnabled = false;

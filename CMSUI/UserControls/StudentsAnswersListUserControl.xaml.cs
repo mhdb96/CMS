@@ -37,18 +37,18 @@ namespace CMSUI.UserControls
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            studentsAnswersGrid.ItemsSource = MyEvaluator.StudentsAnswers;
+            studentsAnswersGrid.ItemsSource = MyEvaluator.StudentsAnswers;            
         }
         public void refresh()
         {            
             studentsAnswersGrid.ItemsSource = null;
             studentsAnswersGrid.Items.Clear();
             studentsAnswersGrid.ItemsSource = MyEvaluator.StudentsAnswers;            
-        }
+        }        
 
-        private void Test_Click(object sender, RoutedEventArgs e)
+        private void Evaluate_Btn_Click(object sender, RoutedEventArgs e)
         {
-
+            
         }
     }
 }

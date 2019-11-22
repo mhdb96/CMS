@@ -29,9 +29,11 @@ namespace WpfApp1
         public MainWindow()
         {
             InitializeComponent();
+            GlobalConfig.Connection.CheckConniction();
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            GlobalConfig.Connection.CheckConniction();
             DataGridListe.Items.Clear();
             List<StudentAnswersModel> myInfo = ev.GetRightAnswers();
             foreach (StudentAnswersModel i in myInfo)
