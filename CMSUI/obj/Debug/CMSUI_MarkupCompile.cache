@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\onurk\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\
+C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\
 CMSUI
 none
 false
 DEBUG;TRACE
-C:\Users\onurk\Documents\GitHub\YGL-Projcet-1\CMSUI\App.xaml
+C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\App.xaml
 181020268764
 
 33-1867182176
-20108746314
+20215207412
 AdminPanelWindow.xaml;CreateActiveTermWindow.xaml;CreateAssignmentWindow.xaml;CreateCourseWindow.xaml;CreateDepartmentWindow.xaml;CreateTeacherWindow.xaml;EvaluationWindows\CreateExamWindow.xaml;LoginWindow.xaml;TeacherPanelWindow.xaml;UserControls\AnswersOutcomesUserControl.xaml;UserControls\AssignmentDashboardUserControl.xaml;UserControls\CourseDashboardUserControl.xaml;UserControls\DepartmentDashboardUserControl.xaml;UserControls\MyCoursesDashboardUserControl.xaml;UserControls\OutcomeUserControl.xaml;UserControls\StudentsAnswersListUserControl.xaml;UserControls\TeacherDashboardUserControl.xaml;UserControls\TermsDashboardUserControl.xaml;
 
 False

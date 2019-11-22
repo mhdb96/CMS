@@ -79,6 +79,7 @@
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\YearModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WriteToExcel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
