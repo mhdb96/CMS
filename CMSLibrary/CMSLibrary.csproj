@@ -48,17 +48,16 @@
   <ItemGroup>
     <Compile Include="AuthenticationState.cs" />
     <Compile Include="Login.cs" />
-    <Compile Include="Models\AnswerKeyModel.cs" />
     <Compile Include="DataAccess\SqlConnector.cs" />
     <Compile Include="Evaluate.cs" />
     <Compile Include="Excel.cs" />
     <Compile Include="GlobalConfig.cs" />
     <Compile Include="DataAccess\IDataConnection.cs" />
+    <Compile Include="Models\AnswerKeyModel.cs" />
     <Compile Include="Models\QuestionOutcomeModel.cs" />
     <Compile Include="StudentAnswersModel.cs" />
     <Compile Include="Models\ActiveTermModel.cs" />
     <Compile Include="Models\AdminModel.cs" />
-    <Compile Include="Models\AnswerKeyModel.cs" />
     <Compile Include="Models\AssignmentModel.cs" />
     <Compile Include="Models\CourseModel.cs" />
     <Compile Include="Models\CourseOutcomeModel.cs" />

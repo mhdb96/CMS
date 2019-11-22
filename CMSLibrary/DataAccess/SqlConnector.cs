@@ -14,6 +14,18 @@ namespace CMSLibrary.DataAccess
     {
         public static string databaseName = "CMS";
 
+        public List<CourseOutcomeModel> GetCourseOutcome_GetByExamId(int examId)
+        {
+            List<CourseOutcomeModel> output;
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@ExamId", examId);
+                output = connection.Query<CourseOutcomeModel>("dbo.spCourseOutcomes_GetByExamId", p, commandType: CommandType.StoredProcedure).ToList();
+            }
+            return output;
+        }
+
         public List<ResultModel> GetResults_GetByQuestionId(int questionId)
         {
             List<ResultModel> output;
@@ -60,7 +72,7 @@ namespace CMSLibrary.DataAccess
                 var p = new DynamicParameters();
                 p.Add("@StudentId", studentId);
                 p.Add("@QuestionId", questionId);
-                output = connection.Query<ResultModel>("dbo.Results_GetByStudentIdAndQuestionId", p, commandType: CommandType.StoredProcedure).First();
+                output = connection.Query<ResultModel>("dbo.spResults_GetByStudentIdAndQuestionId", p, commandType: CommandType.StoredProcedure).First();
             }
             return output;
         }
@@ -82,7 +94,7 @@ namespace CMSLibrary.DataAccess
             {
                 var p = new DynamicParameters();
                 p.Add("@ExamGroupId", id);
-                output = connection.Query<QuestionModel>("dbo.Questions_GetByExamGroupId", p, commandType: CommandType.StoredProcedure).ToList();
+                output = connection.Query<QuestionModel>("dbo.spQuestions_GetByExamGroupId", p, commandType: CommandType.StoredProcedure).ToList();
             }
             return output;
         }
@@ -93,12 +105,15 @@ namespace CMSLibrary.DataAccess
             {
                 var p = new DynamicParameters();
                 p.Add("@ExamId", model.Id);
-                model.ExamGroups = connection.Query<ExamGroupModel, GroupModel, ExamGroupModel>("dbo.ExamsGroups_GetByExamId", (examGroup, group)
-                    =>
-                {
-                    examGroup.Group = group;
-                    return examGroup;
-                }, p, commandType: CommandType.StoredProcedure).ToList();
+                //model.ExamGroups = connection.Query<ExamGroupModel>("dbo.spExamGroups_GetByExamId", p, commandType: CommandType.StoredProcedure).ToList();
+                model.ExamGroups = connection.Query<ExamGroupModel, GroupModel, ExamGroupModel>("dbo.spExamGroups_GetByExamId",
+                    (examGroup, group)
+                    => {
+                        examGroup.Group = group;
+                        return examGroup;
+                    
+                    }, p, commandType: CommandType.StoredProcedure).ToList();
+
 
             }
         }
@@ -109,7 +124,7 @@ namespace CMSLibrary.DataAccess
             {
                 var p = new DynamicParameters();
                 p.Add("@ExamId", id);
-                output = connection.Query<ExamModel>("dbo.Exams_GetById", p, commandType: CommandType.StoredProcedure).First();
+                output = connection.Query<ExamModel>("dbo.spExams_GetById", p, commandType: CommandType.StoredProcedure).First();
 
             }
             return output;
@@ -206,7 +221,7 @@ namespace CMSLibrary.DataAccess
             {
                 List<ExamModel> Exams = new List<ExamModel>();
                 var p = new DynamicParameters();
-                p.Add("@TeacherId", id);
+                p.Add("@TeacherId", id);                
                 Exams = connection.Query<ExamModel>("dbo.spAssignments_HasExamByTeacherId", p, commandType: CommandType.StoredProcedure).ToList();
 
                 if (Exams.Any())

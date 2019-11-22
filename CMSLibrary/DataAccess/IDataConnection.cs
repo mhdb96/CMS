@@ -11,6 +11,8 @@ namespace CMSLibrary.DataAccess
     {
         string CheckConniction();
 
+
+        List<CourseOutcomeModel> GetCourseOutcome_GetByExamId(int examId);
         List<ResultModel> GetResults_GetByQuestionId(int questionId);
         List<QuestionModel> GetQuestion_GetByCourseOutcomesIdAndExamGroupsId(int examGroupId, int courseOutcomeId);
         List<CourseOutcomeModel> GetQuestionOutcomes_GetByCourseIdAndExamGroupsId(int examGroupId, int courseId);

@@ -33,7 +33,7 @@ namespace CMSLibrary
         public void CreateNewSheet()
         {
             wb.Worksheets.Add(After:ws);
-            ws = wb.Worksheets[2];
+            ws = wb.Worksheets[2];// TODO Dinamik değil. Onura sor (unutmazsa cevap verir)
         }
 
         public decimal ReadCell(int i, int j)

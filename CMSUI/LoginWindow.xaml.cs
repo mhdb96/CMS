@@ -72,7 +72,7 @@ namespace CMSUI
                     this.Close();
                 } else
                 {
-                    TeacherPanelWindow win = new TeacherPanelWindow(/*this*/);
+                    TeacherPanelWindow win = new TeacherPanelWindow(this);
                     win.Show();
                     this.Close();
                 }

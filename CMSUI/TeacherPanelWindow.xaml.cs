@@ -23,23 +23,23 @@ namespace CMSUI
     public partial class TeacherPanelWindow
     {
         ITeacherPanelRequester CallingWindow;        
-        public TeacherPanelWindow(/*ITeacherPanelRequester caller*/)
+        public TeacherPanelWindow(ITeacherPanelRequester caller)
         {
-            Teacher = new TeacherModel
-            {
-                FirstName = "Muahammed",
-                LastName = "Bedavi",
-                Id = 7,
-                RegNo = 1,
-                User = new UserModel
-                {
-                    Id = 5,
-                }
+            //Teacher = new TeacherModel
+            //{
+            //    FirstName = "Muahammed",
+            //    LastName = "Bedavi",
+            //    Id = 7,
+            //    RegNo = 1,
+            //    User = new UserModel
+            //    {
+            //        Id = 5,
+            //    }
 
-            };
+            //};
             InitializeComponent();
-            //CallingWindow = caller;
-            //Teacher = CallingWindow.GetTeacherInfo();                        
+            CallingWindow = caller;
+            Teacher = CallingWindow.GetTeacherInfo();                        
         }
         public static readonly DependencyProperty TeacherProperty =
         DependencyProperty.Register("Teacher", typeof(TeacherModel), typeof(TeacherPanelWindow), new FrameworkPropertyMetadata(null));
