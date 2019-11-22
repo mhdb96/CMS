@@ -73,8 +73,30 @@ namespace CMSUI
         // TODO - empliment validation
         private bool ValidForm()
         {
-            bool valid = true;
-            return valid;
+            foreach (OutcomeUserControl outcome in outcomesList.Children)
+            {
+                if (outcome.nameText.Text == "" || outcome.descriptionText.Text == "")
+                {
+                    if (outcome.descriptionText.Text == "")
+                    {
+                        outcome.descriptionText.BorderBrush = Brushes.Red;
+                    }
+
+                    errorOutcomes.Visibility = Visibility.Visible;
+                }
+            }
+            if (nameText.Text == "")
+            {
+                errorName.Visibility = Visibility.Visible;
+            }
+            if (errorOutcomes.Visibility == Visibility.Visible || errorName.Visibility == Visibility.Visible)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         private void CancelDepartmentBtn_Click(object sender, RoutedEventArgs e)
@@ -86,8 +108,34 @@ namespace CMSUI
         {
             // TODO - fix the placement system for the letters
             OutcomeUserControl outcome = new OutcomeUserControl();
+            // TODO - fix the ascii code
             outcome.nameText.Text = Convert.ToChar(outcomesList.Children.Count + 65).ToString();
             outcomesList.Children.Add(outcome);
+        }
+
+        private void NameText_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (nameText.Text == "")
+            {
+                errorName.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                errorName.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void ScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
+        {
+            errorOutcomes.Visibility = Visibility.Hidden;
+            
+            foreach (OutcomeUserControl outcome in outcomesList.Children)
+            {
+                if (outcome.nameText.BorderBrush == Brushes.Red || outcome.descriptionText.BorderBrush == Brushes.Red)
+                {
+                    errorOutcomes.Visibility = Visibility.Visible;
+                }
+            }
         }
     }
 }

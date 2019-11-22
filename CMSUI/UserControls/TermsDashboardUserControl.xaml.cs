@@ -63,7 +63,18 @@ namespace CMSUI.UserControls
             Button btn = (Button)sender;
             ActiveTermModel model = new ActiveTermModel();
             model = (ActiveTermModel)btn.Tag;
-            // TODO - Delete the selected term
+
+
+            if (GlobalConfig.Connection.DeleteActiveTerm_ById(model.Id))
+            {
+                Terms.Remove(model);
+                WireUpLists();
+                // TODO - Delete the selected term
+            }
+            else
+            {
+                // TODO - ADD a MessageBox
+            }
         }
 
         public void ActiveTermComplete(ActiveTermModel model)

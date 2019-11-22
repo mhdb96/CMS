@@ -11,6 +11,28 @@ namespace CMSLibrary.DataAccess
     {
         string CheckConniction();
 
+        List<ResultModel> GetResults_GetByQuestionId(int questionId);
+        List<QuestionModel> GetQuestion_GetByCourseOutcomesIdAndExamGroupsId(int examGroupId, int courseOutcomeId);
+        List<CourseOutcomeModel> GetQuestionOutcomes_GetByCourseIdAndExamGroupsId(int examGroupId, int courseId);
+        ResultModel GetResults_GetByStudentIdAndQuestionId(int studentId, int questionId);
+        List<StudentModel> GetStudent_GetByExamGroupId(int id);
+        List<QuestionModel> GetQuestions_GetByExamGroupId(int id);
+        void GetExamGroup_ByExamId(ExamModel model);
+        ExamModel GetExam_ById(int id);
+        List<QuestionModel> GetQuestion_ALL();
+        List<StudentModel> GetStudent_ALL();
+        List<StudentMarksModel> GetStudentMark_ALL();
+
+
+
+        bool DeleteAssignment_ById(int id);
+        bool DeleteCourse_ById(int id);
+        bool DeleteTeacher_ById(int id);
+        bool DeleteDepartment_ById(int id);
+        bool DeleteActiveTerm_ById(int id);
+        List<CourseModel> GetCourse_ValidByDepartmentIdAndActiveTermId(int DepartmentId, int ActiveTermId);
+        List<TermModel> GetTerm_ValidByYearId(int id);
+
         void CreateActiveTerm(ActiveTermModel model);
         List<YearModel> GetYear_ALL();
         List<TermModel> GetTerm_ALL();

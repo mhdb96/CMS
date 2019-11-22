@@ -67,6 +67,17 @@ namespace CMSUI.UserControls
             // TODO - Delete the selected Teacher
             TeacherModel model = (TeacherModel)teachersGrid.SelectedItem;
 
+            if (GlobalConfig.Connection.DeleteTeacher_ById(model.Id))
+            {
+                Teachers.Remove(model);
+                WireUpLists();
+                // TODO - Delete the selected term
+            }
+            else
+            {
+                // TODO - ADD a MessageBox
+            }
+
         }
 
         private void UpdateTeacherBtn_Click(object sender, RoutedEventArgs e)

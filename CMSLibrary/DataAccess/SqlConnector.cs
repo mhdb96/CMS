@@ -14,6 +14,285 @@ namespace CMSLibrary.DataAccess
     {
         public static string databaseName = "CMS";
 
+        public List<ResultModel> GetResults_GetByQuestionId(int questionId)
+        {
+            List<ResultModel> output;
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@QuestionId", questionId);
+                output = connection.Query<ResultModel>("dbo.spResults_GetByQuestionId", p, commandType: CommandType.StoredProcedure).ToList();
+            }
+            return output;
+        }
+
+        public List<QuestionModel> GetQuestion_GetByCourseOutcomesIdAndExamGroupsId(int ExamGroupId, int CourseOutcomeId)
+        {
+            List<QuestionModel> output;
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@ExamGroupId", ExamGroupId);
+                p.Add("@CourseOutcomeId", CourseOutcomeId);
+                output = connection.Query<QuestionModel>("dbo.spQuestion_GetByCourseOutcomesIdAndExamGroupsId", p, commandType: CommandType.StoredProcedure).ToList();
+            }
+            return output;
+        }
+
+        public List<CourseOutcomeModel> GetQuestionOutcomes_GetByCourseIdAndExamGroupsId(int ExamGroupId, int CourseId)
+        {
+            List<CourseOutcomeModel> output;
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@ExamGroupId", ExamGroupId);
+                p.Add("@CourseId", CourseId);
+                output = connection.Query<CourseOutcomeModel>("dbo.spQuestionOutcomes_GetByCourseOutcomesIdAndExamGroupsId", p, commandType: CommandType.StoredProcedure).ToList();
+            }
+            return output;
+        }
+
+        public ResultModel GetResults_GetByStudentIdAndQuestionId(int studentId, int questionId)
+        {
+            ResultModel output;
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@StudentId", studentId);
+                p.Add("@QuestionId", questionId);
+                output = connection.Query<ResultModel>("dbo.Results_GetByStudentIdAndQuestionId", p, commandType: CommandType.StoredProcedure).First();
+            }
+            return output;
+        }
+        public List<StudentModel> GetStudent_GetByExamGroupId(int id)
+        {
+            List<StudentModel> output;
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@ExamGroupId", id);
+                output = connection.Query<StudentModel>("dbo.spStudents_GetByExamGroupId", p, commandType: CommandType.StoredProcedure).ToList();
+            }
+            return output;
+        }
+        public List<QuestionModel> GetQuestions_GetByExamGroupId(int id)
+        {
+            List<QuestionModel> output;
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@ExamGroupId", id);
+                output = connection.Query<QuestionModel>("dbo.Questions_GetByExamGroupId", p, commandType: CommandType.StoredProcedure).ToList();
+            }
+            return output;
+        }
+
+        public void GetExamGroup_ByExamId(ExamModel model)
+        {
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@ExamId", model.Id);
+                model.ExamGroups = connection.Query<ExamGroupModel, GroupModel, ExamGroupModel>("dbo.ExamsGroups_GetByExamId", (examGroup, group)
+                    =>
+                {
+                    examGroup.Group = group;
+                    return examGroup;
+                }, p, commandType: CommandType.StoredProcedure).ToList();
+
+            }
+        }
+        public ExamModel GetExam_ById(int id)
+        {
+            ExamModel output;
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@ExamId", id);
+                output = connection.Query<ExamModel>("dbo.Exams_GetById", p, commandType: CommandType.StoredProcedure).First();
+
+            }
+            return output;
+        }
+
+        public List<QuestionModel> GetQuestion_ALL()
+        {
+            List<QuestionModel> output;
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                output = connection.Query<QuestionModel>("dbo.spQuestions_GetAll").ToList();
+            }
+            return output;
+        }
+
+        public List<StudentModel> GetStudent_ALL()
+        {
+            List<StudentModel> output;
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                output = connection.Query<StudentModel>("dbo.spStudents_GetAll").ToList();
+            }
+            return output;
+        }
+
+        public List<StudentMarksModel> GetStudentMark_ALL()
+        {
+            List<StudentMarksModel> output;
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+
+                output = connection.Query<StudentModel, ResultModel, QuestionModel, StudentMarksModel>("dbo.spStudentMarks_GetAll",
+                    (student, result, question)
+                    => {
+                        StudentMarksModel studentMarks = new StudentMarksModel();
+                        studentMarks.Student = student;
+                        studentMarks.Result = result;
+                        studentMarks.Question = question;
+                        return studentMarks;
+                    }).ToList();
+            }
+            return output;
+        }
+
+
+        public bool DeleteAssignment_ById(int id)
+        {
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                List<ExamModel> Exam = new List<ExamModel>();
+                var p = new DynamicParameters();
+                p.Add("@AssignmentId", id);
+                Exam = connection.Query<ExamModel>("dbo.spAssignemtns_HasExamByAssignmentId", p, commandType: CommandType.StoredProcedure).ToList();
+
+                if (Exam.Any())
+                {
+                    return false;
+                }
+                else
+                {
+                    connection.Execute("dbo.spAssignments_Delete", p, commandType: CommandType.StoredProcedure);
+                    return true;
+                }
+
+            }
+        }
+
+        public bool DeleteCourse_ById(int id)
+        {
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                List<CourseModel> Courses = new List<CourseModel>();
+                var p = new DynamicParameters();
+                p.Add("@CourseId", id);
+                Courses = connection.Query<CourseModel>("dbo.spCourses_HasAssignmentByCourseId", p, commandType: CommandType.StoredProcedure).ToList();
+
+                if (Courses.Any())
+                {
+                    return false;
+                }
+                else
+                {
+                    connection.Execute("dbo.spCourses_Delete", p, commandType: CommandType.StoredProcedure);
+                    return true;
+                }
+
+                
+            }
+        }
+
+        public bool DeleteTeacher_ById(int id)
+        {
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                List<ExamModel> Exams = new List<ExamModel>();
+                var p = new DynamicParameters();
+                p.Add("@TeacherId", id);
+                Exams = connection.Query<ExamModel>("dbo.spAssignments_HasExamByTeacherId", p, commandType: CommandType.StoredProcedure).ToList();
+
+                if (Exams.Any())
+                {
+                    return false;
+                }
+                else
+                {
+                    connection.Execute("dbo.spTeachers_Delete", p, commandType: CommandType.StoredProcedure);
+                    return true;
+                }
+            }
+        }
+
+        public bool DeleteDepartment_ById(int id)
+        {
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+
+                List<ExamModel> Exams = new List<ExamModel>();
+                List<ExamModel> Student = new List<ExamModel>();
+
+                var p = new DynamicParameters();
+                p.Add("@DepartmentId", id);
+                Exams = connection.Query<ExamModel>("dbo.spAssignments_HasExamByDepartmentId", p, commandType: CommandType.StoredProcedure).ToList();
+                Student = connection.Query<ExamModel>("dbo.spDepartments_HasStudentByDepartmentId", p, commandType: CommandType.StoredProcedure).ToList();
+
+                if (Exams.Any() || Student.Any())
+                {
+                    return false;
+                }
+                else
+                {
+                    connection.Execute("dbo.spDepartments_Delete", p, commandType: CommandType.StoredProcedure);
+                    return true;
+                }                
+            }
+        }
+
+        public bool DeleteActiveTerm_ById(int id)
+        {
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                List<ExamModel> Exams = new List<ExamModel>();
+                var p = new DynamicParameters();
+                p.Add("@ActiveTermId", id);
+                Exams = connection.Query<ExamModel>("dbo.spAssignments_HasExamByActiveTermId", p, commandType: CommandType.StoredProcedure).ToList();
+
+                if (Exams.Any())
+                {
+                    return false;
+                }
+                else
+                {
+                    connection.Execute("dbo.spActiveTerms_Delete", p, commandType: CommandType.StoredProcedure);
+                    return true;
+                }
+            }
+        }
+
+        public List<CourseModel> GetCourse_ValidByDepartmentIdAndActiveTermId(int DepartmentId , int ActiveTermId)
+        {
+            List<CourseModel> output;
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@DepartmentId", DepartmentId);
+                p.Add("@ActiveTermId", ActiveTermId);
+
+                output = connection.Query<CourseModel>("dbo.spCourses_Valid",p,commandType:CommandType.StoredProcedure).ToList();
+            }
+            return output;
+        }
+
+        public List<TermModel> GetTerm_ValidByYearId(int id)
+        {
+            List<TermModel> myTerms;
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@Yearid", id);
+                myTerms = connection.Query<TermModel>("dbo.spTerms_ValidByYearId", p, commandType: CommandType.StoredProcedure).ToList();
+            }
+            return myTerms;
+        }
+
         public void CreateActiveTerm(ActiveTermModel model)
         {
             using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))

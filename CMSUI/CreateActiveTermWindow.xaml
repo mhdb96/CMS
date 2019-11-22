@@ -15,7 +15,7 @@
             <Setter Property="Margin" Value="0 0 10 0"/>
         </Style>
     </Window.Resources>
-    <Grid>
+    <Grid x:Name="myGrid">
         <Grid.ColumnDefinitions >
             <ColumnDefinition Width="20"/>
             <ColumnDefinition Width="auto"/>
@@ -50,25 +50,38 @@
             Grid.Column="2" Grid.Row="2"            
             Margin="10 5 0 5"           
             Controls:TextBoxHelper.ClearTextButton="True"            
-            Controls:TextBoxHelper.Watermark="Please select an item...">
+            Controls:TextBoxHelper.Watermark="Please select an item..." SelectionChanged="YearsCombobox_SelectionChanged">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}" />
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <ComboBox x:Name="termsCombobox"
+
+        <StackPanel x:Name="errorYear" Grid.Column="3" Grid.Row="2" Orientation="Horizontal" Grid.ColumnSpan="3" Visibility="Hidden">
+            <iconPacks:PackIconMaterial Kind="AlertCircle" VerticalAlignment="Center" Width="20" Height="20" Margin="5 0 0 0" Foreground="Red"/>
+            <TextBlock Text="You need to choose a year" FontSize="10pt" VerticalAlignment="Center" Margin="5 0 0 0"/>
+        </StackPanel>
+
+        <ComboBox x:Name="termsCombobox"      
+            IsHitTestVisible = "false"
             Width="150"                 
             Grid.Column="2" Grid.Row="3"            
             Margin="10 5 0 5"           
             Controls:TextBoxHelper.ClearTextButton="True"            
-            Controls:TextBoxHelper.Watermark="Please select an item...">
+            Controls:TextBoxHelper.Watermark="Please select an item..." SelectionChanged="TermsCombobox_SelectionChanged">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}" />
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
+
+        <StackPanel x:Name="errorTerm" Grid.Column="3" Grid.Row="3" Orientation="Horizontal" Grid.ColumnSpan="3" Visibility="Hidden">
+            <iconPacks:PackIconMaterial Kind="AlertCircle" VerticalAlignment="Center" Width="20" Height="20" Margin="5 0 0 0" Foreground="Red"/>
+            <TextBlock Text="You need to choose a term" FontSize="10pt" VerticalAlignment="Center" Margin="5 0 0 0"/>
+        </StackPanel>
+
         <Button
             x:Name="createActiveTermBtn" Click="CreateActiveTermBtn_Click"
             Content="Create" Grid.Column="3" Grid.Row="7"

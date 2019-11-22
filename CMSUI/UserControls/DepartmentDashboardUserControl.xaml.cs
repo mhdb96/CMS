@@ -49,7 +49,18 @@ namespace CMSUI.UserControls
             Button btn = (Button)sender;
             DepartmentModel model = new DepartmentModel();
             model = (DepartmentModel)btn.Tag;
-            // TODO - Delete the selected department
+
+            if (GlobalConfig.Connection.DeleteDepartment_ById(model.Id))
+            {
+                Departments.Remove(model);
+                WireUpLists();
+                // TODO - Delete the selected term
+            }
+            else
+            {
+                // TODO - ADD a MessageBox
+            }
+            
         }
 
         private void UpdateDepartmentBtn_Click(object sender, RoutedEventArgs e)
