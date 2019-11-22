@@ -17,7 +17,6 @@ C:\Users\onurk\Documents\GitHub\YGL-Projcet-1\CMSLibrary\bin\Debug\CMSLibrary.dl
 C:\Users\onurk\Documents\GitHub\YGL-Projcet-1\CMSLibrary\bin\Debug\CMSLibrary.pdb
 C:\Users\onurk\Documents\GitHub\YGL-Projcet-1\CMSLibrary\bin\Debug\Dapper.dll
 C:\Users\onurk\Documents\GitHub\YGL-Projcet-1\CMSLibrary\bin\Debug\Dapper.xml
-C:\Users\onurk\Documents\GitHub\YGL-Projcet-1\CMSLibrary\obj\Debug\CMSLibrary.csprojAssemblyReference.cache
 C:\Users\onurk\Documents\GitHub\YGL-Projcet-1\CMSLibrary\obj\Debug\CMSLibrary.csproj.CoreCompileInputs.cache
 C:\Users\onurk\Documents\GitHub\YGL-Projcet-1\CMSLibrary\obj\Debug\CMSLibrary.csproj.CopyComplete
 C:\Users\onurk\Documents\GitHub\YGL-Projcet-1\CMSLibrary\obj\Debug\CMSLibrary.dll
