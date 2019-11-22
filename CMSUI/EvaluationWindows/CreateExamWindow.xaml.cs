@@ -95,10 +95,7 @@ namespace CMSUI.EvaluationWindows
             answersOutcomesExpander.IsEnabled = true;
             answersOutcomesExpander.IsExpanded = true;
             GlobalConfig.Connection.GetCourseOutcomes_ById(Exam.Assignment.Course);            
-            AnswersOutcomesMatrices.ItemsSource = Exam.ExamGroups;    
-            
-            
-            
+            AnswersOutcomesMatrices.ItemsSource = Exam.ExamGroups;                                        
         }
 
         private void ChooseStudentsAnswersListBtn_Click(object sender, RoutedEventArgs e)
@@ -122,8 +119,6 @@ namespace CMSUI.EvaluationWindows
 
         private void CreateExamBtn_Click(object sender, RoutedEventArgs e)
         {            
-            
-
             Exam.ExamType = (ExamTypeModel)examTypesCombobox.SelectedItem;
             Exam.Date = (DateTime)examDate.SelectedDate;
             GlobalConfig.Connection.CreateExam(Exam);
@@ -141,13 +136,14 @@ namespace CMSUI.EvaluationWindows
                     {                        
                         if (studentAnswers.Group.Name == answerKey.Group.Name)
                         {
-                            ResultModel r = new ResultModel();
-                            r.QuestionId = question.Id;                            
+                            ResultModel r = new ResultModel
+                            {
+                                QuestionId = question.Id
+                            };
                             StudentModel model = GlobalConfig.Connection.GetStudent_ByRegNo(studentAnswers.Student.RegNo);
                             r.Student = model;
                             if (studentAnswers.AnswersList[counter].ToString() == answerKey.AnswersList.Substring(counter, 1))
                             {
-
                                 r.IsTrue = true;
                             }
                             else
@@ -165,11 +161,8 @@ namespace CMSUI.EvaluationWindows
                         model.QuestionId = question.Id;
                         GlobalConfig.Connection.CreteQuestionOutcome(model);
                     }
-
                 }
             }            
-
-
         }
 
         private void CancelExamBtn_Click(object sender, RoutedEventArgs e)

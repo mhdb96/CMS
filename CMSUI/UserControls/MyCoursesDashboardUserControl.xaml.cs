@@ -132,7 +132,6 @@ namespace CMSUI.UserControls
 
         private void MyCoursesList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
         }
 
         private void AddExamBtn_Click(object sender, RoutedEventArgs e)
