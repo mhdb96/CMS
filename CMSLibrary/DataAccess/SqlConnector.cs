@@ -14,6 +14,120 @@ namespace CMSLibrary.DataAccess
     {
         public static string databaseName = "CMS";
 
+        public void UpdateCourseOutcome(CourseOutcomeModel model)
+        {
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@Id", model.Id);
+                p.Add("@Name", model.Name);
+                p.Add("@Description", model.Description);
+                p.Add("@CourseId", model.CourseId);
+
+                connection.Execute("dbo.spCourseOutcomes_UpdateByCourseOutcomesId", p, commandType: CommandType.StoredProcedure);
+            }
+        }
+        public void UpdateCourse(CourseModel model)
+        {
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                var p = new DynamicParameters();
+
+                p.Add("@Id", model.Id);
+                p.Add("@Name", model.Name);
+                p.Add("@Code", model.Code);
+                p.Add("@EduYearId", model.EduYear.Id);
+
+                connection.Execute("dbo.spCourse_UpdateByCourseId", p, commandType: CommandType.StoredProcedure);
+
+                foreach (CourseOutcomeModel dO in model.CourseOutcomes)
+                {
+                    //dO.DepartmentId = model.Id;
+                    UpdateCourseOutcome(dO);
+                }
+            }
+        }
+
+
+        public void UpdateDepartmentOutcome(DepartmentOutcomeModel model)
+        {
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@OutcomeId", model.Id);
+                p.Add("@Name", model.Name);
+                p.Add("@Description", model.Description);
+
+                connection.Execute("dbo.spDepartmentOutcomes_UpdateByDepartmentOutcomesId", p, commandType: CommandType.StoredProcedure);
+            }
+        }
+        public void UpdateDepartment(DepartmentModel model)
+        {
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                var p = new DynamicParameters();
+
+                p.Add("@DepartmentsId", model.Id);
+                p.Add("@DepartmentName", model.Name);
+
+
+                connection.Execute("dbo.spDepartment_UpdateByDepartmentId", p, commandType: CommandType.StoredProcedure);
+
+                foreach (DepartmentOutcomeModel dO in model.Outcomes)
+                {
+                    //dO.DepartmentId = model.Id;
+                    UpdateDepartmentOutcome(dO);
+                }
+            }
+        }
+
+        public void UpdateAssignments(AssignmentModel model)
+        {
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                var p = new DynamicParameters();
+
+                p.Add("@AssignmentId", model.Id);
+                p.Add("@TeacherId", model.Teacher.Id);
+                p.Add("@CourseId", model.Course.Id);
+                p.Add("@DepartmentId", model.Department.Id);
+                p.Add("@ActiveTermId", model.ActiveTerm.Id);
+
+                connection.Execute("dbo.spAssignment_UpdateByAssignmentId", p, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public void UpdateActiveTerms(ActiveTermModel model)
+        {
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                var p = new DynamicParameters();
+
+                p.Add("@ActiveTermId", model.Id);
+                p.Add("@YearId", model.Year.Id);
+                p.Add("@TermId", model.Term.Id);
+
+                connection.Execute("dbo.spActiveTerms_UpdateByYearIdAndTermId", p, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public void UpdateTeachers (TeacherModel model)
+        {
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                var p = new DynamicParameters();
+
+                p.Add("@UserId", model.User.Id);
+                p.Add("@RegNo", model.RegNo);
+                p.Add("@FirstName", model.FirstName);
+                p.Add("@LastName", model.LastName);
+                p.Add("@UserName", model.User.UserName);
+                p.Add("@Password", model.User.Password);
+
+                connection.Execute("dbo.spTeachers_UpdateByUserId", p, commandType: CommandType.StoredProcedure);
+            }
+        }
+
         public List<CourseOutcomeModel> GetCourseOutcome_GetByExamId(int examId)
         {
             List<CourseOutcomeModel> output;

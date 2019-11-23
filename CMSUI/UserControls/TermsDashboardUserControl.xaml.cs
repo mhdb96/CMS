@@ -56,6 +56,13 @@ namespace CMSUI.UserControls
             ActiveTermModel model = new ActiveTermModel();
             model = (ActiveTermModel)btn.Tag;
             // TODO - Update the selected term
+
+            CreateActiveTermWindow win = new CreateActiveTermWindow(this, model);
+            win.ShowDialog();
+
+            Terms.Remove(model);
+            WireUpLists();
+
         }
 
         private void DeleteTermBtn_Click(object sender, RoutedEventArgs e)

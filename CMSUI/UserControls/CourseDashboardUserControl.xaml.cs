@@ -73,6 +73,14 @@ namespace CMSUI.UserControls
             CourseModel model = new CourseModel();
             model = (CourseModel)btn.Tag;
             // TODO - Update the selected department
+
+            CreateCourseWindow win = new CreateCourseWindow(this, model);
+            
+            win.ShowDialog();
+
+            Courses.Remove(model);
+            WireUpLists();
+
         }
 
         private void DeleteCourseBtn_Click(object sender, RoutedEventArgs e)

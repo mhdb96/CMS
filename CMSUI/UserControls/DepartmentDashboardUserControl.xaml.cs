@@ -69,6 +69,12 @@ namespace CMSUI.UserControls
             DepartmentModel model = new DepartmentModel();
             model = (DepartmentModel)btn.Tag;
             // TODO - Update the selected department
+
+            CreateDepartmentWindow win = new CreateDepartmentWindow(this, model);
+            win.ShowDialog();
+
+            Departments.Remove(model);
+            WireUpLists();
         }
 
         private void DepatmentsList_SelectionChanged(object sender, SelectionChangedEventArgs e)

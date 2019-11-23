@@ -11,6 +11,13 @@ namespace CMSLibrary.DataAccess
     {
         string CheckConniction();
 
+        void UpdateCourseOutcome(CourseOutcomeModel model);
+        void UpdateCourse(CourseModel model);
+        void UpdateDepartmentOutcome(DepartmentOutcomeModel model);
+        void UpdateDepartment(DepartmentModel model);
+        void UpdateAssignments(AssignmentModel model);
+        void UpdateActiveTerms(ActiveTermModel model);
+        void UpdateTeachers(TeacherModel model);
 
         List<CourseOutcomeModel> GetCourseOutcome_GetByExamId(int examId);
         List<ResultModel> GetResults_GetByQuestionId(int questionId);

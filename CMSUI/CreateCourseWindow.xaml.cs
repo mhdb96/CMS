@@ -21,15 +21,52 @@ namespace CMSUI
     /// <summary>
     /// Interaction logic for CreateCourseWindow.xaml
     /// </summary>
+    /// 
     public partial class CreateCourseWindow
     {
         ICouresRequester CallingWindow;
         List<EducationalYearModel> EduYears;
+
+        bool update;
+        CourseModel course = new CourseModel();
+        List<CourseOutcomeModel> addCourseOutcomes = new List<CourseOutcomeModel>();
+
         public CreateCourseWindow(ICouresRequester caller)
         {
             InitializeComponent();
             CallingWindow = caller;
             LoadListsData();
+        }
+        public CreateCourseWindow(ICouresRequester caller, CourseModel model)
+        {
+            InitializeComponent();
+            CallingWindow = caller;
+            LoadListsData();
+
+            update = true;
+            createCourseBtn.Content = "Update";
+
+            course = model;
+
+            nameText.Text = course.Name;
+            codeText.Text = course.Code;
+
+            /*
+            foreach (var eduYear in EduYears)
+            {
+                if (eduYear.Id == courses.EduYear.Id)
+                {
+                    eduYearCombobox.SelectedItem = eduYear;
+                }
+            }*///çalışmıyor EduYear Gelmiyor
+            
+            foreach (var outcome in course.CourseOutcomes)
+            {
+                OutcomeUserControl outcomeUserControl = new OutcomeUserControl();
+                outcomeUserControl.nameText.Text = outcome.Name;
+                outcomeUserControl.descriptionText.Text = outcome.Description;
+                outcomesList.Children.Add(outcomeUserControl);
+            }
         }
 
         private void LoadListsData()
@@ -44,26 +81,67 @@ namespace CMSUI
             OutcomeUserControl outcome = new OutcomeUserControl();
             outcome.nameText.Text = Convert.ToChar(outcomesList.Children.Count + 65).ToString();
             outcomesList.Children.Add(outcome);
+
+            if (update)
+            {
+                CourseOutcomeModel dO = new CourseOutcomeModel();
+                dO.Name = outcome.nameText.Text;
+                dO.Description = outcome.descriptionText.Text;
+                addCourseOutcomes.Add(dO);
+            }
+
         }
         
         private void CreateCourseBtn_Click(object sender, RoutedEventArgs e)
         {
             if (ValidForm())
             {
-                CourseModel model = new CourseModel();
-                model.Name = nameText.Text;
-                model.Code = codeText.Text;
-                model.EduYear = (EducationalYearModel)eduYearCombobox.SelectedItem;              
-                foreach (OutcomeUserControl outcome in outcomesList.Children)
+                if (!update)
                 {
-                    CourseOutcomeModel cO = new CourseOutcomeModel();
-                    cO.Name = outcome.nameText.Text;
-                    cO.Description = outcome.descriptionText.Text;
-                    model.CourseOutcomes.Add(cO);
+                    CourseModel model = new CourseModel();
+                    model.Name = nameText.Text;
+                    model.Code = codeText.Text;
+                    model.EduYear = (EducationalYearModel)eduYearCombobox.SelectedItem;
+                    foreach (OutcomeUserControl outcome in outcomesList.Children)
+                    {
+                        CourseOutcomeModel cO = new CourseOutcomeModel();
+                        cO.Name = outcome.nameText.Text;
+                        cO.Description = outcome.descriptionText.Text;
+                        model.CourseOutcomes.Add(cO);
+                    }
+                    GlobalConfig.Connection.CreateCourse(model);
+                    CallingWindow.CourseComplete(model);
+
                 }
-                GlobalConfig.Connection.CreateCourse(model);
-                CallingWindow.CourseComplete(model);
+                else
+                {
+                    course.Name = nameText.Text;
+                    course.Code = codeText.Text;
+                    course.EduYear = (EducationalYearModel)eduYearCombobox.SelectedItem;
+
+                    foreach (CourseOutcomeModel addCourseOutcome in addCourseOutcomes)
+                    {
+                        course.CourseOutcomes.Add(addCourseOutcome);
+                    }
+
+                    int i = 0;
+                    foreach (OutcomeUserControl outcome in outcomesList.Children)
+                    {
+                        course.CourseOutcomes[i].Name = outcome.nameText.Text;
+                        course.CourseOutcomes[i].Description = outcome.descriptionText.Text;
+                        i++;
+                    }
+                    foreach (CourseOutcomeModel addCourseOutcome in addCourseOutcomes)
+                    {
+                        addCourseOutcome.CourseId = course.Id;
+                        GlobalConfig.Connection.CreateCourseOutcome(addCourseOutcome);
+                    }
+                    GlobalConfig.Connection.UpdateCourse(course);
+                    CallingWindow.CourseComplete(course);
+
+                }
                 this.Close();
+
             }
         }
 

@@ -52,8 +52,14 @@ namespace CMSUI.UserControls
 
         private void UpdateAssignmentBtn_Click(object sender, RoutedEventArgs e)
         {
-            //    // TODO - Update the selected Assignment
+            // TODO - Update the selected Assignment
             AssignmentModel model = (AssignmentModel)assignmentsGrid.SelectedItem;
+
+            CreateAssignmentWindow win = new CreateAssignmentWindow(this, model);
+            win.ShowDialog();
+            
+            Assignments.Remove(model);
+            WireUpLists(Assignments);
         }
 
         private void AddAssignmentBtn_Click(object sender, RoutedEventArgs e)

@@ -84,6 +84,13 @@ namespace CMSUI.UserControls
         {
             // TODO - Update the selected Teacher
             TeacherModel model = (TeacherModel)teachersGrid.SelectedItem;
+
+            CreateTeacherWindow win = new CreateTeacherWindow(this,model);
+            win.ShowDialog();
+
+            Teachers.Remove(model);
+            WireUpLists();
+
         }
     }
 }

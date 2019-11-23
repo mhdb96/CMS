@@ -24,11 +24,11 @@ namespace CMSUI
         //public string test = "10";
         IAdminPanelRequester CallingWindow;
         AdminModel Admin;
-        public AdminPanelWindow(IAdminPanelRequester caller)
+        public AdminPanelWindow(/*IAdminPanelRequester caller*/)
         {
             InitializeComponent();
-            CallingWindow = caller;
-            Admin = CallingWindow.GetAdminInfo();
+            //CallingWindow = caller;
+            //Admin = CallingWindow.GetAdminInfo();
             
         }
     }

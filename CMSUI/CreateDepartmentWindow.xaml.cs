@@ -24,30 +24,86 @@ namespace CMSUI
     public partial class CreateDepartmentWindow
     {
         IDepartmentRequester callingWindow;
+
+        bool update;
+        DepartmentModel department = new DepartmentModel();
+        List<DepartmentOutcomeModel> addDepartmentOutcomes = new List<DepartmentOutcomeModel>();
+
         public CreateDepartmentWindow(IDepartmentRequester caller)
         {
             InitializeComponent();
             callingWindow = caller;
         }
 
+        public CreateDepartmentWindow(IDepartmentRequester caller, DepartmentModel model)
+        {
+            InitializeComponent();
+            callingWindow = caller;
+
+            update = true;
+            createDepartmentBtn.Content = "Update";
+
+            department = model;
+
+            nameText.Text = department.Name;
+            foreach (var outcome in department.Outcomes)
+            {
+                OutcomeUserControl outcomeUserControl = new OutcomeUserControl();
+                outcomeUserControl.nameText.Text = outcome.Name;
+                outcomeUserControl.descriptionText.Text = outcome.Description;
+                outcomesList.Children.Add(outcomeUserControl);
+            }
+
+        }
+
         private void CreateDepartmentBtn_Click(object sender, RoutedEventArgs e)
         {
             if(ValidForm())
             {
-                DepartmentModel model = new DepartmentModel();
-                model.Name = nameText.Text;
-                foreach (OutcomeUserControl outcome in outcomesList.Children)
+                if (!update)
                 {
-                    DepartmentOutcomeModel dO = new DepartmentOutcomeModel();
-                    dO.Name = outcome.nameText.Text;
-                    dO.Description = outcome.descriptionText.Text;
-                    model.Outcomes.Add(dO);
+                    DepartmentModel model = new DepartmentModel();
+                    model.Name = nameText.Text;
+                    foreach (OutcomeUserControl outcome in outcomesList.Children)
+                    {
+                        DepartmentOutcomeModel dO = new DepartmentOutcomeModel();
+                        dO.Name = outcome.nameText.Text;
+                        dO.Description = outcome.descriptionText.Text;
+                        model.Outcomes.Add(dO);
+                    }
+                    GlobalConfig.Connection.CreateDepartment(model);
+                    callingWindow.DepartmentComplete(model);
+
                 }
-                GlobalConfig.Connection.CreateDepartment(model);
-                callingWindow.DepartmentComplete(model);
+                else
+                {
+                    department.Name = nameText.Text;
+
+                    foreach (DepartmentOutcomeModel addDepartmentOutcome in addDepartmentOutcomes)
+                    {
+                        department.Outcomes.Add(addDepartmentOutcome);
+                    }
+
+                    int i = 0;
+                    foreach (OutcomeUserControl outcome in outcomesList.Children)
+                    {
+                        department.Outcomes[i].Name = outcome.nameText.Text;
+                        department.Outcomes[i].Description = outcome.descriptionText.Text;
+                        i++;
+                    }
+                    foreach (DepartmentOutcomeModel addDepartmentOutcome in addDepartmentOutcomes)
+                    {
+                        addDepartmentOutcome.DepartmentId = department.Id;
+                        GlobalConfig.Connection.CreateDepartmentOutcome(addDepartmentOutcome);
+                    }
+                    GlobalConfig.Connection.UpdateDepartment(department);
+                    callingWindow.DepartmentComplete(department);
+
+                }
                 this.Close();
+
             }
-            
+
 
         }
 
@@ -104,13 +160,24 @@ namespace CMSUI
             this.Close();
         }
 
+
         private void AddOutcome_Click(object sender, RoutedEventArgs e)
         {
             // TODO - fix the placement system for the letters
             OutcomeUserControl outcome = new OutcomeUserControl();
             // TODO - fix the ascii code
+            
             outcome.nameText.Text = Convert.ToChar(outcomesList.Children.Count + 65).ToString();
             outcomesList.Children.Add(outcome);
+
+            if (update)
+            {
+                DepartmentOutcomeModel dO = new DepartmentOutcomeModel();
+                dO.Name = outcome.nameText.Text;
+                dO.Description = outcome.descriptionText.Text;
+                addDepartmentOutcomes.Add(dO);
+            }
+
         }
 
         private void NameText_TextChanged(object sender, TextChangedEventArgs e)

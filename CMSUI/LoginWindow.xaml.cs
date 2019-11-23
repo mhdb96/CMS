@@ -67,8 +67,8 @@ namespace CMSUI
                 MessageBox.Show("success");
                 if (User.Role.Name == "Admin")
                 {
-                    AdminPanelWindow win = new AdminPanelWindow(this);
-                    win.Show();
+                    //AdminPanelWindow win = new AdminPanelWindow(this);
+                    //win.Show();
                     this.Close();
                 } else
                 {
