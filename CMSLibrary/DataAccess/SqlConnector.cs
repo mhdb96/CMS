@@ -14,6 +14,16 @@ namespace CMSLibrary.DataAccess
     {
         public static string databaseName = "CMS";
 
+        public void DepartmentOutcome_Delete(int id)
+        {
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@DepartmentOutcomeId", id);
+                connection.Execute("dbo.spDepartmentOutcomes_Delete", p, commandType: CommandType.StoredProcedure);
+            }
+        }
+
         public void CourseOutcome_Delete(int id)
         {
             using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
@@ -104,11 +114,11 @@ namespace CMSLibrary.DataAccess
 
                 connection.Execute("dbo.spDepartment_UpdateByDepartmentId", p, commandType: CommandType.StoredProcedure);
 
-                foreach (DepartmentOutcomeModel dO in model.Outcomes)
-                {
-                    //dO.DepartmentId = model.Id;
-                    UpdateDepartmentOutcome(dO);
-                }
+                //foreach (DepartmentOutcomeModel dO in model.Outcomes)
+                //{
+                //    //dO.DepartmentId = model.Id;
+                //    UpdateDepartmentOutcome(dO);
+                //}
             }
         }
 

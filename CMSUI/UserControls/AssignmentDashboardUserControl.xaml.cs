@@ -58,7 +58,6 @@ namespace CMSUI.UserControls
             CreateAssignmentWindow win = new CreateAssignmentWindow(this, model);
             win.ShowDialog();
             
-            Assignments.Remove(model);
             WireUpLists(Assignments);
         }
 
@@ -149,6 +148,7 @@ namespace CMSUI.UserControls
 
         public void AssignmentComplete(AssignmentModel model)
         {
+            Assignments.Remove(model);
             Assignments.Add(model);
             WireUpLists(Assignments);
             assignmentsGrid.SelectedIndex = assignmentsGrid.Items.Count - 1;

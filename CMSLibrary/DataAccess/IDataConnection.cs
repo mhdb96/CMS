@@ -11,6 +11,7 @@ namespace CMSLibrary.DataAccess
     {
         string CheckConniction();
 
+        void DepartmentOutcome_Delete(int id);
         void CourseOutcome_Delete(int id);
         bool CourseOutcome_IsDeletable(int id);
         void UpdateCourseOutcome(CourseOutcomeModel model);

@@ -60,7 +60,6 @@ namespace CMSUI.UserControls
             CreateActiveTermWindow win = new CreateActiveTermWindow(this, model);
             win.ShowDialog();
 
-            Terms.Remove(model);
             WireUpLists();
 
         }
@@ -86,6 +85,7 @@ namespace CMSUI.UserControls
 
         public void ActiveTermComplete(ActiveTermModel model)
         {
+            Terms.Remove(model);
             Terms.Add(model);
             WireUpLists();
             termsList.SelectedIndex = termsList.Items.Count - 1;

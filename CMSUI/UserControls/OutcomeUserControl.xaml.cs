@@ -48,7 +48,7 @@ namespace CMSUI.UserControls
                     }
                     else if (td.Type == OutcomeType.DepartmentOutcome)
                     {
-                        //GlobalConfig.Connection.CourseOutcome_Delete(td.Id);
+                        GlobalConfig.Connection.DepartmentOutcome_Delete(td.Id);
                     }
                     
                 }
