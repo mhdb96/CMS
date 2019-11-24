@@ -29,7 +29,7 @@ namespace CMSUI
 
         bool update;
         CourseModel course = new CourseModel();
-        List<CourseOutcomeModel> addCourseOutcomes = new List<CourseOutcomeModel>();
+        List<CourseOutcomeModel> newCourseOutcomes = new List<CourseOutcomeModel>();
 
         public CreateCourseWindow(ICouresRequester caller)
         {
@@ -51,20 +51,26 @@ namespace CMSUI
             nameText.Text = course.Name;
             codeText.Text = course.Code;
 
-            /*
             foreach (var eduYear in EduYears)
             {
-                if (eduYear.Id == courses.EduYear.Id)
+                if (eduYear.Id == course.EduYear.Id)
                 {
                     eduYearCombobox.SelectedItem = eduYear;
                 }
-            }*///çalışmıyor EduYear Gelmiyor
+            }
             
             foreach (var outcome in course.CourseOutcomes)
             {
                 OutcomeUserControl outcomeUserControl = new OutcomeUserControl();
+
                 outcomeUserControl.nameText.Text = outcome.Name;
                 outcomeUserControl.descriptionText.Text = outcome.Description;
+                TagData td = new TagData();
+                td.IsNew = false;
+                td.IsDeletable = GlobalConfig.Connection.CourseOutcome_IsDeletable(outcome.Id);
+                td.Id = outcome.Id;
+                td.Type = OutcomeType.CourseOutcome;
+                outcomeUserControl.Tag = td;
                 outcomesList.Children.Add(outcomeUserControl);
             }
         }
@@ -80,16 +86,13 @@ namespace CMSUI
             // TODO - fix the placement system for the letters
             OutcomeUserControl outcome = new OutcomeUserControl();
             outcome.nameText.Text = Convert.ToChar(outcomesList.Children.Count + 65).ToString();
+            TagData td = new TagData();
+            td.Id = -1;
+            td.IsDeletable = true;
+            td.IsNew = true;
+            td.Type = OutcomeType.CourseOutcome;
+            outcome.Tag = td;
             outcomesList.Children.Add(outcome);
-
-            if (update)
-            {
-                CourseOutcomeModel dO = new CourseOutcomeModel();
-                dO.Name = outcome.nameText.Text;
-                dO.Description = outcome.descriptionText.Text;
-                addCourseOutcomes.Add(dO);
-            }
-
         }
         
         private void CreateCourseBtn_Click(object sender, RoutedEventArgs e)
@@ -117,27 +120,26 @@ namespace CMSUI
                 {
                     course.Name = nameText.Text;
                     course.Code = codeText.Text;
-                    course.EduYear = (EducationalYearModel)eduYearCombobox.SelectedItem;
-
-                    foreach (CourseOutcomeModel addCourseOutcome in addCourseOutcomes)
-                    {
-                        course.CourseOutcomes.Add(addCourseOutcome);
-                    }
-
-                    int i = 0;
+                    course.EduYear = (EducationalYearModel)eduYearCombobox.SelectedItem;                    
                     foreach (OutcomeUserControl outcome in outcomesList.Children)
                     {
-                        course.CourseOutcomes[i].Name = outcome.nameText.Text;
-                        course.CourseOutcomes[i].Description = outcome.descriptionText.Text;
-                        i++;
-                    }
-                    foreach (CourseOutcomeModel addCourseOutcome in addCourseOutcomes)
-                    {
-                        addCourseOutcome.CourseId = course.Id;
-                        GlobalConfig.Connection.CreateCourseOutcome(addCourseOutcome);
-                    }
+                        CourseOutcomeModel cO = new CourseOutcomeModel();
+                        cO.Name = outcome.nameText.Text;
+                        cO.Description = outcome.descriptionText.Text;
+                        cO.CourseId = course.Id;
+                        TagData td = (TagData)outcome.Tag;
+                        if(td.IsNew == true)
+                        {
+                            
+                            GlobalConfig.Connection.CreateCourseOutcome(cO);
+                        }
+                        else
+                        {
+                            GlobalConfig.Connection.UpdateCourseOutcome(cO);
+                        }
+                    }                    
                     GlobalConfig.Connection.UpdateCourse(course);
-                    CallingWindow.CourseComplete(course);
+                    CallingWindow.CourseUpdateComplete(course);
 
                 }
                 this.Close();
@@ -238,4 +240,5 @@ namespace CMSUI
             }
         }
     }
+
 }

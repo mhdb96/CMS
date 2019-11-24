@@ -14,6 +14,37 @@ namespace CMSLibrary.DataAccess
     {
         public static string databaseName = "CMS";
 
+        public void CourseOutcome_Delete(int id)
+        {
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@CourseOutcomeId", id);
+                connection.Execute("dbo.CourseOutcomes_Delete", p, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public bool CourseOutcome_IsDeletable (int id)
+        {
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                List<CourseOutcomeModel> courseOutcomes = new List<CourseOutcomeModel>();
+                var p = new DynamicParameters();
+                p.Add("@CourseOutcomeId", id);
+                courseOutcomes = connection.Query<CourseOutcomeModel>("dbo.spCourseOutcomes_HasQuestionOutcomesByCourseOutcomeId", p, commandType: CommandType.StoredProcedure).ToList();
+
+                if (courseOutcomes.Any())
+                {
+                    return false;
+                }
+                else
+                {                    
+                    return true;
+                }
+
+            }
+        }
+
         public void UpdateCourseOutcome(CourseOutcomeModel model)
         {
             using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
@@ -40,11 +71,11 @@ namespace CMSLibrary.DataAccess
 
                 connection.Execute("dbo.spCourse_UpdateByCourseId", p, commandType: CommandType.StoredProcedure);
 
-                foreach (CourseOutcomeModel dO in model.CourseOutcomes)
-                {
-                    //dO.DepartmentId = model.Id;
-                    UpdateCourseOutcome(dO);
-                }
+                //foreach (CourseOutcomeModel dO in model.CourseOutcomes)
+                //{
+                //    //dO.DepartmentId = model.Id;
+                //    UpdateCourseOutcome(dO);
+                //}
             }
         }
 
@@ -604,7 +635,12 @@ namespace CMSLibrary.DataAccess
             List<CourseModel> output;
             using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
             {
-                output = connection.Query<CourseModel>("dbo.spCourses_GetAll").ToList();
+                output = connection.Query<CourseModel, EducationalYearModel, CourseModel>("dbo.spCourses_GetAll", 
+                    (course, eduYear) =>
+                    {
+                        course.EduYear = eduYear;
+                        return course;
+                    }, commandType: CommandType.StoredProcedure).ToList();
             }
             return output;
         }

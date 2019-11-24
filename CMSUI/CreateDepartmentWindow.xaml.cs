@@ -97,7 +97,7 @@ namespace CMSUI
                         GlobalConfig.Connection.CreateDepartmentOutcome(addDepartmentOutcome);
                     }
                     GlobalConfig.Connection.UpdateDepartment(department);
-                    callingWindow.DepartmentComplete(department);
+                    callingWindow.DepartmentUpdateComplete(department);
 
                 }
                 this.Close();

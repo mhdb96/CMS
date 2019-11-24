@@ -56,7 +56,15 @@ namespace CMSUI.UserControls
             WireUpLists();
             coursesList.SelectedIndex = coursesList.Items.Count - 1;
         }
-        
+
+        public void CourseUpdateComplete(CourseModel model)
+        {
+            Courses.Remove(model);
+            Courses.Add(model);
+            WireUpLists();
+            coursesList.SelectedIndex = coursesList.Items.Count - 1;
+        }
+
         private void CoursesList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (coursesList.ItemsSource != null)
@@ -78,7 +86,6 @@ namespace CMSUI.UserControls
             
             win.ShowDialog();
 
-            Courses.Remove(model);
             WireUpLists();
 
         }
