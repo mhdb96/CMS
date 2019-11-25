@@ -48,17 +48,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AuthenticationState.cs" />
+    <Compile Include="Enums\AuthenticationState.cs" />
+    <Compile Include="Enums\OutcomeType.cs" />
     <Compile Include="Login.cs" />
     <Compile Include="DataAccess\SqlConnector.cs" />
-    <Compile Include="Evaluate.cs" />
-    <Compile Include="Excel.cs" />
+    <Compile Include="Evaluation\Evaluate.cs" />
+    <Compile Include="Evaluation\Excel.cs" />
     <Compile Include="GlobalConfig.cs" />
     <Compile Include="DataAccess\IDataConnection.cs" />
     <Compile Include="Models\AnswerKeyModel.cs" />
     <Compile Include="Models\QuestionOutcomeModel.cs" />
-    <Compile Include="ObservableObject.cs" />
-    <Compile Include="StudentAnswersModel.cs" />
+    <Compile Include="Models\TagData.cs" />
+    <Compile Include="Evaluation\ObservableObject.cs" />
+    <Compile Include="Models\StudentAnswersModel.cs" />
     <Compile Include="Models\ActiveTermModel.cs" />
     <Compile Include="Models\AdminModel.cs" />
     <Compile Include="Models\AssignmentModel.cs" />
@@ -82,8 +84,8 @@
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\YearModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StudentDataModel.cs" />
-    <Compile Include="WriteToExcel.cs" />
+    <Compile Include="Evaluation\StudentDataModel.cs" />
+    <Compile Include="Evaluation\WriteToExcel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

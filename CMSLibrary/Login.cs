@@ -1,4 +1,5 @@
-﻿using CMSLibrary.Models;
+﻿using CMSLibrary.Enums;
+using CMSLibrary.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -12,6 +12,10 @@ namespace CMSLibrary.DataAccess
         string CheckConniction();
 
         //TODO - control the names
+
+        string CreateStudent(StudentModel model);
+
+
         void DepartmentOutcome_Delete(int id);
         void CourseOutcome_Delete(int id);
         bool CourseOutcome_IsDeletable(int id);

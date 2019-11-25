@@ -7,7 +7,7 @@
              xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:local="clr-namespace:CMSUI.UserControls"
-             xmlns:external="clr-namespace:CMSLibrary;assembly=CMSLibrary"
+             xmlns:external="clr-namespace:CMSLibrary.Evaluation;assembly=CMSLibrary"
              mc:Ignorable="d" >
     <UserControl.DataContext>
         <external:StudentDataModel/>

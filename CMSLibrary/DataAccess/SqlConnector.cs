@@ -931,5 +931,29 @@ namespace CMSLibrary.DataAccess
                 connection.Execute("dbo.spExams_Update", p, commandType: CommandType.StoredProcedure);
             }
         }
+
+        public string CreateStudent(StudentModel model)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@RegNo", model.RegNo);
+                p.Add("@FirstName", model.FirstName);
+                p.Add("@LastName", model.LastName);
+                p.Add("@DepartmentId", model.Department.Id);
+                p.Add("@EduYearId", model.EduYear.Id);
+                p.Add("@id", 0, dbType: DbType.Int32, direction: ParameterDirection.Output);
+                try
+                {
+                    connection.Execute("dbo.spStudents_Insert", p, commandType: CommandType.StoredProcedure);
+                    model.Id = p.Get<int>("@id");
+                }
+                catch (Exception)
+                {
+                    return $"{model.FullName} Could not be add to the database due to duplication in RegNo {model.RegNo}{System.Environment.NewLine}";
+                }
+                return null;
+            }
+        }
     }
 }

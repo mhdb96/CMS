@@ -69,29 +69,29 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AdminPanelWindow.xaml.cs">
+    <Compile Include="Panels\AdminPanelWindow.xaml.cs">
       <DependentUpon>AdminPanelWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\GridWidthToTabWidthConverter.cs" />
+    <Compile Include="Converters\GridWidthToTabWidthConverterTeacher.cs" />
+    <Compile Include="Converters\HeaderToIconConverter.cs" />
     <Compile Include="Converters\VisibilityValueConverter.cs" />
-    <Compile Include="CreateAssignmentWindow.xaml.cs">
+    <Compile Include="CreateForms\CreateAssignmentWindow.xaml.cs">
       <DependentUpon>CreateAssignmentWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CreateCourseWindow.xaml.cs">
+    <Compile Include="CreateForms\CreateCourseWindow.xaml.cs">
       <DependentUpon>CreateCourseWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="EvaluationWindows\CreateExamWindow.xaml.cs">
       <DependentUpon>CreateExamWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FixStudentsDataWindow.xaml.cs">
+    <Compile Include="EvaluationWindows\FixStudentsDataWindow.xaml.cs">
       <DependentUpon>FixStudentsDataWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GridWidthToTabWidthConverter.cs" />
-    <Compile Include="GridWidthToTabWidthConverterTeacher.cs" />
-    <Compile Include="HeaderToIconConverter.cs" />
-    <Compile Include="InsertStudentsFromTxtFiles.xaml.cs">
+    <Compile Include="EvaluationWindows\InsertStudentsFromTxtFiles.xaml.cs">
       <DependentUpon>InsertStudentsFromTxtFiles.xaml</DependentUpon>
     </Compile>
-    <Compile Include="LoginWindow.xaml.cs">
+    <Compile Include="LoginWindows\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Requesters\IActiveTermRequester.cs" />
@@ -103,8 +103,7 @@
     <Compile Include="Requesters\IFixStudentsDataWindowRequester.cs" />
     <Compile Include="Requesters\ITeacherPanelRequester.cs" />
     <Compile Include="Requesters\ITeacherRequester.cs" />
-    <Compile Include="TagData.cs" />
-    <Compile Include="TeacherPanelWindow.xaml.cs">
+    <Compile Include="Panels\TeacherPanelWindow.xaml.cs">
       <DependentUpon>TeacherPanelWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\AnswersOutcomesUserControl.xaml.cs">
@@ -137,27 +136,27 @@
     <Compile Include="UserControls\TermsDashboardUserControl.xaml.cs">
       <DependentUpon>TermsDashboardUserControl.xaml</DependentUpon>
     </Compile>
-    <Page Include="AdminPanelWindow.xaml">
+    <Page Include="Panels\AdminPanelWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CreateActiveTermWindow.xaml">
+    <Page Include="CreateForms\CreateActiveTermWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CreateAssignmentWindow.xaml">
+    <Page Include="CreateForms\CreateAssignmentWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CreateCourseWindow.xaml">
+    <Page Include="CreateForms\CreateCourseWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CreateDepartmentWindow.xaml">
+    <Page Include="CreateForms\CreateDepartmentWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CreateTeacherWindow.xaml">
+    <Page Include="CreateForms\CreateTeacherWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -165,32 +164,32 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CreateActiveTermWindow.xaml.cs">
+    <Compile Include="CreateForms\CreateActiveTermWindow.xaml.cs">
       <DependentUpon>CreateActiveTermWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CreateDepartmentWindow.xaml.cs">
+    <Compile Include="CreateForms\CreateDepartmentWindow.xaml.cs">
       <DependentUpon>CreateDepartmentWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CreateTeacherWindow.xaml.cs">
+    <Compile Include="CreateForms\CreateTeacherWindow.xaml.cs">
       <DependentUpon>CreateTeacherWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="EvaluationWindows\CreateExamWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="FixStudentsDataWindow.xaml">
+    <Page Include="EvaluationWindows\FixStudentsDataWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="InsertStudentsFromTxtFiles.xaml">
+    <Page Include="EvaluationWindows\InsertStudentsFromTxtFiles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="LoginWindow.xaml">
+    <Page Include="LoginWindows\LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TeacherPanelWindow.xaml">
+    <Page Include="Panels\TeacherPanelWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
