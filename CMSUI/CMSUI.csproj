@@ -72,6 +72,7 @@
     <Compile Include="AdminPanelWindow.xaml.cs">
       <DependentUpon>AdminPanelWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\VisibilityValueConverter.cs" />
     <Compile Include="CreateAssignmentWindow.xaml.cs">
       <DependentUpon>CreateAssignmentWindow.xaml</DependentUpon>
     </Compile>
@@ -81,9 +82,15 @@
     <Compile Include="EvaluationWindows\CreateExamWindow.xaml.cs">
       <DependentUpon>CreateExamWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FixStudentsDataWindow.xaml.cs">
+      <DependentUpon>FixStudentsDataWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GridWidthToTabWidthConverter.cs" />
     <Compile Include="GridWidthToTabWidthConverterTeacher.cs" />
     <Compile Include="HeaderToIconConverter.cs" />
+    <Compile Include="InsertStudentsFromTxtFiles.xaml.cs">
+      <DependentUpon>InsertStudentsFromTxtFiles.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
@@ -93,6 +100,7 @@
     <Compile Include="Requesters\ICouresRequester.cs" />
     <Compile Include="Requesters\IDepartmentRequester.cs" />
     <Compile Include="Requesters\IExamRequester.cs" />
+    <Compile Include="Requesters\IFixStudentsDataWindowRequester.cs" />
     <Compile Include="Requesters\ITeacherPanelRequester.cs" />
     <Compile Include="Requesters\ITeacherRequester.cs" />
     <Compile Include="TeacherPanelWindow.xaml.cs">
@@ -115,6 +123,9 @@
     </Compile>
     <Compile Include="UserControls\OutcomeUserControl.xaml.cs">
       <DependentUpon>OutcomeUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\StudentDataUserControl.xaml.cs">
+      <DependentUpon>StudentDataUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\StudentsAnswersListUserControl.xaml.cs">
       <DependentUpon>StudentsAnswersListUserControl.xaml</DependentUpon>
@@ -166,6 +177,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="FixStudentsDataWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InsertStudentsFromTxtFiles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -195,6 +214,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\OutcomeUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\StudentDataUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

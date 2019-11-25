@@ -39,7 +39,7 @@ namespace CMSUI.UserControls
         {
             studentsAnswersGrid.ItemsSource = MyEvaluator.StudentsAnswers;            
         }
-        public void refresh()
+        public void Refresh()
         {            
             studentsAnswersGrid.ItemsSource = null;
             studentsAnswersGrid.Items.Clear();

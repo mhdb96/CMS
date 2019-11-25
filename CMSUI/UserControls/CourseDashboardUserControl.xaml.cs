@@ -60,7 +60,7 @@ namespace CMSUI.UserControls
         private void CoursesList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (coursesList.ItemsSource != null)
-         {
+            {
                 CourseModel model = (CourseModel)coursesList.SelectedItem;
                 GlobalConfig.Connection.GetCourseOutcomes_ById(model);
                 coursesList.SelectedItem = model;

@@ -11,6 +11,8 @@ namespace CMSLibrary
     public class Evaluate
     {
         public List<StudentAnswersModel> StudentsAnswers = new List<StudentAnswersModel>();
+        public List<StudentAnswersModel> StudentsAnswersWithErrors = new List<StudentAnswersModel>();
+
         public List<AnswerKeyModel> AnswerKeys = new List<AnswerKeyModel>();
         string StudentListPath;
         string AnswersKeyPath;
@@ -31,26 +33,73 @@ namespace CMSLibrary
             return AnswerKeys;
         }
 
+        public void FixingErrors()
+        {
+            List<StudentAnswersModel> err = new List<StudentAnswersModel>();
+            foreach(StudentAnswersModel ans in StudentsAnswersWithErrors)
+            {
+                StudentModel model = GlobalConfig.Connection.GetStudent_ByRegNo(ans.Student.RegNo);
+                if (model == null)
+                {
+                    err.Add(ans);
+                }
+                else
+                {
+                    ans.Student = model;
+                    StudentsAnswers.Add(ans);
+                }
+            }
+            StudentsAnswersWithErrors = err;
+        }
+
         public List<StudentAnswersModel> GetStudentsAnswers(string studentListPath)
         {
+            StudentsAnswersWithErrors.Clear();
             StudentListPath = studentListPath;
             results = File.ReadAllLines(StudentListPath, Encoding.GetEncoding("iso-8859-9"));
             foreach (string listString in results)
             {
                 StudentAnswersModel studentAnswers = new StudentAnswersModel();
-                studentAnswers.Student.FirstName = listString.Substring(0, 12);
-                studentAnswers.Student.LastName = listString.Substring(12, 12);
-                studentAnswers.Student.RegNo = Int32.Parse(listString.Substring(24, 9));
-                studentAnswers.Group.Name = listString.Substring(33, 1);
-                foreach (AnswerKeyModel answerKey in AnswerKeys)
+
+                StudentModel model = GlobalConfig.Connection.GetStudent_ByRegNo(Int32.Parse(listString.Substring(24, 9)));
+                if(model == null)
                 {
-                    if (answerKey.Group.Name == studentAnswers.Group.Name)
+                    studentAnswers.Student.FirstName = listString.Substring(0, 12);
+                    studentAnswers.Student.LastName = listString.Substring(12, 12);
+                    studentAnswers.Student.RegNo = Int32.Parse(listString.Substring(24, 9));
+                    studentAnswers.Group.Name = listString.Substring(33, 1);
+                    foreach (AnswerKeyModel answerKey in AnswerKeys)
                     {
-                        studentAnswers.AnswersList = listString.Substring(34, answerKey.QuestionCount);
-                        break;
+                        if (answerKey.Group.Name == studentAnswers.Group.Name)
+                        {
+                            studentAnswers.AnswersList = listString.Substring(34, answerKey.QuestionCount);
+                            break;
+                        }
                     }
+                    StudentsAnswersWithErrors.Add(studentAnswers);
                 }
-                StudentsAnswers.Add(studentAnswers);
+                else
+                {
+                    studentAnswers.Student = model;
+                    //studentAnswers.Student.FirstName = listString.Substring(0, 12);
+                    //studentAnswers.Student.LastName = listString.Substring(12, 12);
+                    //studentAnswers.Student.RegNo = Int32.Parse(listString.Substring(24, 9));
+                    studentAnswers.Group.Name = listString.Substring(33, 1);
+                    foreach (AnswerKeyModel answerKey in AnswerKeys)
+                    {
+                        if (answerKey.Group.Name == studentAnswers.Group.Name)
+                        {
+                            studentAnswers.AnswersList = listString.Substring(34, answerKey.QuestionCount);
+                            break;
+                        }
+                    }
+                    StudentsAnswers.Add(studentAnswers);
+                }
+                
+            }
+            if(StudentsAnswersWithErrors.Count > 0)
+            {
+                return null;
             }
             return StudentsAnswers;
         }

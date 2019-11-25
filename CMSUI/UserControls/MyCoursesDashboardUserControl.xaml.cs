@@ -25,6 +25,7 @@ namespace CMSUI.UserControls
     public partial class MyCoursesDashboardUserControl : UserControl, IExamRequester
     {
         List<AssignmentModel> MyAssignments;
+        List<ExamModel> MyExams;
         List<AssignmentModel> FilteredAssignments;
         AssignmentModel SelectedAssignment;
         List<ActiveTermModel> MyTerms = new List<ActiveTermModel>();
@@ -69,6 +70,12 @@ namespace CMSUI.UserControls
             myCoursesList.ItemsSource = null;
             myCoursesList.Items.Clear();
             myCoursesList.ItemsSource = model;
+        }
+        private void WireUpLists(List<ExamModel> model)
+        {
+            examsGrid.ItemsSource = null;
+            examsGrid.Items.Clear();
+            examsGrid.ItemsSource = model;
         }
 
         private void FilterCourses()
@@ -132,6 +139,20 @@ namespace CMSUI.UserControls
 
         private void MyCoursesList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (myCoursesList.ItemsSource != null && myCoursesList.SelectedItem != null)
+            {
+                AssignmentModel model = (AssignmentModel)myCoursesList.SelectedItem;
+
+                MyExams = GlobalConfig.Connection.GetExam_ByAssignmentId(model.Id);
+                foreach (ExamModel exam in MyExams)
+                {
+                    exam.Assignment = model;
+                }
+                examsGrid.ItemsSource = MyExams;
+            } else
+            {
+                examsGrid.ItemsSource = null;
+            }
         }
 
         private void AddExamBtn_Click(object sender, RoutedEventArgs e)
@@ -156,6 +177,37 @@ namespace CMSUI.UserControls
         public AssignmentModel GetAssignment()
         {
             return SelectedAssignment;
+        }
+
+        private void UpdateExamBtn_Click(object sender, RoutedEventArgs e)
+        {
+            // TODO - Update the selected Teacher
+            ExamModel model = (ExamModel)examsGrid.SelectedItem;
+        }
+
+        private void DeleteExamBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ExamModel model = (ExamModel)examsGrid.SelectedItem;
+            GlobalConfig.Connection.DeleteExam_ById(model.Id);
+            MyExams.Remove(model);
+            WireUpLists(MyExams);
+            
+        }
+
+        private void CreateExcelFileBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ExamModel model = (ExamModel)examsGrid.SelectedItem;
+            WriteToExcel w = new WriteToExcel(model);
+            GlobalConfig.Connection.UpdateExam_ById(model);
+            int t = myCoursesList.SelectedIndex;
+            myCoursesList.SelectedItem = null;
+            myCoursesList.SelectedIndex = t;
+        }
+
+        private void FileLink_Click(object sender, RoutedEventArgs e)
+        {
+            ExamModel model = (ExamModel)examsGrid.SelectedItem;
+            System.Diagnostics.Process.Start(model.FilePath);
         }
     }
 }

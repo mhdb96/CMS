@@ -11,7 +11,7 @@ namespace CMSLibrary.DataAccess
     {
         string CheckConniction();
 
-
+        //TODO - control the names
         List<CourseOutcomeModel> GetCourseOutcome_GetByExamId(int examId);
         List<ResultModel> GetResults_GetByQuestionId(int questionId);
         List<QuestionModel> GetQuestion_GetByCourseOutcomesIdAndExamGroupsId(int examGroupId, int courseOutcomeId);
@@ -24,6 +24,10 @@ namespace CMSLibrary.DataAccess
         List<QuestionModel> GetQuestion_ALL();
         List<StudentModel> GetStudent_ALL();
         List<StudentMarksModel> GetStudentMark_ALL();
+
+        List<ExamModel> GetExam_ByAssignmentId(int assignmetId);
+        void DeleteExam_ById(int id);
+        void UpdateExam_ById(ExamModel model);
 
 
 

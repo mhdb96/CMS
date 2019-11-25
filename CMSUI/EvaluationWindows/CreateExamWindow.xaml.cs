@@ -23,7 +23,7 @@ namespace CMSUI.EvaluationWindows
     /// <summary>
     /// Interaction logic for CreateExamWindow.xaml
     /// </summary>
-    public partial class CreateExamWindow
+    public partial class CreateExamWindow: IFixStudentsDataWindowRequester
     {
         public static readonly DependencyProperty ExamProperty =
         DependencyProperty.Register("Exam", typeof(ExamModel), typeof(CreateExamWindow), new FrameworkPropertyMetadata(null));        
@@ -107,16 +107,35 @@ namespace CMSUI.EvaluationWindows
             }
             Evaluator.StudentsAnswers.Clear();
             Evaluator.GetStudentsAnswers(studentsAnswersListPath);
-            studentAnswersListUserControl.refresh();
+            if (Evaluator.StudentsAnswersWithErrors.Count > 0)
+            {
+                FixData();
+            }
+            else
+            {
+                ShowData();
+            }
+            
+        }
+
+        void ShowData()
+        {
+            
+            studentAnswersListUserControl.Refresh();
             List<GroupModel> Groups = GlobalConfig.Connection.GetGroup_All();
             foreach (StudentAnswersModel model in Evaluator.StudentsAnswers)
             {
                 model.Group = Groups.Find(g => g.Name == model.Group.Name);
-            }            
+            }
             studentsAnswersExpander.IsEnabled = true;
             studentsAnswersExpander.IsExpanded = true;
         }
 
+        void FixData()
+        {
+            FixStudentsDataWindow win = new FixStudentsDataWindow(this ,Evaluator);
+            win.ShowDialog();
+        }
         private void CreateExamBtn_Click(object sender, RoutedEventArgs e)
         {            
             Exam.ExamType = (ExamTypeModel)examTypesCombobox.SelectedItem;
@@ -168,6 +187,18 @@ namespace CMSUI.EvaluationWindows
         private void CancelExamBtn_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        public void FixComplete(bool val)
+        {
+            if (!val)
+            {
+                FixData();
+            }
+            else
+            {
+                ShowData();
+            }
         }
     }
 }

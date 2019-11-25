@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using CMSLibrary;
 using CMSLibrary.Models;
 
@@ -38,9 +39,32 @@ namespace CMSLibrary
             excel.CreateNewSheet();
 
             WriteDataToExcelSheet1(exam);
-
-            excel.SaveAs(@"C:\Users\mhdb\Desktop\Test.xlsx");
+            SaveFileDialog saveFile = new SaveFileDialog();
+            saveFile.ShowDialog();
+            excel.SaveAs(saveFile.FileName);
             excel.Close();
+        }
+        public WriteToExcel(ExamModel model)
+        {
+            ExamModel exam = model;
+            exam.Assignment.Course.CourseOutcomes = GlobalConfig.Connection.GetCourseOutcome_GetByExamId(exam.Id);
+
+
+            //GlobalConfig.Connection.GetCourseOutcomes_ById(courseModel[0]);
+            //exam.Assignment.Course.Id = courseModel[0].Id;
+
+
+
+            excel.CreateNewFile();
+            excel.CreateNewSheet();
+            excel.CreateNewSheet();
+
+            WriteDataToExcelSheet1(exam);
+            SaveFileDialog saveFile = new SaveFileDialog();
+            saveFile.ShowDialog();
+            excel.SaveAs(saveFile.FileName);
+            excel.Close();
+            model.FilePath = saveFile.FileName;
         }
 
         private void WriteDataToExcelSheet1(ExamModel exam)

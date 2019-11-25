@@ -192,6 +192,17 @@ namespace CMSLibrary.DataAccess
             }
         }
 
+        public void DeleteExam_ById(int id)
+        {
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {                
+                var p = new DynamicParameters();
+                p.Add("@ExamId", id);                
+                connection.Execute("dbo.spExams_Delete", p, commandType: CommandType.StoredProcedure);
+                           
+            }
+        }
+
         public bool DeleteCourse_ById(int id)
         {
             using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
@@ -584,7 +595,7 @@ namespace CMSLibrary.DataAccess
             {
                 var p = new DynamicParameters();
                 p.Add("@RegNo", regNo);
-                output = connection.Query<StudentModel>("dbo.spStudents_GetByRegNo", p, commandType: CommandType.StoredProcedure).First();
+                output = connection.Query<StudentModel>("dbo.spStudents_GetByRegNo", p, commandType: CommandType.StoredProcedure).FirstOrDefault();
 
             }
             return output;
@@ -730,5 +741,35 @@ namespace CMSLibrary.DataAccess
             return output;
         }
 
+        public List<ExamModel> GetExam_ByAssignmentId(int assignmetId)
+        {
+            List<ExamModel> output = new List<ExamModel>();
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@AssignmentId", assignmetId);
+                output = connection.Query<ExamModel, ExamTypeModel, ExamModel>("dbo.spExams_GetByAssignmentId",
+                    (exam, examType) =>
+                    {
+                        exam.ExamType = examType;
+                        return exam;
+                    }
+                    , p, commandType: CommandType.StoredProcedure).ToList();
+            }
+            return output;
+        }
+
+        public void UpdateExam_ById(ExamModel model)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                var p = new DynamicParameters();
+                p.Add("ExamId", model.Id);
+                p.Add("@Date", model.Date);
+                p.Add("@ExamTypeId", model.ExamType.Id);
+                p.Add("@FilePath", model.FilePath);               
+                connection.Execute("dbo.spExams_Update", p, commandType: CommandType.StoredProcedure);
+            }
+        }
     }
 }

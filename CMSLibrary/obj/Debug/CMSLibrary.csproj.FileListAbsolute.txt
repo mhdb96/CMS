@@ -23,3 +23,4 @@ C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSLibrary\obj\Debug\CMSLibrary.cs
 C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSLibrary\obj\Debug\CMSLibrary.csproj.CopyComplete
 C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSLibrary\obj\Debug\CMSLibrary.dll
 C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSLibrary\obj\Debug\CMSLibrary.pdb
+C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSLibrary\obj\Debug\CMSLibrary.csprojAssemblyReference.cache

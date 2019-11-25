@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CMSUI.UserControls"
+             xmlns:Converters ="clr-namespace:CMSUI.Converters"
              xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks" 
              mc:Ignorable="d" 
@@ -119,7 +120,7 @@
         <DataGrid 
             BorderThickness="1"
             SelectionMode="Single"
-            x:Name="teachersGrid"
+            x:Name="examsGrid"
             Grid.Row="2" Grid.Column="3" Grid.RowSpan="2"            
             Grid.ColumnSpan="4"                       
             Margin="2" IsReadOnly="True"
@@ -129,29 +130,52 @@
             >
             <DataGrid.Columns>
                 <DataGridTemplateColumn      
-                    SortMemberPath="RegNo"
+                    SortMemberPath="ExamType.Name"
                     Header="Type" Width="SizeToHeader">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding RegNo}"/>
+                            <TextBlock Text="{Binding ExamType.Name}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn 
-                    SortMemberPath="FirstName"
-                    Header="Date" Width="SizeToHeader">
+                    SortMemberPath="DateString"
+                    Header="Date" Width="SizeToCells">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding FirstName}"/>
+                            <TextBlock Text="{Binding DateString}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn 
-                    SortMemberPath="LastName"
-                    Header="File" Width="SizeToHeader">
+                <DataGridTemplateColumn                     
+                    Header="File" Width="SizeToCells">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding LastName}"/>
+                            <StackPanel Orientation="Vertical">
+                                <Button                                    
+                                Visibility="{Binding AddExcelFile}"
+                                ToolTip="Update"
+                                Margin="5"                           
+                                x:Name="createExcelFileBtn"
+                                Click="CreateExcelFileBtn_Click"
+                                VerticalAlignment="Center">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Create Excel File" VerticalAlignment="Center" Margin="0 0 5 0"/>
+                                        <iconPacks:PackIconFontAwesome 
+                                    Margin="2"                                
+                                    Foreground="Orange"
+                                    Kind="EditRegular" />
+                                    </StackPanel>
+                                </Button>
+                                <TextBlock Visibility="{Binding Path=AddExcelFile, Converter={x:Static Converters:VisibilityValueConverter.ins}}">
+                                <Hyperlink x:Name="fileLink" Click="FileLink_Click">
+                                        file
+                                    </Hyperlink>
+                                </TextBlock>
+                                <!--<TextBlock Text="{Binding File}" 
+                                           Visibility="{Binding Path=AddExcelFile, Converter={x:Static Converters:VisibilityValueConverter.ins}}"/>-->
+                            </StackPanel>
+                            
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -161,7 +185,8 @@
                             <Button
                                 ToolTip="Update"
                                 Margin="5"                           
-                                x:Name="updateTeacherBtn"
+                                x:Name="updateExamBtn"
+                                Click="UpdateExamBtn_Click"
                                 VerticalAlignment="Center">
                                 <iconPacks:PackIconFontAwesome 
                                     Margin="2"                                
@@ -177,7 +202,8 @@
                             <Button
                                 ToolTip="Delete"
                                 Margin="5"                          
-                                x:Name="deleteTeacherBtn"                          
+                                x:Name="deleteExamBtn"  
+                                Click="DeleteExamBtn_Click"
                                 VerticalAlignment="Center">
                                 <iconPacks:PackIconMaterial 
                                     Margin="2"                        
