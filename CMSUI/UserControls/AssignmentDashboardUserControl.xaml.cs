@@ -52,8 +52,13 @@ namespace CMSUI.UserControls
 
         private void UpdateAssignmentBtn_Click(object sender, RoutedEventArgs e)
         {
-            //    // TODO - Update the selected Assignment
+            // TODO - Update the selected Assignment
             AssignmentModel model = (AssignmentModel)assignmentsGrid.SelectedItem;
+
+            CreateAssignmentWindow win = new CreateAssignmentWindow(this, model);
+            win.ShowDialog();
+            
+            WireUpLists(Assignments);
         }
 
         private void AddAssignmentBtn_Click(object sender, RoutedEventArgs e)
@@ -143,6 +148,7 @@ namespace CMSUI.UserControls
 
         public void AssignmentComplete(AssignmentModel model)
         {
+            Assignments.Remove(model);
             Assignments.Add(model);
             WireUpLists(Assignments);
             assignmentsGrid.SelectedIndex = assignmentsGrid.Items.Count - 1;

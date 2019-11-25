@@ -51,6 +51,7 @@ namespace CMSUI.UserControls
 
         public void TeacherComplete(TeacherModel model)
         {
+            Teachers.Remove(model);
             Teachers.Add(model);
             WireUpLists();
             teachersGrid.SelectedIndex = teachersGrid.Items.Count - 1;
@@ -84,6 +85,12 @@ namespace CMSUI.UserControls
         {
             // TODO - Update the selected Teacher
             TeacherModel model = (TeacherModel)teachersGrid.SelectedItem;
+
+            CreateTeacherWindow win = new CreateTeacherWindow(this,model);
+            win.ShowDialog();
+
+            WireUpLists();
+
         }
     }
 }

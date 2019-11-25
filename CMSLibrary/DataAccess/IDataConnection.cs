@@ -12,6 +12,17 @@ namespace CMSLibrary.DataAccess
         string CheckConniction();
 
         //TODO - control the names
+        void DepartmentOutcome_Delete(int id);
+        void CourseOutcome_Delete(int id);
+        bool CourseOutcome_IsDeletable(int id);
+        void UpdateCourseOutcome(CourseOutcomeModel model);
+        void UpdateCourse(CourseModel model);
+        void UpdateDepartmentOutcome(DepartmentOutcomeModel model);
+        void UpdateDepartment(DepartmentModel model);
+        void UpdateAssignments(AssignmentModel model);
+        void UpdateActiveTerms(ActiveTermModel model);
+        void UpdateTeachers(TeacherModel model);
+
         List<CourseOutcomeModel> GetCourseOutcome_GetByExamId(int examId);
         List<ResultModel> GetResults_GetByQuestionId(int questionId);
         List<QuestionModel> GetQuestion_GetByCourseOutcomesIdAndExamGroupsId(int examGroupId, int courseOutcomeId);

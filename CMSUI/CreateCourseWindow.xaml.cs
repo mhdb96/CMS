@@ -21,15 +21,58 @@ namespace CMSUI
     /// <summary>
     /// Interaction logic for CreateCourseWindow.xaml
     /// </summary>
+    /// 
     public partial class CreateCourseWindow
     {
         ICouresRequester CallingWindow;
         List<EducationalYearModel> EduYears;
+
+        bool update;
+        CourseModel course = new CourseModel();
+        List<CourseOutcomeModel> newCourseOutcomes = new List<CourseOutcomeModel>();
+
         public CreateCourseWindow(ICouresRequester caller)
         {
             InitializeComponent();
             CallingWindow = caller;
             LoadListsData();
+        }
+        public CreateCourseWindow(ICouresRequester caller, CourseModel model)
+        {
+            InitializeComponent();
+            CallingWindow = caller;
+            LoadListsData();
+
+            update = true;
+            createCourseBtn.Content = "Update";
+
+            course = model;
+
+            nameText.Text = course.Name;
+            codeText.Text = course.Code;
+
+            foreach (var eduYear in EduYears)
+            {
+                if (eduYear.Id == course.EduYear.Id)
+                {
+                    eduYearCombobox.SelectedItem = eduYear;
+                }
+            }
+            
+            foreach (var outcome in course.CourseOutcomes)
+            {
+                OutcomeUserControl outcomeUserControl = new OutcomeUserControl();
+
+                outcomeUserControl.nameText.Text = outcome.Name;
+                outcomeUserControl.descriptionText.Text = outcome.Description;
+                TagData td = new TagData();
+                td.IsNew = false;
+                td.IsDeletable = GlobalConfig.Connection.CourseOutcome_IsDeletable(outcome.Id);
+                td.Id = outcome.Id;
+                td.Type = OutcomeType.CourseOutcome;
+                outcomeUserControl.Tag = td;
+                outcomesList.Children.Add(outcomeUserControl);
+            }
         }
 
         private void LoadListsData()
@@ -43,6 +86,12 @@ namespace CMSUI
             // TODO - fix the placement system for the letters
             OutcomeUserControl outcome = new OutcomeUserControl();
             outcome.nameText.Text = Convert.ToChar(outcomesList.Children.Count + 65).ToString();
+            TagData td = new TagData();
+            td.Id = -1;
+            td.IsDeletable = true;
+            td.IsNew = true;
+            td.Type = OutcomeType.CourseOutcome;
+            outcome.Tag = td;
             outcomesList.Children.Add(outcome);
         }
         
@@ -50,20 +99,51 @@ namespace CMSUI
         {
             if (ValidForm())
             {
-                CourseModel model = new CourseModel();
-                model.Name = nameText.Text;
-                model.Code = codeText.Text;
-                model.EduYear = (EducationalYearModel)eduYearCombobox.SelectedItem;              
-                foreach (OutcomeUserControl outcome in outcomesList.Children)
+                if (!update)
                 {
-                    CourseOutcomeModel cO = new CourseOutcomeModel();
-                    cO.Name = outcome.nameText.Text;
-                    cO.Description = outcome.descriptionText.Text;
-                    model.CourseOutcomes.Add(cO);
+                    CourseModel model = new CourseModel();
+                    model.Name = nameText.Text;
+                    model.Code = codeText.Text;
+                    model.EduYear = (EducationalYearModel)eduYearCombobox.SelectedItem;
+                    foreach (OutcomeUserControl outcome in outcomesList.Children)
+                    {
+                        CourseOutcomeModel cO = new CourseOutcomeModel();
+                        cO.Name = outcome.nameText.Text;
+                        cO.Description = outcome.descriptionText.Text;
+                        model.CourseOutcomes.Add(cO);
+                    }
+                    GlobalConfig.Connection.CreateCourse(model);
+                    CallingWindow.CourseComplete(model);
+
                 }
-                GlobalConfig.Connection.CreateCourse(model);
-                CallingWindow.CourseComplete(model);
+                else
+                {
+                    course.Name = nameText.Text;
+                    course.Code = codeText.Text;
+                    course.EduYear = (EducationalYearModel)eduYearCombobox.SelectedItem;                    
+                    foreach (OutcomeUserControl outcome in outcomesList.Children)
+                    {
+                        CourseOutcomeModel cO = new CourseOutcomeModel();
+                        cO.Name = outcome.nameText.Text;
+                        cO.Description = outcome.descriptionText.Text;
+                        cO.CourseId = course.Id;
+                        TagData td = (TagData)outcome.Tag;
+                        if(td.IsNew == true)
+                        {
+                            
+                            GlobalConfig.Connection.CreateCourseOutcome(cO);
+                        }
+                        else
+                        {
+                            GlobalConfig.Connection.UpdateCourseOutcome(cO);
+                        }
+                    }                    
+                    GlobalConfig.Connection.UpdateCourse(course);
+                    CallingWindow.CourseUpdateComplete(course);
+
+                }
                 this.Close();
+
             }
         }
 
@@ -160,4 +240,5 @@ namespace CMSUI
             }
         }
     }
+
 }

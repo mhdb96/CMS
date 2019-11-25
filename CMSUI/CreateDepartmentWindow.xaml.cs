@@ -24,30 +24,96 @@ namespace CMSUI
     public partial class CreateDepartmentWindow
     {
         IDepartmentRequester callingWindow;
+
+        bool update;
+        DepartmentModel department = new DepartmentModel();
+        List<DepartmentOutcomeModel> addDepartmentOutcomes = new List<DepartmentOutcomeModel>();
+
         public CreateDepartmentWindow(IDepartmentRequester caller)
         {
             InitializeComponent();
             callingWindow = caller;
         }
 
+        public CreateDepartmentWindow(IDepartmentRequester caller, DepartmentModel model)
+        {
+            InitializeComponent();
+            callingWindow = caller;
+
+            update = true;
+            createDepartmentBtn.Content = "Update";
+
+            department = model;
+
+            nameText.Text = department.Name;
+            foreach (var outcome in department.Outcomes)
+            {
+                OutcomeUserControl outcomeUserControl = new OutcomeUserControl();
+                outcomeUserControl.nameText.Text = outcome.Name;
+                outcomeUserControl.descriptionText.Text = outcome.Description;
+
+                TagData td = new TagData();
+                td.IsNew = false;
+                td.IsDeletable = true;
+                td.Id = outcome.Id;
+                td.Type = OutcomeType.DepartmentOutcome;
+                outcomeUserControl.Tag = td;
+
+                outcomesList.Children.Add(outcomeUserControl);
+            }
+
+        }
+
         private void CreateDepartmentBtn_Click(object sender, RoutedEventArgs e)
         {
             if(ValidForm())
             {
-                DepartmentModel model = new DepartmentModel();
-                model.Name = nameText.Text;
-                foreach (OutcomeUserControl outcome in outcomesList.Children)
+                if (!update)
                 {
-                    DepartmentOutcomeModel dO = new DepartmentOutcomeModel();
-                    dO.Name = outcome.nameText.Text;
-                    dO.Description = outcome.descriptionText.Text;
-                    model.Outcomes.Add(dO);
+                    DepartmentModel model = new DepartmentModel();
+                    model.Name = nameText.Text;
+                    foreach (OutcomeUserControl outcome in outcomesList.Children)
+                    {
+                        DepartmentOutcomeModel dO = new DepartmentOutcomeModel();
+                        dO.Name = outcome.nameText.Text;
+                        dO.Description = outcome.descriptionText.Text;
+                        model.Outcomes.Add(dO);
+                    }
+                    GlobalConfig.Connection.CreateDepartment(model);
+                    callingWindow.DepartmentComplete(model);
+
                 }
-                GlobalConfig.Connection.CreateDepartment(model);
-                callingWindow.DepartmentComplete(model);
+                else
+                {
+                    
+                    department.Name = nameText.Text;
+
+                    foreach (OutcomeUserControl outcome in outcomesList.Children)
+                    {
+                        DepartmentOutcomeModel dO = new DepartmentOutcomeModel();
+                        dO.Name = outcome.nameText.Text;
+                        dO.Description = outcome.descriptionText.Text;
+                        dO.DepartmentId = department.Id;
+
+                        TagData td = (TagData)outcome.Tag;
+                        if (td.IsNew == true)
+                        {
+                            GlobalConfig.Connection.CreateDepartmentOutcome(dO);
+                        }
+                        else
+                        {
+                            GlobalConfig.Connection.UpdateDepartmentOutcome(dO);
+                        }
+                    }
+                    GlobalConfig.Connection.UpdateDepartment(department);
+                    callingWindow.DepartmentUpdateComplete(department);
+
+
+                }
                 this.Close();
+
             }
-            
+
 
         }
 
@@ -104,13 +170,24 @@ namespace CMSUI
             this.Close();
         }
 
+
         private void AddOutcome_Click(object sender, RoutedEventArgs e)
         {
             // TODO - fix the placement system for the letters
             OutcomeUserControl outcome = new OutcomeUserControl();
             // TODO - fix the ascii code
+            
             outcome.nameText.Text = Convert.ToChar(outcomesList.Children.Count + 65).ToString();
+
+            TagData td = new TagData();
+            td.Id = -1;
+            td.IsDeletable = true;
+            td.IsNew = true;
+            td.Type = OutcomeType.CourseOutcome;
+            outcome.Tag = td;
+
             outcomesList.Children.Add(outcome);
+  
         }
 
         private void NameText_TextChanged(object sender, TextChangedEventArgs e)

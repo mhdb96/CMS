@@ -68,19 +68,31 @@ namespace CMSUI.UserControls
             Button btn = (Button)sender;
             DepartmentModel model = new DepartmentModel();
             model = (DepartmentModel)btn.Tag;
+            if(model.Outcomes.Count == 0)
+            {
+                FindCourseOutcomes(model);
+            }
             // TODO - Update the selected department
+
+            CreateDepartmentWindow win = new CreateDepartmentWindow(this, model);
+            win.ShowDialog();            
+            WireUpLists();
         }
 
         private void DepatmentsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(depatmentsList.ItemsSource != null)
+            DepartmentModel model = (DepartmentModel)depatmentsList.SelectedItem;
+            FindCourseOutcomes(model);
+        }
+
+        private void FindCourseOutcomes(DepartmentModel model)
+        {
+            if (depatmentsList.ItemsSource != null)
             {
-                DepartmentModel model = (DepartmentModel)depatmentsList.SelectedItem;
                 GlobalConfig.Connection.GetDepartmentOutcomes_ById(model);
                 depatmentsList.SelectedItem = model;
                 depatmentOutcomesList.ItemsSource = model.Outcomes;
             }
-            
         }
 
         private void AddDepartmentBtn_Click(object sender, RoutedEventArgs e)
@@ -94,6 +106,13 @@ namespace CMSUI.UserControls
             Departments.Add(model);
             WireUpLists();
             depatmentsList.SelectedIndex = depatmentsList.Items.Count-1;
+        }
+        public void DepartmentUpdateComplete(DepartmentModel model)
+        {
+            Departments.Remove(model);
+            Departments.Add(model);
+            WireUpLists();
+            depatmentsList.SelectedIndex = depatmentsList.Items.Count - 1;
         }
     }
 }

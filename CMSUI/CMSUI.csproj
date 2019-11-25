@@ -103,6 +103,7 @@
     <Compile Include="Requesters\IFixStudentsDataWindowRequester.cs" />
     <Compile Include="Requesters\ITeacherPanelRequester.cs" />
     <Compile Include="Requesters\ITeacherRequester.cs" />
+    <Compile Include="TagData.cs" />
     <Compile Include="TeacherPanelWindow.xaml.cs">
       <DependentUpon>TeacherPanelWindow.xaml</DependentUpon>
     </Compile>

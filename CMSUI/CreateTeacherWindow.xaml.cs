@@ -24,25 +24,58 @@ namespace CMSUI
     public partial class CreateTeacherWindow
     {
         ITeacherRequester CallingWindow;
+
+        bool update;
+        TeacherModel model = new TeacherModel();
+
         public CreateTeacherWindow(ITeacherRequester caller)
         {
             InitializeComponent();
             CallingWindow = caller;
+
+            update = false;
+            createTeacherBtn.Content = "Create";//gerek var mı?
+        }
+        public CreateTeacherWindow(ITeacherRequester caller, TeacherModel teacher)
+        {
+            InitializeComponent();
+            CallingWindow = caller;
+
+            update = true;
+            createTeacherBtn.Content = "Update";
+
+            model = teacher;
+
+            regNoText.Text = model.RegNo.ToString();
+            firstNameText.Text = model.FirstName;
+            lastNameText.Text = model.LastName;
+            usernameText.Text = model.User.UserName;
+            passwordText.Password = model.User.Password;
         }
 
         private void CreateTeacherBtn_Click(object sender, RoutedEventArgs e)
         {
             if(ValidForm())
             {
-                TeacherModel model = new TeacherModel();
                 model.RegNo = int.Parse(regNoText.Text);
                 model.FirstName = firstNameText.Text;
                 model.LastName = lastNameText.Text;
                 model.User.UserName = usernameText.Text;
                 model.User.Password = passwordText.Password;
-                GlobalConfig.Connection.CreateTeacher(model);
-                CallingWindow.TeacherComplete(model);
-                this.Close();
+
+                if (!update)
+                {
+                    GlobalConfig.Connection.CreateTeacher(model);
+                    CallingWindow.TeacherComplete(model);
+                    this.Close();
+                }
+                else
+                {
+                    GlobalConfig.Connection.UpdateTeachers(model);
+                    CallingWindow.TeacherComplete(model);
+                    this.Close();
+                    
+                }
             }
                       
         }

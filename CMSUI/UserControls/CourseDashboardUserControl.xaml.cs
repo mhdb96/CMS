@@ -56,12 +56,24 @@ namespace CMSUI.UserControls
             WireUpLists();
             coursesList.SelectedIndex = coursesList.Items.Count - 1;
         }
-        
+
+        public void CourseUpdateComplete(CourseModel model)
+        {
+            Courses.Remove(model);
+            Courses.Add(model);
+            WireUpLists();
+            coursesList.SelectedIndex = coursesList.Items.Count - 1;
+        }
+
         private void CoursesList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            CourseModel model = (CourseModel)coursesList.SelectedItem;
+            FindCourseOutcomes(model);
+        }
+        public void FindCourseOutcomes(CourseModel model)
         {
             if (coursesList.ItemsSource != null)
             {
-                CourseModel model = (CourseModel)coursesList.SelectedItem;
                 GlobalConfig.Connection.GetCourseOutcomes_ById(model);
                 coursesList.SelectedItem = model;
                 courseOutcomesList.ItemsSource = model.CourseOutcomes;
@@ -73,6 +85,18 @@ namespace CMSUI.UserControls
             CourseModel model = new CourseModel();
             model = (CourseModel)btn.Tag;
             // TODO - Update the selected department
+
+            if (model.CourseOutcomes.Count == 0)
+            {
+                FindCourseOutcomes(model);
+            }
+
+            CreateCourseWindow win = new CreateCourseWindow(this, model);
+            
+            win.ShowDialog();
+
+            WireUpLists();
+
         }
 
         private void DeleteCourseBtn_Click(object sender, RoutedEventArgs e)

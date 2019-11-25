@@ -34,12 +34,45 @@ namespace CMSUI
 
         //List<StackPanel> spList = new List<StackPanel>();  // DynamicValid  için
 
+        bool update;
+        ActiveTermModel activeTerm = new ActiveTermModel();
+
         public CreateActiveTermWindow(IActiveTermRequester caller)
         {
             InitializeComponent();
             CallingWindow = caller;
             LoadListsData();
+
+            update = false;
+            createActiveTermBtn.Content = "Create";//gerek var mı?
         }
+
+        public CreateActiveTermWindow(IActiveTermRequester caller, ActiveTermModel model)
+        {
+            InitializeComponent();
+            CallingWindow = caller;
+            LoadListsData();
+
+            update = true;
+            createActiveTermBtn.Content = "Update";
+
+            activeTerm = model;
+
+
+            // TODO Foreach'sız nasıl olurdu
+            foreach (var year in Years)
+            {
+                if(year.Id == activeTerm.Year.Id) { 
+                    yearsCombobox.SelectedItem = year;
+                }
+            }
+              termsCombobox.SelectedItem = activeTerm.Term;
+    
+            //
+
+
+        }
+
         private void LoadListsData()
         {
             Years = GlobalConfig.Connection.GetYear_ALL();
@@ -54,12 +87,21 @@ namespace CMSUI
 
             if (ValidForm())
             {
-                ActiveTermModel model = new ActiveTermModel();
-                model.Year = (YearModel)yearsCombobox.SelectedItem;
-                model.Term = (TermModel)termsCombobox.SelectedItem;
-                GlobalConfig.Connection.CreateActiveTerm(model);
-                CallingWindow.ActiveTermComplete(model);
+                activeTerm.Year = (YearModel)yearsCombobox.SelectedItem;
+                activeTerm.Term = (TermModel)termsCombobox.SelectedItem;
+
+                if (!update)
+                {
+                    GlobalConfig.Connection.CreateActiveTerm(activeTerm);
+                }
+                else
+                {
+                    GlobalConfig.Connection.UpdateActiveTerms(activeTerm);                   
+                }
+                CallingWindow.ActiveTermComplete(activeTerm);
                 this.Close();
+
+
             }
             
         }
@@ -171,8 +213,13 @@ namespace CMSUI
             {
                 model = (YearModel)yearsCombobox.SelectedItem;
                 Terms = GlobalConfig.Connection.GetTerm_ValidByYearId(model.Id);
-                termsCombobox.ItemsSource = Terms;
 
+                if(model.Id==activeTerm.Year.Id)
+                {
+                    Terms.Add(activeTerm.Term);
+                }
+
+                termsCombobox.ItemsSource = Terms;
                 if (!Terms.Any())
                 {
                     termsCombobox.IsHitTestVisible = false;

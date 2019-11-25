@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CMSLibrary;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,14 +28,32 @@ namespace CMSUI.UserControls
 
         private void DeleteOutcome_Click(object sender, RoutedEventArgs e)
         {
-            Button btn = sender as Button;
-            var conditionUserControl = FindParent<OutcomeUserControl>(btn);
-            if (conditionUserControl != null)
+            TagData td = (TagData)this.Tag;
+            if (td.IsDeletable == true)
             {
-                var sp = FindParent<StackPanel>(conditionUserControl);
-                if (sp != null)
-                    sp.Children.Remove(conditionUserControl);
+                Button btn = sender as Button;
+                var conditionUserControl = FindParent<OutcomeUserControl>(btn);
+                if (conditionUserControl != null)
+                {
+                    var sp = FindParent<StackPanel>(conditionUserControl);
+                    if (sp != null)
+                        sp.Children.Remove(conditionUserControl);
+
+                }
+                if(!td.IsNew)
+                {
+                    if(td.Type == OutcomeType.CourseOutcome)
+                    {
+                        GlobalConfig.Connection.CourseOutcome_Delete(td.Id);
+                    }
+                    else if (td.Type == OutcomeType.DepartmentOutcome)
+                    {
+                        GlobalConfig.Connection.DepartmentOutcome_Delete(td.Id);
+                    }
+                    
+                }
             }
+            
         }
         // TODO - Try to understand this Func.
         private static T FindParent<T>(DependencyObject dependencyObject) where T : DependencyObject

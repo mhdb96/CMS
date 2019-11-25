@@ -28,12 +28,61 @@ namespace CMSUI
         List<CourseModel> Courses;
         List<TeacherModel> Teachers;
 
+        bool update;
+        AssignmentModel assignmentModel = new AssignmentModel();
 
         public CreateAssignmentWindow(IAssignmentRequester caller)
         {
             InitializeComponent();
             CallingWindow = caller;
             LoadListsData();
+
+            update = false;
+            createAssignmentBtn.Content = "Create";//gerek var mı?
+        }
+        public CreateAssignmentWindow(IAssignmentRequester caller, AssignmentModel model)
+        {
+            InitializeComponent();
+            CallingWindow = caller;
+            LoadListsData();
+
+            update = true;
+            createAssignmentBtn.Content = "Update";
+
+            assignmentModel = model;
+
+
+            // TODO Foreachsız nasıl olurdu
+            foreach (var department in Departments)
+            {
+                if (assignmentModel.Department.Id == department.Id)
+                {
+                    departmentsCombobox.SelectedItem = department;
+                }
+            }
+            foreach (var activeTerm in ActiveTerms)
+            {
+                if (assignmentModel.ActiveTerm.Id == activeTerm.Id)
+                {
+                    activeTermsCombobox.SelectedItem = activeTerm;
+                }
+            }
+            foreach (var course in Courses)
+            {
+                if (assignmentModel.Course.Id == course.Id)
+                {
+                    coursesCombobox.SelectedItem = course;
+                }
+            }
+            foreach (var teacher in Teachers)
+            {
+                if (assignmentModel.Teacher.Id == teacher.Id)
+                {
+                    teachersCombobox.SelectedItem = teacher;
+                }
+            }
+            //
+
         }
 
         private void LoadListsData()
@@ -55,14 +104,23 @@ namespace CMSUI
         {
             if (ValidForm())
             {
-                AssignmentModel model = new AssignmentModel();
-                model.Department = (DepartmentModel)departmentsCombobox.SelectedItem;
-                model.ActiveTerm = (ActiveTermModel)activeTermsCombobox.SelectedItem;
-                model.Course = (CourseModel)coursesCombobox.SelectedItem;
-                model.Teacher = (TeacherModel)teachersCombobox.SelectedItem;
-                GlobalConfig.Connection.CreateAssignment(model);
-                CallingWindow.AssignmentComplete(model);
+                assignmentModel.Department = (DepartmentModel)departmentsCombobox.SelectedItem;
+                assignmentModel.ActiveTerm = (ActiveTermModel)activeTermsCombobox.SelectedItem;
+                assignmentModel.Course = (CourseModel)coursesCombobox.SelectedItem;
+                assignmentModel.Teacher = (TeacherModel)teachersCombobox.SelectedItem;
+
+                if (!update)
+                {
+                    GlobalConfig.Connection.CreateAssignment(assignmentModel);
+                }
+                else
+                {
+                    GlobalConfig.Connection.UpdateAssignments(assignmentModel);
+                }
+
+                CallingWindow.AssignmentComplete(assignmentModel);
                 this.Close();
+
             }
         }
         private bool ValidForm()
@@ -106,6 +164,12 @@ namespace CMSUI
                 ActiveTermModel activeTermModel = (ActiveTermModel)activeTermsCombobox.SelectedItem;
 
                 Courses = GlobalConfig.Connection.GetCourse_ValidByDepartmentIdAndActiveTermId(departmentModel.Id, activeTermModel.Id);
+
+                if (departmentModel.Id == assignmentModel.Department.Id && activeTermModel.Id == assignmentModel.ActiveTerm.Id)
+                {
+                    Courses.Add(assignmentModel.Course);
+                }
+
                 coursesCombobox.ItemsSource = Courses;
 
                 if (!Courses.Any())
