@@ -1,4 +1,5 @@
 ﻿using CMSLibrary;
+using Squirrel;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -18,6 +19,14 @@ namespace CMSUI
         {
             base.OnStartup(e);
             GlobalConfig.InitializeConnections();
+            CheckForUpdates();
+        }
+        private async Task CheckForUpdates()
+        {
+            using (var manager = new UpdateManager(@"C:\r"))
+            {
+                await manager.UpdateApp();
+            }
         }
     }
 }
