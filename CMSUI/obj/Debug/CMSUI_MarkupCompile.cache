@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\
+C:\Users\onurk\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\
 CMSUI
 none
 false
 DEBUG;TRACE
-C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\App.xaml
+C:\Users\onurk\Documents\GitHub\YGL-Projcet-1\CMSUI\App.xaml
 21-1840892454
 
 38-1406625699
-31-1580678697
+31542725211
 Panels\AdminPanelWindow.xaml;CreateForms\CreateActiveTermWindow.xaml;CreateForms\CreateAssignmentWindow.xaml;CreateForms\CreateCourseWindow.xaml;CreateForms\CreateDepartmentWindow.xaml;CreateForms\CreateTeacherWindow.xaml;EvaluationWindows\CreateExamWindow.xaml;EvaluationWindows\FixStudentsDataWindow.xaml;EvaluationWindows\InsertStudentsFromTxtFiles.xaml;LoginWindow.xaml;Panels\TeacherPanelWindow.xaml;UserControls\AnswersOutcomesUserControl.xaml;UserControls\Dashboards\AssignmentDashboardUserControl.xaml;UserControls\Dashboards\CourseDashboardUserControl.xaml;UserControls\DepartmentDashboardUserControl.xaml;UserControls\Dashboards\MyCoursesDashboardUserControl.xaml;UserControls\OutcomeUserControl.xaml;UserControls\StudentDataUserControl.xaml;UserControls\StudentsAnswersListUserControl.xaml;UserControls\Dashboards\TeacherDashboardUserControl.xaml;UserControls\Dashboards\TermsDashboardUserControl.xaml;
 
 False

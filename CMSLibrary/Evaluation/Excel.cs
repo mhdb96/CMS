@@ -10,7 +10,7 @@ namespace CMSLibrary.Evaluation
 {
     public class Excel
     {
-        string path = "";
+        //string path = "";
         _Application excel = new _Excel.Application();
         Workbook wb;
         Worksheet ws;
@@ -18,12 +18,13 @@ namespace CMSLibrary.Evaluation
         {
 
         }
+        /*
         public Excel (string path, int sheet)
         {
             this.path = path;
             wb = excel.Workbooks.Open(path);
             ws = excel.Worksheets[sheet];
-        }
+        }*/
 
         public void CreateNewFile()
         {
@@ -33,7 +34,7 @@ namespace CMSLibrary.Evaluation
         public void CreateNewSheet()
         {
             wb.Worksheets.Add(After:ws);
-            ws = wb.Worksheets[2];// TODO Dinamik değil. Onura sor (unutmazsa cevap verir)
+            ws = wb.Worksheets[2];
         }
 
         public decimal ReadCell(int i, int j)
