@@ -48,7 +48,8 @@ namespace CMSUI.CreateForms
 
             update = true;
             createAssignmentBtn.Content = "Update";
-
+            titleText.Text = "Update a Assignment";
+            title.Title = "Update Assignment";
             assignmentModel = model;
 
 

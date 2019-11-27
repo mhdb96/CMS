@@ -8,6 +8,7 @@
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks" 
         xmlns:local="clr-namespace:CMSUI"
         mc:Ignorable="d"
+        x:Name="title"
         Title="Create Assignment" Height="450" Width="800" FontSize="18pt">
     <Window.Resources>
         <Style x:Key = "myTextBlockStyle" TargetType = "TextBlock">
@@ -39,7 +40,7 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" Grid.ColumnSpan="6">
             <iconPacks:PackIconFontAwesome VerticalAlignment="Center" Width="35" Height="35" Kind="BriefcaseSolid" />
-            <TextBlock Text="Create an Assignment" FontSize="22pt"
+            <TextBlock x:Name="titleText" Text="Create an Assignment" FontSize="22pt"
                     Margin="10 0 0 10"/>
         </StackPanel>
 
