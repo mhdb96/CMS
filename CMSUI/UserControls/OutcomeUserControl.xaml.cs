@@ -36,25 +36,21 @@ namespace CMSUI.UserControls
             if (td.IsDeletable == true)
             {
                 var sp = ParentFinder.FindParent<StackPanel>(this);
-                var wind = ParentFinder.FindParent<CreateDepartmentWindow>(this);
-                var winc = ParentFinder.FindParent<CreateCourseWindow>(this);
-                if (sp != null)
-                    sp.Children.Remove(this);
                 if (!td.IsNew)
                 {
                     if(td.Type == OutcomeType.CourseOutcome)
                     {
-                        winc.outcomesToDelete.Add(td.Id);
-
-                        //GlobalConfig.Connection.CourseOutcome_Delete(td.Id);
+                        var win = ParentFinder.FindParent<CreateCourseWindow>(this);
+                        win.outcomesToDelete.Add(td.Id);                        
                     }
                     else if (td.Type == OutcomeType.DepartmentOutcome)
-                    {                        
-                        //var wind = ParentFinder.FindParent<CreateDepartmentWindow>(this);
-                        wind.outcomesToDelete.Add(td.Id);
-                        //GlobalConfig.Connection.DepartmentOutcome_Delete(td.Id);
+                    {
+                        var win = ParentFinder.FindParent<CreateDepartmentWindow>(this);                       
+                        win.outcomesToDelete.Add(td.Id);                        
                     }
                 }
+                if (sp != null)
+                    sp.Children.Remove(this);
             }
         }
         // TODO - Try to understand this Func.
