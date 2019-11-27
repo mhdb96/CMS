@@ -132,6 +132,8 @@ C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\bin\Debug\Splat.pdb
 C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\bin\Debug\Squirrel.pdb
 C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\bin\Debug\Dapper.xml
 C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\CMSUI.csprojAssemblyReference.cache
+C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\LoginWindows\DatabaseSettingWindow.g.cs
+C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\LoginWindows\DevelopersInfoWindow.g.cs
 C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\Panels\AdminPanelWindow.g.cs
 C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\CreateForms\CreateActiveTermWindow.g.cs
 C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\CreateForms\CreateAssignmentWindow.g.cs
@@ -158,6 +160,8 @@ C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\GeneratedInternalT
 C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\CMSUI_MarkupCompile.cache
 C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\CMSUI_MarkupCompile.lref
 C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\App.baml
+C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\LoginWindows\DatabaseSettingWindow.baml
+C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\LoginWindows\DevelopersInfoWindow.baml
 C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\Panels\AdminPanelWindow.baml
 C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\CreateForms\CreateActiveTermWindow.baml
 C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\CreateForms\CreateAssignmentWindow.baml
@@ -186,7 +190,3 @@ C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\CMSUI.csproj.CoreC
 C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\CMSUI.csproj.CopyComplete
 C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\CMSUI.exe
 C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\CMSUI.pdb
-C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\LoginWindows\DatabaseSettingWindow.g.cs
-C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\LoginWindows\DevelopersInfoWindow.g.cs
-C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\LoginWindows\DatabaseSettingWindow.baml
-C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\LoginWindows\DevelopersInfoWindow.baml

@@ -21,17 +21,27 @@ namespace CMSUI.Panels
     /// <summary>
     /// Interaction logic for AdminPanelWindow.xaml
     /// </summary>
+    /// 
     public partial class AdminPanelWindow
     {
-        //public string test = "10";
         IAdminPanelRequester CallingWindow;
-        AdminModel Admin;
         public AdminPanelWindow(IAdminPanelRequester caller)
-        {
+        {            
             InitializeComponent();
             CallingWindow = caller;
-            Admin = CallingWindow.GetAdminInfo();            
+            Admin = CallingWindow.GetAdminInfo();
+            myCoursesControl.MyAdmin = Admin;
         }
+
+        public static readonly DependencyProperty AdminProperty =
+        DependencyProperty.Register("Admin", typeof(AdminModel), typeof(AdminPanelWindow), new FrameworkPropertyMetadata(null));
+
+        private AdminModel Admin
+        {
+            get { return (AdminModel)GetValue(AdminProperty); }
+            set { SetValue(AdminProperty, value); }
+        }
+
         public async Task<MessageDialogResult> ShowMessageOnAdmin(string title, string message, MessageDialogStyle style)
         {
             return await this.ShowMessageAsync(title, message, style, null);    

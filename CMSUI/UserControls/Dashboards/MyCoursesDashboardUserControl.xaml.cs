@@ -34,7 +34,7 @@ namespace CMSUI.UserControls
         AssignmentModel SelectedAssignment;
         List<ActiveTermModel> MyTerms = new List<ActiveTermModel>();
         List<DepartmentModel> MyDepartments = new List<DepartmentModel>();
-
+        //Visibility isAdmin = Visibility.Collapsed;
         public static readonly DependencyProperty MyTeacherProperty =
         DependencyProperty.Register("MyTeacher", typeof(TeacherModel), typeof(MyCoursesDashboardUserControl), new FrameworkPropertyMetadata(null));
 
@@ -42,6 +42,15 @@ namespace CMSUI.UserControls
         {
             get { return (TeacherModel)GetValue(MyTeacherProperty); }
             set { SetValue(MyTeacherProperty, value); }
+        }
+
+        public static readonly DependencyProperty MyAdminProperty =
+        DependencyProperty.Register("MyAdmin", typeof(AdminModel), typeof(MyCoursesDashboardUserControl), new FrameworkPropertyMetadata(null));
+
+        public AdminModel MyAdmin
+        {
+            get { return (AdminModel)GetValue(MyAdminProperty); }
+            set { SetValue(MyAdminProperty, value); }
         }
 
         public MyCoursesDashboardUserControl()
@@ -53,18 +62,30 @@ namespace CMSUI.UserControls
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             LoadMyAssignments();
+            if(MyAdmin != null)
+            {
+                insertStudentBtn.Visibility = Visibility.Visible;
+            }
+            
         }
 
         private void LoadMyAssignments()
         {
-            MyAssignments = GlobalConfig.Connection.GetAssignment_ByTeacherId(MyTeacher.Id);
+            if (MyTeacher == null)
+            {
+                MyAssignments = GlobalConfig.Connection.GetAssignment_All();
+            }
+            else
+            {
+                MyAssignments = GlobalConfig.Connection.GetAssignment_ByTeacherId(MyTeacher.Id);
+            }
+
             if (MyTerms.Count != 0)
             {
                 MyTerms.Clear();
                 MyDepartments.Clear();
                 departmentsCombobox.ItemsSource = null;
                 activeTermsCombobox.ItemsSource = null;
-
             }
             foreach (AssignmentModel model in MyAssignments)
             {
@@ -180,7 +201,14 @@ namespace CMSUI.UserControls
 
         public UserModel GetUserInfo()
         {
-            return MyTeacher.User;
+            if(MyTeacher == null)
+            {
+                return MyAdmin.User;
+            }
+            else
+            {
+                return MyTeacher.User;
+            }
         }
 
         public AssignmentModel GetAssignment()
@@ -241,6 +269,12 @@ namespace CMSUI.UserControls
         {
             LoadMyAssignments();
             WireUpLists(MyAssignments);
+        }
+
+        private void InsertStudentBtn_Click(object sender, RoutedEventArgs e)
+        {
+            InsertStudentsFromTxtFiles win = new InsertStudentsFromTxtFiles();
+            win.ShowDialog();
         }
     }
 }

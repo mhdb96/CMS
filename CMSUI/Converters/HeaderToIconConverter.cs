@@ -43,6 +43,10 @@ namespace CMSUI.Converters
             {
                 return "BookMultiple";
             }
+            if (type == "Exams")
+            {
+                return "BookMultiple";
+            }
             return "";
         }
 

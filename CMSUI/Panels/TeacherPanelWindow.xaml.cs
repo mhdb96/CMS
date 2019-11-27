@@ -26,18 +26,6 @@ namespace CMSUI.Panels
         ITeacherPanelRequester CallingWindow;        
         public TeacherPanelWindow(ITeacherPanelRequester caller)
         {
-            //Teacher = new TeacherModel
-            //{
-            //    FirstName = "Muahammed",
-            //    LastName = "Bedavi",
-            //    Id = 7,
-            //    RegNo = 1,
-            //    User = new UserModel
-            //    {
-            //        Id = 5,
-            //    }
-
-            //};
             InitializeComponent();
             CallingWindow = caller;
             Teacher = CallingWindow.GetTeacherInfo();

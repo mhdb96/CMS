@@ -14,7 +14,7 @@ namespace CMSUI.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             //Console.WriteLine(value);
-            double width = (double)value / 5.7;
+            double width = (double)value / 6.9;
             int e = (int)width;
             return e;
         }

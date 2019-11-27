@@ -6,13 +6,14 @@
         xmlns:fsxaml="http://github.com/fsprojects/FsXaml"
         xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
-        xmlns:Converters ="clr-namespace:CMSUI.Converters"
-        xmlns:local="clr-namespace:CMSUI"
+        xmlns:Converters ="clr-namespace:CMSUI.Converters"        
+        xmlns:local="clr-namespace:CMSUI.Panels"
         xmlns:MyControls="clr-namespace:CMSUI.UserControls"
                       
         mc:Ignorable="d"
-        Title="Admin Panel" Height="700" Width="1100" FontSize="18pt">
+        Title="Admin Panel" Height="700" Width="1400" FontSize="18pt">
 
+    
     <Border Margin="20">
         <DockPanel Grid.Row="1" Grid.Column="1">
             <TabControl HorizontalAlignment="Center"
@@ -51,6 +52,11 @@
                 </Controls:MetroTabItem>
                 <Controls:MetroTabItem Header="Assignment">
                     <MyControls:AssignmentDashboardUserControl/>
+                </Controls:MetroTabItem>
+                <Controls:MetroTabItem Header="Exams">
+                    <MyControls:MyCoursesDashboardUserControl
+                        x:Name="myCoursesControl" >
+                    </MyControls:MyCoursesDashboardUserControl>
                 </Controls:MetroTabItem>
             </TabControl>
         </DockPanel>

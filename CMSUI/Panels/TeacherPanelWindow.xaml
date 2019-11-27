@@ -37,7 +37,8 @@
                     </Style>
                 </TabControl.Resources>
                 <Controls:MetroTabItem Header="My Courses">
-                    <MyControls:MyCoursesDashboardUserControl MyTeacher="{Binding Teacher, ElementName= TeacherPanel}">
+                    <MyControls:MyCoursesDashboardUserControl 
+                        MyTeacher="{Binding Teacher, ElementName= TeacherPanel}">
                         
                     </MyControls:MyCoursesDashboardUserControl>
                 </Controls:MetroTabItem>
