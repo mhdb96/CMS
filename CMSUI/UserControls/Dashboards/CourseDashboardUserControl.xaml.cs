@@ -133,5 +133,13 @@ namespace CMSUI.UserControls
             LoadCourses();
             WireUpLists();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            string searchValue = searchText.Text;
+            Courses = GlobalConfig.Connection.GetCourse_BySearchValue(searchValue);
+            coursesList.ItemsSource = Courses;
+            WireUpLists();
+        }
     }
 }

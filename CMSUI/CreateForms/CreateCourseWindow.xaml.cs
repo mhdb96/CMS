@@ -46,7 +46,8 @@ namespace CMSUI.CreateForms
 
             update = true;
             createCourseBtn.Content = "Update";
-
+            titleText.Text = "Update a Department";
+            title.Title = "Update Department";
             course = model;
 
             nameText.Text = course.Name;
@@ -132,13 +133,15 @@ namespace CMSUI.CreateForms
                     course.EduYear = (EducationalYearModel)eduYearCombobox.SelectedItem;                    
                     foreach (OutcomeUserControl outcome in outcomesList.Children)
                     {
+                        TagData td = (TagData)outcome.Tag;
+
                         CourseOutcomeModel cO = new CourseOutcomeModel
                         {
+                            Id = td.Id,
                             Name = outcome.nameText.Text,
                             Description = outcome.descriptionText.Text,
                             CourseId = course.Id
                         };
-                        TagData td = (TagData)outcome.Tag;
                         if(td.IsNew == true)
                         {
                             
@@ -172,7 +175,10 @@ namespace CMSUI.CreateForms
                     errorOutcomes.Visibility = Visibility.Visible;
                 }
             }
-
+            if (outcomesList.Children.Count == 0)
+            {
+                errorOutcomes.Visibility = Visibility.Visible;
+            }
             if (nameText.Text == "")
             {
                 errorName.Visibility = Visibility.Visible;

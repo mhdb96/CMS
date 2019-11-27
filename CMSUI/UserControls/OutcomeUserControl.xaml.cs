@@ -1,6 +1,7 @@
 ﻿using CMSLibrary;
 using CMSLibrary.Enums;
 using CMSLibrary.Models;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CMSUI.CreateForms;
 
 namespace CMSUI.UserControls
 {
@@ -40,11 +42,13 @@ namespace CMSUI.UserControls
                 {
                     if(td.Type == OutcomeType.CourseOutcome)
                     {
-                        GlobalConfig.Connection.CourseOutcome_Delete(td.Id);
+                        //GlobalConfig.Connection.CourseOutcome_Delete(td.Id);
                     }
                     else if (td.Type == OutcomeType.DepartmentOutcome)
                     {
-                        GlobalConfig.Connection.DepartmentOutcome_Delete(td.Id);
+                        var win = ParentFinder.FindParent<CreateDepartmentWindow>(this);
+                        win.outcomesToDelete.Add(td.Id);
+                        //GlobalConfig.Connection.DepartmentOutcome_Delete(td.Id);
                     }
                 }
             }

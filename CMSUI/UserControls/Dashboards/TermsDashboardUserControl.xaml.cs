@@ -97,5 +97,13 @@ namespace CMSUI.UserControls
             LoadTerms();
             WireUpLists();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            string searchValue = searchText.Text;
+            Terms = GlobalConfig.Connection.GetActiveTerm_BySearchValue(searchValue);
+            termsList.ItemsSource = Terms;
+            WireUpLists();
+        }
     }
 }

@@ -129,5 +129,13 @@ namespace CMSUI.UserControls
             LoadDepartments();
             WireUpLists();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            string searchValue = searchText.Text;
+            Departments = GlobalConfig.Connection.GetDepartment_BySearchValue(searchValue);
+            depatmentsList.ItemsSource = Departments;
+            WireUpLists();
+        }
     }
 }

@@ -32,7 +32,7 @@
             <RowDefinition Height="10"/>
         </Grid.RowDefinitions>
         <Button Grid.Row="1" Grid.Column="4" Content="Search"
-                Margin="0 5 0 5"/>
+                Margin="0 5 0 5" Click="Button_Click"/>
         <TextBox x:Name="searchText"
             Grid.Column="3" Grid.Row="1" 
                  Margin="0 5 10 5" Width="150"

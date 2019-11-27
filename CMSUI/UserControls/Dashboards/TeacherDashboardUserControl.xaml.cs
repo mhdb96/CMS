@@ -99,5 +99,13 @@ namespace CMSUI.UserControls
             LoadTeachers();
             WireUpLists();
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            string searchValue = searchText.Text;
+            Teachers = GlobalConfig.Connection.GetTeacher_BySearchValue(searchValue);
+            teachersGrid.ItemsSource = Teachers;
+            WireUpLists();
+        }
     }
 }
