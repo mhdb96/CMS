@@ -28,6 +28,9 @@ namespace CMSUI.CreateForms
         ICouresRequester CallingWindow;
         List<EducationalYearModel> EduYears;
 
+        public List<int> outcomesToDelete = new List<int>();
+
+
         bool update;
         CourseModel course = new CourseModel();
         List<CourseOutcomeModel> newCourseOutcomes = new List<CourseOutcomeModel>();
@@ -151,7 +154,11 @@ namespace CMSUI.CreateForms
                         {
                             GlobalConfig.Connection.UpdateCourseOutcome(cO);
                         }
-                    }                    
+                    }
+                    foreach (var delete in outcomesToDelete)
+                    {
+                        GlobalConfig.Connection.CourseOutcome_Delete(delete);
+                    }
                     GlobalConfig.Connection.UpdateCourse(course);
                     CallingWindow.CourseUpdateComplete(course);
 
