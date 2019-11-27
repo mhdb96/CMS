@@ -1,7 +1,9 @@
 ﻿using CMSLibrary;
 using CMSLibrary.Models;
 using CMSUI.CreateForms;
+using CMSUI.Panels;
 using CMSUI.Requesters;
+using MahApps.Metro.Controls.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -65,7 +67,7 @@ namespace CMSUI.UserControls
 
         }
 
-        private void DeleteTermBtn_Click(object sender, RoutedEventArgs e)
+        private async void DeleteTermBtn_Click(object sender, RoutedEventArgs e)
         {
             Button btn = (Button)sender;
             ActiveTermModel model = new ActiveTermModel();
@@ -80,6 +82,10 @@ namespace CMSUI.UserControls
             }
             else
             {
+                AdminPanelWindow parent = ParentFinder.FindParent<AdminPanelWindow>(this);
+                await parent.ShowMessageOnAdmin("Deletion Error",
+                    "The selected term can't be deleted beacause it has an exam",
+                    MessageDialogStyle.Affirmative);
                 // TODO - ADD a MessageBox
             }
         }

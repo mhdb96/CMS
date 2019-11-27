@@ -115,8 +115,7 @@ namespace CMSUI.EvaluationWindows
             else
             {
                 ShowData();
-            }
-            
+            }            
         }
 
         void ShowData()
@@ -182,7 +181,9 @@ namespace CMSUI.EvaluationWindows
                         GlobalConfig.Connection.CreteQuestionOutcome(model);
                     }
                 }
-            }            
+            }
+            CallingWindow.ExamComplete(Exam);
+            this.Close();
         }
 
         private void CancelExamBtn_Click(object sender, RoutedEventArgs e)

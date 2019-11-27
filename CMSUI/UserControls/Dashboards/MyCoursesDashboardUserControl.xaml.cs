@@ -55,8 +55,7 @@ namespace CMSUI.UserControls
 
         public MyCoursesDashboardUserControl()
         {
-            InitializeComponent();
-            //Loaded += UserControl_Loaded;            
+            InitializeComponent();            
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -65,8 +64,7 @@ namespace CMSUI.UserControls
             if(MyAdmin != null)
             {
                 insertStudentBtn.Visibility = Visibility.Visible;
-            }
-            
+            }            
         }
 
         private void LoadMyAssignments()
@@ -196,7 +194,8 @@ namespace CMSUI.UserControls
 
         public void ExamComplete(ExamModel model)
         {
-            throw new NotImplementedException();
+            MyExams.Add(model);
+            WireUpLists(MyExams);
         }
 
         public UserModel GetUserInfo()
