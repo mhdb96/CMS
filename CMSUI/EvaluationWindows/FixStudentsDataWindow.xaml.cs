@@ -35,11 +35,6 @@ namespace CMSUI.EvaluationWindows
             GetStudentsAnswers();
         }
 
-        public FixStudentsDataWindow(CreateExamWindow createExamWindow, Evaluate evaluator)
-        {
-            this.createExamWindow = createExamWindow;
-            this.evaluator = evaluator;
-        }
 
         List<StudentDataModel> data = new List<StudentDataModel>();
         private CreateExamWindow createExamWindow;
@@ -55,6 +50,8 @@ namespace CMSUI.EvaluationWindows
                 sd.lastName.Text = NamesFixer(ans.Student.LastName);
                 sd.regNo.Text = ans.Student.RegNo.ToString();
                 sd.firstName.Text = NamesFixer(ans.Student.FirstName);
+                sd.errorType.Visibility = Visibility.Visible;
+                sd.errorTypeText.Text = ans.ErrorType;
                 students.Children.Add(sd);
                 i++;
             }

@@ -33,16 +33,10 @@ namespace CMSUI.UserControls
             TagData td = (TagData)this.Tag;
             if (td.IsDeletable == true)
             {
-                Button btn = sender as Button;
-                var conditionUserControl = FindParent<OutcomeUserControl>(btn);
-                if (conditionUserControl != null)
-                {
-                    var sp = FindParent<StackPanel>(conditionUserControl);
-                    if (sp != null)
-                        sp.Children.Remove(conditionUserControl);
-
-                }
-                if(!td.IsNew)
+                var sp = ParentFinder.FindParent<StackPanel>(this);
+                if (sp != null)
+                    sp.Children.Remove(this);
+                if (!td.IsNew)
                 {
                     if(td.Type == OutcomeType.CourseOutcome)
                     {
@@ -52,10 +46,8 @@ namespace CMSUI.UserControls
                     {
                         GlobalConfig.Connection.DepartmentOutcome_Delete(td.Id);
                     }
-                    
                 }
             }
-            
         }
         // TODO - Try to understand this Func.
         private static T FindParent<T>(DependencyObject dependencyObject) where T : DependencyObject

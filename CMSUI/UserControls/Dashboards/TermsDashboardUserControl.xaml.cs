@@ -91,5 +91,11 @@ namespace CMSUI.UserControls
             WireUpLists();
             termsList.SelectedIndex = termsList.Items.Count - 1;
         }
+
+        private void UpdateDataSourceBtn_Click(object sender, RoutedEventArgs e)
+        {
+            LoadTerms();
+            WireUpLists();
+        }
     }
 }

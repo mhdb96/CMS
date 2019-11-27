@@ -24,5 +24,12 @@ namespace CMSUI.UserControls
         {
             InitializeComponent();
         }
+
+        private void DeleteStudentData_Click(object sender, RoutedEventArgs e)
+        {
+            var sp = ParentFinder.FindParent<StackPanel>(this);
+            if (sp != null)
+                sp.Children.Remove(this);
+        }
     }
 }

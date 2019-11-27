@@ -25,6 +25,7 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="10"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -42,6 +43,20 @@
                  Controls:TextBoxHelper.Watermark="Search Teacher"            
                  Controls:TextBoxHelper.ClearTextButton="True"       
                  TextWrapping="Wrap"/>
+        <Button    
+            Grid.Column="5" Grid.Row="1"
+            x:Name="updateDataSourceBtn"
+            Click="UpdateDataSourceBtn_Click"
+                ToolTip="Refresh teachers list"                
+                Margin="5"                
+                VerticalAlignment="Center"
+                HorizontalAlignment="Right">
+            <StackPanel Orientation="Horizontal">
+                <iconPacks:PackIconOcticons                               
+                        Foreground="Green"                        
+                        Kind="Sync" />
+            </StackPanel>
+        </Button>
         <UniformGrid Margin="5 0 5 0" Rows="1" Grid.Column="1" Grid.Row="1">
             <TextBlock Text="Teachers List" Style="{StaticResource myTextBlockStyle}"/>
             <Button                                
@@ -62,7 +77,7 @@
             SelectionMode="Single"
             x:Name="teachersGrid"
             Grid.Row="2" Grid.Column="1" Grid.RowSpan="2"            
-            Grid.ColumnSpan="4"                       
+            Grid.ColumnSpan="5"                       
             Margin="2" IsReadOnly="True"
             AutoGenerateColumns="False"
             CanUserSortColumns="True"

@@ -20,6 +20,8 @@
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="10"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
@@ -42,6 +44,31 @@
                    Controls:TextBoxHelper.Watermark="Enter RegNo"
                    Margin="10 1 10 1" Width="90"
                    Text="{Binding RegNo, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"/>
+            <Button x:Name="deleteStudentData" Click="DeleteStudentData_Click" 
+                    Grid.Column="5"
+                    Grid.Row="1"
+                        Margin="10 0 5 0"
+                Width="25"
+                        Height="25"
+                        Style="{DynamicResource MahApps.Metro.Styles.MetroCircleButtonStyle}">
+                <iconPacks:PackIconOcticons 
+                    VerticalAlignment="Center"
+                    Width="10" Foreground="Red"                      
+                    Height="10"                                              
+                    Kind="x"/>
+            </Button>
+            <StackPanel 
+                Grid.Column="6"
+                    Grid.Row="1"
+                x:Name="errorType"                        
+                        Orientation="Horizontal" 
+                        Visibility="Collapsed"
+                        Margin="5">
+                <iconPacks:PackIconMaterial Kind="AlertCircle" VerticalAlignment="Center" Width="15" Height="15" Margin="5 0 0 0" Foreground="Red"/>
+                <TextBlock 
+                    x:Name="errorTypeText"
+                    VerticalAlignment="Center" Margin="5 0 0 0"/>
+            </StackPanel>
         </Grid>
     </Border>
     

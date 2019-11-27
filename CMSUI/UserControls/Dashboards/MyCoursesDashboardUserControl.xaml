@@ -25,6 +25,7 @@
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="10"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -73,6 +74,20 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
         </StackPanel>
+        <Button    
+            Grid.Column="7" Grid.Row="1"
+            x:Name="updateDataSourceBtn"
+            Click="UpdateDataSourceBtn_Click"
+                ToolTip="Refresh courses list"                
+                Margin="5"                
+                VerticalAlignment="Center"
+                HorizontalAlignment="Right">
+            <StackPanel Orientation="Horizontal">
+                <iconPacks:PackIconOcticons                               
+                        Foreground="Green"                        
+                        Kind="Sync" />
+            </StackPanel>
+        </Button>
         <ListBox 
             x:Name="myCoursesList"
             Grid.Row="2" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="2"  
@@ -82,9 +97,18 @@
             Margin="2">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <UniformGrid Margin="10" Rows="1">
-                        <TextBlock Text="{Binding Course.Name}" />
-                        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                    <Grid Margin="10">
+
+                        <Grid.ColumnDefinitions >
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="{Binding Course.Name}" Grid.Column="0" Grid.Row="0" />
+                        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal"
+                                    Grid.Column="1" Grid.Row="0">
                             <Button
                                 ToolTip="Add an exam"
                                 Margin="5"
@@ -96,7 +120,7 @@
                             Kind="PlusBoxOutline" />
                             </Button>
                         </StackPanel>
-                    </UniformGrid>
+                    </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
@@ -122,7 +146,7 @@
             SelectionMode="Single"
             x:Name="examsGrid"
             Grid.Row="2" Grid.Column="3" Grid.RowSpan="2"            
-            Grid.ColumnSpan="4"                       
+            Grid.ColumnSpan="5"                       
             Margin="2" IsReadOnly="True"
             AutoGenerateColumns="False"
             CanUserSortColumns="True"

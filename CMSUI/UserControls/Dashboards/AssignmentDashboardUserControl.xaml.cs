@@ -154,5 +154,11 @@ namespace CMSUI.UserControls
             WireUpLists(Assignments);
             assignmentsGrid.SelectedIndex = assignmentsGrid.Items.Count - 1;
         }
+
+        private void UpdateDataSourceBtn_Click(object sender, RoutedEventArgs e)
+        {
+            LoadAssignments();
+            WireUpLists(Assignments);
+        }
     }
 }

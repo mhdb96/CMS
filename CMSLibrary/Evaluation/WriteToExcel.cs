@@ -19,20 +19,24 @@ namespace CMSLibrary.Evaluation
         ExamModel Exam;
         int[] startingLines = new int[] { 0, 0, 0 };
 
-        public WriteToExcel()
-        {
-            Exam = GlobalConfig.Connection.GetExam_ById(20);
-            Exam.Assignment.Course.CourseOutcomes = GlobalConfig.Connection.GetCourseOutcome_GetByExamId(Exam.Id);
-            excel.CreateNewFile();
-            excel.CreateNewSheet();
-            excel.CreateNewSheet();
-            //WriteDataToExcelSheet1(Exam);
-            WriteDataToExcelSheet();
-            SaveFileDialog saveFile = new SaveFileDialog();
-            saveFile.ShowDialog();
-            excel.SaveAs(saveFile.FileName);
-            excel.Close();
-        }
+        //public WriteToExcel()
+        //{
+        //    Exam = GlobalConfig.Connection.GetExam_ById(20);
+        //    Exam.Assignment.Course.CourseOutcomes = GlobalConfig.Connection.GetCourseOutcome_GetByExamId(Exam.Id);
+        //    excel.CreateNewFile();
+        //    excel.CreateNewSheet();
+        //    excel.CreateNewSheet();
+        //    //WriteDataToExcelSheet1(Exam);
+        //    WriteDataToExcelSheet();
+        //    SaveFileDialog saveFile = new SaveFileDialog();
+        //    DialogResult r = saveFile.ShowDialog();
+        //    if ( r != DialogResult.Abort || r != DialogResult.Cancel) 
+        //    {
+        //        excel.SaveAs(saveFile.FileName);
+        //    }
+            
+        //    excel.Close();
+        //}
         public WriteToExcel(ExamModel model)
         {
             Exam = model;
@@ -42,10 +46,18 @@ namespace CMSLibrary.Evaluation
             excel.CreateNewSheet();
             WriteDataToExcelSheet();      
             SaveFileDialog saveFile = new SaveFileDialog();
-            saveFile.ShowDialog();
-            excel.SaveAs(saveFile.FileName);
-            excel.Close();
-            model.FilePath = saveFile.FileName;
+            DialogResult r = saveFile.ShowDialog();
+            if (r == DialogResult.Abort || r == DialogResult.Cancel)
+            {
+                
+            }
+            else
+            {
+                excel.SaveAs(saveFile.FileName);
+                model.FilePath = saveFile.FileName;
+                excel.Close();
+            }
+            
         }
         private void WriteDataToExcelSheet()
         {

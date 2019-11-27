@@ -1,0 +1,79 @@
+﻿<Controls:MetroWindow x:Class="CMSUI.LoginWindows.DevelopersInfoWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:fsxaml="http://github.com/fsprojects/FsXaml"
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks" 
+        xmlns:local="clr-namespace:CMSUI.LoginWindows"
+        mc:Ignorable="d"
+        Title="Developers Info" Height="500" Width="350" WindowStartupLocation="CenterScreen"
+                      ResizeMode="NoResize">
+    <Window.Resources>
+        <Style x:Key = "myTextBlockStyle" TargetType = "TextBlock">
+            <Setter Property = "VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="0 0 10 0"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions >
+            <ColumnDefinition Width="40"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="40"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <TextBlock 
+            Margin="10 10 10 30"
+            FontSize="18"            
+                   HorizontalAlignment="Center"
+                   TextAlignment="Center"
+                   Grid.Row="3" Grid.Column="1"
+                   Width="auto"
+                   TextWrapping="Wrap" FontFamily="Segoe UI Semibold">
+            Development Team
+        </TextBlock>
+        <Image Width="auto" Grid.Row="2" Grid.Column="1" Margin="10 10" Source="/images/xdebuggers-logo.png"/>
+
+        <TextBlock 
+            FontFamily="Segoe UI Semibold"
+            Grid.Row="4" Grid.Column="1" 
+            Margin="10 10 10 2"    
+            Width="auto"         
+            FontSize="18" 
+            TextAlignment="Center"
+            Text="Muhammed Bedavi"/>
+        <TextBlock
+            TextAlignment="Center"
+            FontFamily="Segoe UI Semibold"
+            Grid.Row="5" Grid.Column="1" 
+            FontSize="18" 
+            Margin="10 2 10 2"    
+            Width="auto"                       
+            Text="Onur Kantar"/>
+        <TextBlock Grid.Row="6" Grid.Column="1"
+                   TextAlignment="Center"
+            FontFamily="Segoe UI Semibold"
+            FontSize="18" 
+            Margin="10 20 10 10"    
+            Width="auto" >                                
+            <Hyperlink NavigateUri="https://github.com/mhdb96/YGL-Projcet-1" RequestNavigate="Hyperlink_RequestNavigate">
+                Project Github Link
+            </Hyperlink>
+        </TextBlock>
+
+
+    </Grid>
+</Controls:MetroWindow>
+

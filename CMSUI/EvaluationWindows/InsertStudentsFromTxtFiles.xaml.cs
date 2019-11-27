@@ -18,6 +18,7 @@ using System.Windows.Shapes;
 using CMSUI.UserControls;
 using CMSLibrary.Models;
 using CMSLibrary.Evaluation;
+using MahApps.Metro.Controls.Dialogs;
 
 namespace CMSUI.EvaluationWindows
 {
@@ -82,7 +83,11 @@ namespace CMSUI.EvaluationWindows
                 {
                     t = t.Remove(t.Length - 1);
                 }
-            }
+                if(t.First() == ' ')
+                {
+                    t = t.Remove(0);
+                }
+            }            
             return t;
         }
 
@@ -102,13 +107,15 @@ namespace CMSUI.EvaluationWindows
             GetStudentsData();
         }
 
-        private void InsertStudents_Click(object sender, RoutedEventArgs e)
+        private async void InsertStudents_Click(object sender, RoutedEventArgs e)
         {
+            string studentNo = "";
             try
             {
                 List<StudentModel> studentModels = new List<StudentModel>();
                 foreach (StudentDataUserControl student in students.Children)
                 {
+                    studentNo = student.number.Text;
                     StudentDataModel model = new StudentDataModel();
                     model.FirstName = student.firstName.Text;
                     model.LastName = student.lastName.Text;
@@ -123,24 +130,35 @@ namespace CMSUI.EvaluationWindows
                     };
                     studentModels.Add(s);
                 }
-
+                bool hasErrors = false;
+                int errorsCount = 0;
                 StringBuilder sb = new StringBuilder();
+                sb.Append($"At {DateTime.Now.ToString()} new error log was created{Environment.NewLine}");
                 foreach (StudentModel s in studentModels)
                 {
                     string err = GlobalConfig.Connection.CreateStudent(s);
                     if(err != null)
                     {
+                        hasErrors = true;
+                        errorsCount++;
                         sb.Append(err);
                     }
                 }
-                string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-                File.AppendAllText(path + "\\log.txt", sb.ToString());
-                sb.Clear();
-
+                if(hasErrors)
+                {                    
+                    sb.Append($"==================================================================={Environment.NewLine}");
+                    string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                    File.AppendAllText(path + "\\log.txt", sb.ToString());
+                    sb.Clear();
+                    await this.ShowMessageAsync("Error in the Creating Porccess", $"The creating proccess finished with {errorsCount} errors{Environment.NewLine}" +
+                        $"Please check Log file on the desktop for more information", MessageDialogStyle.Affirmative, null);
+                }                
+                this.Close();
             }
             catch (Exception er)
             {
-                System.Windows.MessageBox.Show(er.Message);
+                error.Visibility = Visibility.Visible;
+                errorText.Text = $"Error at {studentNo} line: {er.Message}";
             }
         }
     }

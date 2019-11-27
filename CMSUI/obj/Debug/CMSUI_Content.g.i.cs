@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("artboard-1.ico")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/xdebuggers-logo.png")]
 
 

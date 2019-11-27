@@ -9,7 +9,7 @@
         xmlns:local="clr-namespace:CMSUI"
         xmlns:MyControls="clr-namespace:CMSUI.UserControls"
         mc:Ignorable="d"
-        Title="InsertStudentsFromTxtFiles" Height="450" Width="800">
+        Title="InsertStudentsFromTxtFiles" Height="450" Width="600">
     <Window.Resources>
         <Style x:Key = "myTextBlockStyle" TargetType = "TextBlock">
             <Setter Property = "VerticalAlignment" Value="Center" />
@@ -40,10 +40,23 @@
                     Height="2"
                     x:Name="chooseStudentsFile"
                 Click="ChooseStudentsFile_Click"/>
-            <Button Grid.Column="1" Grid.Row="4" Content="Insert Students"
+        <StackPanel Grid.Column="1" Grid.Row="4" Orientation="Horizontal"
+                    Grid.ColumnSpan="5">
+            <Button  Content="Insert Students"
                     Height="2"
                     x:Name="insertStudents"
                 Click="InsertStudents_Click"/>
+            <StackPanel x:Name="error"                        
+                        Orientation="Horizontal" 
+                        Visibility="Collapsed"
+                        Margin="5">
+                <iconPacks:PackIconMaterial Kind="AlertCircle" VerticalAlignment="Center" Width="15" Height="15" Margin="5 0 0 0" Foreground="Red"/>
+                <TextBlock 
+                    x:Name="errorText"
+                    Text="Username is required" VerticalAlignment="Center" Margin="5 0 0 0"/>
+            </StackPanel>
+        </StackPanel>
+            
         <TextBlock Text="Select:" Grid.Column="4" Grid.Row="1" Style="{StaticResource myTextBlockStyle}"/>
             <StackPanel Orientation="Horizontal" Grid.Column="5" Grid.Row="1">
                 <!--<TextBlock Text="Department" Style="{StaticResource myTextBlockStyle}"/>-->

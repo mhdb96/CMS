@@ -18,6 +18,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using CMSUI.LoginWindows;
+using CMSUI.EvaluationWindows;
 
 namespace CMSUI
 {
@@ -49,7 +51,9 @@ namespace CMSUI
         }
 
         private void LoginBtn_Click(object sender, RoutedEventArgs e)
-        {           
+        {
+            errorUserName.Visibility = Visibility.Collapsed;
+            errorPassword.Visibility = Visibility.Collapsed;
             User = new UserModel
             {
                 UserName = usernameText.Text,
@@ -58,15 +62,16 @@ namespace CMSUI
             AuthenticationState authState = Login.Check(User);
             if (authState == AuthenticationState.UserNotFound)
             {
-                MessageBox.Show("not found");
+                errorUsernameText.Text = "User not found";
+                errorUserName.Visibility = Visibility.Visible;
             }
             else if (authState == AuthenticationState.WrongPassword)
             {
-                MessageBox.Show("wrong");
+                errorPasswordText.Text = "You've entered a wrong password";
+                errorPassword.Visibility = Visibility.Visible;
             }
             else if (authState == AuthenticationState.Authenticated)
             {
-                MessageBox.Show("success");
                 if (User.Role.Name == "Admin")
                 {
                     AdminPanelWindow win = new AdminPanelWindow(this);
@@ -93,7 +98,7 @@ namespace CMSUI
             var controller = await this.ShowProgressAsync("Please wait...", "Connectting to the database", settings: mySettings);
             controller.SetIndeterminate();                        
             string errMsg =  await Task.Run(() => GlobalConfig.Connection.CheckConniction()) ;
-            await Task.Delay(1500);
+            await Task.Delay(1000);
             await controller.CloseAsync();
             if (errMsg == "")
             {            
@@ -108,6 +113,18 @@ namespace CMSUI
         private async void MetroWindow_ContentRendered(object sender, EventArgs e)
         {
             await ShowProgressDialogAsync();            
+        }
+
+        private void DatabaseBtn_Click(object sender, RoutedEventArgs e)
+        {
+            DatabaseSettingWindow win = new DatabaseSettingWindow();
+            win.ShowDialog();
+        }
+
+        private void InfoBtn_Click(object sender, RoutedEventArgs e)
+        {
+            DevelopersInfoWindow win = new DevelopersInfoWindow();
+            win.ShowDialog();
         }
     }
 }

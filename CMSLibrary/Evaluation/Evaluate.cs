@@ -38,9 +38,27 @@ namespace CMSLibrary.Evaluation
             List<StudentAnswersModel> err = new List<StudentAnswersModel>();
             foreach(StudentAnswersModel ans in StudentsAnswersWithErrors)
             {
+                bool isDuplicate = false;
                 StudentModel model = GlobalConfig.Connection.GetStudent_ByRegNo(ans.Student.RegNo);
+                var duplicate = StudentsAnswers.Find(s => s.Student.RegNo == model.RegNo);
+                if (duplicate != null)
+                {
+                    model = null;
+                    isDuplicate = true;
+                    duplicate.ErrorType = "Duplicated Value, Fix RegNo";
+                    err.Add(duplicate);
+                    StudentsAnswers.Remove(duplicate);
+                }
                 if (model == null)
                 {
+                    if (isDuplicate)
+                    {
+                        ans.ErrorType = "Duplicated Value, Fix RegNo";
+                    }
+                    else
+                    {
+                        ans.ErrorType = "Student not found in DB";
+                    }
                     err.Add(ans);
                 }
                 else
@@ -59,12 +77,27 @@ namespace CMSLibrary.Evaluation
             results = File.ReadAllLines(StudentListPath, Encoding.GetEncoding("iso-8859-9"));
             foreach (string listString in results)
             {
+                string line = listString.Replace(" ", "");
+                if(line == "")
+                {
+                    continue;
+                }
                 StudentAnswersModel studentAnswers = new StudentAnswersModel();
                 StudentModel model;
                 int regNo = 0;
+                bool isDuplicate = false;
                 if (Int32.TryParse(listString.Substring(24, 9), out regNo))
                 {
                     model = GlobalConfig.Connection.GetStudent_ByRegNo(regNo);
+                    var duplicate =  StudentsAnswers.Find(s => s.Student.RegNo == model.RegNo);
+                    if(duplicate != null)
+                    {
+                        model = null;
+                        isDuplicate = true;
+                        duplicate.ErrorType = "Duplicated Value, Fix RegNo";
+                        StudentsAnswersWithErrors.Add(duplicate);
+                        StudentsAnswers.Remove(duplicate);
+                    }
                 }
                 else
                 {
@@ -72,6 +105,15 @@ namespace CMSLibrary.Evaluation
                 }
                 if (model == null)
                 {
+                    if(isDuplicate)
+                    {
+                        studentAnswers.ErrorType = "Duplicated Value, Fix RegNo";
+                    }
+                    else
+                    {
+                        studentAnswers.ErrorType = "Student not found in DB";
+                    }
+                    
                     studentAnswers.Student.FirstName = listString.Substring(0, 12);
                     studentAnswers.Student.LastName = listString.Substring(12, 12);
                     studentAnswers.Student.RegNo = regNo;

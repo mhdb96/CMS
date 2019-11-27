@@ -1,5 +1,7 @@
 ﻿using CMSLibrary.Models;
 using CMSUI.Requesters;
+using CMSUI.EvaluationWindows;
+using MahApps.Metro.Controls.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,8 +30,11 @@ namespace CMSUI.Panels
         {
             InitializeComponent();
             CallingWindow = caller;
-            Admin = CallingWindow.GetAdminInfo();
-
+            Admin = CallingWindow.GetAdminInfo();            
+        }
+        public async Task<MessageDialogResult> ShowMessageOnAdmin(string title, string message, MessageDialogStyle style)
+        {
+            return await this.ShowMessageAsync(title, message, style, null);    
         }
     }
 }

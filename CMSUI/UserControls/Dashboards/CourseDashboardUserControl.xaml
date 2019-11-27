@@ -21,6 +21,7 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="10"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -38,6 +39,20 @@
                  Controls:TextBoxHelper.Watermark="Search Course"            
                  Controls:TextBoxHelper.ClearTextButton="True"       
                  TextWrapping="Wrap"/>
+        <Button    
+            Grid.Column="5" Grid.Row="1"
+            x:Name="updateDataSourceBtn"
+            Click="UpdateDataSourceBtn_Click"
+                ToolTip="Refresh courses list"                
+                Margin="5"                
+                VerticalAlignment="Center"
+                HorizontalAlignment="Right">
+            <StackPanel Orientation="Horizontal">
+                <iconPacks:PackIconOcticons                               
+                        Foreground="Green"                        
+                        Kind="Sync" />
+            </StackPanel>
+        </Button>
         <UniformGrid Margin="5 0 5 0" Rows="1" Grid.Column="1" Grid.Row="1">
             <TextBlock Text="Courses List" Style="{StaticResource myTextBlockStyle}"/>
             <Button                                
@@ -106,7 +121,7 @@
         </ListBox>
         <ListBox 
             x:Name="courseOutcomesList"
-            Grid.Row="2" Grid.Column="2" Grid.RowSpan="2" Grid.ColumnSpan="3"           
+            Grid.Row="2" Grid.Column="2" Grid.RowSpan="2" Grid.ColumnSpan="4"           
             BorderThickness="1"
             SelectedIndex="0"
             Margin="2">

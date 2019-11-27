@@ -68,8 +68,17 @@ namespace CMSUI.UserControls
 
         private void CoursesList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            CourseModel model = (CourseModel)coursesList.SelectedItem;
-            FindCourseOutcomes(model);
+            if(coursesList.SelectedItem != null)
+            {
+                CourseModel model = (CourseModel)coursesList.SelectedItem;               
+                FindCourseOutcomes(model);                
+            }
+            else
+            {
+                courseOutcomesList.ItemsSource = null;
+            }
+            
+            
         }
         public void FindCourseOutcomes(CourseModel model)
         {
@@ -117,6 +126,12 @@ namespace CMSUI.UserControls
             {
                 // TODO - ADD a MessageBox
             }
+        }
+
+        private void UpdateDataSourceBtn_Click(object sender, RoutedEventArgs e)
+        {
+            LoadCourses();
+            WireUpLists();
         }
     }
 }

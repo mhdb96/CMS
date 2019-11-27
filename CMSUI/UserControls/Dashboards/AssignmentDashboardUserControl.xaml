@@ -23,6 +23,7 @@
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="10"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -48,6 +49,20 @@
                 </StackPanel>
             </Button>
         </UniformGrid>
+        <Button    
+            Grid.Column="6" Grid.Row="1"
+            x:Name="updateDataSourceBtn"
+            Click="UpdateDataSourceBtn_Click"
+                ToolTip="Refresh assignments list"                
+                Margin="5"                
+                VerticalAlignment="Center"
+                HorizontalAlignment="Right">
+            <StackPanel Orientation="Horizontal">
+                <iconPacks:PackIconOcticons                               
+                        Foreground="Green"                        
+                        Kind="Sync" />
+            </StackPanel>
+        </Button>
         <TextBlock Text="Filter By:" Grid.Column="3" Grid.Row="1" Style="{StaticResource myTextBlockStyle}"/>
         <StackPanel Orientation="Horizontal" Grid.Column="4" Grid.Row="1">
             <!--<TextBlock Text="Department" Style="{StaticResource myTextBlockStyle}"/>-->
@@ -89,7 +104,7 @@
             SelectionMode="Single"
             x:Name="assignmentsGrid"
             Grid.Row="2" Grid.Column="1" Grid.RowSpan="2"            
-            Grid.ColumnSpan="5"                       
+            Grid.ColumnSpan="6"                       
             Margin="2" IsReadOnly="True"
             AutoGenerateColumns="False"
             CanUserSortColumns="True"

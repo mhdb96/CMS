@@ -8,7 +8,8 @@
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks" 
         xmlns:local="clr-namespace:CMSUI"
         mc:Ignorable="d"
-        Title="LoginWindow" Height="600" Width="350" WindowStartupLocation="CenterScreen"
+        Title="LoginWindow" Height="500" Width="350" WindowStartupLocation="CenterScreen"
+                      ResizeMode="NoResize"
                       
                       ContentRendered="MetroWindow_ContentRendered">
     <Window.Resources>
@@ -19,41 +20,99 @@
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions >
-                <ColumnDefinition Width="20"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="40"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="40"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="20"/>
+                <RowDefinition Height="*"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
                 <RowDefinition Height="20"/>
             </Grid.RowDefinitions>
-        <TextBlock Text="Welcom"
+        <TextBlock 
+            Margin="10"
+            FontSize="18"            
                    HorizontalAlignment="Center"
-                   Grid.Row="1" Grid.Column="2"/>
-        <TextBox
-            x:Name="usernameText"
-            Grid.Row="2" Grid.Column="2"/>
-        <PasswordBox
-            x:Name="passwordText"
-            Grid.Row="3" Grid.Column="2"/>
+                   TextAlignment="Center"
+                   Grid.Row="3" Grid.Column="1"
+                   Width="auto"
+                   TextWrapping="Wrap" FontFamily="Segoe UI Semibold">
+            Course Management System
+        </TextBlock>
+        <Image Width="auto" Grid.Row="2" Grid.Column="1" Margin="70 10">
+            <Image.Source>
+                <BitmapImage DecodePixelWidth="300" UriSource="/images/logo.png" />
+            </Image.Source>
+        </Image>
+        <StackPanel Grid.Row="5" Grid.Column="1" Margin="10 10 10 2">
+            <TextBox x:Name="usernameText"
+            
+                  Width="auto"
+                 Controls:TextBoxHelper.Watermark="Enter Username"            
+                 Controls:TextBoxHelper.ClearTextButton="True"       
+                 TextWrapping="Wrap"/>
+            <StackPanel x:Name="errorUserName"                        
+                        Orientation="Horizontal" 
+                        Visibility="Collapsed"
+                        Margin="5">
+                <iconPacks:PackIconMaterial Kind="AlertCircle" VerticalAlignment="Center" Width="15" Height="15" Margin="5 0 0 0" Foreground="Red"/>
+                <TextBlock 
+                    x:Name="errorUsernameText"
+                    Text="Username is required" VerticalAlignment="Center" Margin="5 0 0 0"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Grid.Row="6" Grid.Column="1" Margin="10 2 10 10">
+            <PasswordBox x:Name="passwordText"            
+                  Width="auto"
+                     Style="{StaticResource MetroButtonRevealedPasswordBox}"
+                 Controls:TextBoxHelper.Watermark="Enter Password"            
+                 Controls:TextBoxHelper.ClearTextButton="True"/>
+            <StackPanel x:Name="errorPassword" Margin="5" 
+                    Orientation="Horizontal" 
+                    Visibility="Collapsed">
+                <iconPacks:PackIconMaterial Kind="AlertCircle" VerticalAlignment="Center" Width="15" Height="15" Margin="5 0 0 0" Foreground="Red"/>
+                <TextBlock x:Name="errorPasswordText"
+                           Text="Password is required" VerticalAlignment="Center" Margin="5 0 0 0"/>
+            </StackPanel>
+        </StackPanel>
+        
         <Button 
+            Margin="10 5 10 2"
             x:Name="loginBtn" Click="LoginBtn_Click"
-            Grid.Row="4" Grid.Column="2"
+            Grid.Row="7" Grid.Column="1"
             Content="login"/>
-        <Button 
-            Grid.Row="5" Grid.Column="2"
-            Content="database setting"/>
+        <StackPanel Grid.Row="9" Grid.Column="1">
+            <Grid Width="auto">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button
+                    x:Name="databaseBtn"
+                    Click="DatabaseBtn_Click"
+                    Grid.Column="0"
+                    Margin="10 10 5 10"
+                    Width="auto"
+                    Content="database setting"/>
+                <Button 
+                    x:Name="infoBtn"
+                    Click="InfoBtn_Click"
+                    Grid.Column="1"
+                    Margin="5 10 10 10"
+                    Width="auto"
+                    Content="Developers Info"
+                        />
+            </Grid>
+            
+        </StackPanel>
+        
     </Grid>
 </Controls:MetroWindow>

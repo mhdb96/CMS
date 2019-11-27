@@ -93,5 +93,11 @@ namespace CMSUI.UserControls
             WireUpLists();
 
         }
+
+        private void UpdateDataSourceBtn_Click(object sender, RoutedEventArgs e)
+        {
+            LoadTeachers();
+            WireUpLists();
+        }
     }
 }

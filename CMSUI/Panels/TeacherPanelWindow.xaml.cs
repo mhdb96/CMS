@@ -1,5 +1,6 @@
 ﻿using CMSLibrary.Models;
 using CMSUI.Requesters;
+using MahApps.Metro.Controls.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,6 +49,11 @@ namespace CMSUI.Panels
         {
             get { return (TeacherModel)GetValue(TeacherProperty); }
             set { SetValue(TeacherProperty, value); }
-        }        
+        }
+
+        public async Task<MessageDialogResult> ShowMessageOnTeacher(string title, string message, MessageDialogStyle style)
+        {
+            return await this.ShowMessageAsync(title, message, style, null);
+        }
     }
 }

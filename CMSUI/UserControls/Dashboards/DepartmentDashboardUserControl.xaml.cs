@@ -82,8 +82,16 @@ namespace CMSUI.UserControls
 
         private void DepatmentsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            DepartmentModel model = (DepartmentModel)depatmentsList.SelectedItem;
-            FindCourseOutcomes(model);
+            if(depatmentsList.SelectedItem != null)
+            {
+                DepartmentModel model = (DepartmentModel)depatmentsList.SelectedItem;
+                FindCourseOutcomes(model);
+            }
+            else
+            {
+                depatmentOutcomesList.ItemsSource = null;
+            }
+            
         }
 
         private void FindCourseOutcomes(DepartmentModel model)
@@ -114,6 +122,12 @@ namespace CMSUI.UserControls
             Departments.Add(model);
             WireUpLists();
             depatmentsList.SelectedIndex = depatmentsList.Items.Count - 1;
+        }
+
+        private void UpdateDataSourceBtn_Click(object sender, RoutedEventArgs e)
+        {
+            LoadDepartments();
+            WireUpLists();
         }
     }
 }

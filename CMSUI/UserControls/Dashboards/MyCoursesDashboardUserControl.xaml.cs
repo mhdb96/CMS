@@ -3,6 +3,8 @@ using CMSLibrary.Evaluation;
 using CMSLibrary.Models;
 using CMSUI.EvaluationWindows;
 using CMSUI.Requesters;
+using CMSUI.Panels;
+using CMSUI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +19,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MahApps.Metro.Controls.Dialogs;
 
 namespace CMSUI.UserControls
 {
@@ -31,7 +34,6 @@ namespace CMSUI.UserControls
         AssignmentModel SelectedAssignment;
         List<ActiveTermModel> MyTerms = new List<ActiveTermModel>();
         List<DepartmentModel> MyDepartments = new List<DepartmentModel>();
-        //List<CourseModel> MyCourses;
 
         public static readonly DependencyProperty MyTeacherProperty =
         DependencyProperty.Register("MyTeacher", typeof(TeacherModel), typeof(MyCoursesDashboardUserControl), new FrameworkPropertyMetadata(null));
@@ -56,6 +58,14 @@ namespace CMSUI.UserControls
         private void LoadMyAssignments()
         {
             MyAssignments = GlobalConfig.Connection.GetAssignment_ByTeacherId(MyTeacher.Id);
+            if (MyTerms.Count != 0)
+            {
+                MyTerms.Clear();
+                MyDepartments.Clear();
+                departmentsCombobox.ItemsSource = null;
+                activeTermsCombobox.ItemsSource = null;
+
+            }
             foreach (AssignmentModel model in MyAssignments)
             {
                 MyTerms.Add(model.ActiveTerm);
@@ -143,7 +153,6 @@ namespace CMSUI.UserControls
             if (myCoursesList.ItemsSource != null && myCoursesList.SelectedItem != null)
             {
                 AssignmentModel model = (AssignmentModel)myCoursesList.SelectedItem;
-
                 MyExams = GlobalConfig.Connection.GetExam_ByAssignmentId(model.Id);
                 foreach (ExamModel exam in MyExams)
                 {
@@ -161,8 +170,7 @@ namespace CMSUI.UserControls
             Button btn = (Button)sender;
             SelectedAssignment = (AssignmentModel)btn.Tag;
             CreateExamWindow win = new CreateExamWindow(this);
-            win.ShowDialog();
-            
+            win.ShowDialog();            
         }
 
         public void ExamComplete(ExamModel model)
@@ -191,11 +199,15 @@ namespace CMSUI.UserControls
             ExamModel model = (ExamModel)examsGrid.SelectedItem;
             GlobalConfig.Connection.DeleteExam_ById(model.Id);
             MyExams.Remove(model);
-            WireUpLists(MyExams);
-            
+            WireUpLists(MyExams);            
         }
 
         private void CreateExcelFileBtn_Click(object sender, RoutedEventArgs e)
+        {
+            CreateExcelFile();
+        }
+
+        private void CreateExcelFile()
         {
             ExamModel model = (ExamModel)examsGrid.SelectedItem;
             WriteToExcel w = new WriteToExcel(model);
@@ -205,10 +217,30 @@ namespace CMSUI.UserControls
             myCoursesList.SelectedIndex = t;
         }
 
-        private void FileLink_Click(object sender, RoutedEventArgs e)
+        private async void FileLink_Click(object sender, RoutedEventArgs e)
         {
             ExamModel model = (ExamModel)examsGrid.SelectedItem;
-            System.Diagnostics.Process.Start(model.FilePath);
+            try
+            {
+                System.Diagnostics.Process.Start(model.FilePath);
+            }
+            catch (Exception)
+            {
+                TeacherPanelWindow parent =  ParentFinder.FindParent<TeacherPanelWindow>(this);
+                MessageDialogResult r = await parent.ShowMessageOnTeacher("File Not Found",
+                    "The requested excel file wasn't found. Do you want to create a new file?", 
+                    MessageDialogStyle.AffirmativeAndNegative);
+                if(r == MessageDialogResult.Affirmative)
+                {
+                    CreateExcelFile();
+                }
+            }
+            
+        }
+        private void UpdateDataSourceBtn_Click(object sender, RoutedEventArgs e)
+        {
+            LoadMyAssignments();
+            WireUpLists(MyAssignments);
         }
     }
 }
