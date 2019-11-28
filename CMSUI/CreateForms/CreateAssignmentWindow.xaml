@@ -61,7 +61,7 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
         <StackPanel x:Name="errorDepartment" Grid.Column="3" Grid.Row="2" Orientation="Horizontal" Grid.ColumnSpan="3" Visibility="Hidden">
-            <iconPacks:PackIconMaterial Kind="AlertCircle" VerticalAlignment="Center" Width="20" Height="20" Margin="5 0 0 0" Foreground="Red"/>
+            <iconPacks:PackIconMaterial Kind="AlertCircle" VerticalAlignment="Center" Width="20" Height="20" Margin="5 0 0 0" Foreground="Crimson"/>
             <TextBlock Text="You need to choose a department" FontSize="10pt" VerticalAlignment="Center" Margin="5 0 0 0"/>
         </StackPanel>
         <ComboBox x:Name="activeTermsCombobox"
@@ -77,7 +77,7 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
         <StackPanel x:Name="errorActiveTerm" Grid.Column="3" Grid.Row="3" Orientation="Horizontal" Grid.ColumnSpan="3" Visibility="Hidden">
-            <iconPacks:PackIconMaterial Kind="AlertCircle" VerticalAlignment="Center" Width="20" Height="20" Margin="5 0 0 0" Foreground="Red"/>
+            <iconPacks:PackIconMaterial Kind="AlertCircle" VerticalAlignment="Center" Width="20" Height="20" Margin="5 0 0 0" Foreground="Crimson"/>
             <TextBlock Text="You need to choose a term" FontSize="10pt" VerticalAlignment="Center" Margin="5 0 0 0"/>
         </StackPanel>
         <ComboBox x:Name="coursesCombobox"
@@ -94,7 +94,7 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
         <StackPanel x:Name="errorCourse" Grid.Column="3" Grid.Row="4" Orientation="Horizontal" Grid.ColumnSpan="3" Visibility="Hidden">
-            <iconPacks:PackIconMaterial Kind="AlertCircle" VerticalAlignment="Center" Width="20" Height="20" Margin="5 0 0 0" Foreground="Red"/>
+            <iconPacks:PackIconMaterial Kind="AlertCircle" VerticalAlignment="Center" Width="20" Height="20" Margin="5 0 0 0" Foreground="Crimson"/>
             <TextBlock Text="You need to choose a course" FontSize="10pt" VerticalAlignment="Center" Margin="5 0 0 0"/>
         </StackPanel>
         <ComboBox x:Name="teachersCombobox"
@@ -110,7 +110,7 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
         <StackPanel x:Name="errorTeacher" Grid.Column="3" Grid.Row="5" Orientation="Horizontal" Grid.ColumnSpan="3" Visibility="Hidden">
-            <iconPacks:PackIconMaterial Kind="AlertCircle" VerticalAlignment="Center" Width="20" Height="20" Margin="5 0 0 0" Foreground="Red"/>
+            <iconPacks:PackIconMaterial Kind="AlertCircle" VerticalAlignment="Center" Width="20" Height="20" Margin="5 0 0 0" Foreground="Crimson"/>
             <TextBlock Text="You need to choose a teacher" FontSize="10pt" VerticalAlignment="Center" Margin="5 0 0 0"/>
         </StackPanel>
         <Button

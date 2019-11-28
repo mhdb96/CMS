@@ -1,4 +1,5 @@
 ﻿using CMSLibrary;
+using MahApps.Metro;
 using Squirrel;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,9 @@ namespace CMSUI
     {
         protected override void OnStartup(StartupEventArgs e)
         {
+            ThemeManager.ChangeAppStyle(Application.Current,
+                                    ThemeManager.GetAccent("Cobalt"),
+                                    ThemeManager.GetAppTheme("BaseDark"));
             base.OnStartup(e);
             GlobalConfig.InitializeConnections();
             CheckForUpdates();

@@ -63,7 +63,7 @@
                         Orientation="Horizontal" 
                         Visibility="Collapsed"
                         Margin="5">
-                <iconPacks:PackIconMaterial Kind="AlertCircle" VerticalAlignment="Center" Width="15" Height="15" Margin="5 0 0 0" Foreground="Red"/>
+                <iconPacks:PackIconMaterial Kind="AlertCircle" VerticalAlignment="Center" Width="15" Height="15" Margin="5 0 0 0" Foreground="Crimson"/>
                 <TextBlock 
                     x:Name="errorUsernameText"
                     Text="Username is required" VerticalAlignment="Center" Margin="5 0 0 0"/>
@@ -78,7 +78,7 @@
             <StackPanel x:Name="errorPassword" Margin="5" 
                     Orientation="Horizontal" 
                     Visibility="Collapsed">
-                <iconPacks:PackIconMaterial Kind="AlertCircle" VerticalAlignment="Center" Width="15" Height="15" Margin="5 0 0 0" Foreground="Red"/>
+                <iconPacks:PackIconMaterial Kind="AlertCircle" VerticalAlignment="Center" Width="15" Height="15" Margin="5 0 0 0" Foreground="Crimson"/>
                 <TextBlock x:Name="errorPasswordText"
                            Text="Password is required" VerticalAlignment="Center" Margin="5 0 0 0"/>
             </StackPanel>

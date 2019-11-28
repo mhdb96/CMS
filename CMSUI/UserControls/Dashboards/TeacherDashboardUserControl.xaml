@@ -53,7 +53,7 @@
                 HorizontalAlignment="Right">
             <StackPanel Orientation="Horizontal">
                 <iconPacks:PackIconOcticons                               
-                        Foreground="Green"                        
+                        Foreground="LimeGreen"                        
                         Kind="Sync" />
             </StackPanel>
         </Button>
@@ -68,7 +68,7 @@
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Add" VerticalAlignment="Center" Margin="0 0 5 0"/>
                     <iconPacks:PackIconMaterial                                
-                        Foreground="Green"                        
+                        Foreground="LimeGreen"                        
                         Kind="PlusBoxOutline" />
                 </StackPanel>
             </Button>
@@ -131,7 +131,7 @@
                                 VerticalAlignment="Center">
                                 <iconPacks:PackIconFontAwesome 
                                     Margin="2"                                
-                                    Foreground="Orange"
+                                    Foreground="Tomato"
                                     Kind="EditRegular" />
                             </Button>
                         </DataTemplate>
@@ -147,7 +147,7 @@
                                 VerticalAlignment="Center">
                                 <iconPacks:PackIconMaterial 
                                     Margin="2"                        
-                                    Foreground="Red"                         
+                                    Foreground="Crimson"                         
                                     Kind="Delete" />
                             </Button>
                         </DataTemplate>
@@ -168,7 +168,7 @@
                             VerticalAlignment="Center">
                                 <iconPacks:PackIconFontAwesome 
                                     Margin="2"
-                                Foreground="Orange"
+                                Foreground="Tomato"
                             Kind="EditRegular" />
                             </Button>
                             <Button
@@ -178,7 +178,7 @@
                             VerticalAlignment="Center">
                                 <iconPacks:PackIconMaterial 
                                     Margin="2"
-                                Foreground="Red"
+                                Foreground="Crimson"
                             Kind="Delete" />
                             </Button>
                         </StackPanel>

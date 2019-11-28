@@ -87,7 +87,7 @@
                 HorizontalAlignment="Right">
             <StackPanel Orientation="Horizontal">
                 <iconPacks:PackIconOcticons                               
-                        Foreground="Green"                        
+                        Foreground="LimeGreen"                        
                         Kind="Sync" />
             </StackPanel>
         </Button>
@@ -119,7 +119,7 @@
                             VerticalAlignment="Center">
                                 <iconPacks:PackIconMaterial 
                                     Margin="2"
-                                Foreground="Green"
+                                Foreground="LimeGreen"
                             Kind="PlusBoxOutline" />
                             </Button>
                         </StackPanel>
@@ -148,7 +148,7 @@
                     Header="Type" Width="SizeToHeader">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding ExamType.Name}"/>
+                            <TextBlock Text="{Binding ExamType.Name}" Margin="10 0 10 0"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -157,7 +157,7 @@
                     Header="Date" Width="SizeToCells">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding DateString}"/>
+                            <TextBlock Text="{Binding DateString}" Margin="10 0 10 0"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -165,7 +165,7 @@
                     Header="File" Width="SizeToCells">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Vertical" Margin="10 0 10 0">
                                 <Button                                    
                                 Visibility="{Binding AddExcelFile}"
                                 ToolTip="Update"
@@ -177,13 +177,13 @@
                                         <TextBlock Text="Create Excel File" VerticalAlignment="Center" Margin="0 0 5 0"/>
                                         <iconPacks:PackIconFontAwesome 
                                     Margin="2"                                
-                                    Foreground="Orange"
+                                    Foreground="Tomato"
                                     Kind="EditRegular" />
                                     </StackPanel>
                                 </Button>
                                 <TextBlock Visibility="{Binding Path=AddExcelFile, Converter={x:Static Converters:VisibilityValueConverter.ins}}">
                                 <Hyperlink x:Name="fileLink" Click="FileLink_Click">
-                                        file
+                                        Click To View
                                     </Hyperlink>
                                 </TextBlock>
                             </StackPanel>
@@ -193,7 +193,7 @@
                 <DataGridTemplateColumn Width="SizeToCells">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button
+                            <Button                                
                                 ToolTip="Delete"
                                 Margin="5"                          
                                 x:Name="deleteExamBtn"  
@@ -201,7 +201,7 @@
                                 VerticalAlignment="Center">
                                 <iconPacks:PackIconMaterial 
                                     Margin="2"                        
-                                    Foreground="Red"                         
+                                    Foreground="Crimson"                         
                                     Kind="Delete" />
                             </Button>
                         </DataTemplate>

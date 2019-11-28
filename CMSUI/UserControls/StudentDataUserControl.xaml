@@ -53,7 +53,7 @@
                         Style="{DynamicResource MahApps.Metro.Styles.MetroCircleButtonStyle}">
                 <iconPacks:PackIconOcticons 
                     VerticalAlignment="Center"
-                    Width="10" Foreground="Red"                      
+                    Width="10" Foreground="Crimson"                      
                     Height="10"                                              
                     Kind="x"/>
             </Button>
@@ -64,7 +64,7 @@
                         Orientation="Horizontal" 
                         Visibility="Collapsed"
                         Margin="5">
-                <iconPacks:PackIconMaterial Kind="AlertCircle" VerticalAlignment="Center" Width="15" Height="15" Margin="5 0 0 0" Foreground="Red"/>
+                <iconPacks:PackIconMaterial Kind="AlertCircle" VerticalAlignment="Center" Width="15" Height="15" Margin="5 0 0 0" Foreground="Crimson"/>
                 <TextBlock 
                     x:Name="errorTypeText"
                     VerticalAlignment="Center" Margin="5 0 0 0"/>

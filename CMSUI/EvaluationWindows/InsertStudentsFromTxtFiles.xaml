@@ -56,7 +56,7 @@
                         Orientation="Horizontal" 
                         Visibility="Collapsed"
                         Margin="5">
-                <iconPacks:PackIconMaterial Kind="AlertCircle" VerticalAlignment="Center" Width="15" Height="15" Margin="5 0 0 0" Foreground="Red"/>
+                <iconPacks:PackIconMaterial Kind="AlertCircle" VerticalAlignment="Center" Width="15" Height="15" Margin="5 0 0 0" Foreground="Crimson"/>
                 <TextBlock 
                     x:Name="errorText"
                     FontSize="10pt"

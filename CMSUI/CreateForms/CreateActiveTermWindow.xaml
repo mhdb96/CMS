@@ -60,7 +60,7 @@
         </ComboBox>
 
         <StackPanel x:Name="errorYear" Grid.Column="3" Grid.Row="2" Orientation="Horizontal" Grid.ColumnSpan="3" Visibility="Hidden">
-            <iconPacks:PackIconMaterial Kind="AlertCircle" VerticalAlignment="Center" Width="20" Height="20" Margin="5 0 0 0" Foreground="Red"/>
+            <iconPacks:PackIconMaterial Kind="AlertCircle" VerticalAlignment="Center" Width="20" Height="20" Margin="5 0 0 0" Foreground="Crimson"/>
             <TextBlock Text="You need to choose a year" FontSize="10pt" VerticalAlignment="Center" Margin="5 0 0 0"/>
         </StackPanel>
 
@@ -79,7 +79,7 @@
         </ComboBox>
 
         <StackPanel x:Name="errorTerm" Grid.Column="3" Grid.Row="3" Orientation="Horizontal" Grid.ColumnSpan="3" Visibility="Hidden">
-            <iconPacks:PackIconMaterial Kind="AlertCircle" VerticalAlignment="Center" Width="20" Height="20" Margin="5 0 0 0" Foreground="Red"/>
+            <iconPacks:PackIconMaterial Kind="AlertCircle" VerticalAlignment="Center" Width="20" Height="20" Margin="5 0 0 0" Foreground="Crimson"/>
             <TextBlock Text="You need to choose a term" FontSize="10pt" VerticalAlignment="Center" Margin="5 0 0 0"/>
         </StackPanel>
 

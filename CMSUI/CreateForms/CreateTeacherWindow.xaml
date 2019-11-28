@@ -57,7 +57,7 @@
                  Controls:TextBoxHelper.ClearTextButton="True"       
                  TextWrapping="Wrap" TextChanged="RegNoText_TextChanged"/>
         <StackPanel x:Name="errorRegisterNo" Grid.Column="3" Grid.Row="2" Orientation="Horizontal" Grid.ColumnSpan="3" Visibility="Hidden">
-            <iconPacks:PackIconMaterial Kind="AlertCircle" VerticalAlignment="Center" Width="20" Height="20" Margin="5 0 0 0" Foreground="Red"/>
+            <iconPacks:PackIconMaterial Kind="AlertCircle" VerticalAlignment="Center" Width="20" Height="20" Margin="5 0 0 0" Foreground="Crimson"/>
             <TextBlock Text="Register No is required" FontSize="10pt" VerticalAlignment="Center" Margin="5 0 0 0"/>
         </StackPanel>
         <TextBox x:Name="firstNameText"
@@ -67,7 +67,7 @@
                  Controls:TextBoxHelper.ClearTextButton="True"       
                  TextWrapping="Wrap" TextChanged="FirstNameText_TextChanged"/>
         <StackPanel x:Name="errorFirstName" Grid.Column="3" Grid.Row="3" Orientation="Horizontal" Grid.ColumnSpan="3" Visibility="Hidden">
-            <iconPacks:PackIconMaterial Kind="AlertCircle" VerticalAlignment="Center" Width="20" Height="20" Margin="5 0 0 0" Foreground="Red"/>
+            <iconPacks:PackIconMaterial Kind="AlertCircle" VerticalAlignment="Center" Width="20" Height="20" Margin="5 0 0 0" Foreground="Crimson"/>
             <TextBlock Text="First Name is required" FontSize="10pt" VerticalAlignment="Center" Margin="5 0 0 0"/>
         </StackPanel>
         <TextBox x:Name="lastNameText"
@@ -77,7 +77,7 @@
                  Controls:TextBoxHelper.ClearTextButton="True"       
                  TextWrapping="Wrap" TextChanged="LastNameText_TextChanged"/>
         <StackPanel x:Name="errorLastName" Grid.Column="3" Grid.Row="4" Orientation="Horizontal" Grid.ColumnSpan="3" Visibility="Hidden">
-            <iconPacks:PackIconMaterial Kind="AlertCircle" VerticalAlignment="Center" Width="20" Height="20" Margin="5 0 0 0" Foreground="Red"/>
+            <iconPacks:PackIconMaterial Kind="AlertCircle" VerticalAlignment="Center" Width="20" Height="20" Margin="5 0 0 0" Foreground="Crimson"/>
             <TextBlock Text="Last Name is required" FontSize="10pt" VerticalAlignment="Center" Margin="5 0 0 0"/>
         </StackPanel>
         <TextBox x:Name="usernameText"
@@ -87,7 +87,7 @@
                  Controls:TextBoxHelper.ClearTextButton="True"       
                  TextWrapping="Wrap" TextChanged="UsernameText_TextChanged"/>
         <StackPanel x:Name="errorUserName" Grid.Column="3" Grid.Row="5" Orientation="Horizontal" Grid.ColumnSpan="3" Visibility="Hidden">
-            <iconPacks:PackIconMaterial Kind="AlertCircle" VerticalAlignment="Center" Width="20" Height="20" Margin="5 0 0 0" Foreground="Red"/>
+            <iconPacks:PackIconMaterial Kind="AlertCircle" VerticalAlignment="Center" Width="20" Height="20" Margin="5 0 0 0" Foreground="Crimson"/>
             <TextBlock Text="Username is required" FontSize="10pt" VerticalAlignment="Center" Margin="5 0 0 0"/>
         </StackPanel>
         <PasswordBox x:Name="passwordText"
@@ -97,7 +97,7 @@
                  Controls:TextBoxHelper.Watermark="Enter Password"            
                  Controls:TextBoxHelper.ClearTextButton="True" PasswordChanged="PasswordText_PasswordChanged"/>
         <StackPanel x:Name="errorPassword" Grid.Column="3" Grid.Row="6" Orientation="Horizontal" Grid.ColumnSpan="3" Visibility="Hidden">
-            <iconPacks:PackIconMaterial Kind="AlertCircle" VerticalAlignment="Center" Width="20" Height="20" Margin="5 0 0 0" Foreground="Red"/>
+            <iconPacks:PackIconMaterial Kind="AlertCircle" VerticalAlignment="Center" Width="20" Height="20" Margin="5 0 0 0" Foreground="Crimson"/>
             <TextBlock Text="Password is required" FontSize="10pt" VerticalAlignment="Center" Margin="5 0 0 0"/>
         </StackPanel>
         <Button
