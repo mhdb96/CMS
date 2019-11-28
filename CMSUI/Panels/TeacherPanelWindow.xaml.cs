@@ -21,7 +21,8 @@ namespace CMSUI.Panels
     /// Interaction logic for TeacherPanelWindow.xaml
     /// </summary>
     /// 
-    public partial class TeacherPanelWindow
+    public partial class TeacherPanelWindow : IActiveTermRequester
+
     {
         ITeacherPanelRequester CallingWindow;        
         public TeacherPanelWindow(ITeacherPanelRequester caller)
@@ -47,6 +48,11 @@ namespace CMSUI.Panels
         private void TeacherPanel_Closed(object sender, EventArgs e)
         {
             CallingWindow.TeacherPanelClosed();
+        }
+
+        public void ActiveTermComplete(ActiveTermModel model)
+        {
+            throw new NotImplementedException();
         }
     }
 }

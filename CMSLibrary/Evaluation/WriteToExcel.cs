@@ -111,8 +111,9 @@ namespace CMSLibrary.Evaluation
                     qtoplam += question.Mark;
                 }
                 excel.WriteToCell(p, 0, courseOutcome.Name);
-                excel.WriteToCell(p, 1, (toplam / studentsCount).ToString());
-                excel.WriteToCell(p, 2, (((toplam / studentsCount) / qtoplam) * 100).ToString());
+
+                excel.WriteToCell(p, 1, (toplam / studentsCount).ToString("0.##"));
+                excel.WriteToCell(p, 2, (((toplam / studentsCount) / qtoplam) * 100).ToString("0.##"));
                 p++;
             }
             return p;
@@ -136,8 +137,8 @@ namespace CMSLibrary.Evaluation
             excel.SelectWorkSheet(2);
             int k = startingLine;                        
             excel.WriteToCell(k, 0, (question.Name).ToString());
-            excel.WriteToCell(k, 1, (questionAVG / studentsCount).ToString());
-            excel.WriteToCell(k, 2, "%" + (((questionAVG / studentsCount) / question.Mark) * 100).ToString());
+            excel.WriteToCell(k, 1, (questionAVG / studentsCount).ToString("0.##"));
+            excel.WriteToCell(k, 2, "%" + (((questionAVG / studentsCount) / question.Mark) * 100).ToString("0.##"));
             k++;
             return k;
         }
@@ -203,7 +204,7 @@ namespace CMSLibrary.Evaluation
                 {
                     questionAVG += studentMarks[m, n];
                 }                
-                excel.WriteToCell(i, j, (questionAVG / students.Count).ToString());
+                excel.WriteToCell(i, j, (questionAVG / students.Count).ToString("0.##"));
                 questionStartingLine = WriteAVGsToQuestions(question, students.Count, questionAVG, questionStartingLine);
                 excel.SelectWorkSheet(1);
                 j++;

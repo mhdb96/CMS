@@ -70,6 +70,20 @@ namespace CMSLibrary.Evaluation
             StudentsAnswersWithErrors = err;
         }
 
+        private string NamesFixer(string name)
+        {
+            string t = name;
+            t = t.Replace("  ", "");
+            if (t.Count() > 0)
+            {
+                if (t.Last() == ' ')
+                {
+                    t = t.Remove(t.Length - 1);
+                }
+            }
+            return t;
+        }
+
         public List<StudentAnswersModel> GetStudentsAnswers(string studentListPath)
         {
             StudentsAnswersWithErrors.Clear();
@@ -89,15 +103,28 @@ namespace CMSLibrary.Evaluation
                 if (Int32.TryParse(listString.Substring(24, 9), out regNo))
                 {
                     model = GlobalConfig.Connection.GetStudent_ByRegNo(regNo);
-                    var duplicate =  StudentsAnswers.Find(s => s.Student.RegNo == model.RegNo);
-                    if(duplicate != null)
+
+                    if(model != null)
                     {
-                        model = null;
-                        isDuplicate = true;
-                        duplicate.ErrorType = "Duplicated Value, Fix RegNo";
-                        StudentsAnswersWithErrors.Add(duplicate);
-                        StudentsAnswers.Remove(duplicate);
+                        if (model.FirstName != NamesFixer(listString.Substring(0, 12)))
+                        {
+                            model = null;
+                        }
                     }
+                    
+
+                    if (model != null)
+                    {                        
+                        var duplicate = StudentsAnswers.Find(s => s.Student.RegNo == model.RegNo);
+                        if (duplicate != null)
+                        {
+                            model = null;
+                            isDuplicate = true;
+                            duplicate.ErrorType = "Duplicated Value, Fix RegNo";
+                            StudentsAnswersWithErrors.Add(duplicate);
+                            StudentsAnswers.Remove(duplicate);
+                        }
+                    }                    
                 }
                 else
                 {

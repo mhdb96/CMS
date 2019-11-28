@@ -166,10 +166,14 @@ namespace CMSUI.CreateForms
 
                 Courses = GlobalConfig.Connection.GetCourse_ValidByDepartmentIdAndActiveTermId(departmentModel.Id, activeTermModel.Id);
 
-                if (departmentModel.Id == assignmentModel.Department.Id && activeTermModel.Id == assignmentModel.ActiveTerm.Id)
+                if(update)
                 {
-                    Courses.Add(assignmentModel.Course);
+                    if (departmentModel.Id == assignmentModel.Department.Id && activeTermModel.Id == assignmentModel.ActiveTerm.Id)
+                    {
+                        Courses.Add(assignmentModel.Course);
+                    }
                 }
+                
 
                 coursesCombobox.ItemsSource = Courses;
 
