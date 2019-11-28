@@ -69,6 +69,14 @@ namespace CMSUI.UserControls
 
         private async void DeleteTermBtn_Click(object sender, RoutedEventArgs e)
         {
+            IParentWindow parent = ParentFinder.FindParent<AdminPanelWindow>(this);
+            MessageDialogResult r = await parent.ShowMessage("Warning",
+                    "Are you sure you want to delete this term",
+                    MessageDialogStyle.AffirmativeAndNegative);
+            if (r == MessageDialogResult.Negative)
+            {
+                return;
+            }
             Button btn = (Button)sender;
             ActiveTermModel model = new ActiveTermModel();
             model = (ActiveTermModel)btn.Tag;
@@ -81,9 +89,8 @@ namespace CMSUI.UserControls
                 // TODO - Delete the selected term
             }
             else
-            {
-                AdminPanelWindow parent = ParentFinder.FindParent<AdminPanelWindow>(this);
-                await parent.ShowMessageOnAdmin("Deletion Error",
+            {                
+                await parent.ShowMessage("Deletion Error",
                     "The selected term can't be deleted beacause it has an exam",
                     MessageDialogStyle.Affirmative);
                 // TODO - ADD a MessageBox

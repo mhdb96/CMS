@@ -72,7 +72,6 @@
         <TextBlock Grid.Column="2" Grid.Row="1" Text="Outcomes List" Style="{StaticResource myTextBlockStyle}"/>
         <ListBox 
             x:Name="depatmentsList"
-            
             Grid.Row="2" Grid.Column="1" Grid.RowSpan="2"            
             BorderThickness="1"
             SelectedIndex="0"
@@ -80,9 +79,20 @@
             SelectionChanged="DepatmentsList_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <UniformGrid Margin="10" Rows="1">
-                        <TextBlock Text="{Binding Name}" />
-                        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                    <Grid Margin="10">
+                        <Grid.ColumnDefinitions >
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="{Binding Name}" 
+                                   TextWrapping="Wrap"
+                                   MaxWidth="350"
+                                   Grid.Column="0" Grid.Row="0"/>
+                        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal"
+                                    Grid.Column="1" Grid.Row="0">
                             <Button
                                 ToolTip="Update"
                                 Margin="0 0 5 0"
@@ -104,7 +114,7 @@
                             Kind="Delete" />
                             </Button>
                         </StackPanel>
-                    </UniformGrid>
+                    </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>

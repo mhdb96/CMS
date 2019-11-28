@@ -28,10 +28,11 @@ namespace CMSUI
     /// </summary>
     public partial class LoginWindow : IAdminPanelRequester, ITeacherPanelRequester, IDatabaseSettingRequester
     {
+
         UserModel User;
         public LoginWindow()
         {
-            InitializeComponent();
+            InitializeComponent();            
         }
 
         public AdminModel GetAdminInfo()

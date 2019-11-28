@@ -8,6 +8,8 @@ namespace CMSLibrary.DataAccess
         string CheckConniction();
 
 
+        bool User_ValidByUsername(string username);
+
         //TODO - control the names
         List<CourseModel> GetCourse_BySearchValue(string searchValue);
         List<ActiveTermModel> GetActiveTerm_BySearchValue(string searchValue);

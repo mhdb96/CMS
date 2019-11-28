@@ -68,6 +68,14 @@ namespace CMSUI.UserControls
 
         private async void DeleteTeacherBtn_Click(object sender, RoutedEventArgs e)
         {
+            IParentWindow parent = ParentFinder.FindParent<AdminPanelWindow>(this);
+            MessageDialogResult r = await parent.ShowMessage("Warning",
+                    "Are you sure you want to delete this teacher",
+                    MessageDialogStyle.AffirmativeAndNegative);
+            if (r == MessageDialogResult.Negative)
+            {
+                return;
+            }
             // TODO - Delete the selected Teacher
             TeacherModel model = (TeacherModel)teachersGrid.SelectedItem;
 
@@ -78,9 +86,8 @@ namespace CMSUI.UserControls
                 // TODO - Delete the selected term
             }
             else
-            {
-                AdminPanelWindow parent = ParentFinder.FindParent<AdminPanelWindow>(this);
-                await parent.ShowMessageOnAdmin("Deletion Error",
+            {                
+                await parent.ShowMessage("Deletion Error",
                     "The selected teacher can't be deleted beacause it has an exam",
                     MessageDialogStyle.Affirmative);
                 // TODO - ADD a MessageBox

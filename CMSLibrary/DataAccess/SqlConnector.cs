@@ -1008,5 +1008,26 @@ namespace CMSLibrary.DataAccess
                 return null;
             }
         }
+
+        public bool User_ValidByUsername(string username)
+        {
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                List<UserModel> users = new List<UserModel>();
+                var p = new DynamicParameters();
+                p.Add("@UserName", username);
+                users = connection.Query<UserModel>("dbo.spUsers_ValidByUsername", p, commandType: CommandType.StoredProcedure).ToList();
+
+                if (users.Any())
+                {                    
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+
+            }
+        }
     }
 }

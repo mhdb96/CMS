@@ -138,52 +138,56 @@ namespace CMSUI.EvaluationWindows
         }
         private void CreateExamBtn_Click(object sender, RoutedEventArgs e)
         {            
-            Exam.ExamType = (ExamTypeModel)examTypesCombobox.SelectedItem;
-            Exam.Date = (DateTime)examDate.SelectedDate;
-            GlobalConfig.Connection.CreateExam(Exam);
-            foreach (ExamGroupModel examGroup in Exam.ExamGroups)
+            if(ValidForm())
             {
-                examGroup.ExamId = Exam.Id;
-                GlobalConfig.Connection.CreateExamGroup(examGroup);
-                AnswerKeyModel answerKey = Evaluator.AnswerKeys.Find(a => a.Group.Name == examGroup.Group.Name);
-                int counter = 0;
-                foreach (QuestionModel question in examGroup.Questions)
-                {                    
-                    question.ExamGroupId = examGroup.Id;
-                    GlobalConfig.Connection.CreateQuestion(question);
-                    foreach (var studentAnswers in Evaluator.StudentsAnswers)
-                    {                        
-                        if (studentAnswers.Group.Name == answerKey.Group.Name)
-                        {
-                            ResultModel r = new ResultModel
-                            {
-                                QuestionId = question.Id
-                            };
-                            StudentModel model = GlobalConfig.Connection.GetStudent_ByRegNo(studentAnswers.Student.RegNo);
-                            r.Student = model;
-                            if (studentAnswers.AnswersList[counter].ToString() == answerKey.AnswersList.Substring(counter, 1))
-                            {
-                                r.IsTrue = true;
-                            }
-                            else
-                            {
-                                r.IsTrue = false;
-                            }
-                            GlobalConfig.Connection.CreateResult(r);
-                        }                        
-                    }
-                    counter++;
-                    foreach (CourseOutcomeModel courseOutcome in question.QuestionOutcomes)
+                Exam.ExamType = (ExamTypeModel)examTypesCombobox.SelectedItem;
+                Exam.Date = (DateTime)examDate.SelectedDate;
+                GlobalConfig.Connection.CreateExam(Exam);
+                foreach (ExamGroupModel examGroup in Exam.ExamGroups)
+                {
+                    examGroup.ExamId = Exam.Id;
+                    GlobalConfig.Connection.CreateExamGroup(examGroup);
+                    AnswerKeyModel answerKey = Evaluator.AnswerKeys.Find(a => a.Group.Name == examGroup.Group.Name);
+                    int counter = 0;
+                    foreach (QuestionModel question in examGroup.Questions)
                     {
-                        QuestionOutcomeModel model = new QuestionOutcomeModel();
-                        model.CourseOutcomeId = courseOutcome.Id;
-                        model.QuestionId = question.Id;
-                        GlobalConfig.Connection.CreteQuestionOutcome(model);
+                        question.ExamGroupId = examGroup.Id;
+                        GlobalConfig.Connection.CreateQuestion(question);
+                        foreach (var studentAnswers in Evaluator.StudentsAnswers)
+                        {
+                            if (studentAnswers.Group.Name == answerKey.Group.Name)
+                            {
+                                ResultModel r = new ResultModel
+                                {
+                                    QuestionId = question.Id
+                                };
+                                StudentModel model = GlobalConfig.Connection.GetStudent_ByRegNo(studentAnswers.Student.RegNo);
+                                r.Student = model;
+                                if (studentAnswers.AnswersList[counter].ToString() == answerKey.AnswersList.Substring(counter, 1))
+                                {
+                                    r.IsTrue = true;
+                                }
+                                else
+                                {
+                                    r.IsTrue = false;
+                                }
+                                GlobalConfig.Connection.CreateResult(r);
+                            }
+                        }
+                        counter++;
+                        foreach (CourseOutcomeModel courseOutcome in question.QuestionOutcomes)
+                        {
+                            QuestionOutcomeModel model = new QuestionOutcomeModel();
+                            model.CourseOutcomeId = courseOutcome.Id;
+                            model.QuestionId = question.Id;
+                            GlobalConfig.Connection.CreteQuestionOutcome(model);
+                        }
                     }
                 }
+                CallingWindow.ExamComplete(Exam);
+                this.Close();
             }
-            CallingWindow.ExamComplete(Exam);
-            this.Close();
+            
         }
 
         private void CancelExamBtn_Click(object sender, RoutedEventArgs e)
@@ -201,6 +205,36 @@ namespace CMSUI.EvaluationWindows
             {
                 ShowData();
             }
+        }
+        private bool ValidForm()
+        {            
+            
+            if (examDate.SelectedDate == null)
+            {
+                errorDate.Visibility = Visibility.Visible;
+            }
+            if (Evaluator.AnswerKeys.Count == 0)
+            {
+                errorAsnwerKey.Visibility = Visibility.Visible;
+            }
+            if (!studentsAnswersExpander.IsExpanded)
+            {
+                errorStudentList.Visibility = Visibility.Visible;
+            }
+            if (examTypesCombobox.SelectedItem == null)
+            {
+                errorExamType.Visibility = Visibility.Visible;
+            }
+            if (errorAsnwerKey.Visibility == Visibility.Visible || errorDate.Visibility == Visibility.Visible || errorExamType.Visibility == Visibility.Visible || errorStudentList.Visibility == Visibility.Visible)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
+
         }
     }
 }

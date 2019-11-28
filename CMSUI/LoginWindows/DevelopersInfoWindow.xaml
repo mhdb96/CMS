@@ -44,7 +44,7 @@
                    TextWrapping="Wrap" FontFamily="Segoe UI Semibold">
             Development Team
         </TextBlock>
-        <Image Width="auto" Grid.Row="2" Grid.Column="1" Margin="10 10" Source="/images/xdebuggers-logo.png"/>
+        <Image Width="auto" Grid.Row="2" Grid.Column="1" Margin="10 10" Source="/images/xdebuggers-logo-light.png"/>
 
         <TextBlock 
             FontFamily="Segoe UI Semibold"

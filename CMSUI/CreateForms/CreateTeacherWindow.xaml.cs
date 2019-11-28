@@ -65,6 +65,14 @@ namespace CMSUI.CreateForms
                 model.User.UserName = usernameText.Text;
                 model.User.Password = passwordText.Password;
 
+                if(!GlobalConfig.Connection.User_ValidByUsername(model.User.UserName))
+                {
+                    errorUserName.Visibility = Visibility.Visible;
+                    errorUserNameText.Text = "Username is already in use";
+                    return;
+                }
+
+
                 if (!update)
                 {
                     GlobalConfig.Connection.CreateTeacher(model);
@@ -106,6 +114,7 @@ namespace CMSUI.CreateForms
                 }
                 if (usernameText.Text == "")
                 {
+                    errorUserNameText.Text = "Username is required";
                     errorUserName.Visibility = Visibility.Visible;
                 }
                 if (passwordText.Password.Length == 0)
@@ -160,6 +169,7 @@ namespace CMSUI.CreateForms
         {
             if (usernameText.Text == "")
             {
+                errorUserNameText.Text = "Username is required";
                 errorUserName.Visibility = Visibility.Visible;
             }
             else

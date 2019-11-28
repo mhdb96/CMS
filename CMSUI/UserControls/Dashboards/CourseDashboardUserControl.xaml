@@ -88,7 +88,10 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
                         </Grid.RowDefinitions>
-                        <TextBlock Text="{Binding Full}" Grid.Column="0" Grid.Row="0"/>
+                        <TextBlock 
+                            TextWrapping="Wrap"
+                                   MaxWidth="350"
+                            Text="{Binding Full}" Grid.Column="0" Grid.Row="0"/>
                         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal"
                                     Grid.Column="1" Grid.Row="0">
                             <Button

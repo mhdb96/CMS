@@ -13,9 +13,9 @@ namespace CMSLibrary
         {              
             return $"Data Source = {Ip},{Port}; Network Library = DBMSSOCN; Initial Catalog = CMS; User ID = {Username}; Password = {Password};";
         }
-        public static string Ip = "192.168.1.8";
+        public static string Ip = "192.168.1.26";
         public static string Port = "1433";
-        public static string Username = "onur";
-        public static string Password = "1903forza";
+        public static string Username = "sa";
+        public static string Password = "alpha86";
     }
 }

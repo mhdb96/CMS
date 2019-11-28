@@ -11,7 +11,7 @@
         xmlns:MyControls="clr-namespace:CMSUI.UserControls"
         mc:Ignorable="d"
         x:Name="TeacherPanel"
-        Title="Teacher Panel" Height="600" Width="1100" FontSize="14pt" Closed="TeacherPanel_Closed">
+        Title="Teacher Panel" Height="600" Width="1300"  FontSize="14pt" Closed="TeacherPanel_Closed">
     <Border Margin="20">
         <DockPanel Grid.Row="1" Grid.Column="1">
             <TabControl HorizontalAlignment="Center"
@@ -43,7 +43,9 @@
                     </MyControls:MyCoursesDashboardUserControl>
                 </Controls:MetroTabItem>
                 <Controls:MetroTabItem Header="My Profile" >
-                    
+                    <MyControls:MyProfileDashboradUserControl                        
+                        MTeacher="{Binding Teacher, ElementName= TeacherPanel}">
+                    </MyControls:MyProfileDashboradUserControl>
                 </Controls:MetroTabItem>
             </TabControl>
         </DockPanel>

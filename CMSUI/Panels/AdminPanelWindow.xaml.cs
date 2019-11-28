@@ -22,7 +22,7 @@ namespace CMSUI.Panels
     /// Interaction logic for AdminPanelWindow.xaml
     /// </summary>
     /// 
-    public partial class AdminPanelWindow
+    public partial class AdminPanelWindow : IParentWindow
     {
         IAdminPanelRequester CallingWindow;
         public AdminPanelWindow(IAdminPanelRequester caller)
@@ -42,14 +42,14 @@ namespace CMSUI.Panels
             set { SetValue(AdminProperty, value); }
         }
 
-        public async Task<MessageDialogResult> ShowMessageOnAdmin(string title, string message, MessageDialogStyle style)
-        {
-            return await this.ShowMessageAsync(title, message, style, null);    
-        }
-
         private void MetroWindow_Closed(object sender, EventArgs e)
         {
             CallingWindow.AdminPanelClosed();
+        }
+
+        public async Task<MessageDialogResult> ShowMessage(string title, string message, MessageDialogStyle style)
+        {
+            return await this.ShowMessageAsync(title, message, style, null);
         }
     }
 }

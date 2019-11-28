@@ -36,9 +36,7 @@ namespace CMSUI.EvaluationWindows
         }
 
 
-        List<StudentDataModel> data = new List<StudentDataModel>();
-        private CreateExamWindow createExamWindow;
-        private Evaluate evaluator;
+        List<StudentDataModel> data = new List<StudentDataModel>();        
 
         public void GetStudentsAnswers()
         {

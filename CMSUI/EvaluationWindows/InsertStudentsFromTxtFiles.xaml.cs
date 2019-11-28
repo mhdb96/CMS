@@ -108,7 +108,7 @@ namespace CMSUI.EvaluationWindows
                 }
                 if(t.First() == ' ')
                 {
-                    t = t.Remove(0);
+                    t = t.Remove(0, 1);
                 }
             }            
             return t;
@@ -128,6 +128,10 @@ namespace CMSUI.EvaluationWindows
         private async void InsertStudents_Click(object sender, RoutedEventArgs e)
         {
             string studentNo = "";
+            if(departmentsCombobox.SelectedItem == null || eduYearsCombobox.SelectedItem == null)
+            {
+                return;
+            }
             try
             {                
                 bool isDuplicate = false;

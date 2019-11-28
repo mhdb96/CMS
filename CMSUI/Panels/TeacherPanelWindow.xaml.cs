@@ -21,7 +21,7 @@ namespace CMSUI.Panels
     /// Interaction logic for TeacherPanelWindow.xaml
     /// </summary>
     /// 
-    public partial class TeacherPanelWindow : IActiveTermRequester
+    public partial class TeacherPanelWindow : IParentWindow
 
     {
         ITeacherPanelRequester CallingWindow;        
@@ -38,21 +38,16 @@ namespace CMSUI.Panels
         {
             get { return (TeacherModel)GetValue(TeacherProperty); }
             set { SetValue(TeacherProperty, value); }
-        }
-
-        public async Task<MessageDialogResult> ShowMessageOnTeacher(string title, string message, MessageDialogStyle style)
-        {
-            return await this.ShowMessageAsync(title, message, style, null);
-        }
+        }        
 
         private void TeacherPanel_Closed(object sender, EventArgs e)
         {
             CallingWindow.TeacherPanelClosed();
         }
 
-        public void ActiveTermComplete(ActiveTermModel model)
+        public async Task<MessageDialogResult> ShowMessage(string title, string message, MessageDialogStyle style)
         {
-            throw new NotImplementedException();
-        }
+            return await this.ShowMessageAsync(title, message, style, null);
+        }        
     }
 }

@@ -15,7 +15,7 @@
                  Margin="10 5 0 5" Width="50"                        
                  TextWrapping="Wrap" TextChanged="NameText_TextChanged"/>
                 <TextBox x:Name="descriptionText"
-                 Margin="10 5 0 5" Width="200"
+                 Margin="10 5 0 5" Width="400"
                  Controls:TextBoxHelper.Watermark="Enter an Outcome"            
                  Controls:TextBoxHelper.ClearTextButton="True"       
                  TextWrapping="Wrap" TextChanged="DescriptionText_TextChanged"/>

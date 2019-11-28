@@ -9,7 +9,7 @@
         xmlns:local="clr-namespace:CMSUI"
         xmlns:MyControls="clr-namespace:CMSUI.UserControls"
         mc:Ignorable="d"
-        Title="InsertStudentsFromTxtFiles" Height="450" Width="600"
+        Title="InsertStudentsFromTxtFiles" Height="700" Width="600"
                       >
     <Window.Resources>
         <Style x:Key = "myTextBlockStyle" TargetType = "TextBlock">

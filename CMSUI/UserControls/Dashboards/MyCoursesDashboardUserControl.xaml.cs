@@ -20,6 +20,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls.Dialogs;
+using MahApps.Metro.Controls;
 
 namespace CMSUI.UserControls
 {
@@ -221,8 +222,26 @@ namespace CMSUI.UserControls
             ExamModel model = (ExamModel)examsGrid.SelectedItem;
         }
 
-        private void DeleteExamBtn_Click(object sender, RoutedEventArgs e)
+        private async void DeleteExamBtn_Click(object sender, RoutedEventArgs e)
         {
+            IParentWindow parent;
+            
+            if(MyAdmin != null)
+            {
+                parent = ParentFinder.FindParent<AdminPanelWindow>(this);
+            }
+            else
+            {
+                parent = ParentFinder.FindParent<TeacherPanelWindow>(this);
+            }
+
+            MessageDialogResult r = await parent.ShowMessage("Warning",
+                    "Are you sure you want to delete this exam",
+                    MessageDialogStyle.AffirmativeAndNegative);
+            if (r == MessageDialogResult.Negative)
+            {
+                return;
+            }
             ExamModel model = (ExamModel)examsGrid.SelectedItem;
             GlobalConfig.Connection.DeleteExam_ById(model.Id);
             MyExams.Remove(model);
@@ -231,6 +250,7 @@ namespace CMSUI.UserControls
 
         private void CreateExcelFileBtn_Click(object sender, RoutedEventArgs e)
         {
+            
             CreateExcelFile();
         }
 
@@ -253,14 +273,24 @@ namespace CMSUI.UserControls
             }
             catch (Exception)
             {
-                TeacherPanelWindow parent =  ParentFinder.FindParent<TeacherPanelWindow>(this);
-                MessageDialogResult r = await parent.ShowMessageOnTeacher("File Not Found",
-                    "The requested excel file wasn't found. Do you want to create a new file?", 
+                IParentWindow parent;
+                if (MyAdmin != null)
+                {
+                    parent = ParentFinder.FindParent<AdminPanelWindow>(this);
+                    
+                }
+                else
+                {
+                    parent = ParentFinder.FindParent<TeacherPanelWindow>(this);
+                }
+                MessageDialogResult r = await parent.ShowMessage("File Not Found",
+                    "The requested excel file wasn't found. Do you want to create a new file?",
                     MessageDialogStyle.AffirmativeAndNegative);
-                if(r == MessageDialogResult.Affirmative)
+                if (r == MessageDialogResult.Affirmative)
                 {
                     CreateExcelFile();
                 }
+
             }
             
         }
@@ -274,6 +304,6 @@ namespace CMSUI.UserControls
         {
             InsertStudentsFromTxtFiles win = new InsertStudentsFromTxtFiles();
             win.ShowDialog();
-        }
+        }        
     }
 }

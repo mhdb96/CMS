@@ -9,7 +9,7 @@
         xmlns:local="clr-namespace:CMSUI"
         mc:Ignorable="d"
         x:Name="title" 
-        Title="Create Course" Height="558.6" Width="522">               
+        Title="Create Course" Height="558.6" Width="600">               
     <Window.Resources>
         <Style x:Key = "myTextBlockStyle" TargetType = "TextBlock">
             <Setter Property = "VerticalAlignment" Value="Center" />
@@ -35,9 +35,8 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" Grid.ColumnSpan="6">
@@ -100,7 +99,7 @@
             </Button>
         </StackPanel>
         
-        <ScrollViewer Grid.Column="1" Grid.Row="6" Margin="10" Grid.ColumnSpan="3" Height="200" ScrollChanged="ScrollViewer_ScrollChanged">
+        <ScrollViewer Grid.Column="1" Grid.Row="6" Margin="10" Grid.ColumnSpan="5" Height="auto" ScrollChanged="ScrollViewer_ScrollChanged">
             <StackPanel Orientation="Vertical" x:Name="outcomesList">
 
             </StackPanel>

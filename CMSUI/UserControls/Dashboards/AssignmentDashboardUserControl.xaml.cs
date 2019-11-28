@@ -72,6 +72,15 @@ namespace CMSUI.UserControls
 
         private async void DeleteAssignmentBtn_Click(object sender, RoutedEventArgs e)
         {
+            IParentWindow parent = ParentFinder.FindParent<AdminPanelWindow>(this);
+            MessageDialogResult r = await parent.ShowMessage("Warning",
+                    "Are you sure you want to delete this assginment",
+                    MessageDialogStyle.AffirmativeAndNegative);
+            if (r == MessageDialogResult.Negative)
+            {
+                return;
+            }
+
             //    // TODO - Delete the selected Assignment
             AssignmentModel model = (AssignmentModel)assignmentsGrid.SelectedItem;
 
@@ -83,8 +92,7 @@ namespace CMSUI.UserControls
             }
             else
             {
-                AdminPanelWindow parent = ParentFinder.FindParent<AdminPanelWindow>(this);
-                await parent.ShowMessageOnAdmin("Deletion Error",
+                await parent.ShowMessage("Deletion Error",
                     "The selected assignment can't be deleted beacause it has an exam",
                     MessageDialogStyle.Affirmative);                
                 // TODO - ADD a MessageBox

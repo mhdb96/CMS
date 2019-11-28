@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/xdebuggers-logo.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/xdebuggers-logo-light.png")]
 
 
