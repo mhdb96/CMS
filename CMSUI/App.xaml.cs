@@ -27,7 +27,7 @@ namespace CMSUI
         }
         private async Task CheckForUpdates()
         {
-            using (var manager = new UpdateManager(@"C:\r"))
+            using (var manager = new UpdateManager("https://github.com/mhdb96/YGL-Projcet-1"))
             {
                 await manager.UpdateApp();
             }
