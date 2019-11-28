@@ -12,6 +12,62 @@ namespace CMSLibrary.DataAccess
     {
         public static string databaseName = "CMS";
 
+        public List<CourseModel> GetCourse_BySearchValue(string searchValue)
+        {
+            List<CourseModel> output;
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@SearchValue", searchValue);
+                output = connection.Query<CourseModel, EducationalYearModel, CourseModel>("dbo.spCourses_BySearchValue",
+                    (course, eduYear) =>
+                    {
+                        course.EduYear = eduYear;
+                        return course;
+                    }, p, commandType: CommandType.StoredProcedure).ToList();
+            }
+            return output;
+        }
+
+        public List<ActiveTermModel> GetActiveTerm_BySearchValue(string searchValue)
+        {
+            List<ActiveTermModel> output;
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@SearchValue", searchValue);
+                output = connection.Query<ActiveTermModel, TermModel, YearModel, ActiveTermModel>("dbo.spActiveTerms_BySearchValue",
+                    (activeTerm, term, year) => { activeTerm.Term = term; activeTerm.Year = year; return activeTerm; }, p, commandType: CommandType.StoredProcedure).ToList();
+            }
+            return output;
+        }
+
+        public List<TeacherModel> GetTeacher_BySearchValue(string searchValue)
+        {
+            List<TeacherModel> output;
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@SearchValue", searchValue);
+                output = connection.Query<TeacherModel, UserModel, TeacherModel>("dbo.spTeachers_BySearchValue",
+                    (teacher, user) => { teacher.User = user; return teacher; },p, commandType: CommandType.StoredProcedure).ToList();
+            }
+            return output;
+        }
+
+        public List<DepartmentModel> GetDepartment_BySearchValue(string searchValue)
+        {
+            List<DepartmentModel> output;
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@SearchValue", searchValue);
+                output = connection.Query<DepartmentModel>("dbo.spDepartments_BySearchValue", p,commandType:CommandType.StoredProcedure).ToList();
+            }
+            return output;
+        }
+
+
         public void DepartmentOutcome_Delete(int id)
         {
             using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))

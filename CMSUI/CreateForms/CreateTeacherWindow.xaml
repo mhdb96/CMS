@@ -8,7 +8,9 @@
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks" 
         xmlns:local="clr-namespace:CMSUI"
         mc:Ignorable="d"
+        x:Name="title"
         Title="Create Teacher" Height="400" Width="500">
+            
     <Window.Resources>
         <Style x:Key = "myTextBlockStyle" TargetType = "TextBlock">
             <Setter Property = "VerticalAlignment" Value="Center" />
@@ -41,7 +43,7 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" Grid.ColumnSpan="6">
             <iconPacks:PackIconModern  Width="35" Height="35" Kind="UserAdd" VerticalAlignment="Center"/>
-            <TextBlock Text="Create a Teacher" FontSize="22pt"
+            <TextBlock x:Name="titleText" Text="Create a Teacher" FontSize="22pt"
                     Margin="10 0 0 10"/>
         </StackPanel>
         

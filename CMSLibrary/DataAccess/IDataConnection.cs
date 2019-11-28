@@ -7,7 +7,12 @@ namespace CMSLibrary.DataAccess
     {
         string CheckConniction();
 
+
         //TODO - control the names
+        List<CourseModel> GetCourse_BySearchValue(string searchValue);
+        List<ActiveTermModel> GetActiveTerm_BySearchValue(string searchValue);
+        List<TeacherModel> GetTeacher_BySearchValue(string searchValue);
+        List<DepartmentModel> GetDepartment_BySearchValue(string searchValue);
 
         string CreateStudent(StudentModel model);
 

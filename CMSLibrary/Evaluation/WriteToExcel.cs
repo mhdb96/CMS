@@ -44,8 +44,12 @@ namespace CMSLibrary.Evaluation
             excel.CreateNewFile();
             excel.CreateNewSheet();
             excel.CreateNewSheet();
-            WriteDataToExcelSheet();      
+            WriteDataToExcelSheet();
             SaveFileDialog saveFile = new SaveFileDialog();
+
+            saveFile.Filter = ".xlsx files (*.xlsx)|*.xlsx";
+            saveFile.FileName = $"{model.Assignment.Course.Name}-{model.ExamType.Name}-{model.Assignment.ActiveTerm.Name}";
+
             DialogResult r = saveFile.ShowDialog();
             if (r == DialogResult.Abort || r == DialogResult.Cancel)
             {

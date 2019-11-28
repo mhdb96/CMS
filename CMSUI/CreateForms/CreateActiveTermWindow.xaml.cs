@@ -55,7 +55,8 @@ namespace CMSUI.CreateForms
 
             update = true;
             createActiveTermBtn.Content = "Update";
-
+            titleText.Text = "Update a Active Term";
+            title.Title = "Update Active Term";
             activeTerm = model;
 
 

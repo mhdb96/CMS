@@ -43,6 +43,8 @@ namespace CMSUI.CreateForms
 
             update = true;
             createTeacherBtn.Content = "Update";
+            titleText.Text = "Update a Teacher";
+            title.Title = "Update Teacher";
 
             model = teacher;
 

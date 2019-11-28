@@ -8,7 +8,8 @@
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"              
         xmlns:local="clr-namespace:CMSUI"
         mc:Ignorable="d"
-        Title="Create Department" Height="450" Width="500">
+        x:Name="title"      
+        Title="Create Department" Height="450" Width="500">                                
     <Window.Resources>
             <Style x:Key = "myTextBlockStyle" TargetType = "TextBlock">
                 <Setter Property = "VerticalAlignment" Value="Center" />
@@ -40,7 +41,7 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" Grid.ColumnSpan="6">
             <iconPacks:PackIconFontAwesome VerticalAlignment="Center" Width="35" Height="35" Kind="BuildingSolid" />
-            <TextBlock Text="Create a Department" FontSize="22pt"
+            <TextBlock x:Name="titleText" Text="Create a Department" FontSize="22pt"
                     Margin="10 0 0 10"/>
         </StackPanel>
 

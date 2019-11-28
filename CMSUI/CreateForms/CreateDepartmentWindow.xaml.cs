@@ -26,6 +26,8 @@ namespace CMSUI.CreateForms
     {
         IDepartmentRequester callingWindow;
 
+        public List<int> outcomesToDelete = new List<int>();
+
         bool update;
         DepartmentModel department = new DepartmentModel();
         List<DepartmentOutcomeModel> addDepartmentOutcomes = new List<DepartmentOutcomeModel>();
@@ -43,7 +45,8 @@ namespace CMSUI.CreateForms
 
             update = true;
             createDepartmentBtn.Content = "Update";
-
+            titleText.Text = "Update a Department";
+            title.Title = "Update Department";
             department = model;
 
             nameText.Text = department.Name;
@@ -94,17 +97,18 @@ namespace CMSUI.CreateForms
                 {
                     
                     department.Name = nameText.Text;
-
                     foreach (OutcomeUserControl outcome in outcomesList.Children)
                     {
+                        TagData td = (TagData)outcome.Tag;
+
                         DepartmentOutcomeModel dO = new DepartmentOutcomeModel
                         {
+                            Id = td.Id,
                             Name = outcome.nameText.Text,
                             Description = outcome.descriptionText.Text,
                             DepartmentId = department.Id
                         };
 
-                        TagData td = (TagData)outcome.Tag;
                         if (td.IsNew == true)
                         {
                             GlobalConfig.Connection.CreateDepartmentOutcome(dO);
@@ -113,6 +117,10 @@ namespace CMSUI.CreateForms
                         {
                             GlobalConfig.Connection.UpdateDepartmentOutcome(dO);
                         }
+                    }
+                    foreach (var delete in outcomesToDelete)
+                    {
+                        GlobalConfig.Connection.DepartmentOutcome_Delete(delete);
                     }
                     GlobalConfig.Connection.UpdateDepartment(department);
                     callingWindow.DepartmentUpdateComplete(department);
@@ -159,6 +167,10 @@ namespace CMSUI.CreateForms
 
                     errorOutcomes.Visibility = Visibility.Visible;
                 }
+            }
+            if (outcomesList.Children.Count == 0)
+            {
+                errorOutcomes.Visibility = Visibility.Visible;
             }
             if (nameText.Text == "")
             {
@@ -224,6 +236,8 @@ namespace CMSUI.CreateForms
                     errorOutcomes.Visibility = Visibility.Visible;
                 }
             }
+            
+
         }
     }
 }

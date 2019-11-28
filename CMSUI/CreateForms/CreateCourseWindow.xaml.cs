@@ -28,6 +28,9 @@ namespace CMSUI.CreateForms
         ICouresRequester CallingWindow;
         List<EducationalYearModel> EduYears;
 
+        public List<int> outcomesToDelete = new List<int>();
+
+
         bool update;
         CourseModel course = new CourseModel();
         List<CourseOutcomeModel> newCourseOutcomes = new List<CourseOutcomeModel>();
@@ -46,7 +49,8 @@ namespace CMSUI.CreateForms
 
             update = true;
             createCourseBtn.Content = "Update";
-
+            titleText.Text = "Update a Course";
+            title.Title = "Update Course";
             course = model;
 
             nameText.Text = course.Name;
@@ -132,13 +136,15 @@ namespace CMSUI.CreateForms
                     course.EduYear = (EducationalYearModel)eduYearCombobox.SelectedItem;                    
                     foreach (OutcomeUserControl outcome in outcomesList.Children)
                     {
+                        TagData td = (TagData)outcome.Tag;
+
                         CourseOutcomeModel cO = new CourseOutcomeModel
                         {
+                            Id = td.Id,
                             Name = outcome.nameText.Text,
                             Description = outcome.descriptionText.Text,
                             CourseId = course.Id
                         };
-                        TagData td = (TagData)outcome.Tag;
                         if(td.IsNew == true)
                         {
                             
@@ -148,7 +154,11 @@ namespace CMSUI.CreateForms
                         {
                             GlobalConfig.Connection.UpdateCourseOutcome(cO);
                         }
-                    }                    
+                    }
+                    foreach (var delete in outcomesToDelete)
+                    {
+                        GlobalConfig.Connection.CourseOutcome_Delete(delete);
+                    }
                     GlobalConfig.Connection.UpdateCourse(course);
                     CallingWindow.CourseUpdateComplete(course);
 
@@ -172,7 +182,10 @@ namespace CMSUI.CreateForms
                     errorOutcomes.Visibility = Visibility.Visible;
                 }
             }
-
+            if (outcomesList.Children.Count == 0)
+            {
+                errorOutcomes.Visibility = Visibility.Visible;
+            }
             if (nameText.Text == "")
             {
                 errorName.Visibility = Visibility.Visible;

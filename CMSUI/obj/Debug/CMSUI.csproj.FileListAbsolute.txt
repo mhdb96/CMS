@@ -61,7 +61,6 @@ C:\Users\onurk\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\Panels\TeacherPane
 C:\Users\onurk\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\UserControls\AnswersOutcomesUserControl.g.cs
 C:\Users\onurk\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\UserControls\Dashboards\AssignmentDashboardUserControl.g.cs
 C:\Users\onurk\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\UserControls\Dashboards\CourseDashboardUserControl.g.cs
-C:\Users\onurk\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\UserControls\DepartmentDashboardUserControl.g.cs
 C:\Users\onurk\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\UserControls\Dashboards\MyCoursesDashboardUserControl.g.cs
 C:\Users\onurk\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\UserControls\OutcomeUserControl.g.cs
 C:\Users\onurk\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\UserControls\StudentDataUserControl.g.cs
@@ -87,7 +86,6 @@ C:\Users\onurk\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\Panels\TeacherPane
 C:\Users\onurk\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\UserControls\AnswersOutcomesUserControl.baml
 C:\Users\onurk\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\UserControls\Dashboards\AssignmentDashboardUserControl.baml
 C:\Users\onurk\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\UserControls\Dashboards\CourseDashboardUserControl.baml
-C:\Users\onurk\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\UserControls\DepartmentDashboardUserControl.baml
 C:\Users\onurk\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\UserControls\Dashboards\MyCoursesDashboardUserControl.baml
 C:\Users\onurk\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\UserControls\OutcomeUserControl.baml
 C:\Users\onurk\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\UserControls\StudentDataUserControl.baml
@@ -190,3 +188,13 @@ C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\CMSUI.csproj.CoreC
 C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\CMSUI.csproj.CopyComplete
 C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\CMSUI.exe
 C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\CMSUI.pdb
+C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\LoginWindows\DatabaseSettingWindow.g.cs
+C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\LoginWindows\DevelopersInfoWindow.g.cs
+C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\LoginWindows\DatabaseSettingWindow.baml
+C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\LoginWindows\DevelopersInfoWindow.baml
+C:\Users\onurk\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\LoginWindows\DatabaseSettingWindow.g.cs
+C:\Users\onurk\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\LoginWindows\DevelopersInfoWindow.g.cs
+C:\Users\onurk\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\UserControls\Dashboards\DepartmentDashboardUserControl.g.cs
+C:\Users\onurk\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\LoginWindows\DatabaseSettingWindow.baml
+C:\Users\onurk\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\LoginWindows\DevelopersInfoWindow.baml
+C:\Users\onurk\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Debug\UserControls\Dashboards\DepartmentDashboardUserControl.baml
