@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CMSLibrary.DataAccess;
+﻿using CMSLibrary.DataAccess;
 
 namespace CMSLibrary
 {
@@ -16,8 +10,12 @@ namespace CMSLibrary
             Connection = new SqlConnector();
         }
         public static string CnnString(string name)
-        {
-            return ConfigurationManager.ConnectionStrings[name].ConnectionString;            
+        {              
+            return $"Data Source = {Ip},{Port}; Network Library = DBMSSOCN; Initial Catalog = CMS; User ID = {Username}; Password = {Password};";
         }
+        public static string Ip = "192.168.1.26";
+        public static string Port = "1433";
+        public static string Username = "sa";
+        public static string Password = "alpha86";
     }
 }

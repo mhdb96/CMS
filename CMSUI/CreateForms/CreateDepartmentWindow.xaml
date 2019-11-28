@@ -8,12 +8,13 @@
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"              
         xmlns:local="clr-namespace:CMSUI"
         mc:Ignorable="d"
-        Title="Create Department" Height="450" Width="800" FontSize="18pt">
+        Title="Create Department" Height="450" Width="500">
     <Window.Resources>
             <Style x:Key = "myTextBlockStyle" TargetType = "TextBlock">
                 <Setter Property = "VerticalAlignment" Value="Center" />
                 <Setter Property="Margin" Value="0 0 10 0"/>
-            </Style>
+                <Setter Property="FontSize" Value="14pt"/>
+        </Style>
         </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions >

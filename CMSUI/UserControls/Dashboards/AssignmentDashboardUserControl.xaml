@@ -15,7 +15,7 @@
         </Style>
     </UserControl.Resources>
 
-    <Grid Background="AliceBlue">
+    <Grid>
         <Grid.ColumnDefinitions >
             <ColumnDefinition Width="10"/>
             <ColumnDefinition Width="auto"/>

@@ -144,6 +144,7 @@
     <Compile Include="Requesters\IAdminPanelRequester.cs" />
     <Compile Include="Requesters\IAssignmentRequester.cs" />
     <Compile Include="Requesters\ICouresRequester.cs" />
+    <Compile Include="Requesters\IDatabaseSettingRequester.cs" />
     <Compile Include="Requesters\IDepartmentRequester.cs" />
     <Compile Include="Requesters\IExamRequester.cs" />
     <Compile Include="Requesters\IFixStudentsDataWindowRequester.cs" />

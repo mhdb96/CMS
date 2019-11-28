@@ -8,11 +8,13 @@
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks" 
         xmlns:local="clr-namespace:CMSUI"
         mc:Ignorable="d"
-        Title="Create Teacher" Height="400" Width="511.2" FontSize="18pt">
+        Title="Create Teacher" Height="400" Width="500">
     <Window.Resources>
         <Style x:Key = "myTextBlockStyle" TargetType = "TextBlock">
             <Setter Property = "VerticalAlignment" Value="Center" />
             <Setter Property="Margin" Value="0 0 10 0"/>
+            <Setter Property="FontSize" Value="14pt"/>
+            
         </Style>
     </Window.Resources>
     <Grid>

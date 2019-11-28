@@ -31,7 +31,7 @@ namespace CMSUI.Converters
             {
                 return "Book";
             }
-            if (type == "Assignment")
+            if (type == "Assignments")
             {
                 return "Briefcase";
             }

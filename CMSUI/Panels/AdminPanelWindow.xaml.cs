@@ -46,5 +46,10 @@ namespace CMSUI.Panels
         {
             return await this.ShowMessageAsync(title, message, style, null);    
         }
+
+        private void MetroWindow_Closed(object sender, EventArgs e)
+        {
+            CallingWindow.AdminPanelClosed();
+        }
     }
 }

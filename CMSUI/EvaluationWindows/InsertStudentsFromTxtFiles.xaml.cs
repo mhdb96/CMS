@@ -30,8 +30,9 @@ namespace CMSUI.EvaluationWindows
         List<DepartmentModel> Departments;
         List<EducationalYearModel> EduYears;
         string StudentListPath;
-        string[] results;        
-        
+        string[] results;
+        List<StudentModel> StudentsDataWithErrors = new List<StudentModel>();
+        List<StudentModel> StudentModels = new List<StudentModel>();
         List<StudentDataModel> data = new List<StudentDataModel>();
         public InsertStudentsFromTxtFiles()
         {
@@ -61,16 +62,38 @@ namespace CMSUI.EvaluationWindows
             StudentListPath = studentsAnswersListPath;
             results = File.ReadAllLines(StudentListPath, Encoding.GetEncoding("iso-8859-9"));
             int i = 1;
+            studentsList.Children.Clear();
             foreach (string listString in results)
-            {                                   
+            {                              
+                if(listString.Replace(" ","") == "")
+                {
+                    continue;
+                }
                 StudentDataUserControl sd = new StudentDataUserControl();    
                 sd.number.Text = i.ToString();
                 sd.lastName.Text = NamesFixer(listString.Substring(12, 12));
                 sd.regNo.Text = listString.Substring(24, 9);
                 sd.firstName.Text = NamesFixer(listString.Substring(0, 12));
-                students.Children.Add(sd);
+                studentsList.Children.Add(sd);
                 i++;
             }
+        }
+
+        private void FixStudentsData()
+        {
+            studentsList.Children.Clear();
+            int i = 1;
+            foreach (StudentModel student in StudentsDataWithErrors)
+            {
+                StudentDataUserControl sd = new StudentDataUserControl();
+                sd.number.Text = i.ToString();
+                sd.lastName.Text = student.LastName;
+                sd.regNo.Text = student.RegNo.ToString();
+                sd.firstName.Text = student.FirstName;
+                studentsList.Children.Add(sd);
+                i++;
+            }
+
         }
 
         private string NamesFixer (string name)
@@ -95,12 +118,7 @@ namespace CMSUI.EvaluationWindows
         {
 
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            
-            
-        }
+        
 
         private void ChooseStudentsFile_Click(object sender, RoutedEventArgs e)
         {
@@ -111,9 +129,10 @@ namespace CMSUI.EvaluationWindows
         {
             string studentNo = "";
             try
-            {
-                List<StudentModel> studentModels = new List<StudentModel>();
-                foreach (StudentDataUserControl student in students.Children)
+            {                
+                bool isDuplicate = false;
+                StudentsDataWithErrors.Clear();
+                foreach (StudentDataUserControl student in studentsList.Children)
                 {
                     studentNo = student.number.Text;
                     StudentDataModel model = new StudentDataModel();
@@ -128,13 +147,29 @@ namespace CMSUI.EvaluationWindows
                         Department = (DepartmentModel)departmentsCombobox.SelectedItem,
                         EduYear = (EducationalYearModel)eduYearsCombobox.SelectedItem
                     };
-                    studentModels.Add(s);
+                    var duplicate = StudentModels.Find(st => st.RegNo == s.RegNo);
+                    if (duplicate != null)
+                    {
+                        isDuplicate = true;
+                        duplicate.ErrorType = "Duplicated Value, Fix RegNo";
+                        StudentsDataWithErrors.Add(duplicate);
+                        StudentsDataWithErrors.Add(s);
+                        StudentModels.Remove(duplicate);
+                        continue;
+                    }                    
+                    StudentModels.Add(s);
                 }
+                if(isDuplicate)
+                {
+                    FixStudentsData();
+                    return;
+                }
+
                 bool hasErrors = false;
                 int errorsCount = 0;
                 StringBuilder sb = new StringBuilder();
                 sb.Append($"At {DateTime.Now.ToString()} new error log was created{Environment.NewLine}");
-                foreach (StudentModel s in studentModels)
+                foreach (StudentModel s in StudentModels)
                 {
                     string err = GlobalConfig.Connection.CreateStudent(s);
                     if(err != null)

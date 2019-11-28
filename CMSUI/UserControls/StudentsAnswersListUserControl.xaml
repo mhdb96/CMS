@@ -15,7 +15,9 @@
             SelectionMode="Single"                                                           
             AutoGenerateColumns="False"
             CanUserSortColumns="True"
-            CanUserReorderColumns="False"                  
+            CanUserReorderColumns="False" 
+                      CanUserAddRows="False"
+                      IsReadOnly="True"
             >
                 <DataGrid.Columns>
                     <DataGridTextColumn   
@@ -45,7 +47,6 @@
                     </DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
-            <Button Content="Evaluate" x:Name="evaluate_Btn" Click="Evaluate_Btn_Click"/>
         </StackPanel>
     </Grid>
 </UserControl>

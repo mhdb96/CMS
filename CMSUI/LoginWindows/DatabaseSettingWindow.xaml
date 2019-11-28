@@ -43,7 +43,7 @@
             Database Settings
         </TextBlock>
         <StackPanel Grid.Row="2" Grid.Column="1" Margin="10 10 10 2">
-            <TextBox x:Name="usernameText"
+            <TextBox x:Name="ipText"
             
                   Width="auto"
                  Controls:TextBoxHelper.Watermark="Enter database IP"            
@@ -52,7 +52,7 @@
         </StackPanel>
         <StackPanel Grid.Row="3" Grid.Column="1" Margin="10 2 10 2">
             <TextBox 
-            
+            x:Name="portText"
                   Width="auto"
                  Controls:TextBoxHelper.Watermark="Enter database port"            
                  Controls:TextBoxHelper.ClearTextButton="True"       
@@ -60,7 +60,7 @@
         </StackPanel>
         <StackPanel Grid.Row="4" Grid.Column="1" Margin="10 2 10 2">
             <TextBox 
-            
+            x:Name="usernameText"
                   Width="auto"
                  Controls:TextBoxHelper.Watermark="Enter database username"            
                  Controls:TextBoxHelper.ClearTextButton="True"       

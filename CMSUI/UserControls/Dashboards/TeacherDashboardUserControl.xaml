@@ -18,7 +18,7 @@
         <ResourceDictionary x:Key="3" Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.Buttons.xaml" />
     </UserControl.Resources>
     
-    <Grid Background="AliceBlue">
+    <Grid>
         <Grid.ColumnDefinitions >
             <ColumnDefinition Width="10"/>
             <ColumnDefinition Width="*"/>

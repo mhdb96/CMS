@@ -26,7 +26,7 @@
                         Style="{DynamicResource MahApps.Metro.Styles.MetroCircleButtonStyle}">
                     <iconPacks:PackIconOcticons 
                     VerticalAlignment="Center"
-                    Width="10" Foreground="Red"                      
+                    Width="10" Foreground="Crimson"                      
                     Height="10"                                              
                     Kind="x"/>
                 </Button>

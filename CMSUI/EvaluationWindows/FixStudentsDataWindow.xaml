@@ -9,7 +9,8 @@
         xmlns:local="clr-namespace:CMSUI"
         xmlns:MyControls="clr-namespace:CMSUI.UserControls"
         mc:Ignorable="d"
-        Title="FixStudentsDataWindow" Height="450" Width="800" Closed="MetroWindow_Closed">
+        Title="FixStudentsDataWindow" Height="450" Width="800" Closed="MetroWindow_Closed"
+                      FontSize="14pt">
     <Window.Resources>
         <Style x:Key = "myTextBlockStyle" TargetType = "TextBlock">
             <Setter Property = "VerticalAlignment" Value="Center" />

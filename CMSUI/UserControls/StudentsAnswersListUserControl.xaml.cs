@@ -45,11 +45,6 @@ namespace CMSUI.UserControls
             studentsAnswersGrid.ItemsSource = null;
             studentsAnswersGrid.Items.Clear();
             studentsAnswersGrid.ItemsSource = MyEvaluator.StudentsAnswers;            
-        }        
-
-        private void Evaluate_Btn_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
+        }                
     }
 }

@@ -11,7 +11,8 @@
         xmlns:MyControls="clr-namespace:CMSUI.UserControls"
                       
         mc:Ignorable="d"
-        Title="Admin Panel" Height="700" Width="1400" FontSize="18pt">
+        Title="Admin Panel" Height="700" Width="1300" 
+                      FontSize="14pt" Closed="MetroWindow_Closed">
 
     
     <Border Margin="20">
@@ -50,7 +51,7 @@
                 <Controls:MetroTabItem Header="Courses">
                     <MyControls:CourseDashboardUserControl/>
                 </Controls:MetroTabItem>
-                <Controls:MetroTabItem Header="Assignment">
+                <Controls:MetroTabItem Header="Assignments">
                     <MyControls:AssignmentDashboardUserControl/>
                 </Controls:MetroTabItem>
                 <Controls:MetroTabItem Header="Exams">

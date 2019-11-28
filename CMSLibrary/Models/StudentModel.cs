@@ -21,5 +21,6 @@ namespace CMSLibrary.Models
                 return $"{FirstName} {LastName}";
             }
         }
+        public string ErrorType { get; set; }
     }
 }

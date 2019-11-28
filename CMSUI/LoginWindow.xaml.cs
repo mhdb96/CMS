@@ -26,7 +26,7 @@ namespace CMSUI
     /// <summary>
     /// Interaction logic for LoginWindow.xaml
     /// </summary>
-    public partial class LoginWindow : IAdminPanelRequester, ITeacherPanelRequester
+    public partial class LoginWindow : IAdminPanelRequester, ITeacherPanelRequester, IDatabaseSettingRequester
     {
         UserModel User;
         public LoginWindow()
@@ -75,14 +75,13 @@ namespace CMSUI
                 if (User.Role.Name == "Admin")
                 {
                     AdminPanelWindow win = new AdminPanelWindow(this);
-                    win.Show();
-                    this.Close();
+                    win.Show();                    
                 } else
                 {
                     TeacherPanelWindow win = new TeacherPanelWindow(this);
-                    win.Show();
-                    this.Close();
+                    win.Show();                    
                 }
+                this.Hide();
             }
         }
 
@@ -117,7 +116,7 @@ namespace CMSUI
 
         private void DatabaseBtn_Click(object sender, RoutedEventArgs e)
         {
-            DatabaseSettingWindow win = new DatabaseSettingWindow();
+            DatabaseSettingWindow win = new DatabaseSettingWindow(this);
             win.ShowDialog();
         }
 
@@ -125,6 +124,29 @@ namespace CMSUI
         {
             DevelopersInfoWindow win = new DevelopersInfoWindow();
             win.ShowDialog();
+        }
+
+        private void ClearFields()
+        {
+            usernameText.Text = "";
+            passwordText.Password = ""; 
+        }
+
+        public void AdminPanelClosed()
+        {
+            this.Show();
+            ClearFields();
+        }
+
+        public void TeacherPanelClosed()
+        {
+            this.Show();
+            ClearFields();
+        }
+
+        public async Task DatabaseSettingSaved()
+        {
+            await ShowProgressDialogAsync();
         }
     }
 }

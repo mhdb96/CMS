@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CMSLibrary.Models;
 using Dapper;
 
@@ -259,8 +257,7 @@ namespace CMSLibrary.DataAccess
             using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
             {
                 var p = new DynamicParameters();
-                p.Add("@ExamId", model.Id);
-                //model.ExamGroups = connection.Query<ExamGroupModel>("dbo.spExamGroups_GetByExamId", p, commandType: CommandType.StoredProcedure).ToList();
+                p.Add("@ExamId", model.Id);                
                 model.ExamGroups = connection.Query<ExamGroupModel, GroupModel, ExamGroupModel>("dbo.spExamGroups_GetByExamId",
                     (examGroup, group)
                     => {

@@ -43,5 +43,10 @@ namespace CMSUI.Panels
         {
             return await this.ShowMessageAsync(title, message, style, null);
         }
+
+        private void TeacherPanel_Closed(object sender, EventArgs e)
+        {
+            CallingWindow.TeacherPanelClosed();
+        }
     }
 }

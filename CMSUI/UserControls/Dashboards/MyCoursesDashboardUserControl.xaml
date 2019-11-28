@@ -16,7 +16,7 @@
         </Style>
     </UserControl.Resources>
 
-    <Grid Background="AliceBlue">
+    <Grid>
         <Grid.ColumnDefinitions >
             <ColumnDefinition Width="10"/>
             <ColumnDefinition Width="auto"/>
@@ -74,7 +74,7 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
         </StackPanel>
-        <Button Content="Insert Sstudents" x:Name="insertStudentBtn" Click="InsertStudentBtn_Click"
+        <Button Content="Insert Students" x:Name="insertStudentBtn" Click="InsertStudentBtn_Click"
                 Grid.Column="1" Grid.Row="1"
                 Visibility="Collapsed"/>
         <Button    
@@ -114,7 +114,7 @@
                                     Grid.Column="1" Grid.Row="0">
                             <Button
                                 ToolTip="Add an exam"
-                                Margin="5"
+                                Margin="0"
                             x:Name="addExamBtn" Click="AddExamBtn_Click" Tag="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBoxItem}},Path=Content}"
                             VerticalAlignment="Center">
                                 <iconPacks:PackIconMaterial 

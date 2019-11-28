@@ -14,7 +14,7 @@
             <Setter Property="Margin" Value="0 0 10 0"/>
         </Style>
     </UserControl.Resources>
-    <Grid Background="AliceBlue">
+    <Grid>
         <Grid.ColumnDefinitions >
             <ColumnDefinition Width="10"/>
             <ColumnDefinition Width="*"/>
@@ -93,7 +93,7 @@
                                     Grid.Column="1" Grid.Row="0">
                             <Button
                                 ToolTip="Update"
-                                Margin="5"
+                                Margin="0 0 5 0"
                             x:Name="updateCourseBtn" Click="UpdateCourseBtn_Click" Tag="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBoxItem}},Path=Content}"
                             VerticalAlignment="Center">
                                 <iconPacks:PackIconFontAwesome 
@@ -103,7 +103,7 @@
                             </Button>
                             <Button
                                 ToolTip="Delete"
-                                Margin="5"
+                                Margin="5 0 0 0"
                             x:Name="deleteCourseBtn" Click="DeleteCourseBtn_Click" Tag="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBoxItem}},Path=Content}"
                             VerticalAlignment="Center">
                                 <iconPacks:PackIconMaterial 

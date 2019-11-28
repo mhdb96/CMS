@@ -9,7 +9,8 @@
         xmlns:local="clr-namespace:CMSUI"
         xmlns:MyControls="clr-namespace:CMSUI.UserControls"
         mc:Ignorable="d"
-        Title="InsertStudentsFromTxtFiles" Height="450" Width="600">
+        Title="InsertStudentsFromTxtFiles" Height="450" Width="600"
+                      >
     <Window.Resources>
         <Style x:Key = "myTextBlockStyle" TargetType = "TextBlock">
             <Setter Property = "VerticalAlignment" Value="Center" />
@@ -35,8 +36,13 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="10"/>
             </Grid.RowDefinitions>
+        <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" Grid.ColumnSpan="6">
+            <iconPacks:PackIconMaterial VerticalAlignment="Center" Width="35" Height="35" Kind="AccountGroup" />
+            <TextBlock Text="Insert Students" FontSize="22pt"
+                    Margin="10 0 0 10"/>
+        </StackPanel>
 
-            <Button Grid.Column="1" Grid.Row="1" Content="Choose file"
+        <Button Grid.Column="1" Grid.Row="2" Content="Choose file"
                     Height="2"
                     x:Name="chooseStudentsFile"
                 Click="ChooseStudentsFile_Click"/>
@@ -53,12 +59,13 @@
                 <iconPacks:PackIconMaterial Kind="AlertCircle" VerticalAlignment="Center" Width="15" Height="15" Margin="5 0 0 0" Foreground="Red"/>
                 <TextBlock 
                     x:Name="errorText"
+                    FontSize="10pt"
                     Text="Username is required" VerticalAlignment="Center" Margin="5 0 0 0"/>
             </StackPanel>
         </StackPanel>
             
-        <TextBlock Text="Select:" Grid.Column="4" Grid.Row="1" Style="{StaticResource myTextBlockStyle}"/>
-            <StackPanel Orientation="Horizontal" Grid.Column="5" Grid.Row="1">
+        <TextBlock FontSize="14pt" Text="Select:" Grid.Column="4" Grid.Row="2" Style="{StaticResource myTextBlockStyle}"/>
+            <StackPanel Orientation="Horizontal" Grid.Column="5" Grid.Row="2">
                 <!--<TextBlock Text="Department" Style="{StaticResource myTextBlockStyle}"/>-->
                 <ComboBox x:Name="departmentsCombobox"                              
                       Width="170"         
@@ -74,7 +81,7 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Grid.Column="6" Grid.Row="1">
+            <StackPanel Orientation="Horizontal" Grid.Column="6" Grid.Row="2">
                 <!--<TextBlock Text="Term" Style="{StaticResource myTextBlockStyle}"/>-->
                 <ComboBox x:Name="eduYearsCombobox"
                       Width="170"    
@@ -91,9 +98,9 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
             </StackPanel>
-            <ScrollViewer Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="6"
-                          Grid.RowSpan="2">
-            <StackPanel Orientation="Vertical" x:Name="students">
+            <ScrollViewer Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="6"
+                          Grid.RowSpan="1">
+            <StackPanel Orientation="Vertical" x:Name="studentsList">
             </StackPanel>
         </ScrollViewer>
         
