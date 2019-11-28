@@ -1,12 +1,13 @@
 ﻿using CMSLibrary;
 using MahApps.Metro;
-using Squirrel;
+
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
+using Squirrel;
 using System.Windows;
 
 namespace CMSUI
@@ -27,9 +28,9 @@ namespace CMSUI
         }
         private async Task CheckForUpdates()
         {
-            using (var manager = new UpdateManager("https://github.com/mhdb96/YGL-Projcet-1"))
+            using (var manager = new UpdateManager. GitHubUpdateManager("https://github.com/mhdb96/YGL-Projcet-1"))
             {
-                await manager.UpdateApp();
+                await man.Result.UpdateApp();
             }
         }
     }
