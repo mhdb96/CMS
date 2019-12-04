@@ -1,4 +1,5 @@
 ﻿using CMSLibrary.DataAccess;
+using System.Configuration;
 
 namespace CMSLibrary
 {
@@ -10,8 +11,9 @@ namespace CMSLibrary
             Connection = new SqlConnector();
         }
         public static string CnnString(string name)
-        {              
-            return $"Data Source = {Ip},{Port}; Network Library = DBMSSOCN; Initial Catalog = CMS; User ID = {Username}; Password = {Password};";
+        {
+            return ConfigurationManager.ConnectionStrings[name].ConnectionString;
+            //return $"Data Source = {Ip},{Port}; Network Library = DBMSSOCN; Initial Catalog = CMS; User ID = {Username}; Password = {Password};";
         }
         public static string Ip = "192.168.1.26";
         public static string Port = "1433";

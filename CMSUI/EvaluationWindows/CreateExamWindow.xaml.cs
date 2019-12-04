@@ -70,8 +70,14 @@ namespace CMSUI.EvaluationWindows
             string answersKeyPath = GetFilePath();
             if(answersKeyPath == "")
             {
+                if(Evaluator.AnswersKeyPath == "")
+                {
+                    errorAsnwerKey.Visibility = Visibility.Visible;
+                }
+                
                 return;
             }
+            errorAsnwerKey.Visibility = Visibility.Collapsed;
             AnswersOutcomesMatrices.ItemsSource = null;
             AnswersOutcomesMatrices.Items.Clear();
             Exam.ExamGroups.Clear();
@@ -104,8 +110,13 @@ namespace CMSUI.EvaluationWindows
             string studentsAnswersListPath = GetFilePath();
             if (studentsAnswersListPath == "")
             {
+                if (Evaluator.StudentListPath == "")
+                {
+                    errorStudentList.Visibility = Visibility.Visible;
+                }                
                 return;
             }
+            errorStudentList.Visibility = Visibility.Collapsed;
             Evaluator.StudentsAnswers.Clear();
             Evaluator.GetStudentsAnswers(studentsAnswersListPath);
             if (Evaluator.StudentsAnswersWithErrors.Count > 0)
@@ -207,17 +218,17 @@ namespace CMSUI.EvaluationWindows
             }
         }
         private bool ValidForm()
-        {            
-            
+        {
+
             if (examDate.SelectedDate == null)
             {
                 errorDate.Visibility = Visibility.Visible;
             }
-            if (Evaluator.AnswerKeys.Count == 0)
+            if (Evaluator.AnswersKeyPath == "")
             {
                 errorAsnwerKey.Visibility = Visibility.Visible;
             }
-            if (!studentsAnswersExpander.IsExpanded)
+            if (Evaluator.StudentListPath == "")
             {
                 errorStudentList.Visibility = Visibility.Visible;
             }
@@ -233,8 +244,30 @@ namespace CMSUI.EvaluationWindows
             {
                 return true;
             }
+        }
 
+        private void ExamTypesCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (examTypesCombobox.SelectedItem == null)
+            {
+                errorExamType.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                errorExamType.Visibility = Visibility.Collapsed;
+            }
+        }
 
+        private void ExamDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (examDate.SelectedDate == null)
+            {
+                errorDate.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                errorDate.Visibility = Visibility.Collapsed;
+            }
         }
     }
 }

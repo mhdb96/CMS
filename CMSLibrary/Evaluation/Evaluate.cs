@@ -14,8 +14,8 @@ namespace CMSLibrary.Evaluation
         public List<StudentAnswersModel> StudentsAnswersWithErrors = new List<StudentAnswersModel>();
 
         public List<AnswerKeyModel> AnswerKeys = new List<AnswerKeyModel>();
-        string StudentListPath;
-        string AnswersKeyPath;
+        public string StudentListPath = "";
+        public string AnswersKeyPath = "";
         string[] answerKeys;
         string[] results;
         public List<AnswerKeyModel> GetAnswersKeys(string answerPath)
