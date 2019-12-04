@@ -108,6 +108,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Help.xaml.cs">
+      <DependentUpon>Help.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LoginWindows\DatabaseSettingWindow.xaml.cs">
       <DependentUpon>DatabaseSettingWindow.xaml</DependentUpon>
     </Compile>
@@ -172,6 +175,36 @@
     <Compile Include="UserControls\Dashboards\MyProfileDashboradUserControl.xaml.cs">
       <DependentUpon>MyProfileDashboradUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\HelpMenus\AssignmentHelpUserControl.xaml.cs">
+      <DependentUpon>AssignmentHelpUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\HelpMenus\CourseHelpUserControl.xaml.cs">
+      <DependentUpon>CourseHelpUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\HelpMenus\DepartmentHelpUserControl.xaml.cs">
+      <DependentUpon>DepartmentHelpUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\HelpMenus\Exam\CreateExamHelpUserControl.xaml.cs">
+      <DependentUpon>CreateExamHelpUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\HelpMenus\Exam\ExamDashboardHelpUserControl.xaml.cs">
+      <DependentUpon>ExamDashboardHelpUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\HelpMenus\Exam\InsertStudentsHelpUserControl.xaml.cs">
+      <DependentUpon>InsertStudentsHelpUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\HelpMenus\Exam\MyExamDashboardHelpUserControl.xaml.cs">
+      <DependentUpon>MyExamDashboardHelpUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\HelpMenus\MyProfileHelpUserControl.xaml.cs">
+      <DependentUpon>MyProfileHelpUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\HelpMenus\TeacherHelpUserControl.xaml.cs">
+      <DependentUpon>TeacherHelpUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\HelpMenus\TermHelpUserControl.xaml.cs">
+      <DependentUpon>TermHelpUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\OutcomeUserControl.xaml.cs">
       <DependentUpon>OutcomeUserControl.xaml</DependentUpon>
     </Compile>
@@ -187,6 +220,10 @@
     <Compile Include="UserControls\Dashboards\TermsDashboardUserControl.xaml.cs">
       <DependentUpon>TermsDashboardUserControl.xaml</DependentUpon>
     </Compile>
+    <Page Include="Help.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="LoginWindows\DatabaseSettingWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -276,6 +313,46 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControls\HelpMenus\AssignmentHelpUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\HelpMenus\CourseHelpUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\HelpMenus\DepartmentHelpUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\HelpMenus\Exam\CreateExamHelpUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\HelpMenus\Exam\ExamDashboardHelpUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\HelpMenus\Exam\InsertStudentsHelpUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\HelpMenus\Exam\MyExamDashboardHelpUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\HelpMenus\MyProfileHelpUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\HelpMenus\TeacherHelpUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\HelpMenus\TermHelpUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\OutcomeUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -333,9 +410,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Artboard-1.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Logo.png" />
   </ItemGroup>
   <ItemGroup>
@@ -346,6 +420,81 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Logo.ico" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\Help\Shared\add.png" />
+    <Resource Include="Images\Help\Shared\delete.png" />
+    <Resource Include="Images\Help\Shared\edit.png" />
+    <Resource Include="Images\Help\Shared\refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Help\Admin\Department\create.png" />
+    <Resource Include="Images\Help\Admin\Department\deps_list.png" />
+    <Resource Include="Images\Help\Admin\Department\outcms_list.png" />
+    <Resource Include="Images\Help\Admin\Department\search.png" />
+    <Resource Include="Images\Help\Admin\Department\update.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Help\Admin\Teacher\create.png" />
+    <Resource Include="Images\Help\Admin\Teacher\search.png" />
+    <Resource Include="Images\Help\Admin\Teacher\teachers_list.png" />
+    <Resource Include="Images\Help\Admin\Teacher\update.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Help\Admin\Term\create.png" />
+    <Resource Include="Images\Help\Admin\Term\list.png" />
+    <Resource Include="Images\Help\Admin\Term\search.png" />
+    <Resource Include="Images\Help\Admin\Term\update.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Help\Admin\Course\create.png" />
+    <Resource Include="Images\Help\Admin\Course\list.png" />
+    <Resource Include="Images\Help\Admin\Course\outcms_list.png" />
+    <Resource Include="Images\Help\Admin\Course\search.png" />
+    <Resource Include="Images\Help\Admin\Course\update.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Help\Admin\Assignment\create.png" />
+    <Resource Include="Images\Help\Admin\Assignment\list.png" />
+    <Resource Include="Images\Help\Admin\Assignment\search.png" />
+    <Resource Include="Images\Help\Admin\Assignment\update.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Help\Admin\Exam\Dashboard\add.png" />
+    <Resource Include="Images\Help\Admin\Exam\Dashboard\click.png" />
+    <Resource Include="Images\Help\Admin\Exam\Dashboard\create_excel.png" />
+    <Resource Include="Images\Help\Admin\Exam\Dashboard\exam_list.png" />
+    <Resource Include="Images\Help\Admin\Exam\Dashboard\insertStudent.png" />
+    <Resource Include="Images\Help\Admin\Exam\Dashboard\list.png" />
+    <Resource Include="Images\Help\Admin\Exam\Dashboard\marks.png" />
+    <Resource Include="Images\Help\Admin\Exam\Dashboard\outcomes.png" />
+    <Resource Include="Images\Help\Admin\Exam\Dashboard\questions.png" />
+    <Resource Include="Images\Help\Admin\Exam\Dashboard\search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Help\Admin\Exam\InsertStudents\choose.png" />
+    <Resource Include="Images\Help\Admin\Exam\InsertStudents\duplicate.png" />
+    <Resource Include="Images\Help\Admin\Exam\InsertStudents\error.png" />
+    <Resource Include="Images\Help\Admin\Exam\InsertStudents\info.png" />
+    <Resource Include="Images\Help\Admin\Exam\InsertStudents\insert.png" />
+    <Resource Include="Images\Help\Admin\Exam\InsertStudents\list.png" />
+    <Resource Include="Images\Help\Admin\Exam\InsertStudents\log.png" />
+    <Resource Include="Images\Help\Admin\Exam\InsertStudents\log_ico.png" />
+    <Resource Include="Images\Help\Admin\Exam\InsertStudents\window.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Help\Admin\Exam\Create\answers.png" />
+    <Resource Include="Images\Help\Admin\Exam\Create\choose_key.png" />
+    <Resource Include="Images\Help\Admin\Exam\Create\choose_student.png" />
+    <Resource Include="Images\Help\Admin\Exam\Create\duplicate.png" />
+    <Resource Include="Images\Help\Admin\Exam\Create\error.png" />
+    <Resource Include="Images\Help\Admin\Exam\Create\info.png" />
+    <Resource Include="Images\Help\Admin\Exam\Create\keys.png" />
+    <Resource Include="Images\Help\Admin\Exam\Create\window.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Help\Teacher\MyProfile\profile.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -174,3 +174,7 @@ C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Release\LoginWindows\Dat
 C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Release\LoginWindows\DevelopersInfoWindow.baml
 C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Release\UserControls\Dashboards\DepartmentDashboardUserControl.baml
 C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Release\UserControls\Dashboards\MyProfileDashboradUserControl.baml
+C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Release\Help.g.cs
+C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Release\Help.baml
+C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Release\UserControls\HelpMenus\DepartmentHelpUserControl.g.cs
+C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\obj\Release\UserControls\HelpMenus\DepartmentHelpUserControl.baml

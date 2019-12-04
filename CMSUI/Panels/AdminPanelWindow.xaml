@@ -14,53 +14,119 @@
         Title="Admin Panel" Height="700" Width="1300" 
                       FontSize="14pt" Closed="MetroWindow_Closed">
 
-    
-    <Border Margin="20">
-        <DockPanel Grid.Row="1" Grid.Column="1">
-            <TabControl HorizontalAlignment="Center"
+    <Grid>
+        <Button
+            Panel.ZIndex="4"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+                                ToolTip="Help"
+                                Margin="10"                          
+                                x:Name="helpBtn" Click="HelpBtn_Click"
+            >
+            <iconPacks:PackIconMaterial 
+                                    Margin="2"                        
+                                    Foreground="Orange"                         
+                                    Kind="HelpBox" />
+        </Button>
+        <Controls:Flyout Panel.ZIndex="5" IsOpen="False" Position="Right" Width="700" x:Name="flyout" Header="Program Tutorial">
+            <Grid>
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="10"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="10"/>
+                </Grid.RowDefinitions>
+                <Expander 
+                    Header="Table of Content"
+                    x:Name="contentExpander"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                          IsExpanded="True">
+                    <TreeView 
+                        FontSize="10pt"
+                    HorizontalAlignment="Stretch"
+                    x:Name="tutorialTree"
+                MaxHeight="200"
+                 VerticalAlignment="Top" SelectedItemChanged="TutorialTree_SelectedItemChanged">
+                        
+                            <TreeViewItem Header="Admin Panel">
+                                <TreeViewItem Header="Departments Dashboard"/>
+                                <TreeViewItem Header="Teachers Dashboard"/>
+                                <TreeViewItem Header="Terms Dashboard"/>
+                                <TreeViewItem Header="Courses Dashboard"/>
+                                <TreeViewItem Header="Assignments Dashboard"/>
+                                <TreeViewItem Header="Exams">
+                                    <TreeViewItem Header="Exams Dashboard"/>
+                                    <TreeViewItem Header="Insert Students"/>
+                                    <TreeViewItem Header="Create Exam"/>
+                                </TreeViewItem>
+                            </TreeViewItem>
+                        
+                    </TreeView>
+                </Expander>
+
+                <ScrollViewer Margin="0 10"                   
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    >
+                    <StackPanel
+                        x:Name="helpSP"/>
+                </ScrollViewer>
+            </Grid>
+        </Controls:Flyout>
+        <Border Margin="20">
+            <DockPanel Grid.Row="1" Grid.Column="1">
+                <TabControl HorizontalAlignment="Center"
+                            x:Name="tabs"
             TabStripPlacement="Top" Controls:TabControlHelper.Underlined="SelectedTabItem">
-                <TabControl.Resources>
-                    <Style TargetType="Controls:MetroTabItem">
-                        <Setter Property="HeaderTemplate">
-                            <Setter.Value>
-                                <DataTemplate>
-                                    <StackPanel  
+                    <TabControl.Resources>
+                        <Style TargetType="Controls:MetroTabItem">
+                            <Setter Property="HeaderTemplate">
+                                <Setter.Value>
+                                    <DataTemplate>
+                                        <StackPanel  
                                         Orientation="Horizontal" 
                                                 MinWidth="190"
                                                 Height="60" Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DockPanel}},Path=ActualWidth, Converter={x:Static Converters:GridWidthToTabWidthConverter.ins}}">
-                                        <iconPacks:PackIconMaterial 
+                                            <iconPacks:PackIconMaterial 
                                         VerticalAlignment="Center"
                                         Margin="0 0 10 0"
                                         Kind="{Binding Converter={x:Static Converters:HeaderToIconConverter.ins}}" Height="25" Width="25"/>
-                                        <TextBlock Text="{Binding}" VerticalAlignment="Center"/>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </TabControl.Resources>
-                <Controls:MetroTabItem Header="Departments">
-                    <MyControls:DepartmentDashboardUserControl/>
-                </Controls:MetroTabItem>
-                <Controls:MetroTabItem Header="Teachers" >
-                    <MyControls:TeacherDashboardUserControl/>
-                </Controls:MetroTabItem>
-                <Controls:MetroTabItem Header="Terms">
-                    <MyControls:TermsDashboardUserControl/>
-                </Controls:MetroTabItem>
-                <Controls:MetroTabItem Header="Courses">
-                    <MyControls:CourseDashboardUserControl/>
-                </Controls:MetroTabItem>
-                <Controls:MetroTabItem Header="Assignments">
-                    <MyControls:AssignmentDashboardUserControl/>
-                </Controls:MetroTabItem>
-                <Controls:MetroTabItem Header="Exams">
-                    <MyControls:MyCoursesDashboardUserControl
+                                            <TextBlock Text="{Binding}" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </TabControl.Resources>
+                    <Controls:MetroTabItem Header="Departments">
+                        <MyControls:DepartmentDashboardUserControl/>
+                    </Controls:MetroTabItem>
+                    <Controls:MetroTabItem Header="Teachers" >
+                        <MyControls:TeacherDashboardUserControl/>
+                    </Controls:MetroTabItem>
+                    <Controls:MetroTabItem Header="Terms">
+                        <MyControls:TermsDashboardUserControl/>
+                    </Controls:MetroTabItem>
+                    <Controls:MetroTabItem Header="Courses">
+                        <MyControls:CourseDashboardUserControl/>
+                    </Controls:MetroTabItem>
+                    <Controls:MetroTabItem Header="Assignments">
+                        <MyControls:AssignmentDashboardUserControl/>
+                    </Controls:MetroTabItem>
+                    <Controls:MetroTabItem Header="Exams">
+                        <MyControls:MyCoursesDashboardUserControl
                         x:Name="myCoursesControl" >
-                    </MyControls:MyCoursesDashboardUserControl>
-                </Controls:MetroTabItem>
-            </TabControl>
-        </DockPanel>
-
-    </Border>
+                        </MyControls:MyCoursesDashboardUserControl>
+                    </Controls:MetroTabItem>
+                </TabControl>
+            </DockPanel>
+        </Border>
+    </Grid>
+    
 </Controls:MetroWindow>

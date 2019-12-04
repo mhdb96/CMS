@@ -8,6 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("logo.ico")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/help/admin/department/create.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/help/admin/department/deps_list.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/help/admin/department/outcms_list.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/help/admin/department/search.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/help/admin/department/update.png")]
 
 
