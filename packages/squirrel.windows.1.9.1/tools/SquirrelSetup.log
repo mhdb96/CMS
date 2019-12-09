@@ -1,0 +1,29 @@
+﻿2019-12-09 17:36:58> Program: Starting Squirrel Updater: --releasify CourseManagementSystem.1.0.2.nupkg --setupIcon C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\CMSUI\Logo.ico
+2019-12-09 17:36:58> Program: Bootstrapper EXE found at:C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\packages\squirrel.windows.1.9.1\tools\Setup.exe
+2019-12-09 17:36:58> Program: Creating release package: C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\Releases\CourseManagementSystem.1.0.2.nupkg
+2019-12-09 17:36:58> ReleasePackage: Creating release package: C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\Releases\CourseManagementSystem.1.0.2.nupkg => C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\Releases\CourseManagementSystem-1.0.2-full.nupkg
+2019-12-09 17:36:59> ReleasePackage: Extracting dependent packages: []
+2019-12-09 17:36:59> ReleasePackage: Removing unnecessary data
+2019-12-09 17:36:59> ReleasePackage: No release notes found in C:\Users\mhdb9\AppData\Local\SquirrelTemp\tempa\CourseManagementSystem.nuspec
+2019-12-09 17:37:01> DeltaPackageBuilder: Extracting .\Releases\CourseManagementSystem-1.0.1-full.nupkg and C:\Users\mhdb9\Documents\GitHub\YGL-Projcet-1\Releases\CourseManagementSystem-1.0.2-full.nupkg into C:\Users\mhdb9\AppData\Local\SquirrelTemp\tempb
+2019-12-09 17:37:01> DeltaPackageBuilder: Delta patching C:\Users\mhdb9\AppData\Local\SquirrelTemp\tempa\lib\net45\CMSLibrary.dll => C:\Users\mhdb9\AppData\Local\SquirrelTemp\tempb\lib\net45\CMSLibrary.dll
+2019-12-09 17:37:01> DeltaPackageBuilder: Delta patching C:\Users\mhdb9\AppData\Local\SquirrelTemp\tempa\lib\net45\CMSUI.exe => C:\Users\mhdb9\AppData\Local\SquirrelTemp\tempb\lib\net45\CMSUI.exe
+2019-12-09 17:37:06> DeltaPackageBuilder: \lib\net45\CMSUI.exe.config hasn't changed, writing dummy file
+2019-12-09 17:37:06> DeltaPackageBuilder: \lib\net45\CMSUI_ExecutionStub.exe hasn't changed, writing dummy file
+2019-12-09 17:37:06> DeltaPackageBuilder: \lib\net45\ControlzEx.dll hasn't changed, writing dummy file
+2019-12-09 17:37:06> DeltaPackageBuilder: \lib\net45\Dapper.dll hasn't changed, writing dummy file
+2019-12-09 17:37:06> DeltaPackageBuilder: \lib\net45\DeltaCompressionDotNet.dll hasn't changed, writing dummy file
+2019-12-09 17:37:06> DeltaPackageBuilder: \lib\net45\DeltaCompressionDotNet.MsDelta.dll hasn't changed, writing dummy file
+2019-12-09 17:37:06> DeltaPackageBuilder: \lib\net45\DeltaCompressionDotNet.PatchApi.dll hasn't changed, writing dummy file
+2019-12-09 17:37:06> DeltaPackageBuilder: \lib\net45\MahApps.Metro.dll hasn't changed, writing dummy file
+2019-12-09 17:37:06> DeltaPackageBuilder: \lib\net45\MahApps.Metro.IconPacks.dll hasn't changed, writing dummy file
+2019-12-09 17:37:06> DeltaPackageBuilder: \lib\net45\Mono.Cecil.dll hasn't changed, writing dummy file
+2019-12-09 17:37:06> DeltaPackageBuilder: \lib\net45\Mono.Cecil.Mdb.dll hasn't changed, writing dummy file
+2019-12-09 17:37:06> DeltaPackageBuilder: \lib\net45\Mono.Cecil.Pdb.dll hasn't changed, writing dummy file
+2019-12-09 17:37:06> DeltaPackageBuilder: \lib\net45\Mono.Cecil.Rocks.dll hasn't changed, writing dummy file
+2019-12-09 17:37:07> DeltaPackageBuilder: \lib\net45\NuGet.Squirrel.dll hasn't changed, writing dummy file
+2019-12-09 17:37:07> DeltaPackageBuilder: \lib\net45\SharpCompress.dll hasn't changed, writing dummy file
+2019-12-09 17:37:07> DeltaPackageBuilder: \lib\net45\Splat.dll hasn't changed, writing dummy file
+2019-12-09 17:37:07> DeltaPackageBuilder: \lib\net45\Squirrel.dll hasn't changed, writing dummy file
+2019-12-09 17:37:07> DeltaPackageBuilder: \lib\net45\System.Windows.Interactivity.dll hasn't changed, writing dummy file
+2019-12-09 17:37:07> Program: Building embedded zip file for Setup.exe

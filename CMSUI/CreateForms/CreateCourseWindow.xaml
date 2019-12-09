@@ -9,7 +9,7 @@
         xmlns:local="clr-namespace:CMSUI"
         mc:Ignorable="d"
         x:Name="title" 
-        Title="Create Course" Height="558.6" Width="600">               
+        Title="CREATE COURSE" Height="558.6" Width="600">               
     <Window.Resources>
         <Style x:Key = "myTextBlockStyle" TargetType = "TextBlock">
             <Setter Property = "VerticalAlignment" Value="Center" />

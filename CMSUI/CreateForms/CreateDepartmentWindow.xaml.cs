@@ -45,8 +45,8 @@ namespace CMSUI.CreateForms
 
             update = true;
             createDepartmentBtn.Content = "Update";
-            titleText.Text = "Update a Department";
-            title.Title = "Update Department";
+            titleText.Text = "Update the Department";
+            title.Title = "UPDATE DEPARTMENT";
             department = model;
 
             nameText.Text = department.Name;

@@ -103,6 +103,8 @@ namespace CMSUI
             if (errMsg == "")
             {            
                 await this.ShowMessageAsync("Success", "You have succesfully connected to the database.");
+                //DatabaseSettingWindow win = new DatabaseSettingWindow(this);
+                //win.ShowDialog();
             }
             else
             {

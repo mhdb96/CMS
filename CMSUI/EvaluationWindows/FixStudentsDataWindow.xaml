@@ -9,7 +9,7 @@
         xmlns:local="clr-namespace:CMSUI"
         xmlns:MyControls="clr-namespace:CMSUI.UserControls"
         mc:Ignorable="d"
-        Title="FixStudentsDataWindow" Height="450" Width="800" Closed="MetroWindow_Closed"
+        Title="FIX STUDENT DATA" Height="450" Width="800" Closed="MetroWindow_Closed"
                       FontSize="14pt">
     <Window.Resources>
         <Style x:Key = "myTextBlockStyle" TargetType = "TextBlock">
@@ -41,7 +41,7 @@
             <StackPanel Orientation="Vertical" x:Name="students">
             </StackPanel>
         </ScrollViewer>
-        <Button Grid.Column="1" Grid.Row="4" Content="fix" Width="50" Click="Button_Click"/>
+        <Button Grid.Column="1" Grid.Row="4" Content="FIX" Width="50" Click="Button_Click"/>
         
 
 

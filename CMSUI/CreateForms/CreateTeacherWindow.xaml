@@ -9,7 +9,7 @@
         xmlns:local="clr-namespace:CMSUI"
         mc:Ignorable="d"
         x:Name="title"
-        Title="Create Teacher" Height="400" Width="500">
+        Title="CREATE TEACHER" Height="400" Width="500">
             
     <Window.Resources>
         <Style x:Key = "myTextBlockStyle" TargetType = "TextBlock">

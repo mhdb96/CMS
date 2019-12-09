@@ -11,7 +11,7 @@
         xmlns:MyControls="clr-namespace:CMSUI.UserControls"
         mc:Ignorable="d"
         x:Name="TeacherPanel"
-        Title="Teacher Panel" Height="600" Width="1300"  FontSize="14pt" Closed="TeacherPanel_Closed">
+        Title="TEACHER PANEL" Height="600" Width="1300"  FontSize="14pt" Closed="TeacherPanel_Closed">
 
     <Grid>
         <Button

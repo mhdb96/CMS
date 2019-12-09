@@ -9,7 +9,7 @@
         xmlns:local="clr-namespace:CMSUI"
         xmlns:MyControls="clr-namespace:CMSUI.UserControls"
         mc:Ignorable="d"
-        Title="InsertStudentsFromTxtFiles" Height="700" Width="600"
+        Title="INSERT STUDENTS FROM TEXT FILES" Height="700" Width="600"
                       >
     <Window.Resources>
         <Style x:Key = "myTextBlockStyle" TargetType = "TextBlock">
@@ -48,7 +48,7 @@
                 Click="ChooseStudentsFile_Click"/>
         <StackPanel Grid.Column="1" Grid.Row="4" Orientation="Horizontal"
                     Grid.ColumnSpan="5">
-            <Button  Content="Insert Students"
+            <Button  Content="INSERT STUDENTS"
                     Height="2"
                     x:Name="insertStudents"
                 Click="InsertStudents_Click"/>

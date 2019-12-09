@@ -8,7 +8,7 @@
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks" 
         xmlns:local="clr-namespace:CMSUI"
         mc:Ignorable="d"
-        Title="LoginWindow" Height="500" Width="350" WindowStartupLocation="CenterScreen"
+        Title="LOGIN WINDOW" Height="500" Width="350" WindowStartupLocation="CenterScreen"
                       ResizeMode="NoResize"
                       
                       ContentRendered="MetroWindow_ContentRendered">
@@ -88,7 +88,7 @@
             Margin="10 5 10 2"
             x:Name="loginBtn" Click="LoginBtn_Click"
             Grid.Row="7" Grid.Column="1"
-            Content="login"/>
+            Content="LOGIN"/>
         <StackPanel Grid.Row="9" Grid.Column="1">
             <Grid Width="auto">
                 <Grid.ColumnDefinitions>
@@ -101,14 +101,14 @@
                     Grid.Column="0"
                     Margin="10 10 5 10"
                     Width="auto"
-                    Content="database setting"/>
+                    Content="DATABASE SETTINGS"/>
                 <Button 
                     x:Name="infoBtn"
                     Click="InfoBtn_Click"
                     Grid.Column="1"
                     Margin="5 10 10 10"
                     Width="auto"
-                    Content="Developers Info"
+                    Content="DEVELEOPERS INFO"
                         />
             </Grid>
             

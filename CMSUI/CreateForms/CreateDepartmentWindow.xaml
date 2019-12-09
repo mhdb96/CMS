@@ -9,7 +9,7 @@
         xmlns:local="clr-namespace:CMSUI"
         mc:Ignorable="d"
         x:Name="title"      
-        Title="Create Department" Height="450" Width="600">                                
+        Title="CREATE DEPARTMENT" Height="450" Width="600">                                
     <Window.Resources>
             <Style x:Key = "myTextBlockStyle" TargetType = "TextBlock">
                 <Setter Property = "VerticalAlignment" Value="Center" />

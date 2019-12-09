@@ -11,7 +11,7 @@
         xmlns:MyControls="clr-namespace:CMSUI.UserControls"
                       
         mc:Ignorable="d"
-        Title="Admin Panel" Height="700" Width="1300" 
+        Title="ADMIN PANEL" Height="700" Width="1300" 
                       FontSize="14pt" Closed="MetroWindow_Closed">
 
     <Grid>

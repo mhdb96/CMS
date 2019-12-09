@@ -113,7 +113,15 @@ namespace CMSLibrary.Evaluation
                 excel.WriteToCell(p, 0, courseOutcome.Name);
 
                 excel.WriteToCell(p, 1, (toplam / studentsCount).ToString("0.##"));
-                excel.WriteToCell(p, 2, (((toplam / studentsCount) / qtoplam) * 100).ToString("0.##"));
+                if(qtoplam == 0)
+                {
+                    excel.WriteToCell(p, 2, "0");
+                }
+                else
+                {
+                    excel.WriteToCell(p, 2, (((toplam / studentsCount) / qtoplam) * 100).ToString("0.##"));
+                }
+                
                 p++;
             }
             return p;

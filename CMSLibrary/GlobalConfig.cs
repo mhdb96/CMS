@@ -1,5 +1,8 @@
 ﻿using CMSLibrary.DataAccess;
+using System;
 using System.Configuration;
+using System.IO;
+using System.Text;
 
 namespace CMSLibrary
 {
@@ -12,8 +15,20 @@ namespace CMSLibrary
         }
         public static string CnnString(string name)
         {
-            return ConfigurationManager.ConnectionStrings[name].ConnectionString;
-            //return $"Data Source = {Ip},{Port}; Network Library = DBMSSOCN; Initial Catalog = CMS; User ID = {Username}; Password = {Password};";
+            try
+            {                
+                string[] data = File.ReadAllLines($"{System.AppDomain.CurrentDomain.BaseDirectory}info.txt", Encoding.GetEncoding("iso-8859-9"));
+                string[] info = data[0].Split(';');
+                Ip = info[0];
+                Port = info[1];
+                Username = info[2];
+                Password = info[3];
+                return $"Data Source = {Ip},{Port}; Network Library = DBMSSOCN; Initial Catalog = CMS; User ID = {Username}; Password = {Password};";                
+            }
+            catch (System.Exception)
+            {
+                return ConfigurationManager.ConnectionStrings[name].ConnectionString;
+            }            
         }
         public static string Ip = "192.168.1.26";
         public static string Port = "1433";

@@ -8,7 +8,7 @@
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks" 
         xmlns:local="clr-namespace:CMSUI.LoginWindows"
         mc:Ignorable="d"
-        Title="DatabaseSettingWindow" Height="500" Width="350" WindowStartupLocation="CenterScreen"
+        Title="DATABASE SETTING" Height="500" Width="350" WindowStartupLocation="CenterScreen"
                       ResizeMode="NoResize">
     <Window.Resources>
         <Style x:Key = "myTextBlockStyle" TargetType = "TextBlock">

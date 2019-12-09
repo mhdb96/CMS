@@ -9,7 +9,7 @@
         xmlns:local="clr-namespace:CMSUI"
         mc:Ignorable="d"
         x:Name="title"
-        Title="Create Active Term" Height="300" Width="450">            
+        Title="CREATE ACTIVE TERM" Height="300" Width="450">            
     <Window.Resources>
         <Style x:Key = "myTextBlockStyle" TargetType = "TextBlock">
             <Setter Property = "VerticalAlignment" Value="Center" />
