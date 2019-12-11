@@ -67,7 +67,8 @@
         <TextBlock FontSize="14pt" Text="Select:" Grid.Column="4" Grid.Row="2" Style="{StaticResource myTextBlockStyle}"/>
             <StackPanel Orientation="Horizontal" Grid.Column="5" Grid.Row="2">
                 <!--<TextBlock Text="Department" Style="{StaticResource myTextBlockStyle}"/>-->
-                <ComboBox x:Name="departmentsCombobox"                              
+                <ComboBox x:Name="departmentsCombobox"  
+                          SelectionChanged="DepartmentsCombobox_SelectionChanged"
                       Width="170"         
                       Height="35"
                       Margin="0 5 10 5"     
@@ -84,6 +85,7 @@
             <StackPanel Orientation="Horizontal" Grid.Column="6" Grid.Row="2">
                 <!--<TextBlock Text="Term" Style="{StaticResource myTextBlockStyle}"/>-->
                 <ComboBox x:Name="eduYearsCombobox"
+                          SelectionChanged="EduYearsCombobox_SelectionChanged"
                       Width="170"    
                       Height="35"
                       Grid.Column="4" Grid.Row="1"                        

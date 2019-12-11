@@ -34,8 +34,7 @@ namespace CMSUI.LoginWindows
             GlobalConfig.Ip = ipText.Text;
             GlobalConfig.Port = portText.Text;
             GlobalConfig.Username = usernameText.Text;
-            GlobalConfig.Password = passwordText.Password;            
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            GlobalConfig.Password = passwordText.Password;                        
             File.WriteAllText($"{System.AppDomain.CurrentDomain.BaseDirectory}info.txt", $"{GlobalConfig.Ip};{GlobalConfig.Port};{GlobalConfig.Username};{GlobalConfig.Password};");
             this.Close();
             CallinWindow.DatabaseSettingSaved();

@@ -62,10 +62,7 @@ namespace CMSUI.UserControls
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             LoadMyAssignments();
-            if(MyAdmin != null)
-            {
-                insertStudentBtn.Visibility = Visibility.Visible;
-            }            
+            insertStudentBtn.Visibility = Visibility.Visible;        
         }
 
         private void LoadMyAssignments()

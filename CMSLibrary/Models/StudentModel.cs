@@ -22,5 +22,7 @@ namespace CMSLibrary.Models
             }
         }
         public string ErrorType { get; set; }
+        public string AnswersList { get; set; }
+
     }
 }

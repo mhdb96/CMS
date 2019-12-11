@@ -55,8 +55,22 @@ namespace CMSLibrary.Evaluation
             }
         }
 
+        private string _group;
+
+        [Required(ErrorMessage = "Must not be empty.")]
+        [GroupCount(ErrorMessage = "Format error")]
+        public string Group
+        {
+            get { return _group; }
+            set
+            {
+                ValidateProperty(value, "Group");
+                OnPropertyChanged(ref _group, value);
+            }
+        }
 
 
+        public string AnswersList { get; set; }
 
         private void ValidateProperty<T>(T value, string name)
         {
@@ -96,6 +110,27 @@ namespace CMSLibrary.Evaluation
             var isValid = true;
 
             if (Math.Floor(Math.Log10(inputValue) + 1) != 9  )
+            {
+                isValid = false;
+            }
+
+            return isValid;
+        }
+    }
+
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
+    public class GroupCount : ValidationAttribute
+    {
+        public override bool IsValid(object value)
+        {
+            string inputValue = value.ToString();
+            var isValid = true;
+
+            if (inputValue.Length > 1)
+            {
+                isValid = false;
+            }
+            if(!(inputValue == "A" || inputValue == "B" || inputValue == "C" || inputValue == "D"))
             {
                 isValid = false;
             }

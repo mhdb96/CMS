@@ -28,21 +28,21 @@
                     </DataGridTextColumn>
                     <DataGridTextColumn 
                     SortMemberPath="Student.FirstName"
-                    Header="First Name" Width="SizeToHeader"
+                    Header="First Name" Width="auto"                    
                     Binding="{Binding Student.FirstName , Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}">
                     </DataGridTextColumn>
                     <DataGridTextColumn 
                     SortMemberPath="Student.LastName"
-                    Header="Last Name" Width="SizeToHeader"
+                    Header="Last Name" Width="auto"
                     Binding="{Binding Student.LastName , Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}">
                     </DataGridTextColumn>
                     <DataGridTextColumn 
                     SortMemberPath="Group.Name"
-                    Header="Group" Width="SizeToHeader"
+                    Header="Group" Width="auto"
                     Binding="{Binding Group.Name , Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}">
                     </DataGridTextColumn>
                     <DataGridTextColumn 
-                    Header="Answers" Width="SizeToCells"
+                    Header="Answers" Width="auto"
                     Binding="{Binding AnswersList , Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}">
                     </DataGridTextColumn>
                 </DataGrid.Columns>

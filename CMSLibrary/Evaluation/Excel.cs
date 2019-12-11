@@ -1,80 +1,54 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Office.Interop.Excel;
-using _Excel = Microsoft.Office.Interop.Excel;
+using Aspose.Cells;
 
 namespace CMSLibrary.Evaluation
 {
     public class Excel
-    {
-        //string path = "";
-        _Application excel = new _Excel.Application();
-        Workbook wb;
-        Worksheet ws;
-        public Excel()
-        {
+    {                
+        Workbook wb = new Workbook();                
+        string[][,] DataArray = { new string [1000,105],
+        new string [500,5],
+        new string [500,7]};
 
-        }
-        /*
-        public Excel (string path, int sheet)
-        {
-            this.path = path;
-            wb = excel.Workbooks.Open(path);
-            ws = excel.Worksheets[sheet];
-        }*/
-
-        public void CreateNewFile()
-        {
-            wb=excel.Workbooks.Add(XlWBATemplate.xlWBATWorksheet);
-            ws = wb.Worksheets[1];
-        }
-        public void CreateNewSheet()
-        {
-            wb.Worksheets.Add(After:ws);
-            ws = wb.Worksheets[2];
-        }
-
-        public decimal ReadCell(int i, int j)
-        {
-            i++;
-            j++;
-            if(ws.Cells[i, j].Value2 != null)
-            {
-                return Convert.ToDecimal(ws.Cells[i, j].Value2);
-            }
-            else
-            {
-                return -1;
-            }
-
-        }
-        public void WriteToCell(int i, int j, string s)
-        {
-            i++;
-            j++;
-            ws.Cells[i, j].Value2 = s;
         
-        }
-        public void SelectWorkSheet(int sheetNumber)
+        public Excel(int studentsCount, int questionsCount, int outcomesCount)
         {
-            ws = wb.Worksheets[sheetNumber];
+            string[][,] DataArray = 
+            {
+                new string [studentsCount + 30, 105],
+                new string [questionsCount + 20, 5],
+                new string [outcomesCount + 20, 7]
+            };
+            wb.Worksheets.Clear();
+            wb.Worksheets.Add("Students Statistics");
+            wb.Worksheets.Add("Questions Statistics");
+            wb.Worksheets.Add("Outcomes Statistics");
+        }
+        
+        public void WriteToCell(int row, int col, string content, int sheetIndex)
+        {            
+            DataArray[sheetIndex][row, col] = content;
+        }
 
-        }
-        public void Save()
+        public void WriteFile()
         {
-            wb.Save();
+            for (int i = 0; i < 3; i++)
+            {
+                wb.Worksheets[i].Cells.ImportTwoDimensionArray(DataArray[i], 0, 0, true);
+                wb.Worksheets[i].AutoFitColumns();                  
+            }
         }
+        
         public void SaveAs(string path)
         {
-            wb.SaveAs(path);
-        }
-        public void Close()
-        {
-            wb.Close();
-        }
+            WriteFile();            
+            wb.Save(path);
+        }        
 
     }
 }

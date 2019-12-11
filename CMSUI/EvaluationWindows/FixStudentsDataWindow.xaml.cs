@@ -27,6 +27,7 @@ namespace CMSUI.EvaluationWindows
     {
         Evaluate Evaluator;
         IFixStudentsDataWindowRequester CallingWindow;
+        bool IsNonCloseButtonClicked = false;
         public FixStudentsDataWindow(IFixStudentsDataWindowRequester caller, Evaluate ev)
         {
             InitializeComponent();
@@ -50,6 +51,9 @@ namespace CMSUI.EvaluationWindows
                 sd.firstName.Text = NamesFixer(ans.Student.FirstName);
                 sd.errorType.Visibility = Visibility.Visible;
                 sd.errorTypeText.Text = ans.ErrorType;
+                sd.group.Visibility = Visibility.Visible;
+                sd.group.Text = ans.Group.Name;
+                sd.deleteStudentData.Visibility = Visibility.Collapsed;
                 students.Children.Add(sd);
                 i++;
             }
@@ -77,21 +81,30 @@ namespace CMSUI.EvaluationWindows
                 Evaluator.StudentsAnswersWithErrors[i].Student.RegNo = Int32.Parse(item.regNo.Text);
                 Evaluator.StudentsAnswersWithErrors[i].Student.FirstName = item.firstName.Text;
                 Evaluator.StudentsAnswersWithErrors[i].Student.LastName = item.lastName.Text;
+                Evaluator.StudentsAnswersWithErrors[i].Group.Name = item.group.Text;
                 i++;
             }
             Evaluator.FixingErrors();
 
-            
+            IsNonCloseButtonClicked = true;
             this.Close();
         }
 
         private void MetroWindow_Closed(object sender, EventArgs e)
         {
-            if (Evaluator.StudentsAnswersWithErrors.Count > 0)
+            if (!IsNonCloseButtonClicked)
             {
-                CallingWindow.FixComplete(false);
+                return;
             }
-            else CallingWindow.FixComplete(true);
+            else
+            {
+                if (Evaluator.StudentsAnswersWithErrors.Count > 0)
+                {
+                    CallingWindow.FixComplete(false);
+                }
+                else CallingWindow.FixComplete(true);
+            }
+
         }
     }
 }

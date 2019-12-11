@@ -8,7 +8,7 @@
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks" 
         xmlns:local="clr-namespace:CMSUI"
         xmlns:MyControls="clr-namespace:CMSUI.UserControls"
-        mc:Ignorable="d"
+        mc:Ignorable="d"                      
         Title="FIX STUDENT DATA" Height="450" Width="800" Closed="MetroWindow_Closed"
                       FontSize="14pt">
     <Window.Resources>

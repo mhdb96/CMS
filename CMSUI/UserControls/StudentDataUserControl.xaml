@@ -22,6 +22,7 @@
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="10"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
@@ -44,8 +45,13 @@
                    Controls:TextBoxHelper.Watermark="Enter RegNo"
                    Margin="10 1 10 1" Width="90"
                    Text="{Binding RegNo, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox x:Name="group" Grid.Column="5" Grid.Row="1"
+                   Controls:TextBoxHelper.Watermark="Enter Group"
+                   Margin="10 1 10 1" Width="90"
+                   Visibility="Collapsed"
+                   Text="{Binding Group, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"/>
             <Button x:Name="deleteStudentData" Click="DeleteStudentData_Click" 
-                    Grid.Column="5"
+                    Grid.Column="6"
                     Grid.Row="1"
                         Margin="10 0 5 0"
                 Width="25"
@@ -58,7 +64,7 @@
                     Kind="x"/>
             </Button>
             <StackPanel 
-                Grid.Column="6"
+                Grid.Column="7"
                     Grid.Row="1"
                 x:Name="errorType"                        
                         Orientation="Horizontal" 

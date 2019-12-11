@@ -39,6 +39,7 @@ namespace CMSLibrary.Evaluation
             foreach(StudentAnswersModel ans in StudentsAnswersWithErrors)
             {
                 bool isDuplicate = false;
+                bool hasGroup = true;
                 StudentModel model = GlobalConfig.Connection.GetStudent_ByRegNo(ans.Student.RegNo);
                 var duplicate = StudentsAnswers.Find(s => s.Student.RegNo == model.RegNo);
                 if (duplicate != null)
@@ -49,11 +50,20 @@ namespace CMSLibrary.Evaluation
                     err.Add(duplicate);
                     StudentsAnswers.Remove(duplicate);
                 }
+                if(ans.Group.Name == "" || ans.Group.Name == " ")
+                {
+                    hasGroup = false;
+                    model = null;
+                }
                 if (model == null)
                 {
                     if (isDuplicate)
                     {
                         ans.ErrorType = "Duplicated Value, Fix RegNo";
+                    }
+                    else if(!hasGroup)
+                    {
+                        ans.ErrorType = "No Group";
                     }
                     else
                     {
@@ -64,6 +74,14 @@ namespace CMSLibrary.Evaluation
                 else
                 {
                     ans.Student = model;
+                    foreach (AnswerKeyModel answerKey in AnswerKeys)
+                    {
+                        if (answerKey.Group.Name == ans.Group.Name)
+                        {
+                            ans.AnswersList = ans.AnswersList.Substring(0, answerKey.QuestionCount);
+                            break;
+                        }
+                    }
                     StudentsAnswers.Add(ans);
                 }
             }
@@ -100,6 +118,7 @@ namespace CMSLibrary.Evaluation
                 StudentModel model;
                 int regNo = 0;
                 bool isDuplicate = false;
+                bool isRightName = true;
                 if (Int32.TryParse(listString.Substring(24, 9), out regNo))
                 {
                     model = GlobalConfig.Connection.GetStudent_ByRegNo(regNo);
@@ -108,11 +127,10 @@ namespace CMSLibrary.Evaluation
                     {
                         if (model.FirstName != NamesFixer(listString.Substring(0, 12)))
                         {
+                            isRightName = false;
                             model = null;
                         }
-                    }
-                    
-
+                    }                    
                     if (model != null)
                     {                        
                         var duplicate = StudentsAnswers.Find(s => s.Student.RegNo == model.RegNo);
@@ -136,6 +154,10 @@ namespace CMSLibrary.Evaluation
                     {
                         studentAnswers.ErrorType = "Duplicated Value, Fix RegNo";
                     }
+                    else if(!isRightName)
+                    {
+                        studentAnswers.ErrorType = "Wrong Name, Check Student List";
+                    }
                     else
                     {
                         studentAnswers.ErrorType = "Student not found in DB";
@@ -143,34 +165,59 @@ namespace CMSLibrary.Evaluation
                     
                     studentAnswers.Student.FirstName = listString.Substring(0, 12);
                     studentAnswers.Student.LastName = listString.Substring(12, 12);
-                    studentAnswers.Student.RegNo = regNo;
-                    studentAnswers.Group.Name = listString.Substring(33, 1);
-                    foreach (AnswerKeyModel answerKey in AnswerKeys)
+                    studentAnswers.Student.RegNo = regNo;                   
+                    try
                     {
-                        if (answerKey.Group.Name == studentAnswers.Group.Name)
+                        StudentDataModel t = new StudentDataModel
                         {
-                            studentAnswers.AnswersList = listString.Substring(34, answerKey.QuestionCount);
-                            break;
+                            Group = listString.Substring(33, 1)
+                        };
+                        studentAnswers.Group.Name = listString.Substring(33, 1);
+                        foreach (AnswerKeyModel answerKey in AnswerKeys)
+                        {
+                            if (answerKey.Group.Name == studentAnswers.Group.Name)
+                            {
+                                studentAnswers.AnswersList = listString.Substring(34, answerKey.QuestionCount);
+                                break;
+                            }
                         }
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                        studentAnswers.AnswersList = listString.Substring(34, listString.Length - 34);
+                        studentAnswers.ErrorType = "No Group";                        
                     }
                     StudentsAnswersWithErrors.Add(studentAnswers);
                 }
                 else
                 {
-                    studentAnswers.Student = model;
-                    //studentAnswers.Student.FirstName = listString.Substring(0, 12);
-                    //studentAnswers.Student.LastName = listString.Substring(12, 12);
-                    //studentAnswers.Student.RegNo = Int32.Parse(listString.Substring(24, 9));
-                    studentAnswers.Group.Name = listString.Substring(33, 1);
-                    foreach (AnswerKeyModel answerKey in AnswerKeys)
-                    {
-                        if (answerKey.Group.Name == studentAnswers.Group.Name)
+                    try
+                    {                        
+                        studentAnswers.Student = model;
+                        StudentDataModel t = new StudentDataModel
                         {
-                            studentAnswers.AnswersList = listString.Substring(34, answerKey.QuestionCount);
-                            break;
+                            Group = listString.Substring(33, 1)
+                        };
+                        studentAnswers.Group.Name = listString.Substring(33, 1);                        
+                        foreach (AnswerKeyModel answerKey in AnswerKeys)
+                        {
+                            if (answerKey.Group.Name == studentAnswers.Group.Name)
+                            {
+                                studentAnswers.AnswersList = listString.Substring(34, answerKey.QuestionCount);
+                                break;
+                            }
                         }
+                        StudentsAnswers.Add(studentAnswers);
                     }
-                    StudentsAnswers.Add(studentAnswers);
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                        studentAnswers.AnswersList = listString.Substring(34, listString.Length - 34);
+                        studentAnswers.ErrorType = "No Group";
+                        StudentsAnswersWithErrors.Add(studentAnswers);
+                    }                    
+                    
                 }
                 
             }

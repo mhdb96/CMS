@@ -29,7 +29,7 @@ namespace CMSUI.EvaluationWindows
     {
         List<DepartmentModel> Departments;
         List<EducationalYearModel> EduYears;
-        string StudentListPath;
+        string StudentListPath = "";
         string[] results;
         List<StudentModel> StudentsDataWithErrors = new List<StudentModel>();
         List<StudentModel> StudentModels = new List<StudentModel>();
@@ -63,13 +63,16 @@ namespace CMSUI.EvaluationWindows
             results = File.ReadAllLines(StudentListPath, Encoding.GetEncoding("iso-8859-9"));
             int i = 1;
             studentsList.Children.Clear();
+            StudentsDataWithErrors.Clear();
+            StudentModels.Clear();
             foreach (string listString in results)
             {                              
                 if(listString.Replace(" ","") == "")
                 {
                     continue;
                 }
-                StudentDataUserControl sd = new StudentDataUserControl();    
+                StudentDataUserControl sd = new StudentDataUserControl();
+                sd.Tag = listString.Substring(33, listString.Length - 33);
                 sd.number.Text = i.ToString();
                 sd.lastName.Text = NamesFixer(listString.Substring(12, 12));
                 sd.regNo.Text = listString.Substring(24, 9);
@@ -90,10 +93,12 @@ namespace CMSUI.EvaluationWindows
                 sd.lastName.Text = student.LastName;
                 sd.regNo.Text = student.RegNo.ToString();
                 sd.firstName.Text = student.FirstName;
+                sd.errorType.Visibility = Visibility.Visible;
+                sd.errorTypeText.Text = student.ErrorType;
+                sd.Tag = student.AnswersList;
                 studentsList.Children.Add(sd);
                 i++;
             }
-
         }
 
         private string NamesFixer (string name)
@@ -127,43 +132,55 @@ namespace CMSUI.EvaluationWindows
 
         private async void InsertStudents_Click(object sender, RoutedEventArgs e)
         {
-            string studentNo = "";
-            if(departmentsCombobox.SelectedItem == null || eduYearsCombobox.SelectedItem == null)
+            if(ValidForm())
             {
-                return;
-            }
-            try
-            {                
+                string studentNo = "";
+                if (departmentsCombobox.SelectedItem == null || eduYearsCombobox.SelectedItem == null)
+                {
+                    return;
+                }
                 bool isDuplicate = false;
                 StudentsDataWithErrors.Clear();
-                foreach (StudentDataUserControl student in studentsList.Children)
+                try
                 {
-                    studentNo = student.number.Text;
-                    StudentDataModel model = new StudentDataModel();
-                    model.FirstName = student.firstName.Text;
-                    model.LastName = student.lastName.Text;
-                    model.RegNo = Int32.Parse(student.regNo.Text);
-                    StudentModel s = new StudentModel
+                    foreach (StudentDataUserControl student in studentsList.Children)
                     {
-                        FirstName = model.FirstName,
-                        LastName = model.LastName,
-                        RegNo = model.RegNo,
-                        Department = (DepartmentModel)departmentsCombobox.SelectedItem,
-                        EduYear = (EducationalYearModel)eduYearsCombobox.SelectedItem
-                    };
-                    var duplicate = StudentModels.Find(st => st.RegNo == s.RegNo);
-                    if (duplicate != null)
-                    {
-                        isDuplicate = true;
-                        duplicate.ErrorType = "Duplicated Value, Fix RegNo";
-                        StudentsDataWithErrors.Add(duplicate);
-                        StudentsDataWithErrors.Add(s);
-                        StudentModels.Remove(duplicate);
-                        continue;
-                    }                    
-                    StudentModels.Add(s);
+                        studentNo = student.number.Text;
+                        StudentDataModel model = new StudentDataModel();
+                        model.FirstName = student.firstName.Text;
+                        model.LastName = student.lastName.Text;
+                        model.RegNo = Int32.Parse(student.regNo.Text);
+                        StudentModel s = new StudentModel
+                        {
+                            FirstName = model.FirstName,
+                            LastName = model.LastName,
+                            RegNo = model.RegNo,
+                            Department = (DepartmentModel)departmentsCombobox.SelectedItem,
+                            EduYear = (EducationalYearModel)eduYearsCombobox.SelectedItem,
+                            AnswersList = (string)student.Tag
+                        };
+                        var duplicate = StudentModels.Find(st => st.RegNo == s.RegNo);
+                        if (duplicate != null)
+                        {
+                            isDuplicate = true;
+                            duplicate.ErrorType = "Duplicated Value, Fix RegNo";
+                            s.ErrorType = "Duplicated Value, Fix RegNo";
+                            StudentsDataWithErrors.Add(duplicate);
+                            StudentsDataWithErrors.Add(s);
+                            StudentModels.Remove(duplicate);
+                            continue;
+                        }
+                        StudentModels.Add(s);
+                    }
+
                 }
-                if(isDuplicate)
+                catch (Exception er)
+                {
+                    error.Visibility = Visibility.Visible;
+                    errorText.Text = $"Error at {studentNo}th line: {er.Message}";
+                    return;
+                }
+                if (isDuplicate)
                 {
                     FixStudentsData();
                     return;
@@ -172,33 +189,112 @@ namespace CMSUI.EvaluationWindows
                 bool hasErrors = false;
                 int errorsCount = 0;
                 StringBuilder sb = new StringBuilder();
+                StringBuilder newStudentsData = new StringBuilder();
                 sb.Append($"At {DateTime.Now.ToString()} new error log was created{Environment.NewLine}");
                 foreach (StudentModel s in StudentModels)
                 {
                     string err = GlobalConfig.Connection.CreateStudent(s);
-                    if(err != null)
+                    if (err != null)
                     {
                         hasErrors = true;
                         errorsCount++;
                         sb.Append(err);
                     }
+                    newStudentsData.AppendLine(StudentFixedDataText(s));
                 }
-                if(hasErrors)
-                {                    
+                string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                if (hasErrors)
+                {
                     sb.Append($"==================================================================={Environment.NewLine}");
-                    string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
                     File.AppendAllText(path + "\\log.txt", sb.ToString());
                     sb.Clear();
                     await this.ShowMessageAsync("Error in the Creating Porccess", $"The creating proccess finished with {errorsCount} errors{Environment.NewLine}" +
                         $"Please check Log file on the desktop for more information", MessageDialogStyle.Affirmative, null);
-                }                
+                }
+                string fileName = new System.IO.FileInfo(StudentListPath).Name;
+                fileName = fileName.Remove(fileName.Length - 4, 4);
+                File.WriteAllText(System.IO.Path.GetDirectoryName(StudentListPath) + $"\\{fileName}-Fixed-Data.txt", newStudentsData.ToString(), encoding: Encoding.Unicode);
                 this.Close();
             }
-            catch (Exception er)
+            
+        }
+
+        private string StudentFixedDataText(StudentModel model)
+        {
+            string fullText;
+            string firstName = SpaceAdder(model.FirstName, 12);
+            string lastName = SpaceAdder(model.LastName, 12);
+            string regNo = model.RegNo.ToString();
+            fullText = firstName + lastName + regNo + model.AnswersList;
+            return fullText;
+        }
+
+        private string SpaceAdder(string str, int length)
+        {
+            string newStr = str;
+            if (newStr.Length < length)
+            {
+                int limit = newStr.Length;
+                for (int i = 0; i < length - limit; i++)
+                {
+                    newStr += " ";
+                }
+            }
+            return newStr;
+        }
+        private bool ValidForm()
+        {
+
+            if (eduYearsCombobox.SelectedItem == null)
             {
                 error.Visibility = Visibility.Visible;
-                errorText.Text = $"Error at {studentNo} line: {er.Message}";
+                errorText.Text = "Select a year";
+            }
+
+            if (departmentsCombobox.SelectedItem == null)
+            {
+                error.Visibility = Visibility.Visible;
+                errorText.Text = "Select a department";
+            }
+            if(StudentListPath == "")
+            {
+                error.Visibility = Visibility.Visible;
+                errorText.Text = "Select a student data file";
+            }
+            if (departmentsCombobox.SelectedItem == null || eduYearsCombobox.SelectedItem == null || StudentListPath == "")
+            {
+                return false;
+            }
+            else
+            {
+                return true;
             }
         }
+
+        private void DepartmentsCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (departmentsCombobox.SelectedItem == null)
+            {
+                errorText.Text = "Select a department";
+                error.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                error.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void EduYearsCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (eduYearsCombobox.SelectedItem == null)
+            {
+                errorText.Text = "Select a year";
+                error.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                error.Visibility = Visibility.Collapsed;
+            }
+        }        
     }
 }
