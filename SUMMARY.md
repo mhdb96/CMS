@@ -20,3 +20,7 @@
 * [ER Diagram](er-diagram.md)
 * [Flow Chart](flow-chart.md)
 
+## About Us
+
+* [🎆 Our Other Projects](https://projects.xdebuggers.com/)
+
