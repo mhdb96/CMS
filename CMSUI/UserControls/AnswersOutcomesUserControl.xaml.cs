@@ -1,23 +1,6 @@
-﻿using CMSLibrary;
-using CMSLibrary.Models;
-using CMSUI.EvaluationWindows;
-using CMSUI.Requesters;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CMSLibrary.Models;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace CMSUI.UserControls
 {
@@ -40,14 +23,14 @@ namespace CMSUI.UserControls
         public AnswersOutcomesUserControl()
         {
             InitializeComponent();
-        }        
-        
+        }
+
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             groupNameText.Text = $"{this.Tag.ToString()} Group";
             GroupIndex = MyExam.ExamGroups.FindIndex(q => q.Group.Name == this.Tag.ToString());
             CreateGridDefinition();
-            CreateCheckBoxesMatrix();            
+            CreateCheckBoxesMatrix();
         }
 
         private void CreateCheckBoxesMatrix()
@@ -153,13 +136,13 @@ namespace CMSUI.UserControls
         private void SaveMarksAmdOutcomesBtn_Click(object sender, RoutedEventArgs e)
         {
             foreach (UIElement Child in answersOutcomesMatrix.Children)
-            {                
+            {
                 if (Child is TextBox)
                 {
                     QuestionModel question = (QuestionModel)answersOutcomesMatrix.RowDefinitions[Grid.GetRow(Child)].Tag;
                     int questionIndex = MyExam.ExamGroups[GroupIndex].Questions.FindIndex(q => q.Name == question.Name);
                     decimal mark = decimal.Parse(((TextBox)Child).Text);
-                    MyExam.ExamGroups[GroupIndex].Questions[questionIndex].Mark = mark;                                       
+                    MyExam.ExamGroups[GroupIndex].Questions[questionIndex].Mark = mark;
                 }
                 else if (Child is CheckBox)
                 {
@@ -169,7 +152,7 @@ namespace CMSUI.UserControls
                         QuestionModel question = (QuestionModel)answersOutcomesMatrix.RowDefinitions[Grid.GetRow(Child)].Tag;
                         int questionIndex = MyExam.ExamGroups[GroupIndex].Questions.FindIndex(q => q.Name == question.Name);
                         MyExam.ExamGroups[GroupIndex].Questions[questionIndex].QuestionOutcomes.Add(outcome);
-                    }                                        
+                    }
                 }
             }
             saveMarksAmdOutcomesBtn.IsEnabled = false;

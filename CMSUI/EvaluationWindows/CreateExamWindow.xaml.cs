@@ -2,32 +2,21 @@
 using CMSLibrary.Evaluation;
 using CMSLibrary.Models;
 using CMSUI.Requesters;
-using CMSUI.UserControls;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace CMSUI.EvaluationWindows
 {
     /// <summary>
     /// Interaction logic for CreateExamWindow.xaml
     /// </summary>
-    public partial class CreateExamWindow: IFixStudentsDataWindowRequester
+    public partial class CreateExamWindow : IFixStudentsDataWindowRequester
     {
         public static readonly DependencyProperty ExamProperty =
-        DependencyProperty.Register("Exam", typeof(ExamModel), typeof(CreateExamWindow), new FrameworkPropertyMetadata(null));        
+        DependencyProperty.Register("Exam", typeof(ExamModel), typeof(CreateExamWindow), new FrameworkPropertyMetadata(null));
 
         private ExamModel Exam
         {
@@ -42,7 +31,7 @@ namespace CMSUI.EvaluationWindows
         {
             get { return (Evaluate)GetValue(EvaluateProperty); }
             set { SetValue(EvaluateProperty, value); }
-        }        
+        }
 
         IExamRequester CallingWindow;
         public CreateExamWindow(IExamRequester caller)
@@ -68,13 +57,13 @@ namespace CMSUI.EvaluationWindows
         private void ChooseAnswerKeyBtn_Click(object sender, RoutedEventArgs e)
         {
             string answersKeyPath = GetFilePath();
-            if(answersKeyPath == "")
+            if (answersKeyPath == "")
             {
-                if(Evaluator.AnswersKeyPath == "")
+                if (Evaluator.AnswersKeyPath == "")
                 {
                     errorAsnwerKey.Visibility = Visibility.Visible;
                 }
-                
+
                 return;
             }
             errorAsnwerKey.Visibility = Visibility.Collapsed;
@@ -101,8 +90,8 @@ namespace CMSUI.EvaluationWindows
             }
             answersOutcomesExpander.IsEnabled = true;
             answersOutcomesExpander.IsExpanded = true;
-            GlobalConfig.Connection.GetCourseOutcomes_ById(Exam.Assignment.Course);            
-            AnswersOutcomesMatrices.ItemsSource = Exam.ExamGroups;                                        
+            GlobalConfig.Connection.GetCourseOutcomes_ById(Exam.Assignment.Course);
+            AnswersOutcomesMatrices.ItemsSource = Exam.ExamGroups;
         }
 
         private void ChooseStudentsAnswersListBtn_Click(object sender, RoutedEventArgs e)
@@ -113,7 +102,7 @@ namespace CMSUI.EvaluationWindows
                 if (Evaluator.StudentListPath == "")
                 {
                     errorStudentList.Visibility = Visibility.Visible;
-                }                
+                }
                 return;
             }
             errorStudentList.Visibility = Visibility.Collapsed;
@@ -126,12 +115,12 @@ namespace CMSUI.EvaluationWindows
             else
             {
                 ShowData();
-            }            
+            }
         }
 
         void ShowData()
         {
-            
+
             studentAnswersListUserControl.Refresh();
             List<GroupModel> Groups = GlobalConfig.Connection.GetGroup_All();
             foreach (StudentAnswersModel model in Evaluator.StudentsAnswers)
@@ -144,12 +133,12 @@ namespace CMSUI.EvaluationWindows
 
         void FixData()
         {
-            FixStudentsDataWindow win = new FixStudentsDataWindow(this ,Evaluator);
+            FixStudentsDataWindow win = new FixStudentsDataWindow(this, Evaluator);
             win.ShowDialog();
         }
         private void CreateExamBtn_Click(object sender, RoutedEventArgs e)
-        {            
-            if(ValidForm())
+        {
+            if (ValidForm())
             {
                 Exam.ExamType = (ExamTypeModel)examTypesCombobox.SelectedItem;
                 Exam.Date = (DateTime)examDate.SelectedDate;
@@ -198,7 +187,7 @@ namespace CMSUI.EvaluationWindows
                 CallingWindow.ExamComplete(Exam);
                 this.Close();
             }
-            
+
         }
 
         private void CancelExamBtn_Click(object sender, RoutedEventArgs e)

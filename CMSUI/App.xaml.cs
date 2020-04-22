@@ -1,12 +1,5 @@
 ﻿using CMSLibrary;
 using MahApps.Metro;
-using Squirrel;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace CMSUI
@@ -22,7 +15,7 @@ namespace CMSUI
                                     ThemeManager.GetAccent("Orange"),
                                     ThemeManager.GetAppTheme("BaseDark"));
             base.OnStartup(e);
-            GlobalConfig.InitializeConnections();         
-        }        
+            GlobalConfig.InitializeConnections();
+        }
     }
 }

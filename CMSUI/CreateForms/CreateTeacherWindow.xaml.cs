@@ -1,20 +1,8 @@
 ﻿using CMSLibrary;
-using CMSLibrary.DataAccess;
 using CMSLibrary.Models;
 using CMSUI.Requesters;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace CMSUI.CreateForms
 {
@@ -57,7 +45,7 @@ namespace CMSUI.CreateForms
 
         private void CreateTeacherBtn_Click(object sender, RoutedEventArgs e)
         {
-            if(ValidForm())
+            if (ValidForm())
             {
                 model.RegNo = int.Parse(regNoText.Text);
                 model.FirstName = firstNameText.Text;
@@ -65,7 +53,7 @@ namespace CMSUI.CreateForms
                 model.User.UserName = usernameText.Text;
                 model.User.Password = passwordText.Password;
 
-                if(!GlobalConfig.Connection.User_ValidByUsername(model.User.UserName))
+                if (!GlobalConfig.Connection.User_ValidByUsername(model.User.UserName))
                 {
                     errorUserName.Visibility = Visibility.Visible;
                     errorUserNameText.Text = "Username is already in use";
@@ -84,10 +72,10 @@ namespace CMSUI.CreateForms
                     GlobalConfig.Connection.UpdateTeachers(model);
                     CallingWindow.TeacherComplete(model);
                     this.Close();
-                    
+
                 }
             }
-                      
+
         }
 
         private void CancelTeacherBtn_Click(object sender, RoutedEventArgs e)

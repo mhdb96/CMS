@@ -1,21 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using CMSLibrary;
+﻿using CMSLibrary;
 using CMSLibrary.Enums;
 using CMSLibrary.Models;
 using CMSUI.Requesters;
 using CMSUI.UserControls;
+using System;
+using System.Collections.Generic;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace CMSUI.CreateForms
 {
@@ -72,7 +64,7 @@ namespace CMSUI.CreateForms
 
         private void CreateDepartmentBtn_Click(object sender, RoutedEventArgs e)
         {
-            if(ValidForm())
+            if (ValidForm())
             {
                 if (!update)
                 {
@@ -95,7 +87,7 @@ namespace CMSUI.CreateForms
                 }
                 else
                 {
-                    
+
                     department.Name = nameText.Text;
                     foreach (OutcomeUserControl outcome in outcomesList.Children)
                     {
@@ -148,7 +140,7 @@ namespace CMSUI.CreateForms
 
         //    if (result == MessageDialogResult.Affirmative)
         //    {
-                
+
         //    }
         //}
 
@@ -197,7 +189,7 @@ namespace CMSUI.CreateForms
             // TODO - fix the placement system for the letters
             OutcomeUserControl outcome = new OutcomeUserControl();
             // TODO - fix the ascii code
-            
+
             outcome.nameText.Text = Convert.ToChar(outcomesList.Children.Count + 65).ToString();
 
             TagData td = new TagData
@@ -210,7 +202,7 @@ namespace CMSUI.CreateForms
             outcome.Tag = td;
 
             outcomesList.Children.Add(outcome);
-  
+
         }
 
         private void NameText_TextChanged(object sender, TextChangedEventArgs e)
@@ -228,7 +220,7 @@ namespace CMSUI.CreateForms
         private void ScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
             errorOutcomes.Visibility = Visibility.Hidden;
-            
+
             foreach (OutcomeUserControl outcome in outcomesList.Children)
             {
                 if (outcome.nameText.BorderBrush == Brushes.Red || outcome.descriptionText.BorderBrush == Brushes.Red)
@@ -236,7 +228,7 @@ namespace CMSUI.CreateForms
                     errorOutcomes.Visibility = Visibility.Visible;
                 }
             }
-            
+
 
         }
     }

@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Globalization;
-using System.Windows.Data;
 using System.Windows;
+using System.Windows.Data;
 
 namespace CMSUI.Converters
 {
-    class VisibilityValueConverter: IValueConverter
+    class VisibilityValueConverter : IValueConverter
     {
         public static VisibilityValueConverter ins = new VisibilityValueConverter();
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

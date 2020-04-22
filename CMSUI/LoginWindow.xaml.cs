@@ -1,25 +1,13 @@
 ﻿using CMSLibrary;
-using CMSLibrary.DataAccess;
 using CMSLibrary.Enums;
 using CMSLibrary.Models;
+using CMSUI.LoginWindows;
 using CMSUI.Panels;
 using CMSUI.Requesters;
 using MahApps.Metro.Controls.Dialogs;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using CMSUI.LoginWindows;
-using CMSUI.EvaluationWindows;
 
 namespace CMSUI
 {
@@ -32,7 +20,7 @@ namespace CMSUI
         UserModel User;
         public LoginWindow()
         {
-            InitializeComponent();            
+            InitializeComponent();
         }
 
         public AdminModel GetAdminInfo()
@@ -76,11 +64,12 @@ namespace CMSUI
                 if (User.Role.Name == "Admin")
                 {
                     AdminPanelWindow win = new AdminPanelWindow(this);
-                    win.Show();                    
-                } else
+                    win.Show();
+                }
+                else
                 {
                     TeacherPanelWindow win = new TeacherPanelWindow(this);
-                    win.Show();                    
+                    win.Show();
                 }
                 this.Hide();
             }
@@ -96,25 +85,25 @@ namespace CMSUI
                 MaximumBodyHeight = 100
             };
             var controller = await this.ShowProgressAsync("Please wait...", "Connectting to the database", settings: mySettings);
-            controller.SetIndeterminate();                        
-            string errMsg =  await Task.Run(() => GlobalConfig.Connection.CheckConniction()) ;
+            controller.SetIndeterminate();
+            string errMsg = await Task.Run(() => GlobalConfig.Connection.CheckConniction());
             await Task.Delay(1000);
             await controller.CloseAsync();
             if (errMsg == "")
-            {            
+            {
                 await this.ShowMessageAsync("Success", "You have succesfully connected to the database.");
                 //DatabaseSettingWindow win = new DatabaseSettingWindow(this);
                 //win.ShowDialog();
             }
             else
             {
-                await this.ShowMessageAsync("Failure", $"A connection couldn't be established to the database. {Environment.NewLine}Error Message: {Environment.NewLine}{errMsg}",MessageDialogStyle.Affirmative,mySettings);
+                await this.ShowMessageAsync("Failure", $"A connection couldn't be established to the database. {Environment.NewLine}Error Message: {Environment.NewLine}{errMsg}", MessageDialogStyle.Affirmative, mySettings);
             }
         }
 
         private async void MetroWindow_ContentRendered(object sender, EventArgs e)
         {
-            await ShowProgressDialogAsync();            
+            await ShowProgressDialogAsync();
         }
 
         private void DatabaseBtn_Click(object sender, RoutedEventArgs e)
@@ -132,7 +121,7 @@ namespace CMSUI
         private void ClearFields()
         {
             usernameText.Text = "";
-            passwordText.Password = ""; 
+            passwordText.Password = "";
         }
 
         public void AdminPanelClosed()

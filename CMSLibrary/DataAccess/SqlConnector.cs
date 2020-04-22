@@ -1,10 +1,10 @@
-﻿using System;
+﻿using CMSLibrary.Models;
+using Dapper;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using CMSLibrary.Models;
-using Dapper;
 
 namespace CMSLibrary.DataAccess
 {
@@ -50,7 +50,7 @@ namespace CMSLibrary.DataAccess
                 var p = new DynamicParameters();
                 p.Add("@SearchValue", searchValue);
                 output = connection.Query<TeacherModel, UserModel, TeacherModel>("dbo.spTeachers_BySearchValue",
-                    (teacher, user) => { teacher.User = user; return teacher; },p, commandType: CommandType.StoredProcedure).ToList();
+                    (teacher, user) => { teacher.User = user; return teacher; }, p, commandType: CommandType.StoredProcedure).ToList();
             }
             return output;
         }
@@ -62,7 +62,7 @@ namespace CMSLibrary.DataAccess
             {
                 var p = new DynamicParameters();
                 p.Add("@SearchValue", searchValue);
-                output = connection.Query<DepartmentModel>("dbo.spDepartments_BySearchValue", p,commandType:CommandType.StoredProcedure).ToList();
+                output = connection.Query<DepartmentModel>("dbo.spDepartments_BySearchValue", p, commandType: CommandType.StoredProcedure).ToList();
             }
             return output;
         }
@@ -88,7 +88,7 @@ namespace CMSLibrary.DataAccess
             }
         }
 
-        public bool CourseOutcome_IsDeletable (int id)
+        public bool CourseOutcome_IsDeletable(int id)
         {
             using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
             {
@@ -102,7 +102,7 @@ namespace CMSLibrary.DataAccess
                     return false;
                 }
                 else
-                {                    
+                {
                     return true;
                 }
 
@@ -206,7 +206,7 @@ namespace CMSLibrary.DataAccess
             }
         }
 
-        public void UpdateTeachers (TeacherModel model)
+        public void UpdateTeachers(TeacherModel model)
         {
             using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
             {
@@ -313,13 +313,14 @@ namespace CMSLibrary.DataAccess
             using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
             {
                 var p = new DynamicParameters();
-                p.Add("@ExamId", model.Id);                
+                p.Add("@ExamId", model.Id);
                 model.ExamGroups = connection.Query<ExamGroupModel, GroupModel, ExamGroupModel>("dbo.spExamGroups_GetByExamId",
                     (examGroup, group)
-                    => {
+                    =>
+                    {
                         examGroup.Group = group;
                         return examGroup;
-                    
+
                     }, p, commandType: CommandType.StoredProcedure).ToList();
 
 
@@ -366,7 +367,8 @@ namespace CMSLibrary.DataAccess
 
                 output = connection.Query<StudentModel, ResultModel, QuestionModel, StudentMarksModel>("dbo.spStudentMarks_GetAll",
                     (student, result, question)
-                    => {
+                    =>
+                    {
                         StudentMarksModel studentMarks = new StudentMarksModel();
                         studentMarks.Student = student;
                         studentMarks.Result = result;
@@ -403,11 +405,11 @@ namespace CMSLibrary.DataAccess
         public void DeleteExam_ById(int id)
         {
             using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
-            {                
+            {
                 var p = new DynamicParameters();
-                p.Add("@ExamId", id);                
+                p.Add("@ExamId", id);
                 connection.Execute("dbo.spExams_Delete", p, commandType: CommandType.StoredProcedure);
-                           
+
             }
         }
 
@@ -430,7 +432,7 @@ namespace CMSLibrary.DataAccess
                     return true;
                 }
 
-                
+
             }
         }
 
@@ -440,7 +442,7 @@ namespace CMSLibrary.DataAccess
             {
                 List<ExamModel> Exams = new List<ExamModel>();
                 var p = new DynamicParameters();
-                p.Add("@TeacherId", id);                
+                p.Add("@TeacherId", id);
                 Exams = connection.Query<ExamModel>("dbo.spAssignments_HasExamByTeacherId", p, commandType: CommandType.StoredProcedure).ToList();
 
                 if (Exams.Any())
@@ -476,7 +478,7 @@ namespace CMSLibrary.DataAccess
                 {
                     connection.Execute("dbo.spDepartments_Delete", p, commandType: CommandType.StoredProcedure);
                     return true;
-                }                
+                }
             }
         }
 
@@ -501,7 +503,7 @@ namespace CMSLibrary.DataAccess
             }
         }
 
-        public List<CourseModel> GetCourse_ValidByDepartmentIdAndActiveTermId(int DepartmentId , int ActiveTermId)
+        public List<CourseModel> GetCourse_ValidByDepartmentIdAndActiveTermId(int DepartmentId, int ActiveTermId)
         {
             List<CourseModel> output;
             using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
@@ -510,7 +512,7 @@ namespace CMSLibrary.DataAccess
                 p.Add("@DepartmentId", DepartmentId);
                 p.Add("@ActiveTermId", ActiveTermId);
 
-                output = connection.Query<CourseModel>("dbo.spCourses_Valid",p,commandType:CommandType.StoredProcedure).ToList();
+                output = connection.Query<CourseModel>("dbo.spCourses_Valid", p, commandType: CommandType.StoredProcedure).ToList();
             }
             return output;
         }
@@ -569,7 +571,7 @@ namespace CMSLibrary.DataAccess
                 p.Add("@id", 0, dbType: DbType.Int32, direction: ParameterDirection.Output);
                 connection.Execute("dbo.spDepartments_Insert", p, commandType: CommandType.StoredProcedure);
                 model.Id = p.Get<int>("@id");
-                foreach(DepartmentOutcomeModel dO in model.Outcomes)
+                foreach (DepartmentOutcomeModel dO in model.Outcomes)
                 {
                     dO.DepartmentId = model.Id;
                     CreateDepartmentOutcome(dO);
@@ -589,7 +591,7 @@ namespace CMSLibrary.DataAccess
                 connection.Execute("dbo.spDepartmentOutcomes_Insert", p, commandType: CommandType.StoredProcedure);
                 model.Id = p.Get<int>("@id");
             }
-        }        
+        }
 
         public void CreateCourse(CourseModel model)
         {
@@ -709,7 +711,7 @@ namespace CMSLibrary.DataAccess
             List<CourseModel> output;
             using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
             {
-                output = connection.Query<CourseModel, EducationalYearModel, CourseModel>("dbo.spCourses_GetAll", 
+                output = connection.Query<CourseModel, EducationalYearModel, CourseModel>("dbo.spCourses_GetAll",
                     (course, eduYear) =>
                     {
                         course.EduYear = eduYear;
@@ -753,7 +755,7 @@ namespace CMSLibrary.DataAccess
             {
                 var p = new DynamicParameters();
                 p.Add("@GroupId", model.Group.Id);
-                p.Add("@ExamId", model.ExamId);                
+                p.Add("@ExamId", model.ExamId);
                 p.Add("@id", 0, dbType: DbType.Int32, direction: ParameterDirection.Output);
                 connection.Execute("dbo.spExamGroups_Insert", p, commandType: CommandType.StoredProcedure);
                 model.Id = p.Get<int>("@id");
@@ -794,7 +796,7 @@ namespace CMSLibrary.DataAccess
                 var p = new DynamicParameters();
                 p.Add("@IsTrue", model.IsTrue);
                 p.Add("@StudentId", model.Student.Id);
-                p.Add("@QuestionId", model.QuestionId);                
+                p.Add("@QuestionId", model.QuestionId);
                 p.Add("@id", 0, dbType: DbType.Int32, direction: ParameterDirection.Output);
                 connection.Execute("dbo.spResults_Insert", p, commandType: CommandType.StoredProcedure);
                 model.Id = p.Get<int>("@id");
@@ -820,8 +822,8 @@ namespace CMSLibrary.DataAccess
             {
                 var p = new DynamicParameters();
                 p.Add("@DepartmentId", model.Id);
-                model.Outcomes = connection.Query<DepartmentOutcomeModel>("dbo.spDepartmentOutcomes_GetById",p , commandType: CommandType.StoredProcedure).ToList();
-                
+                model.Outcomes = connection.Query<DepartmentOutcomeModel>("dbo.spDepartmentOutcomes_GetById", p, commandType: CommandType.StoredProcedure).ToList();
+
             }
         }
 
@@ -843,14 +845,16 @@ namespace CMSLibrary.DataAccess
             {
                 output = connection.Query<AssignmentModel, DepartmentModel, ActiveTermModel, TermModel, YearModel, CourseModel, TeacherModel, AssignmentModel>("dbo.spAssignments_GetAll",
                     (assignment, department, activeTerm, term, year, course, teacher)
-                    => {
+                    =>
+                    {
                         assignment.Department = department;
                         activeTerm.Term = term;
                         activeTerm.Year = year;
-                        assignment.ActiveTerm = activeTerm; 
+                        assignment.ActiveTerm = activeTerm;
                         assignment.Course = course;
                         assignment.Teacher = teacher;
-                        return assignment; }).ToList();
+                        return assignment;
+                    }).ToList();
             }
             return output;
         }
@@ -864,7 +868,8 @@ namespace CMSLibrary.DataAccess
                 p.Add("@TeacherId", techerId);
                 output = connection.Query<AssignmentModel, DepartmentModel, ActiveTermModel, TermModel, YearModel, CourseModel, TeacherModel, AssignmentModel>("dbo.spAssignments_GetByTeacherId",
                     (assignment, department, activeTerm, term, year, course, teacher)
-                    => {
+                    =>
+                    {
                         assignment.Department = department;
                         activeTerm.Term = term;
                         activeTerm.Year = year;
@@ -883,10 +888,10 @@ namespace CMSLibrary.DataAccess
             using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(databaseName)))
             {
                 var p = new DynamicParameters();
-                p.Add("@UserName", userName);                
+                p.Add("@UserName", userName);
                 output = connection.Query<UserModel, RoleModel, UserModel>("dbo.spUsers_GetByUsername",
-                    (user, role) => 
-                    { user.Role = role; return user; }, 
+                    (user, role) =>
+                    { user.Role = role; return user; },
                     p, commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
             return output;
@@ -926,11 +931,11 @@ namespace CMSLibrary.DataAccess
                     return "";
                 }
                 catch (Exception ex)
-                {                    
-                    
+                {
+
                     return ex.Message;
                 }
-                    
+
             }
         }
 
@@ -980,7 +985,7 @@ namespace CMSLibrary.DataAccess
                 p.Add("ExamId", model.Id);
                 p.Add("@Date", model.Date);
                 p.Add("@ExamTypeId", model.ExamType.Id);
-                p.Add("@FilePath", model.FilePath);               
+                p.Add("@FilePath", model.FilePath);
                 connection.Execute("dbo.spExams_Update", p, commandType: CommandType.StoredProcedure);
             }
         }
@@ -1019,7 +1024,7 @@ namespace CMSLibrary.DataAccess
                 users = connection.Query<UserModel>("dbo.spUsers_ValidByUsername", p, commandType: CommandType.StoredProcedure).ToList();
 
                 if (users.Any())
-                {                    
+                {
                     return false;
                 }
                 else

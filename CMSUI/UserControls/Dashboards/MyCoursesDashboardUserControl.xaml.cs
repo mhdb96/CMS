@@ -2,25 +2,14 @@
 using CMSLibrary.Evaluation;
 using CMSLibrary.Models;
 using CMSUI.EvaluationWindows;
-using CMSUI.Requesters;
 using CMSUI.Panels;
-using CMSUI;
+using CMSUI.Requesters;
+using MahApps.Metro.Controls.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using MahApps.Metro.Controls.Dialogs;
-using MahApps.Metro.Controls;
 
 namespace CMSUI.UserControls
 {
@@ -56,13 +45,13 @@ namespace CMSUI.UserControls
 
         public MyCoursesDashboardUserControl()
         {
-            InitializeComponent();            
+            InitializeComponent();
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             LoadMyAssignments();
-            insertStudentBtn.Visibility = Visibility.Visible;        
+            insertStudentBtn.Visibility = Visibility.Visible;
         }
 
         private void LoadMyAssignments()
@@ -118,7 +107,7 @@ namespace CMSUI.UserControls
                 //filter by activeTerm
                 FilteredAssignments = new List<AssignmentModel>();
                 foreach (AssignmentModel model in MyAssignments)
-                {                    
+                {
                     if (model.ActiveTerm.Name == (string)activeTermsCombobox.SelectedItem)
                     {
                         FilteredAssignments.Add(model);
@@ -132,7 +121,7 @@ namespace CMSUI.UserControls
                 //filter by department
                 FilteredAssignments = new List<AssignmentModel>();
                 foreach (AssignmentModel model in MyAssignments)
-                {                    
+                {
                     if (model.Department.Name == (string)departmentsCombobox.SelectedItem)
                     {
                         FilteredAssignments.Add(model);
@@ -176,7 +165,8 @@ namespace CMSUI.UserControls
                     exam.Assignment = model;
                 }
                 examsGrid.ItemsSource = MyExams;
-            } else
+            }
+            else
             {
                 examsGrid.ItemsSource = null;
             }
@@ -187,7 +177,7 @@ namespace CMSUI.UserControls
             Button btn = (Button)sender;
             SelectedAssignment = (AssignmentModel)btn.Tag;
             CreateExamWindow win = new CreateExamWindow(this);
-            win.ShowDialog();            
+            win.ShowDialog();
         }
 
         public void ExamComplete(ExamModel model)
@@ -198,7 +188,7 @@ namespace CMSUI.UserControls
 
         public UserModel GetUserInfo()
         {
-            if(MyTeacher == null)
+            if (MyTeacher == null)
             {
                 return MyAdmin.User;
             }
@@ -222,8 +212,8 @@ namespace CMSUI.UserControls
         private async void DeleteExamBtn_Click(object sender, RoutedEventArgs e)
         {
             IParentWindow parent;
-            
-            if(MyAdmin != null)
+
+            if (MyAdmin != null)
             {
                 parent = ParentFinder.FindParent<AdminPanelWindow>(this);
             }
@@ -242,12 +232,12 @@ namespace CMSUI.UserControls
             ExamModel model = (ExamModel)examsGrid.SelectedItem;
             GlobalConfig.Connection.DeleteExam_ById(model.Id);
             MyExams.Remove(model);
-            WireUpLists(MyExams);            
+            WireUpLists(MyExams);
         }
 
         private void CreateExcelFileBtn_Click(object sender, RoutedEventArgs e)
         {
-            
+
             CreateExcelFile();
         }
 
@@ -274,7 +264,7 @@ namespace CMSUI.UserControls
                 if (MyAdmin != null)
                 {
                     parent = ParentFinder.FindParent<AdminPanelWindow>(this);
-                    
+
                 }
                 else
                 {
@@ -289,7 +279,7 @@ namespace CMSUI.UserControls
                 }
 
             }
-            
+
         }
         private void UpdateDataSourceBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -301,6 +291,6 @@ namespace CMSUI.UserControls
         {
             InsertStudentsFromTxtFiles win = new InsertStudentsFromTxtFiles();
             win.ShowDialog();
-        }        
+        }
     }
 }

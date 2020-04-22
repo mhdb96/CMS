@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 
 namespace CMSUI.Converters
@@ -14,12 +10,12 @@ namespace CMSUI.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             string type = (string)value;
-            
-            if(type == "Departments")
+
+            if (type == "Departments")
             {
                 return "OfficeBuilding";
             }
-            if(type == "Teachers")
+            if (type == "Teachers")
             {
                 return "Account";
             }
@@ -35,11 +31,11 @@ namespace CMSUI.Converters
             {
                 return "Briefcase";
             }
-            if( type == "My Profile")
+            if (type == "My Profile")
             {
                 return "AccountCardDetails";
             }
-            if(type == "My Courses")
+            if (type == "My Courses")
             {
                 return "BookMultiple";
             }

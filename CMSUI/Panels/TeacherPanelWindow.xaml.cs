@@ -4,18 +4,9 @@ using CMSUI.UserControls.HelpMenus;
 using CMSUI.UserControls.HelpMenus.Exam;
 using MahApps.Metro.Controls.Dialogs;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace CMSUI.Panels
 {
@@ -26,7 +17,7 @@ namespace CMSUI.Panels
     public partial class TeacherPanelWindow : IParentWindow
 
     {
-        ITeacherPanelRequester CallingWindow;        
+        ITeacherPanelRequester CallingWindow;
         public TeacherPanelWindow(ITeacherPanelRequester caller)
         {
             InitializeComponent();
@@ -40,7 +31,7 @@ namespace CMSUI.Panels
         {
             get { return (TeacherModel)GetValue(TeacherProperty); }
             set { SetValue(TeacherProperty, value); }
-        }        
+        }
 
         private void TeacherPanel_Closed(object sender, EventArgs e)
         {

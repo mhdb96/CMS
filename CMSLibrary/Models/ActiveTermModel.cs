@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CMSLibrary.Models
+﻿namespace CMSLibrary.Models
 {
     public class ActiveTermModel
     {
@@ -13,7 +7,7 @@ namespace CMSLibrary.Models
         {
             get
             {
-                return $"{Year.Name} {Term.Name}"; 
+                return $"{Year.Name} {Term.Name}";
             }
         }
         public YearModel Year { get; set; } = new YearModel();

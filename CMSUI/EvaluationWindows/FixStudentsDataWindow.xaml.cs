@@ -1,22 +1,11 @@
-﻿using CMSLibrary;
-using CMSLibrary.Evaluation;
+﻿using CMSLibrary.Evaluation;
 using CMSLibrary.Models;
-using CMSUI.EvaluationWindows;
 using CMSUI.Requesters;
 using CMSUI.UserControls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace CMSUI.EvaluationWindows
 {
@@ -37,7 +26,7 @@ namespace CMSUI.EvaluationWindows
         }
 
 
-        List<StudentDataModel> data = new List<StudentDataModel>();        
+        List<StudentDataModel> data = new List<StudentDataModel>();
 
         public void GetStudentsAnswers()
         {
@@ -78,7 +67,7 @@ namespace CMSUI.EvaluationWindows
             int i = 0;
             foreach (StudentDataUserControl item in students.Children)
             {
-                Evaluator.StudentsAnswersWithErrors[i].Student.RegNo = Int32.Parse(item.regNo.Text);
+                Evaluator.StudentsAnswersWithErrors[i].Student.RegNo = int.Parse(item.regNo.Text);
                 Evaluator.StudentsAnswersWithErrors[i].Student.FirstName = item.firstName.Text;
                 Evaluator.StudentsAnswersWithErrors[i].Student.LastName = item.lastName.Text;
                 Evaluator.StudentsAnswersWithErrors[i].Group.Name = item.group.Text;

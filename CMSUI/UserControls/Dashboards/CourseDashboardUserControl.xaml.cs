@@ -4,20 +4,9 @@ using CMSUI.CreateForms;
 using CMSUI.Panels;
 using CMSUI.Requesters;
 using MahApps.Metro.Controls.Dialogs;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace CMSUI.UserControls
 {
@@ -70,17 +59,17 @@ namespace CMSUI.UserControls
 
         private void CoursesList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(coursesList.SelectedItem != null)
+            if (coursesList.SelectedItem != null)
             {
-                CourseModel model = (CourseModel)coursesList.SelectedItem;               
-                FindCourseOutcomes(model);                
+                CourseModel model = (CourseModel)coursesList.SelectedItem;
+                FindCourseOutcomes(model);
             }
             else
             {
                 courseOutcomesList.ItemsSource = null;
             }
-            
-            
+
+
         }
         public void FindCourseOutcomes(CourseModel model)
         {
@@ -104,7 +93,7 @@ namespace CMSUI.UserControls
             }
 
             CreateCourseWindow win = new CreateCourseWindow(this, model);
-            
+
             win.ShowDialog();
 
             WireUpLists();
@@ -120,7 +109,7 @@ namespace CMSUI.UserControls
             if (r == MessageDialogResult.Negative)
             {
                 return;
-            }            
+            }
             Button btn = (Button)sender;
             CourseModel model = new CourseModel();
             model = (CourseModel)btn.Tag;
@@ -133,7 +122,7 @@ namespace CMSUI.UserControls
                 // TODO - Delete the selected term
             }
             else
-            {                
+            {
                 await parent.ShowMessage("Deletion Error",
                     "The selected course can't be deleted beacause it has an exam",
                     MessageDialogStyle.Affirmative);

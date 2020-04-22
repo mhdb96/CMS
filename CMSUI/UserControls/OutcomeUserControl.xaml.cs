@@ -1,22 +1,9 @@
-﻿using CMSLibrary;
-using CMSLibrary.Enums;
+﻿using CMSLibrary.Enums;
 using CMSLibrary.Models;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using CMSUI.CreateForms;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using CMSUI.CreateForms;
 
 namespace CMSUI.UserControls
 {
@@ -28,7 +15,7 @@ namespace CMSUI.UserControls
         public OutcomeUserControl()
         {
             InitializeComponent();
-        }     
+        }
 
         private void DeleteOutcome_Click(object sender, RoutedEventArgs e)
         {
@@ -38,15 +25,15 @@ namespace CMSUI.UserControls
                 var sp = ParentFinder.FindParent<StackPanel>(this);
                 if (!td.IsNew)
                 {
-                    if(td.Type == OutcomeType.CourseOutcome)
+                    if (td.Type == OutcomeType.CourseOutcome)
                     {
                         var win = ParentFinder.FindParent<CreateCourseWindow>(this);
-                        win.outcomesToDelete.Add(td.Id);                        
+                        win.outcomesToDelete.Add(td.Id);
                     }
                     else if (td.Type == OutcomeType.DepartmentOutcome)
                     {
-                        var win = ParentFinder.FindParent<CreateDepartmentWindow>(this);                       
-                        win.outcomesToDelete.Add(td.Id);                        
+                        var win = ParentFinder.FindParent<CreateDepartmentWindow>(this);
+                        win.outcomesToDelete.Add(td.Id);
                     }
                 }
                 if (sp != null)

@@ -1,10 +1,5 @@
 ﻿using CMSLibrary.Enums;
 using CMSLibrary.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CMSLibrary
 {
@@ -14,11 +9,11 @@ namespace CMSLibrary
         {
 
             UserModel databaseUser = GlobalConfig.Connection.GetUser_ByUserName(localUser.UserName);
-            if(databaseUser == null)
+            if (databaseUser == null)
             {
                 return AuthenticationState.UserNotFound;
             }
-            if(databaseUser.Password != localUser.Password)
+            if (databaseUser.Password != localUser.Password)
             {
                 return AuthenticationState.WrongPassword;
             }

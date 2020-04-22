@@ -1,19 +1,6 @@
-﻿using CMSLibrary;
-using CMSLibrary.Evaluation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CMSLibrary.Evaluation;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace CMSUI.UserControls
 {
@@ -38,13 +25,13 @@ namespace CMSUI.UserControls
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            studentsAnswersGrid.ItemsSource = MyEvaluator.StudentsAnswers;            
+            studentsAnswersGrid.ItemsSource = MyEvaluator.StudentsAnswers;
         }
         public void Refresh()
-        {            
+        {
             studentsAnswersGrid.ItemsSource = null;
             studentsAnswersGrid.Items.Clear();
-            studentsAnswersGrid.ItemsSource = MyEvaluator.StudentsAnswers;            
-        }                
+            studentsAnswersGrid.ItemsSource = MyEvaluator.StudentsAnswers;
+        }
     }
 }

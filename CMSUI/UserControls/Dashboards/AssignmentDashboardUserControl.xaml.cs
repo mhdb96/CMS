@@ -4,20 +4,9 @@ using CMSUI.CreateForms;
 using CMSUI.Panels;
 using CMSUI.Requesters;
 using MahApps.Metro.Controls.Dialogs;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace CMSUI.UserControls
 {
@@ -60,7 +49,7 @@ namespace CMSUI.UserControls
 
             CreateAssignmentWindow win = new CreateAssignmentWindow(this, model);
             win.ShowDialog();
-            
+
             WireUpLists(Assignments);
         }
 
@@ -94,7 +83,7 @@ namespace CMSUI.UserControls
             {
                 await parent.ShowMessage("Deletion Error",
                     "The selected assignment can't be deleted beacause it has an exam",
-                    MessageDialogStyle.Affirmative);                
+                    MessageDialogStyle.Affirmative);
                 // TODO - ADD a MessageBox
             }
 
@@ -112,16 +101,16 @@ namespace CMSUI.UserControls
 
         private void FilterAssignments()
         {
-            if(departmentsCombobox.SelectedItem == null && activeTermsCombobox.SelectedItem == null)
+            if (departmentsCombobox.SelectedItem == null && activeTermsCombobox.SelectedItem == null)
             {
                 WireUpLists(Assignments);
                 return;
             }
-            if(departmentsCombobox.SelectedItem == null)
+            if (departmentsCombobox.SelectedItem == null)
             {
                 //filter by activeTerm
                 FilteredAssignments = new List<AssignmentModel>();
-                foreach(AssignmentModel model in Assignments)
+                foreach (AssignmentModel model in Assignments)
                 {
                     ActiveTermModel a = (ActiveTermModel)activeTermsCombobox.SelectedItem;
                     if (model.ActiveTerm.Id == a.Id)
@@ -132,10 +121,10 @@ namespace CMSUI.UserControls
                 WireUpLists(FilteredAssignments);
                 return;
             }
-            if(activeTermsCombobox.SelectedItem == null)
+            if (activeTermsCombobox.SelectedItem == null)
             {
                 //filter by department
-                FilteredAssignments = new List<AssignmentModel>();                
+                FilteredAssignments = new List<AssignmentModel>();
                 foreach (AssignmentModel model in Assignments)
                 {
                     DepartmentModel d = (DepartmentModel)departmentsCombobox.SelectedItem;

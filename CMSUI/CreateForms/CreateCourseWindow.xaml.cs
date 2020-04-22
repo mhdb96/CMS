@@ -5,17 +5,9 @@ using CMSUI.Requesters;
 using CMSUI.UserControls;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace CMSUI.CreateForms
 {
@@ -63,7 +55,7 @@ namespace CMSUI.CreateForms
                     eduYearCombobox.SelectedItem = eduYear;
                 }
             }
-            
+
             foreach (var outcome in course.CourseOutcomes)
             {
                 OutcomeUserControl outcomeUserControl = new OutcomeUserControl();
@@ -85,7 +77,7 @@ namespace CMSUI.CreateForms
         private void LoadListsData()
         {
             EduYears = GlobalConfig.Connection.GetEducationalYear_ALL();
-            eduYearCombobox.ItemsSource = EduYears;            
+            eduYearCombobox.ItemsSource = EduYears;
         }
 
         private void AddOutcome_Click(object sender, RoutedEventArgs e)
@@ -103,7 +95,7 @@ namespace CMSUI.CreateForms
             outcome.Tag = td;
             outcomesList.Children.Add(outcome);
         }
-        
+
         private void CreateCourseBtn_Click(object sender, RoutedEventArgs e)
         {
             if (ValidForm())
@@ -133,7 +125,7 @@ namespace CMSUI.CreateForms
                 {
                     course.Name = nameText.Text;
                     course.Code = codeText.Text;
-                    course.EduYear = (EducationalYearModel)eduYearCombobox.SelectedItem;                    
+                    course.EduYear = (EducationalYearModel)eduYearCombobox.SelectedItem;
                     foreach (OutcomeUserControl outcome in outcomesList.Children)
                     {
                         TagData td = (TagData)outcome.Tag;
@@ -145,9 +137,9 @@ namespace CMSUI.CreateForms
                             Description = outcome.descriptionText.Text,
                             CourseId = course.Id
                         };
-                        if(td.IsNew == true)
+                        if (td.IsNew == true)
                         {
-                            
+
                             GlobalConfig.Connection.CreateCourseOutcome(cO);
                         }
                         else

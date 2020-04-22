@@ -1,20 +1,16 @@
-﻿using CMSLibrary.Evaluation;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 
 namespace CMSLibrary.Evaluation
 {
     public class StudentDataModel : ObservableObject
     {
-        private string _firstName;        
+        private string _firstName;
 
         [Required(ErrorMessage = "Must not be empty.")]
-        [StringLength(12 , MinimumLength = 2, ErrorMessage = "Must be between 2 and 12 characters.")]
+        [StringLength(12, MinimumLength = 2, ErrorMessage = "Must be between 2 and 12 characters.")]
         [NotHaveIlligalChar(ErrorMessage = "Must not have illigal charchters")]
         public string FirstName
         {
@@ -43,7 +39,7 @@ namespace CMSLibrary.Evaluation
 
         private int _regNo;
 
-        [Required(ErrorMessage = "Must not be empty.")]   
+        [Required(ErrorMessage = "Must not be empty.")]
         [RegNoCount(ErrorMessage = "Must be between 9 numbers.")]
         public int RegNo
         {
@@ -90,26 +86,26 @@ namespace CMSLibrary.Evaluation
             var isValid = true;
 
             if (!string.IsNullOrEmpty(inputValue))
-            {                
-                inputValue =  inputValue.Replace(" ", "");
+            {
+                inputValue = inputValue.Replace(" ", "");
                 inputValue = inputValue.Replace("-", "");
-                isValid = inputValue.All(Char.IsLetter);
+                isValid = inputValue.All(char.IsLetter);
             }
 
             return isValid;
         }
     }
-    
+
 
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
     public class RegNoCount : ValidationAttribute
     {
         public override bool IsValid(object value)
         {
-            int inputValue = Int32.Parse(value.ToString());
+            int inputValue = int.Parse(value.ToString());
             var isValid = true;
 
-            if (Math.Floor(Math.Log10(inputValue) + 1) != 9  )
+            if (Math.Floor(Math.Log10(inputValue) + 1) != 9)
             {
                 isValid = false;
             }
@@ -130,7 +126,7 @@ namespace CMSLibrary.Evaluation
             {
                 isValid = false;
             }
-            if(!(inputValue == "A" || inputValue == "B" || inputValue == "C" || inputValue == "D"))
+            if (!(inputValue == "A" || inputValue == "B" || inputValue == "C" || inputValue == "D"))
             {
                 isValid = false;
             }

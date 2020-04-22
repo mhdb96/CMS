@@ -1,24 +1,16 @@
 ﻿using CMSLibrary;
+using CMSLibrary.Evaluation;
+using CMSLibrary.Models;
+using CMSUI.UserControls;
+using MahApps.Metro.Controls.Dialogs;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Forms;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using CMSUI.UserControls;
-using CMSLibrary.Models;
-using CMSLibrary.Evaluation;
-using MahApps.Metro.Controls.Dialogs;
 
 namespace CMSUI.EvaluationWindows
 {
@@ -66,8 +58,8 @@ namespace CMSUI.EvaluationWindows
             StudentsDataWithErrors.Clear();
             StudentModels.Clear();
             foreach (string listString in results)
-            {                              
-                if(listString.Replace(" ","") == "")
+            {
+                if (listString.Replace(" ", "") == "")
                 {
                     continue;
                 }
@@ -101,7 +93,7 @@ namespace CMSUI.EvaluationWindows
             }
         }
 
-        private string NamesFixer (string name)
+        private string NamesFixer(string name)
         {
             string t = name;
             t = t.Replace("  ", "");
@@ -111,11 +103,11 @@ namespace CMSUI.EvaluationWindows
                 {
                     t = t.Remove(t.Length - 1);
                 }
-                if(t.First() == ' ')
+                if (t.First() == ' ')
                 {
                     t = t.Remove(0, 1);
                 }
-            }            
+            }
             return t;
         }
 
@@ -123,7 +115,7 @@ namespace CMSUI.EvaluationWindows
         {
 
         }
-        
+
 
         private void ChooseStudentsFile_Click(object sender, RoutedEventArgs e)
         {
@@ -132,7 +124,7 @@ namespace CMSUI.EvaluationWindows
 
         private async void InsertStudents_Click(object sender, RoutedEventArgs e)
         {
-            if(ValidForm())
+            if (ValidForm())
             {
                 string studentNo = "";
                 if (departmentsCombobox.SelectedItem == null || eduYearsCombobox.SelectedItem == null)
@@ -149,7 +141,7 @@ namespace CMSUI.EvaluationWindows
                         StudentDataModel model = new StudentDataModel();
                         model.FirstName = student.firstName.Text;
                         model.LastName = student.lastName.Text;
-                        model.RegNo = Int32.Parse(student.regNo.Text);
+                        model.RegNo = int.Parse(student.regNo.Text);
                         StudentModel s = new StudentModel
                         {
                             FirstName = model.FirstName,
@@ -216,7 +208,7 @@ namespace CMSUI.EvaluationWindows
                 File.WriteAllText(System.IO.Path.GetDirectoryName(StudentListPath) + $"\\{fileName}-Fixed-Data.txt", newStudentsData.ToString(), encoding: Encoding.Unicode);
                 this.Close();
             }
-            
+
         }
 
         private string StudentFixedDataText(StudentModel model)
@@ -256,7 +248,7 @@ namespace CMSUI.EvaluationWindows
                 error.Visibility = Visibility.Visible;
                 errorText.Text = "Select a department";
             }
-            if(StudentListPath == "")
+            if (StudentListPath == "")
             {
                 error.Visibility = Visibility.Visible;
                 errorText.Text = "Select a student data file";
@@ -295,6 +287,6 @@ namespace CMSUI.EvaluationWindows
             {
                 error.Visibility = Visibility.Collapsed;
             }
-        }        
+        }
     }
 }

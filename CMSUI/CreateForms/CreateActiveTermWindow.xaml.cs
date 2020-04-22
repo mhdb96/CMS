@@ -1,21 +1,10 @@
 ﻿using CMSLibrary;
 using CMSLibrary.Models;
 using CMSUI.Requesters;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-
-using MahApps.Metro.IconPacks;
 
 namespace CMSUI.CreateForms
 {
@@ -63,12 +52,13 @@ namespace CMSUI.CreateForms
             // TODO Foreach'sız nasıl olurdu
             foreach (var year in Years)
             {
-                if(year.Id == activeTerm.Year.Id) { 
+                if (year.Id == activeTerm.Year.Id)
+                {
                     yearsCombobox.SelectedItem = year;
                 }
             }
-              termsCombobox.SelectedItem = activeTerm.Term;
-    
+            termsCombobox.SelectedItem = activeTerm.Term;
+
             //
 
 
@@ -78,7 +68,7 @@ namespace CMSUI.CreateForms
         {
             Years = GlobalConfig.Connection.GetYear_ALL();
             yearsCombobox.ItemsSource = Years;
-            
+
             //Terms = GlobalConfig.Connection.GetTerm_ALL();
             //termsCombobox.ItemsSource = Terms;
         }
@@ -97,14 +87,14 @@ namespace CMSUI.CreateForms
                 }
                 else
                 {
-                    GlobalConfig.Connection.UpdateActiveTerms(activeTerm);                   
+                    GlobalConfig.Connection.UpdateActiveTerms(activeTerm);
                 }
                 CallingWindow.ActiveTermComplete(activeTerm);
                 this.Close();
 
 
             }
-            
+
         }
 
         private bool ValidForm()
@@ -155,7 +145,7 @@ namespace CMSUI.CreateForms
         //    {
         //        item.Children.Clear();
         //    }
-            
+
         //    if (i > 0) { 
         //        i = 0;
         //    foreach (var row in rows)
@@ -203,7 +193,7 @@ namespace CMSUI.CreateForms
 
         private void YearsCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+
 
             if (yearsCombobox.SelectedItem == null)
             {
@@ -215,7 +205,7 @@ namespace CMSUI.CreateForms
                 model = (YearModel)yearsCombobox.SelectedItem;
                 Terms = GlobalConfig.Connection.GetTerm_ValidByYearId(model.Id);
 
-                if(model.Id==activeTerm.Year.Id)
+                if (model.Id == activeTerm.Year.Id)
                 {
                     Terms.Add(activeTerm.Term);
                 }
@@ -231,7 +221,7 @@ namespace CMSUI.CreateForms
                 }
 
                 errorYear.Visibility = Visibility.Hidden;
-            }   
+            }
         }
 
         private void TermsCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)

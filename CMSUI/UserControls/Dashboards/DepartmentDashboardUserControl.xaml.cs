@@ -4,20 +4,9 @@ using CMSUI.CreateForms;
 using CMSUI.Panels;
 using CMSUI.Requesters;
 using MahApps.Metro.Controls.Dialogs;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace CMSUI.UserControls
 {
@@ -68,13 +57,13 @@ namespace CMSUI.UserControls
                 // TODO - Delete the selected term
             }
             else
-            {                
+            {
                 await parent.ShowMessage("Deletion Error",
                     "The selected department can't be deleted beacause it has an exam",
                     MessageDialogStyle.Affirmative);
                 // TODO - ADD a MessageBox
             }
-            
+
         }
 
         private void UpdateDepartmentBtn_Click(object sender, RoutedEventArgs e)
@@ -82,20 +71,20 @@ namespace CMSUI.UserControls
             Button btn = (Button)sender;
             DepartmentModel model = new DepartmentModel();
             model = (DepartmentModel)btn.Tag;
-            if(model.Outcomes.Count == 0)
+            if (model.Outcomes.Count == 0)
             {
                 FindCourseOutcomes(model);
             }
             // TODO - Update the selected department
 
             CreateDepartmentWindow win = new CreateDepartmentWindow(this, model);
-            win.ShowDialog();            
+            win.ShowDialog();
             WireUpLists();
         }
 
         private void DepatmentsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(depatmentsList.SelectedItem != null)
+            if (depatmentsList.SelectedItem != null)
             {
                 DepartmentModel model = (DepartmentModel)depatmentsList.SelectedItem;
                 FindCourseOutcomes(model);
@@ -104,7 +93,7 @@ namespace CMSUI.UserControls
             {
                 depatmentOutcomesList.ItemsSource = null;
             }
-            
+
         }
 
         private void FindCourseOutcomes(DepartmentModel model)
@@ -124,10 +113,10 @@ namespace CMSUI.UserControls
         }
 
         public void DepartmentComplete(DepartmentModel model)
-        {            
+        {
             Departments.Add(model);
             WireUpLists();
-            depatmentsList.SelectedIndex = depatmentsList.Items.Count-1;
+            depatmentsList.SelectedIndex = depatmentsList.Items.Count - 1;
         }
         public void DepartmentUpdateComplete(DepartmentModel model)
         {
