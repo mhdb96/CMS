@@ -1,3 +1,9 @@
+---
+description: >-
+  C# system for managing, storing and reporting students’ exam results in a
+  giving faculty
+---
+
 # Course Management System
 
 ![](.gitbook/assets/logo.png)
@@ -14,7 +20,7 @@
 
 ## Overview:
 
-A system for managing, storing and reporting students’ exam results in a giving faculty with the ability to:
+C\# system for managing, storing and reporting students’ exam results in a giving faculty with the ability to:
 
 * Manage the courses, terms, teachers and assignments by the admin through the UI.
 * Evaluate the uploaded tests’ results and export all the data to Excel file.
