@@ -19,7 +19,7 @@ A system for managing, storing and reporting students’ exam results in a givin
 * Manage the courses, terms, teachers and assignments by the admin through the UI.
 * Evaluate the uploaded tests’ results and export all the data to Excel file.
 
-## Technologies
+### Technologies
 
 * MS SQL Server.
 * Dapper.
