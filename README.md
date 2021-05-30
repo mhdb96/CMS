@@ -36,6 +36,6 @@ C\# system for managing, storing and reporting students’ exam results in a giv
 
 ## Developers' Info
 
-* **Muhammed Bedavi** ~ [Linkedin🔗](https://www.linkedin.com/in/mhdb96/) - [GitHub🔗](https://github.com/mhdb96)
+* **Muhammed AKSOY** ~ [Linkedin🔗](https://www.linkedin.com/in/mhdb96/) - [GitHub🔗](https://github.com/mhdb96)
 * **Onur KANTAR** ~ [Linkedin🔗](https://www.linkedin.com/in/onur-kantar-580ab1ab/) - [GitHub🔗](https://github.com/simiyen)
 
